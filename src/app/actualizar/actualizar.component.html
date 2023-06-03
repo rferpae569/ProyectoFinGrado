@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="row">
+        <h1 class="text-center mt-5">Por favor, actualice sus datos</h1>
+        <form method="post" autocomplete="off">
+            <!-- Creamos el formulario para actualizar el registro -->
+            <div class="form-group">
+                <label for="nombre">Nombre de usuario:</label>
+                <input type="text" class="form-control"
+                    placeholder="Ponga su nombre de usuario para actualizar el correo y la contraseña"
+                    name="actnombre">
+            </div>
+            <div class="form-group">
+                <label for="password">Contraseña:</label>
+                <div class="input-group">
+                    <input type="password" class="form-control" placeholder="Introduce tu contraseña"
+                        name="contrasena" id="contrasena">
+                    <div class="input-group-append">
+                        <button type="button" class="mostrar-contrasena btn btn-primary rounded"
+                            data-id-contrasena="contrasena">Mostrar</button>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="correo">Correo:</label>
+                <input type="text" class="form-control" placeholder="Actualice el correo" name="actcorreo">
+            </div>
+            <div class="text-center"><br>
+                <button type="submit" class="btn btn-primary" id="actualizar" name="actualizar">Actualizar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+

@@ -1,0 +1,52 @@
+<div [ngClass]="{ 'blur': mostrarFooter }">
+<h1 class="text-center">Bienvenido a "AdivinaLaPelícula"</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <form method="post" class="formulariologin"autocomplete="off"><!--Creamos el formulario-->
+                <div class="form-group">
+                    <label for="usuario">Usuario:</label>
+                    <input type="text" class="form-control" placeholder="Introduce tu nombre de usuario"
+                        name="usuario" required>
+                </div>
+                <div class="form-group">
+                    <label for="contrasena">Contraseña:</label>
+                    <div class="input-group">
+                        <input type="password" class="form-control" placeholder="Introduce tu contraseña"
+                            name="contrasena" id="contrasena" required>
+                        <div class="input-group-append">
+                            <button type="button" class="mostrar-contrasena btn btn-primary rounded"
+                                data-id-contrasena="contrasena">Mostrar</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <br><input type="submit" class="btn btn-primary btn-block" id="iniciar" name="iniciar"
+                        value="Iniciar Sesión">
+                </div>
+            </form>
+        </div>
+    </div>
+</div> <br>
+<div class="text-center">
+    <a routerLink="/registro" >Aún no estoy registrado</a> |
+    <a routerLink="/actualizar" >Actualizar datos</a> |
+    <a routerLink="/borrar">Borrar cuenta</a> |
+    <a routerLink="/dosjugadores" >Modo dos jugadores</a>
+</div>
+</div>
+
+<footer class="footer fixed-bottom bg-white" *ngIf="mostrarFooter">
+    <div class="container bg-white">
+        <form method="POST">
+            <p>Utilizamos cookies propias y de terceros para obtener datos estadísticos de la navegación de nuestros
+                usuarios y mejorar nuestros servicios. Si acepta o continúa navegando, consideramos que acepta su
+                uso. Puede cambiar la configuración u obtener más información <a
+                    href="https://ayudaleyprotecciondatos.es/cookies/" class="azul"> aquí (enlace a página de cookies).</a></p>
+            <div class="text-center">
+                <input type="submit" class="btn btn-primary" id="aceptar" name="aceptar" value="Aceptar" (click)="aceptarCookies()">
+                <input type="submit" class="btn btn-danger" id="rechazar" name="rechazar" value="Rechazar" (click)="rechazarCookies()">
+            </div>
+        </form>
+    </div>
+</footer>
