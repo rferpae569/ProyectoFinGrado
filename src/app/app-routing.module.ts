@@ -6,6 +6,9 @@ import { ActualizarComponent } from './actualizar/actualizar.component';
 import { BorrarComponent } from './borrar/borrar.component';
 import { DosjugadoresComponent } from './dosjugadores/dosjugadores.component';
 import { EleccionComponent } from './eleccion/eleccion.component';
+import { JuegoimagenComponent } from './juegoimagen/juegoimagen.component';
+import { JuegopreguntaComponent } from './juegopregunta/juegopregunta.component';
+import { JuegomusicaComponent } from './juegomusica/juegomusica.component';
 
 const routes: Routes = [
   { path: '', component: InicioComponent },
@@ -14,7 +17,10 @@ const routes: Routes = [
   { path: 'actualizar', component: ActualizarComponent },
   { path: 'borrar', component: BorrarComponent},
   { path: 'dosjugadores', component:DosjugadoresComponent},
-  { path: 'eleccion', component:EleccionComponent}
+  { path: 'eleccion', component:EleccionComponent},
+  { path: 'juegoimagen', component:JuegoimagenComponent},
+  { path: 'juegopregunta', component:JuegopreguntaComponent},
+  { path: 'juegomusica', component:JuegomusicaComponent}
 
 ];
 

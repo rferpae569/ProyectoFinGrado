@@ -1,5 +1,21 @@
 .blur {
-    filter: blur(4px); /* Ajusta el valor de desenfoque según tus preferencias */
-    pointer-events: none; /* Bloquea eventos de puntero */
+    filter: blur(4px); 
+    pointer-events: none; 
 
+  }
+
+  .background-image {
+    background-image: url('../../assets/fondos/fondologin.jpg');
+    background-size: cover; 
+    background-position: center; 
+    width: 100%;
+    height: 100vh; 
+  }
+
+  h1,label,a{
+    color: white;
+  }
+
+  a:hover{
+    color: red;
   }

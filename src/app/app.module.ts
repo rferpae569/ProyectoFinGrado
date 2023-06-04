@@ -12,6 +12,9 @@ import { DosjugadoresComponent } from './dosjugadores/dosjugadores.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EleccionComponent } from './eleccion/eleccion.component';
+import { JuegoimagenComponent } from './juegoimagen/juegoimagen.component';
+import { JuegopreguntaComponent } from './juegopregunta/juegopregunta.component';
+import { JuegomusicaComponent } from './juegomusica/juegomusica.component';
 
 
 
@@ -23,7 +26,10 @@ import { EleccionComponent } from './eleccion/eleccion.component';
     ActualizarComponent,
     BorrarComponent,
     DosjugadoresComponent,
-    EleccionComponent
+    EleccionComponent,
+    JuegoimagenComponent,
+    JuegopreguntaComponent,
+    JuegomusicaComponent
   ],
   imports: [
     BrowserModule,

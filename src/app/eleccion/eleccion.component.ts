@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./eleccion.component.scss']
 })
 export class EleccionComponent {
-
+ 
 }
