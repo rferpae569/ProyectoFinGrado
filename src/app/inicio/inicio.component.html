@@ -3,17 +3,17 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6 offset-md-3">
-            <form method="post" class="formulariologin"autocomplete="off"><!--Creamos el formulario-->
+            <form (ngSubmit)="entradalogin()" [formGroup]="newloginForm" *ngIf="!isLoggedIn" class="formulariologin"autocomplete="off"><!--Creamos el formulario-->
                 <div class="form-group">
                     <label for="usuario">Usuario:</label>
                     <input type="text" class="form-control" placeholder="Introduce tu nombre de usuario"
-                        name="usuario" required>
+                        name="usuario" required formControlName="Nombre">
                 </div>
                 <div class="form-group">
                     <label for="contrasena">Contraseña:</label>
                     <div class="input-group">
                         <input type="password" class="form-control" placeholder="Introduce tu contraseña"
-                            name="contrasena" id="contrasena" required>
+                            name="contrasena" id="contrasena" required formControlName="Passwrd">
                         <div class="input-group-append">
                             <button type="button" class="mostrar-contrasena btn btn-primary rounded"
                                 data-id-contrasena="contrasena">Mostrar</button>

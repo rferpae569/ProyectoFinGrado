@@ -5,6 +5,7 @@ import { RegistroComponent } from './registro/registro.component';
 import { ActualizarComponent } from './actualizar/actualizar.component';
 import { BorrarComponent } from './borrar/borrar.component';
 import { DosjugadoresComponent } from './dosjugadores/dosjugadores.component';
+import { EleccionComponent } from './eleccion/eleccion.component';
 
 const routes: Routes = [
   { path: '', component: InicioComponent },
@@ -12,7 +13,8 @@ const routes: Routes = [
   { path: 'registro', component: RegistroComponent },
   { path: 'actualizar', component: ActualizarComponent },
   { path: 'borrar', component: BorrarComponent},
-  { path: 'dosjugadores', component:DosjugadoresComponent}
+  { path: 'dosjugadores', component:DosjugadoresComponent},
+  { path: 'eleccion', component:EleccionComponent}
 
 ];
 

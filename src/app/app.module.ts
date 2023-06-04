@@ -11,6 +11,7 @@ import { BorrarComponent } from './borrar/borrar.component';
 import { DosjugadoresComponent } from './dosjugadores/dosjugadores.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { EleccionComponent } from './eleccion/eleccion.component';
 
 
 
@@ -21,7 +22,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     RegistroComponent,
     ActualizarComponent,
     BorrarComponent,
-    DosjugadoresComponent
+    DosjugadoresComponent,
+    EleccionComponent
   ],
   imports: [
     BrowserModule,

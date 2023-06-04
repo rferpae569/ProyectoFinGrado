@@ -38,9 +38,13 @@ export class ServicioService {
     return this.http.post<Usuarios>(`${this.url}usuarios/borrarusuario.php`,nuevo);
   }
 
-//   login(user: Usuario): Observable<Usuario[]> {
-//     return this.http.post<Usuario[]>(`${this.url}usuario/loginUsuario.php`, user);
-//   }
+  postActualizarDato(nuevo:Usuarios): Observable<Usuarios> {
+    return this.http.post<Usuarios>(`${this.url}usuarios/actualizarusuario.php`,nuevo);
+  }
+
+  login(user: Usuarios): Observable<Usuarios[]> {
+    return this.http.post<Usuarios[]>(`${this.url}usuarios/loginusuario.php`, user);
+  }
 
 //   getDatosJuego():  Observable<Juego[]> {
 //     return this.http.get<Juego[]>(`${this.url}juego/leerJuegotry.php`);
