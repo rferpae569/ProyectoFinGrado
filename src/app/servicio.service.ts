@@ -5,6 +5,7 @@ import { Usuarios } from './model/usuarios';
 import { Correos } from './model/correos';
 import { Numjugadas } from './model/numjugadas';
 import { Ranking } from './model/ranking';
+import { Juegoimagen } from './model/juegoimagen';
 @Injectable({
   providedIn: 'root'
 })
@@ -28,6 +29,10 @@ export class ServicioService {
 
   getDatosCorreos():  Observable<Correos[]> {
     return this.http.get<Correos[]>(`${this.url}correos/leercorreo.php`);
+  }
+
+  getDatosPeliculaImagen():  Observable<Juegoimagen[]> {
+    return this.http.get<Juegoimagen[]>(`${this.url}juegoimagen/leerjuegoimagen.php`);
   }
   
   postDato(nuevo:Usuarios): Observable<Usuarios> {
