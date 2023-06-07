@@ -10,6 +10,8 @@ import { Observable } from 'rxjs';
   styleUrls: ['./actualizar.component.scss']
 })
 export class ActualizarComponent {
+  mostrarContrasena: boolean = false;
+
   newusuario: Usuarios = {
     Nombre: '',
     Passwrd: '',
@@ -64,5 +66,11 @@ export class ActualizarComponent {
 
   get Correo() {
     return this.newusuarioForm.get('Correo');
+  }
+
+  toggleMostrarContrasena() {
+    const contrasenaInput = document.getElementById('contrasena') as HTMLInputElement;
+    this.mostrarContrasena = !this.mostrarContrasena;
+    contrasenaInput.type = this.mostrarContrasena ? 'text' : 'password';
   }
 }

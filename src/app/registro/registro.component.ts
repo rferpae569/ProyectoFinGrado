@@ -10,6 +10,8 @@ import { Observable } from 'rxjs';
   styleUrls: ['./registro.component.scss']
 })
 export class RegistroComponent {
+  mostrarContrasena: boolean = false;
+
   newusuario: Usuarios = {
     Nombre: '',
     Passwrd: '',
@@ -68,5 +70,11 @@ export class RegistroComponent {
 
   get Correo() {
     return this.newusuarioForm.get('Correo');
+  }
+
+  toggleMostrarContrasena() {
+    const contrasenaInput = document.getElementById('contrasena') as HTMLInputElement;
+    this.mostrarContrasena = !this.mostrarContrasena;
+    contrasenaInput.type = this.mostrarContrasena ? 'text' : 'password';
   }
 }

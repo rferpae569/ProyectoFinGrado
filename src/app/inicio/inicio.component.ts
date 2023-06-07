@@ -20,6 +20,8 @@ export class InicioComponent implements OnInit, AfterViewInit {
   fallo:boolean=false;
 
   mostrarFooter: boolean = true;
+  mostrarContrasena: boolean = false;
+
 
   constructor(private cookieService: CookieService,  private servicioService: ServicioService,
     private fb: FormBuilder,
@@ -83,6 +85,12 @@ export class InicioComponent implements OnInit, AfterViewInit {
     alert('Debes de aceptar las cookies');
     this.mostrarFooter = true;
     return false;
+  }
+
+  toggleMostrarContrasena() {
+    const contrasenaInput = document.getElementById('contrasena') as HTMLInputElement;
+    this.mostrarContrasena = !this.mostrarContrasena;
+    contrasenaInput.type = this.mostrarContrasena ? 'text' : 'password';
   }
 
 }
