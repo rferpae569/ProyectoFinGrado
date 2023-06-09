@@ -15,6 +15,7 @@ import { EleccionComponent } from './eleccion/eleccion.component';
 import { JuegoimagenComponent } from './juegoimagen/juegoimagen.component';
 import { JuegopreguntaComponent } from './juegopregunta/juegopregunta.component';
 import { JuegomusicaComponent } from './juegomusica/juegomusica.component';
+import { Eleccion2Component } from './eleccion2/eleccion2.component';
 
 
 
@@ -29,7 +30,8 @@ import { JuegomusicaComponent } from './juegomusica/juegomusica.component';
     EleccionComponent,
     JuegoimagenComponent,
     JuegopreguntaComponent,
-    JuegomusicaComponent
+    JuegomusicaComponent,
+    Eleccion2Component
   ],
   imports: [
     BrowserModule,

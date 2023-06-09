@@ -17,19 +17,19 @@ export class JuegoimagenComponent implements OnInit {
   datos!: Juegoimagen[]; //juegoimagen era juego
   respuesta: string = '';
   intentos: number = 0; //vidas
-  mensajeResultado: string = '';
+  // mensajeResultado: string = '';
   puntos: number= 0;
   listaPeliculas: string[] = []; //listajuegos
   peliculaControl = new FormControl(); //juegocontrol
   // peliculasFiltrados!: Observable<string[]>;//juegofiltrados
   session: string = ''
   
-  mensajePerderIntento: string = ''; //mensajeperdervida
-  mensajeganar: string = '';
+  // mensajePerderIntento: string = ''; //mensajeperdervida
+  // mensajeganar: string = '';
   numeroAleatorio: number = 0;
   palabrasecreta: string = '';
   nombresPeliculas: Array<{ nombre: string; imagenes: string[] }> = [];//nombrejuegos
-  mensajePerder: string = '';
+  // mensajePerder: string = '';
 
   ngOnInit() {
 
@@ -141,15 +141,15 @@ const nuevo = {
   enviarRespuesta() {
     const gameCookie = this.cookieService.get('game');
 
-    if (!gameCookie ) {
-      this.mensajeganar = 'Has acertado todas las peliculas.';
-      return;
-    }
+    // if (!gameCookie ) {
+    //   this.mensajeganar = 'Has acertado todas las peliculas.';
+    //   return;
+    // }
     this.palabrasecreta = this.cookieService.get('palabra');
     const juegoActual = this.palabrasecreta;
     if (this.respuesta.toLowerCase() === juegoActual.toLowerCase()) {
-      this.mensajeResultado = '¡Respuesta correcta!';
-      this.mensajePerderIntento="";
+      // this.mensajeResultado = '¡Respuesta correcta!';
+      // this.mensajePerderIntento="";
 
       const gameData = JSON.parse(gameCookie);
       const numero = parseInt(this.cookieService.get('numero'), 10);
@@ -193,7 +193,7 @@ const nuevo = {
       );
       this.cookieService.set('intentos', this.intentos.toString(), expirationDate);
       if (this.intentos <= -1) {
-        this.mensajePerder = 'Has perdido todos tus intentos. Intentalo de nuevo.';
+        // this.mensajePerder = 'Has perdido todos tus intentos. Intentalo de nuevo.';
         const nombreuser = this.cookieService.get('session');
         const nuevo = {
           nombre: nombreuser,
@@ -204,10 +204,10 @@ const nuevo = {
         //   console.log("Datos enviados al servidor:", datos);
         // });
 
-      } else {
-        this.mensajePerderIntento = `Respuesta incorrecta. Te quedan ${this.intentos} vidas.`;
+       } //else {
+      //   this.mensajePerderIntento = `Respuesta incorrecta. Te quedan ${this.intentos} vidas.`;
        
-      }
+      // }
     }
     this.respuesta = '';
   }
