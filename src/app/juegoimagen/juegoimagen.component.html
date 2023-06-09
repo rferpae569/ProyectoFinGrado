@@ -1,3 +1,4 @@
+<div class="background-image">
 <div class="container">
     <h1 class='text-center mt-5'>Usuario: {{session}}</h1>
     <h1 class='text-center mt-5'>Intentos: {{intentos}}</h1>
@@ -5,18 +6,20 @@
     <h1 class="text-center mt-5">¿A qué película pertenece esta imagen?</h1>
     <div class="row">
         <div class="col-md-6 mx-auto">
-            <img [src]="nombresPeliculas[numeroAleatorio].imagenes" class="img-fluid d-block w-100 altoimagen">
+            <img [src]="'../../assets/img/' + nombresPeliculas[numeroAleatorio].imagenes[0]" class="img-fluid d-block w-100 altoimagen">
             <!--Cogemos la imagen de la base de datos-->
             <form autocomplete="off" class="mt-4">
                 <!--Creamos un formulario para que el usuario pueda responder-->
                 <div class="form-group colorajax">
                     <label for="respuesta">Introduce la respuesta</label>
-                    <input id="respuesta" type="text" class="form-control" placeholder="Respuesta" name="respuesta" onkeyup="TituloPeliculaAJAX(this.value)">
+                    <input id="respuesta" type="text" class="form-control" placeholder="Respuesta" name="respuesta">
                 </div>
                 <div class="text-center"><br>
-                    <button type="submit" class="btn btn-primary">Comprobar</button>
-                </div>
+                    <button type="submit" class="btn btn-primary" (click)="enviarRespuesta()" (click)="reiniciar()" (click)="seleccionarPalabraSecreta()">Comprobar</button>
+                </div> 
+                <!-- [disabled]="intentos === -1 || mensajeResultado" Esto va en el button-->
             </form>
         </div>
     </div>
+</div>
 </div>

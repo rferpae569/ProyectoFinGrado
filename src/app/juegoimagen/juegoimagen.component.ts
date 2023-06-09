@@ -13,15 +13,15 @@ import { startWith, map } from 'rxjs/operators';
   styleUrls: ['./juegoimagen.component.scss']
 })
 export class JuegoimagenComponent implements OnInit {
-  titulo: string = 'guess gameplay';
+  // titulo: string = 'guess gameplay';
   datos!: Juegoimagen[]; //juegoimagen era juego
   respuesta: string = '';
   intentos: number = 0; //vidas
   mensajeResultado: string = '';
-  puntos: number=0;
+  puntos: number= 0;
   listaPeliculas: string[] = []; //listajuegos
   peliculaControl = new FormControl(); //juegocontrol
-  peliculasFiltrados!: Observable<string[]>;//juegofiltrados
+  // peliculasFiltrados!: Observable<string[]>;//juegofiltrados
   session: string = ''
   
   mensajePerderIntento: string = ''; //mensajeperdervida
@@ -42,6 +42,15 @@ export class JuegoimagenComponent implements OnInit {
 
     if (intentosCookieExists) {
       this.intentos = parseInt(this.cookieService.get('intentos'), 10);
+    } else {
+      this.intentos = 3; // Establecer el valor inicial en 3 si no existe la cookie 'intentos'
+      const currentDate = new Date();
+      const expirationDate = new Date(
+        currentDate.getFullYear(),
+        currentDate.getMonth(),
+        currentDate.getDate() + 1
+      );
+      this.cookieService.set('intentos', '3', expirationDate); // Guardar la cookie con el valor inicial de 3
     }
 
     const listaPeliculasCookie = this.cookieService.get('listapeliculas');
@@ -53,10 +62,10 @@ export class JuegoimagenComponent implements OnInit {
     const puntoscookie = this.cookieService.get('puntos');
     this.puntos = parseInt(puntoscookie, 10) || 0;
 
-    this.peliculasFiltrados = this.peliculaControl.valueChanges.pipe(
-      startWith(''),
-      map((value) => this.filtrarPeliculas(value)) //antes se llamaba filtrarjuegos
-    );
+    // this.peliculasFiltrados = this.peliculaControl.valueChanges.pipe(
+    //   startWith(''),
+    //   map((value) => this.filtrarPeliculas(value)) //antes se llamaba filtrarjuegos
+    // );
     
   }
 
@@ -82,9 +91,9 @@ export class JuegoimagenComponent implements OnInit {
       const intentoscookie = this.cookieService.get('intentos');
       this.intentos = parseInt(intentoscookie, 10);
     }
-    this.peliculasFiltrados = this.peliculaControl.valueChanges.pipe(
-      map(value => value ? this.filtrarPeliculas(value) : this.listaPeliculas)
-    );
+    // this.peliculasFiltrados = this.peliculaControl.valueChanges.pipe(
+    //   map(value => value ? this.filtrarPeliculas(value) : this.listaPeliculas)
+    // );
   }
 
   generarNumeroAleatorio(max: number) {
@@ -108,7 +117,7 @@ const nuevo = {
 // });
 
 
-      // this.router.navigate(['/ranking']);
+      // this.router.navigate(['/ranking']); Esto sera eleccion2
       // return;
     }
     const longitudArray = this.nombresPeliculas.length;
@@ -125,12 +134,13 @@ const nuevo = {
       this.puntos = parseInt(puntoscookie, 10);
     this.cookieService.set('palabra', this.palabrasecreta, expirationDate);
     this.cookieService.set('numero', numeroAleatorio.toString(), expirationDate);
-    this.cookieService.set('intentos', '3', expirationDate);
+    // this.cookieService.set('intentos', '3', expirationDate);
     // location.reload();
   }
 
   enviarRespuesta() {
     const gameCookie = this.cookieService.get('game');
+
     if (!gameCookie ) {
       this.mensajeganar = 'Has acertado todas las peliculas.';
       return;
@@ -153,7 +163,7 @@ const nuevo = {
         this.puntos += 1;
     }
       const currentDate = new Date();
-    const expirationDate = new Date(
+      const expirationDate = new Date(
       currentDate.getFullYear(),
       currentDate.getMonth(),
       currentDate.getDate() + 1
@@ -161,8 +171,6 @@ const nuevo = {
 
       this.cookieService.set('intentos', this.intentos.toString(), expirationDate);
       this.cookieService.set('puntos', this.puntos.toString(), expirationDate);
-
-
 
       if (Array.isArray(gameData) && numero >= 0 && numero < gameData.length) {
         gameData.splice(numero, 1);
@@ -219,11 +227,13 @@ const nuevo = {
       const NombrePelicula = pelicula.NombrePelicula;
       this.listaPeliculas.push(NombrePelicula);
     }
+      // const nombresPeliculasCookie = this.nombresPeliculas.slice(0, 40); // Obtener los primeros 41 elementos
 
+//me coge solo 38 peliculas
     const currentDate = new Date();
     const expirationDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 1);
-    this.cookieService.set('game', JSON.stringify(this.nombresPeliculas), expirationDate);
-    this.cookieService.set('intentos', '3', expirationDate);
+    this.cookieService.set('game', JSON.stringify(this.nombresPeliculas.slice(0, 38)), expirationDate);
+    // this.cookieService.set('intentos', '3', expirationDate);
     this.cookieService.set('listapeliculas', JSON.stringify(this.listaPeliculas), expirationDate);
     this.cookieService.set('puntos', "0", expirationDate);
     // location.reload();
@@ -231,13 +241,14 @@ const nuevo = {
 
   reiniciar() {
     document.cookie = `game=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-    // location.reload();
+    location.reload();
   }
-  seleccionarPelicula(pelicula: string) {
-    this.peliculaControl.setValue(pelicula);
-  }
-  filtrarPeliculas(keyword: string): string[] {
-    return this.listaPeliculas.filter(pelicula => pelicula.toLowerCase().includes(keyword.toLowerCase()));
-  }
+  
+  // seleccionarPelicula(pelicula: string) { //En un principio, no me haria falta.
+  //   this.peliculaControl.setValue(pelicula);
+  // }
+  // filtrarPeliculas(keyword: string): string[] { //Este tampoco haria falta.
+  //   return this.listaPeliculas.filter(pelicula => pelicula.toLowerCase().includes(keyword.toLowerCase()));
+  // }
 
 }
