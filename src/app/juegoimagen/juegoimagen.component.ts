@@ -74,7 +74,7 @@ export class JuegoimagenComponent implements OnInit {
     private cookieService: CookieService,
     private router: Router
   ) {
-    const sessionCookieExists = this.cookieService.check('game');
+    const sessionCookieExists = this.cookieService.check('peliculas');
     if (!sessionCookieExists) {
       this.servicioService.getDatosPeliculaImagen().subscribe((datos) => {
         this.datos = datos;
@@ -82,7 +82,7 @@ export class JuegoimagenComponent implements OnInit {
         this.seleccionarPalabraSecreta();
       });
     } else {
-      const nombresPeliculasCookie = this.cookieService.get('game');
+      const nombresPeliculasCookie = this.cookieService.get('peliculas');
       this.nombresPeliculas = JSON.parse(nombresPeliculasCookie);
       const numeroAleatorioCookie = this.cookieService.get('numero');
       this.numeroAleatorio = parseInt(numeroAleatorioCookie, 10);
@@ -101,7 +101,7 @@ export class JuegoimagenComponent implements OnInit {
   }
 
   seleccionarPalabraSecreta() {
-    const nombresPeliculasCookie = this.cookieService.get('game');
+    const nombresPeliculasCookie = this.cookieService.get('peliculas');
     this.nombresPeliculas = JSON.parse(nombresPeliculasCookie);
 
     if (!this.nombresPeliculas || this.nombresPeliculas.length === 0) {
@@ -139,7 +139,7 @@ const nuevo = {
   }
 
   enviarRespuesta() {
-    const gameCookie = this.cookieService.get('game');
+    const gameCookie = this.cookieService.get('peliculas');
 
     // if (!gameCookie ) {
     //   this.mensajeganar = 'Has acertado todas las peliculas.';
@@ -181,7 +181,7 @@ const nuevo = {
           currentDate.getMonth(),
           currentDate.getDate() + 1
         );
-        this.cookieService.set('game', updatedGameCookie, expirationDate);
+        this.cookieService.set('peliculas', updatedGameCookie, expirationDate);
       }
     } else {
       this.intentos--;
@@ -203,6 +203,7 @@ const nuevo = {
         // this.servicioService.postDatoRanking(nuevo).subscribe((datos) => {
         //   console.log("Datos enviados al servidor:", datos);
         // });
+        this.router.navigate(['/eleccion2']);
 
        } //else {
       //   this.mensajePerderIntento = `Respuesta incorrecta. Te quedan ${this.intentos} vidas.`;
@@ -232,15 +233,15 @@ const nuevo = {
 //me coge solo 38 peliculas
     const currentDate = new Date();
     const expirationDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 1);
-    this.cookieService.set('game', JSON.stringify(this.nombresPeliculas.slice(0, 38)), expirationDate);
+    this.cookieService.set('peliculas', JSON.stringify(this.nombresPeliculas.slice(0, 38)), expirationDate);
     // this.cookieService.set('intentos', '3', expirationDate);
     this.cookieService.set('listapeliculas', JSON.stringify(this.listaPeliculas), expirationDate);
     this.cookieService.set('puntos', "0", expirationDate);
-    // location.reload();
+    location.reload();
   }
 
   reiniciar() {
-    document.cookie = `game=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+    document.cookie = `peliculas=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
     location.reload();
   }
   

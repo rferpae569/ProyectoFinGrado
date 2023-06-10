@@ -1,1 +1,27 @@
-<p>juegomusica works!</p>
+<div class="background-image">
+    <div class="container">
+        <h1 class='text-center mt-5'>Usuario: {{session}}</h1>
+        <h1 class='text-center mt-5'>Intentos: {{intentos}}</h1>
+        <h1 class='text-center mt-5'>Puntos: {{puntos}}</h1>
+        <h1 class="text-center mt-5">¿A qué película pertenece esta cancion?</h1>
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <audio controls>
+                    <source [src]="'../../assets/musica/' + nombresPeliculas[numeroAleatorio].musica[0]" type="audio/mp3">
+                    Tu navegador no soporta el elemento de audio.
+                  </audio>
+                <form autocomplete="off" class="mt-4">
+                    <!--Creamos un formulario para que el usuario pueda responder-->
+                    <div class="form-group colorajax">
+                        <label for="respuesta">Introduce la respuesta</label>
+                        <input id="respuesta" type="text" class="form-control" placeholder="Respuesta" name="respuesta">
+                    </div>
+                    <div class="text-center"><br>
+                        <button type="submit" class="btn btn-primary" (click)="enviarRespuesta()" (click)="reiniciar()" (click)="seleccionarPalabraSecreta()">Comprobar</button>
+                    </div> 
+                    <!-- [disabled]="intentos === -1 || mensajeResultado" Esto va en el button-->
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
