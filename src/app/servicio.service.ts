@@ -6,7 +6,9 @@ import { Correos } from './model/correos';
 import { Numjugadas } from './model/numjugadas';
 import { Ranking } from './model/ranking';
 import { Juegoimagen } from './model/juegoimagen';
+import { Juegopregunta } from './model/juegopregunta';
 import { Juegomusica } from './model/juegomusica';
+import { Juegomusicapista } from './model/juegomusicapista';
 
 @Injectable({
   providedIn: 'root'
@@ -37,8 +39,16 @@ export class ServicioService {
     return this.http.get<Juegoimagen[]>(`${this.url}juegoimagen/leerjuegoimagen.php`);
   }
 
+  getDatosPeliculaPregunta():  Observable<Juegopregunta[]> {
+    return this.http.get<Juegopregunta[]>(`${this.url}juegopregunta/leerjuegopregunta.php`);
+  }
+
   getDatosPeliculaMusica():  Observable<Juegomusica[]> {
     return this.http.get<Juegomusica[]>(`${this.url}juegomusica/leerjuegomusica.php`);
+  }
+
+  getDatosPeliculaPistaMusica():  Observable<Juegomusicapista[]> {
+    return this.http.get<Juegomusicapista[]>(`${this.url}juegomusica/leerpistajuegomusica.php`);
   }
   
   postDato(nuevo:Usuarios): Observable<Usuarios> {

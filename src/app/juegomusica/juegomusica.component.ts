@@ -1,12 +1,12 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { ServicioService } from '../servicio.service';
-import { Juegoimagen } from '../model/juegoimagen';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { Juegomusica } from '../model/juegomusica';
+import { Juegomusicapista } from '../model/juegomusicapista';
 
 @Component({
   selector: 'app-juegomusica',
@@ -14,23 +14,19 @@ import { Juegomusica } from '../model/juegomusica';
   styleUrls: ['./juegomusica.component.scss']
 })
 export class JuegomusicaComponent implements OnInit {
-  // titulo: string = 'guess gameplay';
   datos!: Juegomusica[]; //juegoimagen era juego
   respuesta: string = '';
   intentos: number = 0; //vidas
-  // mensajeResultado: string = '';
   puntos: number= 0;
   listaPeliculas: string[] = []; //listajuegos
   peliculaControl = new FormControl(); //juegocontrol
-  // peliculasFiltrados!: Observable<string[]>;//juegofiltrados
   session: string = ''
-  
-  // mensajePerderIntento: string = ''; //mensajeperdervida
-  // mensajeganar: string = '';
   numeroAleatorio: number = 0;
   palabrasecreta: string = '';
   nombresPeliculas: Array<{ nombre: string; musica: string[] }> = [];//nombrejuegos
-  // mensajePerder: string = '';
+  // pistaMusica: Array<{ nombre: string; compositor: string; mclave: string;}> = [];
+  mostrarPista: boolean = false;
+  pistaMusica: Juegomusicapista[] = [];
 
   ngOnInit() {
 
@@ -63,10 +59,9 @@ export class JuegomusicaComponent implements OnInit {
     const puntoscookie = this.cookieService.get('puntos');
     this.puntos = parseInt(puntoscookie, 10) || 0;
 
-    // this.peliculasFiltrados = this.peliculaControl.valueChanges.pipe(
-    //   startWith(''),
-    //   map((value) => this.filtrarPeliculas(value)) //antes se llamaba filtrarjuegos
-    // );
+    this.servicioService.getDatosPeliculaPistaMusica().subscribe((datos) => {
+      this.pistaMusica = datos;
+    });
     
   }
 
@@ -92,9 +87,6 @@ export class JuegomusicaComponent implements OnInit {
       const intentoscookie = this.cookieService.get('intentos');
       this.intentos = parseInt(intentoscookie, 10);
     }
-    // this.peliculasFiltrados = this.peliculaControl.valueChanges.pipe(
-    //   map(value => value ? this.filtrarPeliculas(value) : this.listaPeliculas)
-    // );
   }
 
   generarNumeroAleatorio(max: number) {
@@ -131,6 +123,7 @@ const nuevo = {
       currentDate.getMonth(),
       currentDate.getDate() + 1
     );
+
     const puntoscookie = this.cookieService.get('puntos');
       this.puntos = parseInt(puntoscookie, 10);
     this.cookieService.set('palabra', this.palabrasecreta, expirationDate);
@@ -142,15 +135,9 @@ const nuevo = {
   enviarRespuesta() {
     const gameCookie = this.cookieService.get('peliculas');
 
-    // if (!gameCookie ) {
-    //   this.mensajeganar = 'Has acertado todas las peliculas.';
-    //   return;
-    // }
     this.palabrasecreta = this.cookieService.get('palabra');
     const juegoActual = this.palabrasecreta;
     if (this.respuesta.toLowerCase() === juegoActual.toLowerCase()) {
-      // this.mensajeResultado = '¡Respuesta correcta!';
-      // this.mensajePerderIntento="";
 
       const gameData = JSON.parse(gameCookie);
       const numero = parseInt(this.cookieService.get('numero'), 10);
@@ -194,7 +181,6 @@ const nuevo = {
       );
       this.cookieService.set('intentos', this.intentos.toString(), expirationDate);
       if (this.intentos <= -1) {
-        // this.mensajePerder = 'Has perdido todos tus intentos. Intentalo de nuevo.';
         const nombreuser = this.cookieService.get('session');
         const nuevo = {
           nombre: nombreuser,
@@ -206,11 +192,9 @@ const nuevo = {
         // });
         this.router.navigate(['/eleccion2']);
 
-       } //else {
-      //   this.mensajePerderIntento = `Respuesta incorrecta. Te quedan ${this.intentos} vidas.`;
-       
-      // }
+       }
     }
+    this.mostrarPista = true;
     this.respuesta = '';
   }
 
@@ -245,12 +229,4 @@ const nuevo = {
     document.cookie = `peliculas=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
     location.reload();
   }
-  
-  // seleccionarPelicula(pelicula: string) { //En un principio, no me haria falta.
-  //   this.peliculaControl.setValue(pelicula);
-  // }
-  // filtrarPeliculas(keyword: string): string[] { //Este tampoco haria falta.
-  //   return this.listaPeliculas.filter(pelicula => pelicula.toLowerCase().includes(keyword.toLowerCase()));
-  // }
-  
 }

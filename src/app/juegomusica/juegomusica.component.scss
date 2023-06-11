@@ -20,3 +20,20 @@
     display: block;
     margin: 0 auto;
   }
+
+  .table-style {
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+    text-align: center;
+    margin: 0 auto;
+    width: 80%; 
+    max-width: 800px; 
+    border-collapse: separate; 
+    border-spacing: 5px; 
+  }
+  
+  .table-style td, th {
+    border: 1px solid black; 
+    padding: 5px; 
+  }

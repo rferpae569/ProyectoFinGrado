@@ -9,7 +9,27 @@
                 <audio controls>
                     <source [src]="'../../assets/musica/' + nombresPeliculas[numeroAleatorio].musica[0]" type="audio/mp3">
                     Tu navegador no soporta el elemento de audio.
-                  </audio>
+                  </audio><br>
+
+                  <div [hidden]="!mostrarPista">
+                    <h1 class="text-center">Pista Musical:</h1>
+                    <table class="table-style">
+                      <tr>
+                        <th>Nombre</th>
+                        <th>Compositor</th>
+                        <th>Clave</th>
+                      </tr>
+                      <tr>
+                        <td>{{ pistaMusica[0].nombre }}</td>
+                        <td>{{ pistaMusica[0].compositor }}</td>
+                        <td>{{ pistaMusica[0].mclave }}</td>
+                      </tr>
+                    </table>
+                  </div><br>
+        
+                <button class="btn btn-primary mx-auto d-block" (click)="mostrarPista = !mostrarPista">Pista</button>
+                <!--Añadimos el boton para mostrar la pista al hacer click en el con javascript-->
+
                 <form autocomplete="off" class="mt-4">
                     <!--Creamos un formulario para que el usuario pueda responder-->
                     <div class="form-group colorajax">
@@ -19,7 +39,6 @@
                     <div class="text-center"><br>
                         <button type="submit" class="btn btn-primary" (click)="enviarRespuesta()" (click)="reiniciar()" (click)="seleccionarPalabraSecreta()">Comprobar</button>
                     </div> 
-                    <!-- [disabled]="intentos === -1 || mensajeResultado" Esto va en el button-->
                 </form>
             </div>
         </div>

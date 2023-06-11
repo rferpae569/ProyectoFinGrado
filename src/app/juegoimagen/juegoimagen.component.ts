@@ -13,23 +13,16 @@ import { startWith, map } from 'rxjs/operators';
   styleUrls: ['./juegoimagen.component.scss']
 })
 export class JuegoimagenComponent implements OnInit {
-  // titulo: string = 'guess gameplay';
   datos!: Juegoimagen[]; //juegoimagen era juego
   respuesta: string = '';
   intentos: number = 0; //vidas
-  // mensajeResultado: string = '';
   puntos: number= 0;
   listaPeliculas: string[] = []; //listajuegos
   peliculaControl = new FormControl(); //juegocontrol
-  // peliculasFiltrados!: Observable<string[]>;//juegofiltrados
   session: string = ''
-  
-  // mensajePerderIntento: string = ''; //mensajeperdervida
-  // mensajeganar: string = '';
   numeroAleatorio: number = 0;
   palabrasecreta: string = '';
   nombresPeliculas: Array<{ nombre: string; imagenes: string[] }> = [];//nombrejuegos
-  // mensajePerder: string = '';
 
   ngOnInit() {
 
@@ -61,12 +54,6 @@ export class JuegoimagenComponent implements OnInit {
     
     const puntoscookie = this.cookieService.get('puntos');
     this.puntos = parseInt(puntoscookie, 10) || 0;
-
-    // this.peliculasFiltrados = this.peliculaControl.valueChanges.pipe(
-    //   startWith(''),
-    //   map((value) => this.filtrarPeliculas(value)) //antes se llamaba filtrarjuegos
-    // );
-    
   }
 
   constructor(
@@ -91,9 +78,6 @@ export class JuegoimagenComponent implements OnInit {
       const intentoscookie = this.cookieService.get('intentos');
       this.intentos = parseInt(intentoscookie, 10);
     }
-    // this.peliculasFiltrados = this.peliculaControl.valueChanges.pipe(
-    //   map(value => value ? this.filtrarPeliculas(value) : this.listaPeliculas)
-    // );
   }
 
   generarNumeroAleatorio(max: number) {
@@ -140,16 +124,10 @@ const nuevo = {
 
   enviarRespuesta() {
     const gameCookie = this.cookieService.get('peliculas');
-
-    // if (!gameCookie ) {
-    //   this.mensajeganar = 'Has acertado todas las peliculas.';
-    //   return;
-    // }
     this.palabrasecreta = this.cookieService.get('palabra');
     const juegoActual = this.palabrasecreta;
+
     if (this.respuesta.toLowerCase() === juegoActual.toLowerCase()) {
-      // this.mensajeResultado = '¡Respuesta correcta!';
-      // this.mensajePerderIntento="";
 
       const gameData = JSON.parse(gameCookie);
       const numero = parseInt(this.cookieService.get('numero'), 10);
@@ -193,7 +171,6 @@ const nuevo = {
       );
       this.cookieService.set('intentos', this.intentos.toString(), expirationDate);
       if (this.intentos <= -1) {
-        // this.mensajePerder = 'Has perdido todos tus intentos. Intentalo de nuevo.';
         const nombreuser = this.cookieService.get('session');
         const nuevo = {
           nombre: nombreuser,
@@ -205,10 +182,7 @@ const nuevo = {
         // });
         this.router.navigate(['/eleccion2']);
 
-       } //else {
-      //   this.mensajePerderIntento = `Respuesta incorrecta. Te quedan ${this.intentos} vidas.`;
-       
-      // }
+       }
     }
     this.respuesta = '';
   }
@@ -244,12 +218,4 @@ const nuevo = {
     document.cookie = `peliculas=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
     location.reload();
   }
-  
-  // seleccionarPelicula(pelicula: string) { //En un principio, no me haria falta.
-  //   this.peliculaControl.setValue(pelicula);
-  // }
-  // filtrarPeliculas(keyword: string): string[] { //Este tampoco haria falta.
-  //   return this.listaPeliculas.filter(pelicula => pelicula.toLowerCase().includes(keyword.toLowerCase()));
-  // }
-
 }
