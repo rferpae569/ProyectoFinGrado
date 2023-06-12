@@ -7,6 +7,7 @@ import { Numjugadas } from './model/numjugadas';
 import { Ranking } from './model/ranking';
 import { Juegoimagen } from './model/juegoimagen';
 import { Juegopregunta } from './model/juegopregunta';
+import { Juegopreguntapista } from './model/juegopreguntapista';
 import { Juegomusica } from './model/juegomusica';
 import { Juegomusicapista } from './model/juegomusicapista';
 
@@ -41,6 +42,10 @@ export class ServicioService {
 
   getDatosPeliculaPregunta():  Observable<Juegopregunta[]> {
     return this.http.get<Juegopregunta[]>(`${this.url}juegopregunta/leerjuegopregunta.php`);
+  }
+
+  getDatosPeliculaPistaPregunta():  Observable<Juegopreguntapista[]> {
+    return this.http.get<Juegopreguntapista[]>(`${this.url}juegopregunta/leerpistajuegopregunta.php`);
   }
 
   getDatosPeliculaMusica():  Observable<Juegomusica[]> {

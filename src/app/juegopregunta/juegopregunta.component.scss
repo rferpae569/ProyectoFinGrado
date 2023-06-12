@@ -1,15 +1,17 @@
 .background-image {
-    background-image: url('../../assets/fondos/fondojuegos.jpg');
-    background-size: 100% 100%;
-  }
+  background-image: url('../../assets/fondos/fondojuegos.jpg');
+  background-size: 100% 100%;
+  height: 120vh;
+  background-attachment: scroll;
+}
 
-  h1,label{
-    color: white;
-  }
+h1,label{
+  color: white;
+}
 
-  .container {
-    position: relative;
-    z-index: 1;
-    height: 100%;
-    margin-top: -50px;
-  }
+.container {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  margin-top: -50px;
+}

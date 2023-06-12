@@ -20,9 +20,9 @@
                         <th>Clave</th>
                       </tr>
                       <tr>
-                        <td>{{ pistaMusica[0].nombre }}</td>
-                        <td>{{ pistaMusica[0].compositor }}</td>
-                        <td>{{ pistaMusica[0].mclave }}</td>
+                        <td>{{ pistaMusica && pistaMusica.length > 0 ? pistaMusica[0].nombre : '' }}</td>
+                        <td>{{ pistaMusica && pistaMusica.length > 0 ? pistaMusica[0].compositor : '' }}</td>
+                        <td>{{ pistaMusica && pistaMusica.length > 0 ? pistaMusica[0].mclave : '' }}</td>
                       </tr>
                     </table>
                   </div><br>

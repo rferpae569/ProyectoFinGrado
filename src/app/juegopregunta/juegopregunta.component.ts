@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
+import { Juegopreguntapista } from '../model/juegopreguntapista';
 
 @Component({
   selector: 'app-juegopregunta',
@@ -14,7 +15,7 @@ import { startWith, map } from 'rxjs/operators';
 })
 export class JuegopreguntaComponent implements OnInit {
   datos!: Juegopregunta[];
-  respuesta: string = '';
+  Respuesta: string = '';
   intentos: number = 0;
   puntos: number = 0;
   listaPeliculas: string[] = [];
@@ -22,7 +23,9 @@ export class JuegopreguntaComponent implements OnInit {
   session: string = '';
   numeroAleatorio: number = 0;
   palabrasecreta: string = '';
-  nombresPeliculas: Array<{ pregunta: string; respuesta: string[] }> = [];
+  nombresPeliculas: Array<{ pregunta: string; Respuesta: string[] }> = [];
+  mostrarPista: boolean = false;
+  pistaPregunta: Juegopreguntapista[] = [];
 
   ngOnInit() {
 
@@ -54,6 +57,10 @@ export class JuegopreguntaComponent implements OnInit {
     
     const puntoscookie = this.cookieService.get('puntos');
     this.puntos = parseInt(puntoscookie, 10) || 0;
+
+    this.servicioService.getDatosPeliculaPistaPregunta().subscribe((datos) => {
+      this.pistaPregunta = datos;
+    });
   }
 
   constructor(
@@ -107,7 +114,11 @@ const nuevo = {
     const longitudArray = this.nombresPeliculas.length;
     const numeroAleatorio = this.generarNumeroAleatorio(longitudArray);
     this.numeroAleatorio = numeroAleatorio;
-    this.palabrasecreta = this.nombresPeliculas[numeroAleatorio].respuesta[numeroAleatorio];
+    
+    const respuestaArray = this.nombresPeliculas[numeroAleatorio].Respuesta;
+    const respuestaAleatoria = respuestaArray[this.generarNumeroAleatorio(respuestaArray.length)];
+    this.palabrasecreta = respuestaAleatoria;    
+    
     const currentDate = new Date();
     const expirationDate = new Date(
       currentDate.getFullYear(),
@@ -127,7 +138,7 @@ const nuevo = {
     this.palabrasecreta = this.cookieService.get('palabra');
     const juegoActual = this.palabrasecreta;
 
-    if (this.respuesta.toLowerCase() === juegoActual.toLowerCase()) {
+    if (this.Respuesta.toLowerCase() === juegoActual.toLowerCase()) {
 
       const gameData = JSON.parse(gameCookie);
       const numero = parseInt(this.cookieService.get('numero'), 10);
@@ -184,7 +195,8 @@ const nuevo = {
 
        }
     }
-    this.respuesta = '';
+    this.mostrarPista = true;
+    this.Respuesta = '';
   }
 
   generarArrayNombresPeliculas() {
@@ -194,7 +206,7 @@ const nuevo = {
       const respuestaPelicula = [pelicula.Respuesta];
       const peliculaObjeto = {
         pregunta: preguntaPelicula,
-        respuesta: respuestaPelicula
+        Respuesta: respuestaPelicula
       };
       this.nombresPeliculas.push(peliculaObjeto);
     }
@@ -213,7 +225,7 @@ const nuevo = {
 
   reiniciar() {
     document.cookie = `peliculas=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-    // location.reload();
+    location.reload();
   }
 
 }
