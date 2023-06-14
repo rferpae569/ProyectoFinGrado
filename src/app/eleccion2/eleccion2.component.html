@@ -1,7 +1,7 @@
 <div>
     <div class="container">
         <h1 class="text-center my-4">El juego ha terminado</h1> 
-        <h1 class="text-center my-4">¿Desea volverlo a intentar?</h1>
+        <h1 class="text-center my-4">¿Desea jugar otra vez o a otro juego?</h1>
         <div class="d-flex justify-content-center">
             <form method="post" class="d-flex flex-column">
                 <!--Creamos el formulario para saber si queremos volver a jugar o no-->
@@ -12,18 +12,12 @@
 
         <div class="button-container">
         <button class="btn btn-primary" (click)="toggleGrafica()">Mostrar gráfica de puntos</button>  
-        <button class="btn btn-primary">Mostrar porcentaje de juegos jugados</button>
+        <button class="btn btn-primary" (click)="toggleGrafica2()">Mostrar porcentaje de juegos jugados</button>
+        <button class="btn btn-primary btn-fixed-bottom-center" (click)="guardarGraficos()">Descargar PDF</button>
         </div>
 
-    <div *ngIf="mostrarGrafica" class="grafica-contenedor">
-      <div id="grafica1"></div>
-      <!-- <button class="btn btn-secondary" (click)="toggleGrafica()">Cerrar gráfica</button> -->
-        <!-- <div class="text-center"><br>
-        <a href="../generadorPDF/generador2.php">Descargar pdf de los resultados</a>
+        <div class="graficas-contenedor">
+            <div id="grafica1"></div>
+            <div id="grafica2"></div>
         </div>
-        <div class="d-flex justify-content-center my-5">
-            <img src="../graficos/grafico1.php" alt="Gráfico de Porcentajes de Jugadas" class="mx-3">
-            <img src="../graficos/grafico2.php" alt="Gráfico de Rankings" class="mx-3">
-        </div>-->
-    </div>  
 </div>
