@@ -30,9 +30,9 @@ export class ActualizarComponent {
     private fb: FormBuilder
   ) {
     this.newusuarioForm = this.fb.group({
-      Nombre: ['', [Validators.required]],
-      Passwrd: ['', [Validators.required]],
-      Correo: ['', [Validators.required]],
+      Nombre: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9]+$/)]],
+      Passwrd: ['', [Validators.required, Validators.pattern(/^(?=.*[0-9])(?=.*\*)(?=.*[a-zA-Z])(.{8,})$/)]],
+      Correo: ['', [Validators.required, Validators.email]]
     });
   }
 

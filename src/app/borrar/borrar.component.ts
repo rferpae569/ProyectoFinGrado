@@ -28,8 +28,8 @@ export class BorrarComponent {
     private fb: FormBuilder
   ) {
     this.newusuarioForm = this.fb.group({
-      Nombre: ['', [Validators.required]],
-      Correo: ['', [Validators.required]],
+      Nombre: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9]+$/)]],
+      Correo: ['', [Validators.required, Validators.email]],
     });
   }
 

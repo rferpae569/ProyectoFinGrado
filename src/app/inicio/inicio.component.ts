@@ -27,8 +27,8 @@ export class InicioComponent implements OnInit, AfterViewInit {
     private fb: FormBuilder,
     private router: Router,) { 
       this.newloginForm = this.fb.group({
-        Nombre: ['', [Validators.required]],
-        Passwrd: ['', [Validators.required]]
+        Nombre: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9]+$/)]],
+        Passwrd: ['', [Validators.required, Validators.pattern(/^(?=.*[0-9])(?=.*\*)(?=.*[a-zA-Z])(.{8,})$/)]]
       })
   }
 
