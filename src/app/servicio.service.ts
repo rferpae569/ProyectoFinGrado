@@ -72,6 +72,10 @@ export class ServicioService {
     return this.http.post<Usuarios[]>(`${this.url}usuarios/loginusuario.php`, user);
   }
 
+  // getIncrementarJugadasImagen(): Observable<Numjugadas[]> {
+  //   return this.http.get<Numjugadas[]>(`${this.url}numjugadas/incrementarjugadaimagen.php`);
+  // }
+
 //   getDatosJuego():  Observable<Juego[]> {
 //     return this.http.get<Juego[]>(`${this.url}juego/leerJuegotry.php`);
 //   }
