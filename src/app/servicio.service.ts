@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Usuarios } from './model/usuarios';
 import { Correos } from './model/correos';
@@ -72,12 +73,25 @@ export class ServicioService {
     return this.http.post<Usuarios[]>(`${this.url}usuarios/loginusuario.php`, user);
   }
 
-  // getIncrementarJugadasImagen(): Observable<Numjugadas[]> {
-  //   return this.http.get<Numjugadas[]>(`${this.url}numjugadas/incrementarjugadaimagen.php`);
+  // getIncrementarJugadasImagen(): Observable<Numjugadas> {
+  //   return this.http.get<Numjugadas>(`${this.url}numjugadas/incrementarjugadaimagen.php`);
   // }
+
+  getIncrementarJugadasImagen(valorCookie: string): Observable<Numjugadas> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'session': valorCookie
+    });
+
+    console.log('Valor de la cookie:', valorCookie); // Agrega esta línea para imprimir el valor de la cookie
+
+  
+    return this.http.get<Numjugadas>(`${this.url}numjugadas/incrementarjugadaimagen.php`, { headers });
+  }
 
 //   getDatosJuego():  Observable<Juego[]> {
 //     return this.http.get<Juego[]>(`${this.url}juego/leerJuegotry.php`);
 //   }
+
 
 }
