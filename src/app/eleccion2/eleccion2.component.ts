@@ -170,7 +170,7 @@ export class Eleccion2Component implements OnInit {
 
   irAEleccion() {
     // Verificar la existencia de las cookies
-    const cookiesExistentes = ['numero', 'palabra', 'puntos', 'listapeliculas', 'intentos', 'peliculas'];
+    const cookiesExistentes = ['numero', 'palabra', 'puntos', 'listapeliculas', 'intentos', 'peliculas', 'pistas'];
     for (const cookie of cookiesExistentes) {
       if (this.cookieService.check(cookie)) {
         this.cookieService.delete(cookie); // Eliminar la cookie
@@ -182,7 +182,7 @@ export class Eleccion2Component implements OnInit {
   }
 
   irAInicio() {
-    const cookiesExistentes = ['numero', 'palabra', 'puntos', 'listapeliculas', 'intentos', 'session', 'peliculas'];
+    const cookiesExistentes = ['numero', 'palabra', 'puntos', 'listapeliculas', 'intentos', 'session', 'peliculas', 'pistas'];
     for (const cookie of cookiesExistentes) {
       if (this.cookieService.check(cookie)) {
         this.cookieService.delete(cookie);

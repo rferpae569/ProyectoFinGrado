@@ -8,14 +8,14 @@
         <div class="col-md-6 mx-auto">
             <img [src]="'../../assets/img/' + nombresPeliculas[numeroAleatorio].imagenes[0]" class="img-fluid altoimagen">
             <!--Cogemos la imagen de la base de datos-->
-            <form autocomplete="off" class="mt-4">
+            <form autocomplete="off" class="mt-4" ngForm>
                 <!--Creamos un formulario para que el usuario pueda responder-->
                 <div class="form-group colorajax">
                     <label for="respuesta">Introduce la respuesta</label>
                     <input id="respuesta" type="text" class="form-control" placeholder="Respuesta" name="respuesta">
                 </div>
                 <div class="text-center"><br>
-                    <button type="submit" class="btn btn-primary" (click)="enviarRespuesta()" (click)="reiniciar()" (click)="seleccionarPalabraSecreta()">Comprobar</button>
+                    <button type="submit" class="btn btn-primary" (click)="enviarRespuesta()">Comprobar</button>
                 </div> 
             </form>
         </div>

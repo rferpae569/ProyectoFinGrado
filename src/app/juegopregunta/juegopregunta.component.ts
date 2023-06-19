@@ -23,9 +23,10 @@ export class JuegopreguntaComponent implements OnInit {
   session: string = '';
   numeroAleatorio: number = 0;
   palabrasecreta: string = '';
-  nombresPeliculas: Array<{ pregunta: string; Respuesta: string[] }> = [];
+  nombresPeliculas: Array<{id: number; pregunta: string; Respuesta: string[] }> = [];
   mostrarPista: boolean = false;
   pistaPregunta: Juegopreguntapista[] = [];
+  pistas: string = ''; //Esto es para la pista
 
   ngOnInit() {
 
@@ -60,6 +61,8 @@ export class JuegopreguntaComponent implements OnInit {
 
     this.servicioService.getDatosPeliculaPistaPregunta().subscribe((datos) => {
       this.pistaPregunta = datos;
+      this.cookieService.set('pistas', JSON.stringify(this.pistaPregunta.slice(0, 20))); //Esto para pistas
+
     });
   }
 
@@ -94,6 +97,8 @@ export class JuegopreguntaComponent implements OnInit {
   seleccionarPalabraSecreta() {
     const nombresPeliculasCookie = this.cookieService.get('peliculas');
     this.nombresPeliculas = JSON.parse(nombresPeliculasCookie);
+    const pistaPeliculasCookies = this.cookieService.get('pistas'); //Para pistas
+    this.pistaPregunta = JSON.parse(pistaPeliculasCookies);
 
     if (!this.nombresPeliculas || this.nombresPeliculas.length === 0) {
 
@@ -108,8 +113,8 @@ const nuevo = {
 // });
 
 
-      // this.router.navigate(['/ranking']); Esto sera eleccion2
-      // return;
+      this.router.navigate(['/eleccion2']);
+      
     }
     const longitudArray = this.nombresPeliculas.length;
     const numeroAleatorio = this.generarNumeroAleatorio(longitudArray);
@@ -117,6 +122,14 @@ const nuevo = {
     
     const respuestaArray = this.nombresPeliculas[numeroAleatorio].Respuesta;
     const respuestaAleatoria = respuestaArray[this.generarNumeroAleatorio(respuestaArray.length)];
+    const id = this.nombresPeliculas[numeroAleatorio].id; //para pistas
+    const pista = this.pistaPregunta.find(item => item.id === id )?.Pista;
+    // console.log(id);
+    // console.log(pista);
+    // pista.toString();
+    this.pistas = pista ? pista.toString() : '';
+    // console.log(this.pistas);
+    // console.log(this.pistaPregunta);
     this.palabrasecreta = respuestaAleatoria;    
     
     const currentDate = new Date();
@@ -137,6 +150,10 @@ const nuevo = {
     const gameCookie = this.cookieService.get('peliculas');
     this.palabrasecreta = this.cookieService.get('palabra');
     const juegoActual = this.palabrasecreta;
+
+    const inputElement = document.querySelector('#respuesta') as HTMLInputElement;
+    this.Respuesta = inputElement.value;
+    // console.log(this.Respuesta);
 
     if (this.Respuesta.toLowerCase() === juegoActual.toLowerCase()) {
 
@@ -197,14 +214,17 @@ const nuevo = {
     }
     this.mostrarPista = true;
     this.Respuesta = '';
+    this.seleccionarPalabraSecreta();
   }
 
   generarArrayNombresPeliculas() {
     this.nombresPeliculas = [];
     for (const pelicula of this.datos) {
+      const idPelicula = pelicula.id;
       const preguntaPelicula = pelicula.pregunta;
       const respuestaPelicula = [pelicula.Respuesta];
       const peliculaObjeto = {
+        id: idPelicula,
         pregunta: preguntaPelicula,
         Respuesta: respuestaPelicula
       };
@@ -215,17 +235,37 @@ const nuevo = {
       this.listaPeliculas.push(NombrePelicula);
     }
 
+    // this.pistaPregunta= [];
+    // for(const pista of this.datos2){
+    //   const idPista= pista.id;
+    //   const pista=pista.Pista;
+    // }
+
     const currentDate = new Date();
     const expirationDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 1);
-    this.cookieService.set('peliculas', JSON.stringify(this.nombresPeliculas.slice(0, 22)), expirationDate);
+    this.cookieService.set('peliculas', JSON.stringify(this.nombresPeliculas.slice(0, 20)), expirationDate);
     this.cookieService.set('listapeliculas', JSON.stringify(this.listaPeliculas), expirationDate);
     this.cookieService.set('puntos', '0', expirationDate);
+    const pistacookie =this.cookieService.get('pistas'); //para pistas
+    this.pistaPregunta = JSON.parse(pistacookie);
     // location.reload();
   }
 
-  reiniciar() {
-    document.cookie = `peliculas=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-    location.reload();
-  }
+  // reiniciar() {
+  //   document.cookie = `peliculas=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+  //   location.reload();
+  // }
+
+  // obtenerPista(): string {
+  //   const numeroAleatorioCookie = this.cookieService.get('numero');
+  //   const numeroAleatorio = parseInt(numeroAleatorioCookie, 10);
+  //   // console.log(numeroAleatorio);
+  
+  //   if (numeroAleatorio >= 0 && numeroAleatorio < this.pistaPregunta.length) {
+  //     return this.pistaPregunta[numeroAleatorio].Pista;
+  //   }
+  
+  //   return '';
+  // }
 
 }

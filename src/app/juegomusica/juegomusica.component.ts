@@ -110,8 +110,8 @@ const nuevo = {
 // });
 
 
-      // this.router.navigate(['/ranking']); Esto sera eleccion2
-      // return;
+      this.router.navigate(['/eleccion2']);
+      
     }
     const longitudArray = this.nombresPeliculas.length;
     const numeroAleatorio = this.generarNumeroAleatorio(longitudArray);
@@ -137,6 +137,12 @@ const nuevo = {
 
     this.palabrasecreta = this.cookieService.get('palabra');
     const juegoActual = this.palabrasecreta;
+    console.log(juegoActual);
+
+    const inputElement = document.querySelector('#respuesta') as HTMLInputElement;
+    this.respuesta = inputElement.value;
+    console.log(this.respuesta);    
+
     if (this.respuesta.toLowerCase() === juegoActual.toLowerCase()) {
 
       const gameData = JSON.parse(gameCookie);
@@ -196,6 +202,8 @@ const nuevo = {
     }
     this.mostrarPista = true;
     this.respuesta = '';
+    this.seleccionarPalabraSecreta();
+
   }
 
   generarArrayNombresMusica() {
@@ -225,8 +233,8 @@ const nuevo = {
     location.reload();
   }
 
-  reiniciar() {
-    document.cookie = `peliculas=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-    location.reload();
-  }
+  // reiniciar() {
+  //   document.cookie = `peliculas=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+  //   location.reload();
+  // }
 }

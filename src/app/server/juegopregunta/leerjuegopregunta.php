@@ -4,7 +4,7 @@ header("Access-Control-Allow-Headers: *");
 try {
     $mbd = new PDO('mysql:host=localhost;dbname=juegocine', "root", "");
 
-    $res = $mbd->query('SELECT preguntas.pregunta, peliculaspreguntas.Respuesta FROM peliculaspreguntas JOIN preguntas ON peliculaspreguntas.idpregunta = preguntas.id');
+    $res = $mbd->query('SELECT preguntas.id, preguntas.pregunta, peliculaspreguntas.Respuesta FROM peliculaspreguntas JOIN preguntas ON peliculaspreguntas.idpregunta = preguntas.id ORDER BY preguntas.id');
 	
 	if ($res->errorCode()==0) {
 		$rows=$res->fetchAll(PDO::FETCH_ASSOC);
