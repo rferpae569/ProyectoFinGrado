@@ -4,8 +4,8 @@ header("Access-Control-Allow-Headers: *");
 try {
     $mbd = new PDO('mysql:host=localhost;dbname=juegocine', "root", "");
 
-	$res = $mbd->query('SELECT * FROM ranking' );
-	
+    $res = $mbd->query('SELECT r.*, u.nombre FROM ranking r JOIN usuarios u ON r.codigoRanking = u.codigoRanking');
+
 	if ($res->errorCode()==0) {
 		$rows=$res->fetchAll(PDO::FETCH_ASSOC);
 		header('Content-type: application/json');

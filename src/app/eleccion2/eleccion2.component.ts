@@ -90,19 +90,20 @@ export class Eleccion2Component implements OnInit {
     } else {
       setTimeout(() => {
         const data = new google.visualization.DataTable();
-        data.addColumn('number', 'CodigoRanking');
+        data.addColumn('string', 'nombre');
         data.addColumn('number', 'PuntosImagen');
         data.addColumn('number', 'PuntosPregunta');
         data.addColumn('number', 'PuntosMusica');
   
         // Llenar los datos de la tabla
-        const rows = this.datos.map((dato: any) => [dato.CodigoRanking, dato.PuntosImagen, dato.PuntosPreguntas, dato.PuntosMusica]);
+        const rows = this.datos.map((dato: any) => [dato.nombre, dato.PuntosImagen, dato.PuntosPreguntas, dato.PuntosMusica]);
         data.addRows(rows);
   
         const options = {
           title: 'Ranking de Puntos',
           width: 500,
           height: 400,
+          hAxis: { title: 'Nombre' }, // Agregar esta opción para especificar la columna de nombres en el eje horizontal
         };
   
         const chart = new google.visualization.BarChart(document.getElementById('grafica1'));

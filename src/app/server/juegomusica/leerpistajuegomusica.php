@@ -5,7 +5,7 @@ try {
     $mbd = new PDO('mysql:host=localhost;dbname=juegocine', "root", "");
 
     // $res = $mbd->query('SELECT canciones.nombre, canciones.compositor, canciones.mclave FROM peliculascanciones JOIN canciones ON peliculascanciones.idmusica = canciones.id');
-	$res = $mbd->query('SELECT canciones.id, canciones.nombre, canciones.compositor, canciones.mclave FROM peliculascanciones JOIN canciones ON peliculascanciones.idmusica = canciones.id');
+	$res = $mbd->query('SELECT canciones.id, canciones.nombre, canciones.compositor, canciones.mclave FROM peliculascanciones JOIN canciones ON peliculascanciones.idmusica = canciones.id ORDER BY peliculascanciones.idmusica');
 
 	if ($res->errorCode()==0) {
 		$rows=$res->fetchAll(PDO::FETCH_ASSOC);

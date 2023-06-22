@@ -1,14 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { Numjugadas } from '../model/numjugadas';
 import { ServicioService } from '../servicio.service';
 import { CookieService } from 'ngx-cookie-service';
+import * as $ from 'jquery';
 // import { HttpClient } from '@angular/common/http';
-import { HttpHeaders } from '@angular/common/http';
-import { tap, finalize } from 'rxjs/operators';
-
-
-
-
+// import { HttpHeaders } from '@angular/common/http';
+// import { tap, finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-eleccion',
@@ -16,7 +13,7 @@ import { tap, finalize } from 'rxjs/operators';
   styleUrls: ['./eleccion.component.scss'],
   providers: [ServicioService]
 })
-export class EleccionComponent {
+export class EleccionComponent{
   numJugadas: Numjugadas = {
     Codigojugadas: 0,
     JugadasImagen: 0,
@@ -25,6 +22,30 @@ export class EleccionComponent {
   };
 
   constructor(private servicio: ServicioService, private cookieService: CookieService) {}
+
+//   ngAfterViewInit() {
+//     // Código de jQuery aquí
+//     $(document).ready(function() {
+//       var juegoImagenLink = $('#juego-imagen-link');
+    
+//       juegoImagenLink.click(function(event) {
+//         event.preventDefault();
+    
+//         $.ajax({
+//           url: 'http://localhost/server/numjugadas/incrementarjugadaimagen.php',
+//           method: 'POST',
+//           success: function(response) {
+//             console.log('Respuesta del servidor:', response);
+//             console.log('Incremento exitoso');
+//           },
+//           error: function(xhr, status, error) {
+//             console.log('Error:', error);
+//           }
+//         });
+//       });
+//     });
+//   }
+// }
 
   // incrementarJugadasImagen(): void {
   //   const valorCookie = this.cookieService.get('session');
@@ -50,27 +71,27 @@ export class EleccionComponent {
 
   // 
   
-  incrementarJugadasImagen(): void {
-    const valorCookie = this.cookieService.get('session');
-    console.log('Valor de la cookie:', valorCookie);
+  // incrementarJugadasImagen(): void {
+  //   const valorCookie = this.cookieService.get('session');
+  //   console.log('Valor de la cookie:', valorCookie);
   
-    if (valorCookie && valorCookie !== '') {
-      // Realiza la solicitud al servidor enviando el valor de la cookie "session"
-      this.servicio.getIncrementarJugadasImagen(valorCookie)
-        .pipe(
-          tap((response: Numjugadas) => {
-            console.log('JugadasImagen incrementada correctamente.', response);
-            this.numJugadas = response;
-          }),
-          finalize(() => {
-            // Aquí puedes realizar cualquier acción final que necesites
-          })
-        )
-        .subscribe();
-    } else {
-      console.error('La cookie "session" no está configurada');
-    }
-  }
+  //   if (valorCookie && valorCookie !== '') {
+  //     // Realiza la solicitud al servidor enviando el valor de la cookie "session"
+  //     this.servicio.getIncrementarJugadasImagen(valorCookie)
+  //       .pipe(
+  //         tap((response: Numjugadas) => {
+  //           console.log('JugadasImagen incrementada correctamente.', response);
+  //           this.numJugadas = response;
+  //         }),
+  //         finalize(() => {
+  //           // Aquí puedes realizar cualquier acción final que necesites
+  //         })
+  //       )
+  //       .subscribe();
+  //   } else {
+  //     console.error('La cookie "session" no está configurada');
+  //   }
+  // }
 
 
   // incrementarJugadasImagen(): void {
@@ -127,3 +148,4 @@ export class EleccionComponent {
   //     );
   // }
 }
+

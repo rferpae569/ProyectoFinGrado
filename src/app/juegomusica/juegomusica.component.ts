@@ -23,10 +23,14 @@ export class JuegomusicaComponent implements OnInit {
   session: string = ''
   numeroAleatorio: number = 0;
   palabrasecreta: string = '';
-  nombresPeliculas: Array<{ nombre: string; musica: string[] }> = [];//nombrejuegos
+  nombresPeliculas: Array<{ id: number; nombre: string; musica: string[] }> = [];//nombrejuegos
   // pistaMusica: Array<{ nombre: string; compositor: string; mclave: string;}> = [];
   mostrarPista: boolean = false;
   pistaMusica: Juegomusicapista[] = [];
+  pistas: string = ''; //Esto es para la pista
+  pistas2: string = ''; //Esto es para la pista
+  pistas3: string = ''; //Esto es para la pista
+
 
   ngOnInit() {
 
@@ -61,6 +65,10 @@ export class JuegomusicaComponent implements OnInit {
 
     this.servicioService.getDatosPeliculaPistaMusica().subscribe((datos) => {
       this.pistaMusica = datos;
+      this.cookieService.set('pistas', JSON.stringify(this.pistaMusica.slice(0, 29))); //Esto para pistas
+      // this.cookieService.set('compositor', JSON.stringify(this.pistaMusica.slice(0, 25))); //Esto para pistas
+      // this.cookieService.set('mclave', JSON.stringify(this.pistaMusica.slice(0, 25))); //Esto para pistas
+
     });
     
   }
@@ -96,6 +104,12 @@ export class JuegomusicaComponent implements OnInit {
   seleccionarPalabraSecreta() {
     const nombresPeliculasCookie = this.cookieService.get('peliculas');
     this.nombresPeliculas = JSON.parse(nombresPeliculasCookie);
+    const pistaPeliculasCookies = this.cookieService.get('pistas'); //Para pistas
+    this.pistaMusica = JSON.parse(pistaPeliculasCookies);
+    // const pistaPeliculasCookies2 = this.cookieService.get('compositor');
+    // this.pistaMusica = JSON.parse(pistaPeliculasCookies2);
+    // const pistaPeliculasCookies3 = this.cookieService.get('mclave');
+    // this.pistaMusica = JSON.parse(pistaPeliculasCookies3);
 
     if (!this.nombresPeliculas || this.nombresPeliculas.length === 0) {
 
@@ -116,6 +130,30 @@ const nuevo = {
     const longitudArray = this.nombresPeliculas.length;
     const numeroAleatorio = this.generarNumeroAleatorio(longitudArray);
     this.numeroAleatorio = numeroAleatorio;
+
+    const respuestaArray = this.nombresPeliculas[numeroAleatorio].nombre;
+    const respuestaAleatoria = respuestaArray[this.generarNumeroAleatorio(respuestaArray.length)];
+    const id = this.nombresPeliculas[numeroAleatorio].id; //para pistas
+    const pista = this.pistaMusica.find(item => item.id === id )?.nombre;
+    const pista2 = this.pistaMusica.find(item => item.id === id )?.compositor;
+    const pista3 = this.pistaMusica.find(item => item.id === id )?.mclave;
+
+
+    console.log(id);
+    // console.log(pista);
+    // console.log(pista2);
+    // console.log(pista3);
+    // pista.toString();
+    this.pistas = pista ? pista.toString() : '';
+    this.pistas2 = pista2 ? pista2.toString() : '';
+    this.pistas3 = pista3 ? pista3.toString() : '';
+
+    console.log(this.pistas);
+    console.log(this.pistas2);
+    console.log(this.pistas3);
+    console.log(this.pistaMusica);
+    this.palabrasecreta = respuestaAleatoria;    
+    
     this.palabrasecreta = this.nombresPeliculas[numeroAleatorio].nombre;
     const currentDate = new Date();
     const expirationDate = new Date(
@@ -209,9 +247,11 @@ const nuevo = {
   generarArrayNombresMusica() {
     this.nombresPeliculas = [];
     for (const pelicula of this.datos) {
+       const idPelicula = pelicula.id 
        const NombrePelicula = pelicula.NombrePelicula;
        const MusicaPelicula = [pelicula.musica.toString()];
        const peliculaObjeto = {
+        id: idPelicula,
         nombre: NombrePelicula,
         musica: MusicaPelicula
       };
@@ -226,10 +266,16 @@ const nuevo = {
 //en juego musica solo me deja 34 peliculas
     const currentDate = new Date();
     const expirationDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 1);
-    this.cookieService.set('peliculas', JSON.stringify(this.nombresPeliculas.slice(0, 34)), expirationDate);
+    this.cookieService.set('peliculas', JSON.stringify(this.nombresPeliculas.slice(0, 29)), expirationDate);
     // this.cookieService.set('intentos', '3', expirationDate);
     this.cookieService.set('listapeliculas', JSON.stringify(this.listaPeliculas), expirationDate);
     this.cookieService.set('puntos', "0", expirationDate);
+    const pistacookie =this.cookieService.get('pistas'); //para pistas
+    this.pistaMusica = JSON.parse(pistacookie);
+    // const pistacookie2 =this.cookieService.get('compositor'); //para pistas
+    // this.pistaMusica = JSON.parse(pistacookie2);
+    // const pistacookie3 =this.cookieService.get('mclave'); //para pistas
+    // this.pistaMusica = JSON.parse(pistacookie3);
     location.reload();
   }
 
