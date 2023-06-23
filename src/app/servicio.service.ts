@@ -56,6 +56,18 @@ export class ServicioService {
   getDatosPeliculaPistaMusica():  Observable<Juegomusicapista[]> {
     return this.http.get<Juegomusicapista[]>(`${this.url}juegomusica/leerpistajuegomusica.php`);
   }
+
+  getIncrementarJugadasImagen(nuevo: any): Observable<any> {
+    return this.http.post(`${this.url}numjugadas/incrementarjugadaimagen.php`, nuevo);
+  }
+
+  getIncrementarJugadasPreguntas(nuevo: any): Observable<any> {
+    return this.http.post(`${this.url}numjugadas/incrementarjugadapregunta.php`, nuevo);
+  }
+
+  getIncrementarJugadasMusica(nuevo: any): Observable<any> {
+    return this.http.post(`${this.url}numjugadas/incrementarjugadamusica.php`, nuevo);
+  }
   
   postDato(nuevo:Usuarios): Observable<Usuarios> {
     return this.http.post<Usuarios>(`${this.url}usuarios/insertarusuario.php`,nuevo);
@@ -69,25 +81,23 @@ export class ServicioService {
     return this.http.post<Usuarios>(`${this.url}usuarios/actualizarusuario.php`,nuevo);
   }
 
+  postDatoRankingImagen(nuevo: any): Observable<any> {
+    return this.http.post(`${this.url}ranking/insertarrankingjuegoimagen.php`, nuevo);
+  }
+
+  postDatoRankingPregunta(nuevo: any): Observable<any> {
+    return this.http.post(`${this.url}ranking/insertarrankingjuegopregunta.php`, nuevo);
+  }
+
+  postDatoRankingMusica(nuevo: any): Observable<any> {
+    return this.http.post(`${this.url}ranking/insertarrankingjuegomusica.php`, nuevo);
+  }
+
   login(user: Usuarios): Observable<Usuarios[]> {
     return this.http.post<Usuarios[]>(`${this.url}usuarios/loginusuario.php`, user);
   }
 
-  getIncrementarJugadasImagen(): Observable<Numjugadas> {
-    return this.http.get<Numjugadas>(`${this.url}numjugadas/incrementarjugadaimagen.php`);
-  }
-
-  // getIncrementarJugadasImagen(valorCookie: string): Observable<Numjugadas> {
-  //   const headers = new HttpHeaders({
-  //     'Content-Type': 'application/json',
-  //     'session': valorCookie
-  //   });
-
-    // console.log('Valor de la cookie:', valorCookie); // Agrega esta línea para imprimir el valor de la cookie
-
-  
-    // return this.http.get<Numjugadas>(`${this.url}numjugadas/incrementarjugadaimagen.php`, { headers });
-  }
+}
 
 //   getDatosJuego():  Observable<Juego[]> {
 //     return this.http.get<Juego[]>(`${this.url}juego/leerJuegotry.php`);

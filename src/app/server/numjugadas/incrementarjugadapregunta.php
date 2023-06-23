@@ -23,11 +23,11 @@ try {
             // Obtener el CodigoJugadas
             $codigoJugadas = $rows[0]['Codigojugadas'];
 
-            // Consulta para incrementar la columna jugadasImagen en uno
-            $mbd->query("UPDATE numjugadas SET JugadasImagen = JugadasImagen + 1 WHERE Codigojugadas = $codigoJugadas");
+            // Consulta para incrementar la columna jugadasPreguntas` en uno
+            $mbd->query("UPDATE numjugadas SET JugadasPreguntas = JugadasPreguntas + 1 WHERE Codigojugadas = $codigoJugadas");
 
             // Obtener los datos actualizados después de la actualización
-            $resUpdated = $mbd->query("SELECT Codigojugadas, JugadasImagen FROM numjugadas WHERE Codigojugadas = $codigoJugadas");
+            $resUpdated = $mbd->query("SELECT Codigojugadas, JugadasPreguntas FROM numjugadas WHERE Codigojugadas = $codigoJugadas");
             $rowsUpdated = $resUpdated->fetchAll(PDO::FETCH_ASSOC);
 
             $response = $rowsUpdated[0]; // Obtener solo el primer objeto del array

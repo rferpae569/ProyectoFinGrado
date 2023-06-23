@@ -108,9 +108,9 @@ const nuevo = {
   puntos: this.puntos
 };
 
-// this.servicioService.postDatoRanking(nuevo).subscribe((datos) => {
-//   console.log("Datos enviados al servidor:", datos);
-// });
+this.servicioService.postDatoRankingPregunta(nuevo).subscribe((datos) => {
+  console.log("Datos enviados al servidor:", datos);
+});
 
 
       this.router.navigate(['/eleccion2']);
@@ -205,9 +205,9 @@ const nuevo = {
           puntos: this.puntos
         };
 
-        // this.servicioService.postDatoRanking(nuevo).subscribe((datos) => {
-        //   console.log("Datos enviados al servidor:", datos);
-        // });
+        this.servicioService.postDatoRankingPregunta(nuevo).subscribe((datos) => {
+          console.log("Datos enviados al servidor:", datos);
+        });
         this.router.navigate(['/eleccion2']);
 
        }

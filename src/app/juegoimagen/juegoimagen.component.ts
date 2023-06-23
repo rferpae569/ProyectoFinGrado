@@ -96,9 +96,9 @@ const nuevo = {
   puntos: this.puntos
 };
 
-// this.servicioService.postDatoRanking(nuevo).subscribe((datos) => {
-//   console.log("Datos enviados al servidor:", datos);
-// });
+this.servicioService.postDatoRankingImagen(nuevo).subscribe((datos) => {
+  console.log("Datos enviados al servidor:", datos);
+});
 
 
       this.router.navigate(['/eleccion2']);
@@ -126,11 +126,11 @@ const nuevo = {
     const gameCookie = this.cookieService.get('peliculas');
     this.palabrasecreta = this.cookieService.get('palabra');
     const juegoActual = this.palabrasecreta;
-    console.log(juegoActual);
+    // console.log(juegoActual);
 
     const inputElement = document.querySelector('#respuesta') as HTMLInputElement;
     this.respuesta = inputElement.value;
-    console.log(this.respuesta);    
+    // console.log(this.respuesta);    
     
     if (this.respuesta.toLowerCase() === juegoActual.toLowerCase()) {
 
@@ -182,9 +182,10 @@ const nuevo = {
           puntos: this.puntos
         };
 
-        // this.servicioService.postDatoRanking(nuevo).subscribe((datos) => {
-        //   console.log("Datos enviados al servidor:", datos);
-        // });
+        this.servicioService.postDatoRankingImagen(nuevo).subscribe((datos) => {
+          console.log("Datos enviados al servidor:", datos);
+        });
+        
         this.router.navigate(['/eleccion2']);
 
        }

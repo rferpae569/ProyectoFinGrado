@@ -119,9 +119,9 @@ const nuevo = {
   puntos: this.puntos
 };
 
-// this.servicioService.postDatoRanking(nuevo).subscribe((datos) => {
-//   console.log("Datos enviados al servidor:", datos);
-// });
+this.servicioService.postDatoRankingMusica(nuevo).subscribe((datos) => {
+  console.log("Datos enviados al servidor:", datos);
+});
 
 
       this.router.navigate(['/eleccion2']);
@@ -139,7 +139,7 @@ const nuevo = {
     const pista3 = this.pistaMusica.find(item => item.id === id )?.mclave;
 
 
-    console.log(id);
+    // console.log(id);
     // console.log(pista);
     // console.log(pista2);
     // console.log(pista3);
@@ -148,10 +148,10 @@ const nuevo = {
     this.pistas2 = pista2 ? pista2.toString() : '';
     this.pistas3 = pista3 ? pista3.toString() : '';
 
-    console.log(this.pistas);
-    console.log(this.pistas2);
-    console.log(this.pistas3);
-    console.log(this.pistaMusica);
+    // console.log(this.pistas);
+    // console.log(this.pistas2);
+    // console.log(this.pistas3);
+    // console.log(this.pistaMusica);
     this.palabrasecreta = respuestaAleatoria;    
     
     this.palabrasecreta = this.nombresPeliculas[numeroAleatorio].nombre;
@@ -175,11 +175,11 @@ const nuevo = {
 
     this.palabrasecreta = this.cookieService.get('palabra');
     const juegoActual = this.palabrasecreta;
-    console.log(juegoActual);
+    // console.log(juegoActual);
 
     const inputElement = document.querySelector('#respuesta') as HTMLInputElement;
     this.respuesta = inputElement.value;
-    console.log(this.respuesta);    
+    // console.log(this.respuesta);    
 
     if (this.respuesta.toLowerCase() === juegoActual.toLowerCase()) {
 
@@ -231,9 +231,9 @@ const nuevo = {
           puntos: this.puntos
         };
 
-        // this.servicioService.postDatoRanking(nuevo).subscribe((datos) => {
-        //   console.log("Datos enviados al servidor:", datos);
-        // });
+        this.servicioService.postDatoRankingMusica(nuevo).subscribe((datos) => {
+          console.log("Datos enviados al servidor:", datos);
+        });
         this.router.navigate(['/eleccion2']);
 
        }
@@ -276,7 +276,7 @@ const nuevo = {
     // this.pistaMusica = JSON.parse(pistacookie2);
     // const pistacookie3 =this.cookieService.get('mclave'); //para pistas
     // this.pistaMusica = JSON.parse(pistacookie3);
-    location.reload();
+    // location.reload();
   }
 
   // reiniciar() {

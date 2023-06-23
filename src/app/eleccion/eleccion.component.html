@@ -1,12 +1,11 @@
 <div class="background-image">
 <div class="container">
     <div class="btn-group" role="group" aria-label="Enlaces a juegos">
-        <a id="juego-imagen-link" class="btn btn-secondary" routerLink="/juegoimagen" >Adivina la película a través de imágenes
+        <a class="btn btn-secondary" (click)="incrementarJugadasImagen()" routerLink="/juegoimagen" >Adivina la película a través de imágenes
             (Fácil)</a>
-             <!-- (click)="incrementarJugadasImagen()"  routerLink="/juegoimagen"-->
-        <a routerLink="/juegopregunta" class="btn btn-secondary">Adivina la película a través de preguntas
+        <a (click)="incrementarJugadasPreguntas()" routerLink="/juegopregunta" class="btn btn-secondary">Adivina la película a través de preguntas
             (Normal)</a>
-        <a routerLink="/juegomusica" class="btn btn-secondary">Adivina la película a través de su música
+        <a (click)="incrementarJugadasMusica()" routerLink="/juegomusica" class="btn btn-secondary">Adivina la película a través de su música
             (Difícil)</a>
     </div>
 </div>
