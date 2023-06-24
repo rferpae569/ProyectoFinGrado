@@ -97,6 +97,10 @@ export class ServicioService {
     return this.http.post<Usuarios[]>(`${this.url}usuarios/loginusuario.php`, user);
   }
 
+  logindos(user: Usuarios): Observable<Usuarios[]> {
+    return this.http.post<Usuarios[]>(`${this.url}usuarios/loginusuariodos.php`, user);
+  }
+
 }
 
 //   getDatosJuego():  Observable<Juego[]> {

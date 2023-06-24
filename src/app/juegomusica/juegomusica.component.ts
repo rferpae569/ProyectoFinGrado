@@ -171,7 +171,7 @@ this.servicioService.postDatoRankingMusica(nuevo).subscribe((datos) => {
   }
 
   enviarRespuesta() {
-    const gameCookie = this.cookieService.get('peliculas');
+    const musicaCookie = this.cookieService.get('peliculas');
 
     this.palabrasecreta = this.cookieService.get('palabra');
     const juegoActual = this.palabrasecreta;
@@ -183,7 +183,7 @@ this.servicioService.postDatoRankingMusica(nuevo).subscribe((datos) => {
 
     if (this.respuesta.toLowerCase() === juegoActual.toLowerCase()) {
 
-      const gameData = JSON.parse(gameCookie);
+      const musicaData = JSON.parse(musicaCookie);
       const numero = parseInt(this.cookieService.get('numero'), 10);
 
       const puntoscookie = this.cookieService.get('puntos');
@@ -204,16 +204,16 @@ this.servicioService.postDatoRankingMusica(nuevo).subscribe((datos) => {
       this.cookieService.set('intentos', this.intentos.toString(), expirationDate);
       this.cookieService.set('puntos', this.puntos.toString(), expirationDate);
 
-      if (Array.isArray(gameData) && numero >= 0 && numero < gameData.length) {
-        gameData.splice(numero, 1);
-        const updatedGameCookie = JSON.stringify(gameData);
+      if (Array.isArray(musicaData) && numero >= 0 && numero < musicaData.length) {
+        musicaData.splice(numero, 1);
+        const updatedMusicaCookie = JSON.stringify(musicaData);
         const currentDate = new Date();
         const expirationDate = new Date(
           currentDate.getFullYear(),
           currentDate.getMonth(),
           currentDate.getDate() + 1
         );
-        this.cookieService.set('peliculas', updatedGameCookie, expirationDate);
+        this.cookieService.set('peliculas', updatedMusicaCookie, expirationDate);
       }
     } else {
       this.intentos--;
