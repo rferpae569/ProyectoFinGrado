@@ -5,15 +5,12 @@
         <h1 class='text-center mt-5'>Puntos: {{puntos}}</h1>
         <div class="row">
             <div class="col-md-6 mx-auto">
-                <h1 class="text-center mt-5" *ngIf="nombresPeliculas[numeroAleatorio]">{{ nombresPeliculas[numeroAleatorio].pregunta }}</h1>
+                <h1 class="text-center mt-5" *ngIf="preguntasPeliculas[numeroAleatorio]">{{ preguntasPeliculas[numeroAleatorio].pregunta }}</h1>
 
                 <div class="alert alert-info" role="alert" [hidden]="!mostrarPista">
                     <h4>Pista:</h4>
                     <p>
                         {{pistas}}
-                        <!-- {{ pistaPregunta && pistaPregunta.length > 0 ? pistaPregunta[0].Pista : '' }} -->
-                        <!-- {{ obtenerPista() }} -->
-
                     </p>
                 </div><br>
 

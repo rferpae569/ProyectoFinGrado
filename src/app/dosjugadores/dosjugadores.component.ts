@@ -76,7 +76,7 @@ export class DosjugadoresComponent implements AfterViewInit {
         }
 
         this.isLoggedIn = true;
-        this.router.navigateByUrl('elecciondos');
+        this.router.navigateByUrl('elecciondosj');
       } else {
         this.fallo = true;
       }

@@ -10,10 +10,14 @@
             <!--Cogemos la imagen de la base de datos-->
             <form autocomplete="off" class="mt-4" ngForm>
                 <!--Creamos un formulario para que el usuario pueda responder-->
-                <!-- <div id="titulopelicula"></div> -->
+                <div id="titulopelicula">
+                        <ul>
+                            <li *ngFor="let titulo of titulosCoincidentes">{{ titulo }}</li>
+                        </ul>
+                </div>
                 <div class="form-group colorajax">
                     <label for="respuesta">Introduce la respuesta</label>
-                    <input id="respuesta" type="text" class="form-control" placeholder="Respuesta" name="respuesta">
+                    <input id="respuesta" type="text" class="form-control" placeholder="Respuesta" name="respuesta" [formControl]="filtroTituloControl">
                 </div>
                 <div class="text-center"><br>
                     <button type="submit" class="btn btn-primary" (click)="enviarRespuesta()">Comprobar</button>

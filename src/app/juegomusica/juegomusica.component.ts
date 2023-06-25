@@ -30,6 +30,8 @@ export class JuegomusicaComponent implements OnInit {
   pistas: string = ''; //Esto es para la pista
   pistas2: string = ''; //Esto es para la pista
   pistas3: string = ''; //Esto es para la pista
+  titulosCoincidentes: string[] = [];
+  filtroTituloControl = new FormControl();
 
 
   ngOnInit() {
@@ -70,6 +72,23 @@ export class JuegomusicaComponent implements OnInit {
       // this.cookieService.set('mclave', JSON.stringify(this.pistaMusica.slice(0, 25))); //Esto para pistas
 
     });
+
+     // Suscribirse a los cambios en el control del input para filtrar los títulos
+     this.filtroTituloControl.valueChanges
+     .pipe(
+       startWith(''), // Empezar con una cadena vacía
+       map(value => value.toLowerCase()) // Convertir a minúsculas
+     )
+     .subscribe(filterValue => {
+       // Filtrar los títulos solo si hay un valor en el filtro
+       if (filterValue) {
+         this.titulosCoincidentes = this.listaPeliculas.filter(
+           titulo => titulo.toLowerCase().startsWith(filterValue)
+         );
+       } else {
+         this.titulosCoincidentes = []; // Vaciar la lista de títulos si no hay valor en el filtro
+       }
+     });
     
   }
 

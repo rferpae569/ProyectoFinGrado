@@ -23,6 +23,8 @@ export class JuegoimagenComponent implements OnInit {
   numeroAleatorio: number = 0;
   palabrasecreta: string = '';
   nombresPeliculas: Array<{ nombre: string; imagenes: string[] }> = [];//nombrejuegos
+  titulosCoincidentes: string[] = [];
+  filtroTituloControl = new FormControl();
 
   ngOnInit() {
 
@@ -54,6 +56,23 @@ export class JuegoimagenComponent implements OnInit {
     
     const puntoscookie = this.cookieService.get('puntos');
     this.puntos = parseInt(puntoscookie, 10) || 0;
+    
+    // Suscribirse a los cambios en el control del input para filtrar los títulos
+    this.filtroTituloControl.valueChanges
+    .pipe(
+      startWith(''), // Empezar con una cadena vacía
+      map(value => value.toLowerCase()) // Convertir a minúsculas
+    )
+    .subscribe(filterValue => {
+      // Filtrar los títulos solo si hay un valor en el filtro
+      if (filterValue) {
+        this.titulosCoincidentes = this.listaPeliculas.filter(
+          titulo => titulo.toLowerCase().startsWith(filterValue)
+        );
+      } else {
+        this.titulosCoincidentes = []; // Vaciar la lista de títulos si no hay valor en el filtro
+      }
+    });
   }
 
   constructor(

@@ -23,7 +23,7 @@ export class JuegopreguntaComponent implements OnInit {
   session: string = '';
   numeroAleatorio: number = 0;
   palabrasecreta: string = '';
-  nombresPeliculas: Array<{id: number; pregunta: string; Respuesta: string[] }> = [];
+  preguntasPeliculas: Array<{id: number; pregunta: string; Respuesta: string[] }> = [];
   mostrarPista: boolean = false;
   pistaPregunta: Juegopreguntapista[] = [];
   pistas: string = ''; //Esto es para la pista
@@ -71,16 +71,16 @@ export class JuegopreguntaComponent implements OnInit {
     private cookieService: CookieService,
     private router: Router
   ) {
-    const sessionCookieExists = this.cookieService.check('peliculas');
+    const sessionCookieExists = this.cookieService.check('preguntas');
     if (!sessionCookieExists) {
       this.servicioService.getDatosPeliculaPregunta().subscribe((datos) => {
         this.datos = datos;
-        this.generarArrayNombresPeliculas();
+        this.generarArrayPreguntasPeliculas();
         this.seleccionarPalabraSecreta();
       });
     } else {
-      const nombresPeliculasCookie = this.cookieService.get('peliculas');
-      this.nombresPeliculas = JSON.parse(nombresPeliculasCookie);
+      const preguntasPeliculasCookie = this.cookieService.get('preguntas');
+      this.preguntasPeliculas = JSON.parse(preguntasPeliculasCookie);
       const numeroAleatorioCookie = this.cookieService.get('numero');
       this.numeroAleatorio = parseInt(numeroAleatorioCookie, 10);
       const nombrejuegocookie = this.cookieService.get('palabra');
@@ -95,12 +95,12 @@ export class JuegopreguntaComponent implements OnInit {
   }
 
   seleccionarPalabraSecreta() {
-    const nombresPeliculasCookie = this.cookieService.get('peliculas');
-    this.nombresPeliculas = JSON.parse(nombresPeliculasCookie);
+    const preguntasPeliculasCookie = this.cookieService.get('preguntas');
+    this.preguntasPeliculas = JSON.parse(preguntasPeliculasCookie);
     const pistaPeliculasCookies = this.cookieService.get('pistas'); //Para pistas
     this.pistaPregunta = JSON.parse(pistaPeliculasCookies);
 
-    if (!this.nombresPeliculas || this.nombresPeliculas.length === 0) {
+    if (!this.preguntasPeliculas || this.preguntasPeliculas.length === 0) {
 
       const nombreuser = this.cookieService.get('session');
 const nuevo = {
@@ -116,13 +116,13 @@ this.servicioService.postDatoRankingPregunta(nuevo).subscribe((datos) => {
       this.router.navigate(['/eleccion2']);
       
     }
-    const longitudArray = this.nombresPeliculas.length;
+    const longitudArray = this.preguntasPeliculas.length;
     const numeroAleatorio = this.generarNumeroAleatorio(longitudArray);
     this.numeroAleatorio = numeroAleatorio;
     
-    const respuestaArray = this.nombresPeliculas[numeroAleatorio].Respuesta;
+    const respuestaArray = this.preguntasPeliculas[numeroAleatorio].Respuesta;
     const respuestaAleatoria = respuestaArray[this.generarNumeroAleatorio(respuestaArray.length)];
-    const id = this.nombresPeliculas[numeroAleatorio].id; //para pistas
+    const id = this.preguntasPeliculas[numeroAleatorio].id; //para pistas
     const pista = this.pistaPregunta.find(item => item.id === id )?.Pista;
     // console.log(id);
     // console.log(pista);
@@ -147,7 +147,7 @@ this.servicioService.postDatoRankingPregunta(nuevo).subscribe((datos) => {
   }
 
   enviarRespuesta() {
-    const preguntaCookie = this.cookieService.get('peliculas');
+    const preguntaCookie = this.cookieService.get('preguntas');
     this.palabrasecreta = this.cookieService.get('palabra');
     const juegoActual = this.palabrasecreta;
 
@@ -187,7 +187,7 @@ this.servicioService.postDatoRankingPregunta(nuevo).subscribe((datos) => {
           currentDate.getMonth(),
           currentDate.getDate() + 1
         );
-        this.cookieService.set('peliculas', updatedPreguntaCookie, expirationDate);
+        this.cookieService.set('preguntas', updatedPreguntaCookie, expirationDate);
       }
     } else {
       this.intentos--;
@@ -217,8 +217,8 @@ this.servicioService.postDatoRankingPregunta(nuevo).subscribe((datos) => {
     this.seleccionarPalabraSecreta();
   }
 
-  generarArrayNombresPeliculas() {
-    this.nombresPeliculas = [];
+  generarArrayPreguntasPeliculas() {
+    this.preguntasPeliculas = [];
     for (const pelicula of this.datos) {
       const idPelicula = pelicula.id;
       const preguntaPelicula = pelicula.pregunta;
@@ -228,7 +228,7 @@ this.servicioService.postDatoRankingPregunta(nuevo).subscribe((datos) => {
         pregunta: preguntaPelicula,
         Respuesta: respuestaPelicula
       };
-      this.nombresPeliculas.push(peliculaObjeto);
+      this.preguntasPeliculas.push(peliculaObjeto);
     }
     for (const pelicula of this.datos) {
       const NombrePelicula = pelicula.pregunta;
@@ -243,7 +243,7 @@ this.servicioService.postDatoRankingPregunta(nuevo).subscribe((datos) => {
 
     const currentDate = new Date();
     const expirationDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 1);
-    this.cookieService.set('peliculas', JSON.stringify(this.nombresPeliculas.slice(0, 20)), expirationDate);
+    this.cookieService.set('preguntas', JSON.stringify(this.preguntasPeliculas.slice(0, 20)), expirationDate);
     this.cookieService.set('listapeliculas', JSON.stringify(this.listaPeliculas), expirationDate);
     this.cookieService.set('puntos', '0', expirationDate);
     const pistacookie =this.cookieService.get('pistas'); //para pistas

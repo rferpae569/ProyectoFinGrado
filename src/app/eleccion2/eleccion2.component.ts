@@ -21,6 +21,7 @@ export class Eleccion2Component implements OnInit {
   mostrarGrafica: boolean = false;
   mostrarGrafica2: boolean = false;
   googleChartsLoaded: boolean = false;
+  chart: any;
 
   constructor(private router: Router, private cookieService: CookieService, private servicioService: ServicioService) {
     servicioService.getDatosRanking().subscribe(datos => {
@@ -95,10 +96,6 @@ export class Eleccion2Component implements OnInit {
         data.addColumn('number', 'PuntosPregunta');
         data.addColumn('number', 'PuntosMusica');
   
-        // Llenar los datos de la tabla
-        const rows = this.datos.map((dato: any) => [dato.nombre, dato.PuntosImagen, dato.PuntosPreguntas, dato.PuntosMusica]);
-        data.addRows(rows);
-  
         const options = {
           title: 'Ranking de Puntos',
           width: 500,
@@ -107,13 +104,21 @@ export class Eleccion2Component implements OnInit {
         };
   
         const chart = new google.visualization.BarChart(document.getElementById('grafica1'));
-        chart.draw(data, options);
+        this.chart = chart; // Guardar una referencia al gráfico
   
         // Mostrar la gráfica restableciendo la propiedad 'display'
         const grafica1 = document.getElementById('grafica1');
         if (grafica1) {
           grafica1.style.display = 'block';
         }
+  
+        // Obtener los datos actualizados antes de dibujar el gráfico
+        this.servicioService.getDatosRanking().subscribe(datos => {
+          this.datos = datos;
+          const rows = this.datos.map((dato: any) => [dato.nombre, dato.PuntosImagen, dato.PuntosPreguntas, dato.PuntosMusica]);
+          data.addRows(rows);
+          this.chart.draw(data, options);
+        });
       }, 0);
     }
   
@@ -133,36 +138,41 @@ export class Eleccion2Component implements OnInit {
       }
     } else {
       setTimeout(() => {
-        const data = new google.visualization.DataTable();
-        data.addColumn('string', 'Categoría');
-        data.addColumn('number', 'Puntos');
+        // Obtener los datos actualizados antes de dibujar el gráfico
+        this.servicioService.getDatosNumJugadas().subscribe(datos2 => {
+          this.datos2 = datos2;
   
-        // Calcular la suma de puntos por categoría
-        const jugadasimagen = this.datos2.reduce((total, dato2) => total + dato2.JugadasImagen, 0);
-        const jugadasPreguntas = this.datos2.reduce((total, dato2) => total + dato2.JugadasPreguntas, 0);
-        const jugadasMusica = this.datos2.reduce((total, dato2) => total + dato2.JugadasMusica, 0);
+          const data = new google.visualization.DataTable();
+          data.addColumn('string', 'Categoría');
+          data.addColumn('number', 'Puntos');
   
-        // Llenar los datos de la tabla
-        data.addRow(['Imagen', jugadasimagen]);
-        data.addRow(['Pregunta', jugadasPreguntas]);
-        data.addRow(['Música', jugadasMusica]);
+          // Calcular la suma de puntos por categoría
+          const jugadasimagen = this.datos2.reduce((total, dato2) => total + dato2.JugadasImagen, 0);
+          const jugadasPreguntas = this.datos2.reduce((total, dato2) => total + dato2.JugadasPreguntas, 0);
+          const jugadasMusica = this.datos2.reduce((total, dato2) => total + dato2.JugadasMusica, 0);
   
-        const options = {
-          title: 'Porcentaje Veces jugadas',
-          width: 500,
-          height: 400,
-          is3D: true,
-          pieSliceText: 'percentage',
-        };
+          // Llenar los datos de la tabla
+          data.addRow(['Imagen', jugadasimagen]);
+          data.addRow(['Pregunta', jugadasPreguntas]);
+          data.addRow(['Música', jugadasMusica]);
   
-        const chart = new google.visualization.PieChart(document.getElementById('grafica2'));
-        chart.draw(data, options);
+          const options = {
+            title: 'Porcentaje Veces jugadas',
+            width: 500,
+            height: 400,
+            is3D: true,
+            pieSliceText: 'percentage',
+          };
   
-        // Mostrar la gráfica restableciendo la propiedad 'display'
-        const grafica2 = document.getElementById('grafica2');
-        if (grafica2) {
-          grafica2.style.display = 'block';
-        }
+          const chart = new google.visualization.PieChart(document.getElementById('grafica2'));
+          chart.draw(data, options);
+  
+          // Mostrar la gráfica restableciendo la propiedad 'display'
+          const grafica2 = document.getElementById('grafica2');
+          if (grafica2) {
+            grafica2.style.display = 'block';
+          }
+        });
       }, 0);
     }
   
@@ -171,7 +181,7 @@ export class Eleccion2Component implements OnInit {
 
   irAEleccion() {
     // Verificar la existencia de las cookies
-    const cookiesExistentes = ['numero', 'palabra', 'puntos', 'listapeliculas', 'intentos', 'peliculas', 'pistas'];
+    const cookiesExistentes = ['numero', 'palabra', 'puntos', 'listapeliculas', 'intentos', 'peliculas', 'pistas', 'preguntas'];
     for (const cookie of cookiesExistentes) {
       if (this.cookieService.check(cookie)) {
         this.cookieService.delete(cookie); // Eliminar la cookie
@@ -183,7 +193,7 @@ export class Eleccion2Component implements OnInit {
   }
 
   irAInicio() {
-    const cookiesExistentes = ['numero', 'palabra', 'puntos', 'listapeliculas', 'intentos', 'session', 'peliculas', 'pistas'];
+    const cookiesExistentes = ['numero', 'palabra', 'puntos', 'listapeliculas', 'intentos', 'session', 'peliculas', 'pistas', 'preguntas'];
     for (const cookie of cookiesExistentes) {
       if (this.cookieService.check(cookie)) {
         this.cookieService.delete(cookie);
