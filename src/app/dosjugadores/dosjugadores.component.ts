@@ -4,6 +4,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Usuarios } from '../model/usuarios';
 import { ServicioService } from '../servicio.service';
 import { Router } from '@angular/router';
+import { Usuariosdos } from '../model/usuariosdos';
+import { Observable } from 'rxjs';
+
 
 @Component({
   selector: 'app-dosjugadores',
@@ -17,6 +20,13 @@ export class DosjugadoresComponent implements AfterViewInit {
   isLoggedIn = false;
   entrada: boolean = false;
   fallo: boolean = false;
+
+  newusuarioForm!: FormGroup;
+  public message: string = '';
+  public clasec: string = '';
+  public clases: string = 'text-info';
+  resp: any;
+  actuales$!: Observable<Usuariosdos[]>;;
 
   mostrarFooter: boolean = true;
   mostrarContrasena: boolean = false;
@@ -81,6 +91,42 @@ export class DosjugadoresComponent implements AfterViewInit {
         this.fallo = true;
       }
     });
+  }
+
+  entradausuariodos() {
+    if (this.newloginForm.invalid) {
+      this.message = 'Por favor corrige los errores';
+      this.clasec = 'text-danger';
+    } else {
+      this.clasec = 'text-success';
+      const newUsuariosdos: Usuariosdos = {
+        NombreUsuario1: this.newloginForm.get('Nombre1')?.value,
+        // PasswrdUsuario1: this.newloginForm.get('Passwrd1')?.value,
+        NombreUsuario2: this.newloginForm.get('Nombre2')?.value,
+        // PasswrdUsuario2: this.newloginForm.get('Passwrd2')?.value
+      };
+  
+      console.log('Entrada correcta', newUsuariosdos);
+  
+      this.servicioService.postDato2(newUsuariosdos).subscribe({
+        next: resp => {
+          this.resp = resp;
+          console.log('Respuesta del servicio:', resp);
+        },
+        error: err => {
+          console.log('Error en la solicitud:', err);
+        },
+        complete: () => {
+          console.log('Solicitud completada');
+          this.actuales$ = this.servicioService.getDatosUsuarios2();
+        }
+      });
+    }
+  }
+
+  mandardatos() {
+    this.entradalogin();
+    this.entradausuariodos();
   }
 
   toggleMostrarContrasena() {

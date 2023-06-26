@@ -2,7 +2,7 @@
 <div class="container">
     <h1 class="text-center mt-5">Modo dos jugadores</h1>
     <h2 class="text-center mt-3">Por favor, inicie sesión para jugar</h2>
-    <form class="mt-5" (ngSubmit)="entradalogin()" [formGroup]="newloginForm" *ngIf="!isLoggedIn" autocomplete="off">
+    <form class="mt-5" (ngSubmit)="mandardatos()" [formGroup]="newloginForm" *ngIf="!isLoggedIn" autocomplete="off">
         <!--Creamos el formulario para que los dos jugadores inicien sesion-->
         <div class="form-group">
             <label for="usuario1">Jugador 1:</label>

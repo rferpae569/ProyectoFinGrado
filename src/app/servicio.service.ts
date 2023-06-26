@@ -11,6 +11,7 @@ import { Juegopregunta } from './model/juegopregunta';
 import { Juegopreguntapista } from './model/juegopreguntapista';
 import { Juegomusica } from './model/juegomusica';
 import { Juegomusicapista } from './model/juegomusicapista';
+import { Usuariosdos } from './model/usuariosdos';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,10 @@ export class ServicioService {
 
   getDatosUsuarios():  Observable<Usuarios[]> {
     return this.http.get<Usuarios[]>(`${this.url}usuarios/leerusuario.php`);
+  }
+
+  getDatosUsuarios2():  Observable<Usuariosdos[]> {
+    return this.http.get<Usuariosdos[]>(`${this.url}usuarios/leerusuariodos.php`);
   }
 
   getDatosRanking():  Observable<Ranking[]> {
@@ -71,6 +76,10 @@ export class ServicioService {
   
   postDato(nuevo:Usuarios): Observable<Usuarios> {
     return this.http.post<Usuarios>(`${this.url}usuarios/insertarusuario.php`,nuevo);
+  }
+
+  postDato2(nuevo:Usuariosdos): Observable<Usuariosdos> {
+    return this.http.post<Usuariosdos>(`${this.url}usuarios/insertarusuariodos.php`,nuevo);
   }
 
   postBorrarDato(nuevo:Usuarios): Observable<Usuarios> {
