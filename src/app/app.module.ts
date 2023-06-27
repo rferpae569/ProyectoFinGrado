@@ -17,6 +17,9 @@ import { JuegopreguntaComponent } from './juegopregunta/juegopregunta.component'
 import { JuegomusicaComponent } from './juegomusica/juegomusica.component';
 import { Eleccion2Component } from './eleccion2/eleccion2.component';
 import { ElecciondosjComponent } from './elecciondosj/elecciondosj.component';
+import { JuegoimagendosjComponent } from './juegoimagendosj/juegoimagendosj.component';
+import { JuegopreguntadosjComponent } from './juegopreguntadosj/juegopreguntadosj.component';
+import { JuegomusicadosjComponent } from './juegomusicadosj/juegomusicadosj.component';
 
 
 
@@ -33,7 +36,10 @@ import { ElecciondosjComponent } from './elecciondosj/elecciondosj.component';
     JuegopreguntaComponent,
     JuegomusicaComponent,
     Eleccion2Component,
-    ElecciondosjComponent
+    ElecciondosjComponent,
+    JuegoimagendosjComponent,
+    JuegopreguntadosjComponent,
+    JuegomusicadosjComponent
   ],
   imports: [
     BrowserModule,

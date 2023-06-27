@@ -8,18 +8,22 @@ import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-juegoimagen',
-  templateUrl: './juegoimagen.component.html',
-  styleUrls: ['./juegoimagen.component.scss']
+  selector: 'app-juegoimagendosj',
+  templateUrl: './juegoimagendosj.component.html',
+  styleUrls: ['./juegoimagendosj.component.scss']
 })
-export class JuegoimagenComponent implements OnInit {
+export class JuegoimagendosjComponent {
+
   datos!: Juegoimagen[]; //juegoimagen era juego
   respuesta: string = '';
   intentos: number = 0; //vidas
-  puntos: number= 0;
+  intentos2: number = 0;
+  puntos: number = 0;
+  puntos2: number= 0;
   listaPeliculas: string[] = []; //listajuegos
   peliculaControl = new FormControl(); //juegocontrol
   session: string = ''
+  session2: string = ''
   numeroAleatorio: number = 0;
   palabrasecreta: string = '';
   nombresPeliculas: Array<{ nombre: string; imagenes: string[] }> = [];//nombrejuegos
@@ -29,14 +33,18 @@ export class JuegoimagenComponent implements OnInit {
   ngOnInit() {
 
     const sessionCookieExists = this.cookieService.check('session');
+    const sessionCookieExists2 =this.cookieService.check('session2');
     const intentosCookieExists = this.cookieService.check('intentos');
+    const intentosCookieExists2 = this.cookieService.check('intentos2');
 
-    if (sessionCookieExists) {
+    if (sessionCookieExists && sessionCookieExists2) {
       this.session = this.cookieService.get('session');
+      this.session2 = this.cookieService.get('session2');
     }
 
-    if (intentosCookieExists) {
+    if (intentosCookieExists && intentosCookieExists2) {
       this.intentos = parseInt(this.cookieService.get('intentos'), 10);
+      this.intentos2 = parseInt(this.cookieService.get('intentos2'),10);
     } else {
       this.intentos = 3; // Establecer el valor inicial en 3 si no existe la cookie 'intentos'
       const currentDate = new Date();
@@ -46,6 +54,15 @@ export class JuegoimagenComponent implements OnInit {
         currentDate.getDate() + 1
       );
       this.cookieService.set('intentos', '3', expirationDate); // Guardar la cookie con el valor inicial de 3
+
+      this.intentos2=3;
+      const currentDate2 = new Date();
+      const expirationDate2 = new Date(
+        currentDate2.getFullYear(),
+        currentDate2.getMonth(),
+        currentDate2.getDate()+1
+      );
+      this.cookieService.set('intentos2','3', expirationDate2);
     }
 
     const listaPeliculasCookie = this.cookieService.get('listapeliculas');
@@ -56,6 +73,8 @@ export class JuegoimagenComponent implements OnInit {
     
     const puntoscookie = this.cookieService.get('puntos');
     this.puntos = parseInt(puntoscookie, 10) || 0;
+    const puntoscookie2 = this.cookieService.get('puntos2');
+    this.puntos2 = parseInt(puntoscookie2,10) || 0;
     
     // Suscribirse a los cambios en el control del input para filtrar los títulos
     this.filtroTituloControl.valueChanges
@@ -96,6 +115,8 @@ export class JuegoimagenComponent implements OnInit {
       this.palabrasecreta = nombrejuegocookie;
       const intentoscookie = this.cookieService.get('intentos');
       this.intentos = parseInt(intentoscookie, 10);
+      const intentoscookie2 = this.cookieService.get('intentos2');
+      this.intentos2 = parseInt(intentoscookie2, 10);
     }
   }
 
@@ -113,6 +134,11 @@ export class JuegoimagenComponent implements OnInit {
 const nuevo = {
   nombre: nombreuser,
   puntos: this.puntos
+};
+      const nombreuser2= this.cookieService.get('session2');
+const nuevo2 = {
+  nombre: nombreuser2,
+  puntos: this.puntos2
 };
 
 this.servicioService.postDatoRankingImagen(nuevo).subscribe((datos) => {
@@ -135,6 +161,8 @@ this.servicioService.postDatoRankingImagen(nuevo).subscribe((datos) => {
     );
     const puntoscookie = this.cookieService.get('puntos');
     this.puntos = parseInt(puntoscookie, 10);
+    const puntos2cookie = this.cookieService.get('puntos2');
+    this.puntos2 = parseInt(puntos2cookie, 10);
     this.cookieService.set('palabra', this.palabrasecreta, expirationDate);
     this.cookieService.set('numero', numeroAleatorio.toString(), expirationDate);
     // this.cookieService.set('intentos', '3', expirationDate);
@@ -158,11 +186,19 @@ this.servicioService.postDatoRankingImagen(nuevo).subscribe((datos) => {
 
       const puntoscookie = this.cookieService.get('puntos');
       this.puntos = parseInt(puntoscookie, 10);
+      const puntoscookie2 = this.cookieService.get('puntos2');
+      this.puntos2 = parseInt(puntoscookie2, 10);
       const intentoscookie = this.cookieService.get('intentos');
       this.intentos = parseInt(intentoscookie, 10);
+      const intentoscookie2 = this.cookieService.get('intentos2');
+      this.intentos2 = parseInt(intentoscookie2, 10);
 
       if (this.intentos <= 3 && this.intentos >= 0) {
         this.puntos += 1;
+    }
+
+    if(this.intentos2 <=3 && this.intentos2 >=0){
+      this.puntos2 += 1;
     }
       const currentDate = new Date();
       const expirationDate = new Date(
@@ -171,8 +207,17 @@ this.servicioService.postDatoRankingImagen(nuevo).subscribe((datos) => {
       currentDate.getDate() + 1
     );
 
+    const currentDate2 = new Date();
+      const expirationDate2 = new Date(
+      currentDate2.getFullYear(),
+      currentDate2.getMonth(),
+      currentDate2.getDate() + 1
+    );
+
       this.cookieService.set('intentos', this.intentos.toString(), expirationDate);
+      this.cookieService.set('intentos2', this.intentos2.toString(), expirationDate);
       this.cookieService.set('puntos', this.puntos.toString(), expirationDate);
+      this.cookieService.set('puntos2', this.puntos2.toString(), expirationDate2);
 
       if (Array.isArray(imagenData) && numero >= 0 && numero < imagenData.length) {
         imagenData.splice(numero, 1);
@@ -193,7 +238,16 @@ this.servicioService.postDatoRankingImagen(nuevo).subscribe((datos) => {
         currentDate.getMonth(),
         currentDate.getDate() + 1
       );
+      this.intentos2--;
+      const currentDate2 = new Date();
+      const expirationDate2 = new Date(
+        currentDate2.getFullYear(),
+        currentDate2.getMonth(),
+        currentDate2.getDate() + 1
+      );
+      
       this.cookieService.set('intentos', this.intentos.toString(), expirationDate);
+      this.cookieService.set('intentos2', this.intentos2.toString(),expirationDate2);
       if (this.intentos <= -1) {
         const nombreuser = this.cookieService.get('session');
         const nuevo = {
@@ -208,6 +262,21 @@ this.servicioService.postDatoRankingImagen(nuevo).subscribe((datos) => {
         this.router.navigate(['/eleccion2']);
 
        }
+      
+      if(this.intentos2 <= -1){
+        const nombreuser2 = this.cookieService.get('session2');
+        const nuevo2 = {
+          nombre: nombreuser2,
+          puntos: this.puntos2
+        };
+
+        this.servicioService.postDatoRankingImagen(nuevo2).subscribe((datos) => {
+          console.log("Datos enviados al servidor:", datos);
+        });
+        
+        this.router.navigate(['/eleccion2']);
+
+      }
     }
     this.respuesta = '';
     this.seleccionarPalabraSecreta();
@@ -237,6 +306,7 @@ this.servicioService.postDatoRankingImagen(nuevo).subscribe((datos) => {
     // this.cookieService.set('intentos', '3', expirationDate);
     this.cookieService.set('listapeliculas', JSON.stringify(this.listaPeliculas), expirationDate);
     this.cookieService.set('puntos', "0", expirationDate);
+    this.cookieService.set('puntos2', "0", expirationDate);
     location.reload();
   }
 
