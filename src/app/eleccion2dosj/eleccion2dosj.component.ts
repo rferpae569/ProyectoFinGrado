@@ -10,18 +10,20 @@ import 'jspdf-autotable';
 declare var google: any;
 
 @Component({
-  selector: 'app-eleccion2',
-  templateUrl: './eleccion2.component.html',
-  styleUrls: ['./eleccion2.component.scss']
+  selector: 'app-eleccion2dosj',
+  templateUrl: './eleccion2dosj.component.html',
+  styleUrls: ['./eleccion2dosj.component.scss']
 })
-export class Eleccion2Component implements OnInit {
-
+export class Eleccion2dosjComponent implements OnInit {
   datos!: Ranking[];
   datos2!: Numjugadas[];
   mostrarGrafica: boolean = false;
   mostrarGrafica2: boolean = false;
   googleChartsLoaded: boolean = false;
   chart: any;
+  usuarioConMasPuntos: string = '';
+  hayEmpate: boolean = false;
+
 
   constructor(private router: Router, private cookieService: CookieService, private servicioService: ServicioService) {
     servicioService.getDatosRanking().subscribe(datos => {
@@ -38,6 +40,25 @@ export class Eleccion2Component implements OnInit {
     google.charts.setOnLoadCallback(() => {
       this.googleChartsLoaded = true;
     });
+
+    const sessionCookie = this.cookieService.get('session');
+    // console.log(sessionCookie);
+    const session2Cookie = this.cookieService.get('session2');
+
+    // Obtener los puntos de los usuarios desde las cookies
+    const puntosUsuario1 = this.cookieService.get('puntos');
+    const puntosUsuario2 = this.cookieService.get('puntos2');
+    // console.log(puntosUsuario2);
+
+    // Comparar los puntos y determinar el usuario con más puntos
+    if (puntosUsuario1 > puntosUsuario2) {
+      this.usuarioConMasPuntos = sessionCookie;
+    } else if (puntosUsuario2 > puntosUsuario1) {
+      this.usuarioConMasPuntos = session2Cookie;
+    } else {
+      this.usuarioConMasPuntos = 'Empate';
+      this.hayEmpate = true;
+    }
   }
 
   guardarGraficos() {
@@ -178,9 +199,9 @@ export class Eleccion2Component implements OnInit {
     this.mostrarGrafica2 = !this.mostrarGrafica2;
   }
 
-  irAEleccion() {
+  irAElecciondosj() {
     // Verificar la existencia de las cookies
-    const cookiesExistentes = ['numero', 'palabra', 'puntos', 'listapeliculas', 'intentos', 'peliculas', 'pistas', 'preguntas'];
+    const cookiesExistentes = ['numero', 'palabra', 'puntos', 'puntos2', 'listapeliculas', 'intentos', 'intentos2', 'peliculas', 'pistas', 'preguntas'];
     for (const cookie of cookiesExistentes) {
       if (this.cookieService.check(cookie)) {
         this.cookieService.delete(cookie); // Eliminar la cookie
@@ -188,11 +209,11 @@ export class Eleccion2Component implements OnInit {
     }
 
     // Navegar al componente /eleccion
-    this.router.navigate(['/eleccion']);
+    this.router.navigate(['/elecciondosj']);
   }
 
   irAInicio() {
-    const cookiesExistentes = ['numero', 'palabra', 'puntos', 'listapeliculas', 'intentos', 'session', 'peliculas', 'pistas', 'preguntas'];
+    const cookiesExistentes = ['numero', 'palabra', 'puntos', 'puntos2', 'listapeliculas', 'intentos', 'intentos2', 'session', 'session2', 'peliculas', 'pistas', 'preguntas'];
     for (const cookie of cookiesExistentes) {
       if (this.cookieService.check(cookie)) {
         this.cookieService.delete(cookie);

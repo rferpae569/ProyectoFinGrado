@@ -20,6 +20,7 @@ import { ElecciondosjComponent } from './elecciondosj/elecciondosj.component';
 import { JuegoimagendosjComponent } from './juegoimagendosj/juegoimagendosj.component';
 import { JuegopreguntadosjComponent } from './juegopreguntadosj/juegopreguntadosj.component';
 import { JuegomusicadosjComponent } from './juegomusicadosj/juegomusicadosj.component';
+import { Eleccion2dosjComponent } from './eleccion2dosj/eleccion2dosj.component';
 
 
 
@@ -39,7 +40,8 @@ import { JuegomusicadosjComponent } from './juegomusicadosj/juegomusicadosj.comp
     ElecciondosjComponent,
     JuegoimagendosjComponent,
     JuegopreguntadosjComponent,
-    JuegomusicadosjComponent
+    JuegomusicadosjComponent,
+    Eleccion2dosjComponent
   ],
   imports: [
     BrowserModule,

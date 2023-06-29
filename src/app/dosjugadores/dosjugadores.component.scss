@@ -1,4 +1,4 @@
-  .background-image {
+  .background-image { //Añadimos el fondo a traves de una clase
     background-image: url('../../assets/fondos/fondologin.jpg');
     background-size: cover; 
     background-position: center; 
@@ -6,20 +6,20 @@
     height: 100vh; 
   }
 
-  h1,h2,label,a{
+  h1,h2,label,a{ //Aplicamos el color blanco a las siguientes etiquetas
     color: white;
   }
 
-  a:hover{
+  a:hover{ //Cuando pasemos el raton por la siguiente etiqueta, se pondra en rojo
     color: red;
   }
 
-  body {
+  body { //declaramos el margen y el padding del body en 0
     margin: 0;
     padding: 0;
   }
   
-  .container {
+  .container { //Le damos una altura al contenedor a tarves de una clase
     min-height: 100vh;
     display: flex;
     flex-direction: column;

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Usuarios } from '../model/usuarios';
 import { ServicioService } from '../servicio.service';
 import { Observable } from 'rxjs';
+//Importamos los modulos
 
 @Component({
   selector: 'app-borrar',
@@ -10,30 +11,30 @@ import { Observable } from 'rxjs';
   styleUrls: ['./borrar.component.scss']
 })
 export class BorrarComponent {
-  newusuario: Usuarios = {
+  newusuario: Usuarios = { //definimos la estructura de usuarios
     Nombre: '',
     Passwrd: '',
     CodigoRanking: 0,
     Codigojugadas: 0
   };
-  newusuarioForm!: FormGroup;
+  newusuarioForm!: FormGroup; //creamos un formgroup para el formulario
   public message: string = '';
   public clasec: string = '';
   public clases: string = 'text-info';
   resp: any;
-  actuales$!: Observable<Usuarios[]>;;
+  actuales$!: Observable<Usuarios[]>;; //Declaramos la siguiente variable como un array del contenido de "Usuarios"
 
   constructor(
     private servicioService: ServicioService,
     private fb: FormBuilder
   ) {
-    this.newusuarioForm = this.fb.group({
+    this.newusuarioForm = this.fb.group({ //Añadimos una expresion regular para los campos pasados por formulario
       Nombre: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9]+$/)]],
       Correo: ['', [Validators.required, Validators.email]],
     });
   }
 
-  borrarusuario() {
+  borrarusuario() { //Esta funcion sirve para borrar el usuario pasado por formulario
     if (this.newusuarioForm.invalid) {
       this.message = 'Por favor corrige los errores';
       this.clasec = 'text-danger';
@@ -57,11 +58,11 @@ export class BorrarComponent {
     }
   }
 
-  get Nombre() {
+  get Nombre() { //almacenamos el nombre
     return this.newusuarioForm.get('Nombre');
   }
 
-  get Correo() {
+  get Correo() { //almacenamos el correo
     return this.newusuarioForm.get('Correo');
   }
 }

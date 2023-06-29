@@ -13,6 +13,7 @@ import { Eleccion2Component } from './eleccion2/eleccion2.component';
 import { ElecciondosjComponent } from './elecciondosj/elecciondosj.component';
 import { JuegoimagendosjComponent } from './juegoimagendosj/juegoimagendosj.component';
 import { JuegomusicadosjComponent } from './juegomusicadosj/juegomusicadosj.component';
+import { Eleccion2dosjComponent } from './eleccion2dosj/eleccion2dosj.component';
 
 const routes: Routes = [
   { path: '', component: InicioComponent },
@@ -29,7 +30,8 @@ const routes: Routes = [
   { path: 'elecciondosj', component:ElecciondosjComponent},
   { path: 'juegoimagendosj', component:JuegoimagendosjComponent},
   { path: 'juegopreguntadosj', component:JuegomusicadosjComponent},
-  { path: 'juegomusicadosj', component:JuegomusicadosjComponent}
+  { path: 'juegomusicadosj', component:JuegomusicadosjComponent},
+  { path: 'eleccion2dosj', component:Eleccion2dosjComponent}
 
 ];
 

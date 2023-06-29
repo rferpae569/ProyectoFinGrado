@@ -12,7 +12,7 @@ import { startWith, map } from 'rxjs/operators';
   templateUrl: './juegoimagendosj.component.html',
   styleUrls: ['./juegoimagendosj.component.scss']
 })
-export class JuegoimagendosjComponent {
+export class JuegoimagendosjComponent implements OnInit {
 
   datos!: Juegoimagen[]; //juegoimagen era juego
   respuesta: string = '';
@@ -29,6 +29,8 @@ export class JuegoimagendosjComponent {
   nombresPeliculas: Array<{ nombre: string; imagenes: string[] }> = [];//nombrejuegos
   titulosCoincidentes: string[] = [];
   filtroTituloControl = new FormControl();
+  turnoActual: number = 1;
+
 
   ngOnInit() {
 
@@ -92,6 +94,20 @@ export class JuegoimagendosjComponent {
         this.titulosCoincidentes = []; // Vaciar la lista de títulos si no hay valor en el filtro
       }
     });
+
+    const turnoGuardado = localStorage.getItem('turno');
+
+    if (turnoGuardado) {
+      this.turnoActual = Number(turnoGuardado);
+    } else {
+      this.turnoActual = 1;
+      localStorage.setItem('turno', '1');
+    }
+
+    this.session = this.turnoActual === 1 ? this.getCookieValue('session') : '';
+    this.session2 = this.turnoActual === 2 ? this.getCookieValue('session2') : '';
+
+    this.alternarTurno();
   }
 
   constructor(
@@ -120,6 +136,24 @@ export class JuegoimagendosjComponent {
     }
   }
 
+  alternarTurno() {
+    this.turnoActual = this.turnoActual === 1 ? 2 : 1;
+    localStorage.setItem('turno', String(this.turnoActual));
+    this.session = this.getCookieValue('session');
+    this.session2 = this.getCookieValue('session2');
+  }
+
+  getCookieValue(cookieName: string): string {
+    const cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].trim();
+      if (cookie.startsWith(`${cookieName}=`)) {
+        return cookie.substring(cookieName.length + 1);
+      }
+    }
+    return '';
+  }
+
   generarNumeroAleatorio(max: number) {
     return Math.floor(Math.random() * max);
   }
@@ -145,8 +179,11 @@ this.servicioService.postDatoRankingImagen(nuevo).subscribe((datos) => {
   console.log("Datos enviados al servidor:", datos);
 });
 
+this.servicioService.postDatoRankingImagen(nuevo2).subscribe((datos) => {
+  console.log("Datos enviados al servidor:", datos);
+});
 
-      this.router.navigate(['/eleccion2']);
+      this.router.navigate(['/eleccion2dosj']);
       
     }
     const longitudArray = this.nombresPeliculas.length;
@@ -193,13 +230,12 @@ this.servicioService.postDatoRankingImagen(nuevo).subscribe((datos) => {
       const intentoscookie2 = this.cookieService.get('intentos2');
       this.intentos2 = parseInt(intentoscookie2, 10);
 
-      if (this.intentos <= 3 && this.intentos >= 0) {
+      if (this.turnoActual === 1) {
         this.puntos += 1;
-    }
-
-    if(this.intentos2 <=3 && this.intentos2 >=0){
-      this.puntos2 += 1;
-    }
+      } else if (this.turnoActual === 2) {
+        this.puntos2 += 1;
+      }
+      
       const currentDate = new Date();
       const expirationDate = new Date(
       currentDate.getFullYear(),
@@ -231,14 +267,20 @@ this.servicioService.postDatoRankingImagen(nuevo).subscribe((datos) => {
         this.cookieService.set('peliculas', updatedImagenCookie, expirationDate);
       }
     } else {
-      this.intentos--;
+
+      if (this.turnoActual === 1) {
+        this.intentos--;
+      } else if (this.turnoActual === 2) {
+        this.intentos2--;
+      }      
+      
       const currentDate = new Date();
       const expirationDate = new Date(
         currentDate.getFullYear(),
         currentDate.getMonth(),
         currentDate.getDate() + 1
       );
-      this.intentos2--;
+      // this.intentos2--;
       const currentDate2 = new Date();
       const expirationDate2 = new Date(
         currentDate2.getFullYear(),
@@ -255,26 +297,44 @@ this.servicioService.postDatoRankingImagen(nuevo).subscribe((datos) => {
           puntos: this.puntos
         };
 
+        const nombreuser2 = this.cookieService.get('session2');
+        const nuevo2 ={
+          nombre: nombreuser2,
+          puntos: this.puntos2
+        }
+
         this.servicioService.postDatoRankingImagen(nuevo).subscribe((datos) => {
           console.log("Datos enviados al servidor:", datos);
         });
-        
-        this.router.navigate(['/eleccion2']);
-
-       }
-      
-      if(this.intentos2 <= -1){
-        const nombreuser2 = this.cookieService.get('session2');
-        const nuevo2 = {
-          nombre: nombreuser2,
-          puntos: this.puntos2
-        };
 
         this.servicioService.postDatoRankingImagen(nuevo2).subscribe((datos) => {
           console.log("Datos enviados al servidor:", datos);
         });
         
-        this.router.navigate(['/eleccion2']);
+        this.router.navigate(['/eleccion2dosj']);
+
+       } else if(this.intentos2 <= -1){
+        const nombreuser2 = this.cookieService.get('session2');
+        const nombreuser = this.cookieService.get('session');
+        const nuevo2 = {
+          nombre: nombreuser2,
+          puntos: this.puntos2
+        };
+
+        const nuevo = {
+          nombre: nombreuser,
+          puntos: this.puntos
+        }
+
+        this.servicioService.postDatoRankingImagen(nuevo2).subscribe((datos) => {
+          console.log("Datos enviados al servidor:", datos);
+        });
+
+        this.servicioService.postDatoRankingImagen(nuevo).subscribe((datos) => {
+          console.log("Datos enviados al servidor:", datos);
+        });
+        
+        this.router.navigate(['/eleccion2dosj']);
 
       }
     }

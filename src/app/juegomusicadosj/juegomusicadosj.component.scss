@@ -1,0 +1,54 @@
+.background-image {
+    background-image: url('../../assets/fondos/fondojuegos.jpg');
+    background-size: 100% 100%;
+    height: 120vh;
+    background-attachment: scroll;
+    overflow: hidden;
+  }
+
+  h1,label,li{
+    color: white;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    margin-top: -50px;
+  }
+
+  audio {
+    display: block;
+    margin: 0 auto;
+  }
+
+  .table-style {
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+    text-align: center;
+    margin: 0 auto;
+    width: 80%; 
+    max-width: 800px; 
+    border-collapse: separate; 
+    border-spacing: 5px; 
+  }
+  
+  .table-style td, th {
+    border: 1px solid black; 
+    padding: 5px; 
+  }
+
+  .user-section {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+.text-left {
+    text-align: left;
+  }
+  
+.text-right {
+    text-align: right;
+  }
