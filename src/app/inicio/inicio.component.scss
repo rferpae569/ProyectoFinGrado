@@ -1,10 +1,10 @@
-.blur {
+.blur { //Especificamos que ponga borroso el componente si el footer esta visible a traves de una clase
     filter: blur(4px); 
     pointer-events: none; 
 
   }
 
-  .background-image {
+  .background-image { //Especificamos el fondo a traves del componente a traves de una clase
     background-image: url('../../assets/fondos/fondologin.jpg');
     background-size: cover; 
     background-position: center; 
@@ -12,10 +12,10 @@
     height: 100vh; 
   }
 
-  h1,label,a{
+  h1,label,a{ //Especificamos que las siguientes etiquetas tengan el color blanco
     color: white;
   }
 
-  a:hover{
+  a:hover{ //Cuando pasemos el raton por la etiqueta a, se pondra en color rojo
     color: red;
   }

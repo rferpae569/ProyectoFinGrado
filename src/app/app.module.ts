@@ -21,8 +21,7 @@ import { JuegoimagendosjComponent } from './juegoimagendosj/juegoimagendosj.comp
 import { JuegopreguntadosjComponent } from './juegopreguntadosj/juegopreguntadosj.component';
 import { JuegomusicadosjComponent } from './juegomusicadosj/juegomusicadosj.component';
 import { Eleccion2dosjComponent } from './eleccion2dosj/eleccion2dosj.component';
-
-
+//importamos los modules y los ocmponentes correspondientes
 
 @NgModule({
   declarations: [

@@ -8,6 +8,7 @@ import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 import 'jspdf-autotable';
 declare var google: any;
+//Importamos los modulos y declaramos la variable para el grafico
 
 @Component({
   selector: 'app-eleccion2dosj',
@@ -61,7 +62,7 @@ export class Eleccion2dosjComponent implements OnInit {
     }
   }
 
-  guardarGraficos() {
+  guardarGraficos() { //Creamos esta funcion para crear el pdf cuando pulemos el boton y guardar los graficos
     const doc = new jsPDF();
     const title = 'Gráficos de "AdivinaLaPelicula"';
   
@@ -98,7 +99,7 @@ export class Eleccion2dosjComponent implements OnInit {
     }
   }
 
-  toggleGrafica() {
+  toggleGrafica() { //Con esta funcion creamos el grafico de los puntos
     if (!this.googleChartsLoaded) {
       return;
     }
@@ -145,7 +146,7 @@ export class Eleccion2dosjComponent implements OnInit {
     this.mostrarGrafica = !this.mostrarGrafica;
   }
   
-  toggleGrafica2() {
+  toggleGrafica2() { //Con esta funcion creamos el grafico de los porcentajes
     if (!this.googleChartsLoaded) {
       return;
     }
@@ -199,7 +200,7 @@ export class Eleccion2dosjComponent implements OnInit {
     this.mostrarGrafica2 = !this.mostrarGrafica2;
   }
 
-  irAElecciondosj() {
+  irAElecciondosj() { //Con esta funcion, volveremos a eleccion para poder escoger un nuevo juego. Aparte de eso borrara tambien las cookies especificadas
     // Verificar la existencia de las cookies
     const cookiesExistentes = ['numero', 'palabra', 'puntos', 'puntos2', 'listapeliculas', 'intentos', 'intentos2', 'peliculas', 'pistas', 'preguntas'];
     for (const cookie of cookiesExistentes) {
@@ -212,7 +213,7 @@ export class Eleccion2dosjComponent implements OnInit {
     this.router.navigate(['/elecciondosj']);
   }
 
-  irAInicio() {
+  irAInicio() { //Esta funcion nos llevara al inicio, y borrara las cookies especificadas.
     const cookiesExistentes = ['numero', 'palabra', 'puntos', 'puntos2', 'listapeliculas', 'intentos', 'intentos2', 'session', 'session2', 'peliculas', 'pistas', 'preguntas'];
     for (const cookie of cookiesExistentes) {
       if (this.cookieService.check(cookie)) {

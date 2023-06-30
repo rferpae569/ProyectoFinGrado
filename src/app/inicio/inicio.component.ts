@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Usuarios } from '../model/usuarios';
 import { ServicioService } from '../servicio.service';
 import { Router } from '@angular/router';
+//importamos los modulos
 
 
 @Component({
@@ -13,41 +14,42 @@ import { Router } from '@angular/router';
 })
 export class InicioComponent implements OnInit, AfterViewInit {
 
+  //Creamos las variables para verificar el usuario y los datos pasados por formulario
   newloginForm!: FormGroup;
   newlogin!: Usuarios;
   isLoggedIn = false;
   entrada:boolean=false;  
   fallo:boolean=false;
 
-  mostrarFooter: boolean = true;
-  mostrarContrasena: boolean = false;
+  mostrarFooter: boolean = true; //Declaramos la variable para mostrar el footer
+  mostrarContrasena: boolean = false; //Declaramos la variable para mostrar la contraseña
 
 
   constructor(private cookieService: CookieService,  private servicioService: ServicioService,
     private fb: FormBuilder,
     private router: Router,) { 
-      this.newloginForm = this.fb.group({
+      this.newloginForm = this.fb.group({ //Creamos expresiones regulares para el nombre y la contraseña
         Nombre: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9]+$/)]],
         Passwrd: ['', [Validators.required, Validators.pattern(/^(?=.*[0-9])(?=.*\*)(?=.*[a-zA-Z])(.{8,})$/)]]
       })
   }
 
-  get nombre() {
+  get nombre() { //almacenamos el nombre
     return this.newloginForm.get('Nombre');
   }
 
-  get passwrd() {
+  get passwrd() { //almacenamos la contraseña
     return this.newloginForm.get('Passwrd');
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit() { //Verificamos si existe la cookie session con esta funcion
     const sessionCookieExists = this.cookieService.check('session');
     if (sessionCookieExists) {
       this.isLoggedIn = true;
     }
   }
 
-  entradalogin() {
+  entradalogin() { //Esta funcion sirve para mandarnos al componente eleccion si todo esta bien y se crea la cookie session.
     this.newlogin = this.newloginForm.value;
     this.servicioService.login(this.newlogin).subscribe((data) => {
       console.log(data);
@@ -63,11 +65,11 @@ export class InicioComponent implements OnInit, AfterViewInit {
 
   }
 
-  ngOnInit() {
+  ngOnInit() { //El ngOnInit servira para ocultar o no el footer si existe la cookie llamada "Cookies"
     this.mostrarFooter = !this.cookieService.check('Cookies');
   }
 
-  aceptarCookies() {
+  aceptarCookies() { //Esta funcion sirve para crear las cookies correspondientes si se aceptan
     // Obtener la fecha actual
   const fechaActual = new Date();
 
@@ -81,13 +83,13 @@ export class InicioComponent implements OnInit, AfterViewInit {
   this.mostrarFooter = false;
   }
 
-  rechazarCookies() {
+  rechazarCookies() { //Esta funcion sirve apra rechazar las cookies, al hacerlo, mostrara un mensaje de alerta
     alert('Debes de aceptar las cookies');
     this.mostrarFooter = true;
     return false;
   }
 
-  toggleMostrarContrasena() {
+  toggleMostrarContrasena() { //Esta funcion sirve para mostrar o no la contraseña
     const contrasenaInput = document.getElementById('contrasena') as HTMLInputElement;
     this.mostrarContrasena = !this.mostrarContrasena;
     contrasenaInput.type = this.mostrarContrasena ? 'text' : 'password';

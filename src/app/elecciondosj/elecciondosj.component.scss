@@ -1,4 +1,4 @@
-.background-image {
+.background-image { //Añadimos el fondo a traves de una clase
     background-image: url('../../assets/fondos/fondoeleccion.jpg');
     background-size: cover; 
     background-position: center; 
@@ -6,6 +6,6 @@
     height: 100vh; 
   }
 
- a{
+ a{ //Aplicamos el color blanco a la siguiente etiqueta
     color: white;
   }

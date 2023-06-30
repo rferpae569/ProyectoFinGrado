@@ -111,7 +111,3 @@ export class ServicioService {
   }
 
 }
-
-//   getDatosJuego():  Observable<Juego[]> {
-//     return this.http.get<Juego[]>(`${this.url}juego/leerJuegotry.php`);
-//   }

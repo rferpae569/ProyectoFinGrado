@@ -14,25 +14,25 @@ import { Juegomusicapista } from '../model/juegomusicapista';
   styleUrls: ['./juegomusicadosj.component.scss']
 })
 export class JuegomusicadosjComponent {
-  datos!: Juegomusica[]; //juegoimagen era juego
+  datos!: Juegomusica[];
   respuesta: string = '';
-  intentos: number = 0; //vidas
+  intentos: number = 0;
   intentos2: number = 0;
   puntos: number= 0;
   puntos2: number= 0;
-  listaPeliculas: string[] = []; //listajuegos
-  peliculaControl = new FormControl(); //juegocontrol
+  listaPeliculas: string[] = [];
+  peliculaControl = new FormControl();
   session: string = ''
   session2: string=''
   numeroAleatorio: number = 0;
   palabrasecreta: string = '';
-  nombresPeliculas: Array<{ id: number; nombre: string; musica: string[] }> = [];//nombrejuegos
+  nombresPeliculas: Array<{ id: number; nombre: string; musica: string[] }> = [];
   // pistaMusica: Array<{ nombre: string; compositor: string; mclave: string;}> = [];
   mostrarPista: boolean = false;
   pistaMusica: Juegomusicapista[] = [];
-  pistas: string = ''; //Esto es para la pista
-  pistas2: string = ''; //Esto es para la pista
-  pistas3: string = ''; //Esto es para la pista
+  pistas: string = '';
+  pistas2: string = '';
+  pistas3: string = '';
   titulosCoincidentes: string[] = [];
   filtroTituloControl = new FormControl();
   turnoActual: number = 1;
@@ -64,13 +64,7 @@ export class JuegomusicadosjComponent {
       this.cookieService.set('intentos', '3', expirationDate); // Guardar la cookie con el valor inicial de 3
         
       this.intentos2=3;
-      const currentDate2 = new Date();
-      const expirationDate2 = new Date(
-        currentDate2.getFullYear(),
-        currentDate2.getMonth(),
-        currentDate2.getDate()+1
-      );
-      this.cookieService.set('intentos2','3', expirationDate2);
+      this.cookieService.set('intentos2','3', expirationDate);
     }
 
     const listaPeliculasCookie = this.cookieService.get('listapeliculas');
@@ -201,7 +195,7 @@ this.servicioService.postDatoRankingMusica(nuevo).subscribe((datos) => {
   console.log("Datos enviados al servidor:", datos);
 });
 
-this.servicioService.postDatoRankingImagen(nuevo2).subscribe((datos) => {
+this.servicioService.postDatoRankingMusica(nuevo2).subscribe((datos) => {
   console.log("Datos enviados al servidor:", datos);
 });
 
@@ -290,17 +284,10 @@ this.servicioService.postDatoRankingImagen(nuevo2).subscribe((datos) => {
       currentDate.getDate() + 1
     );
 
-    const currentDate2 = new Date();
-      const expirationDate2 = new Date(
-      currentDate2.getFullYear(),
-      currentDate2.getMonth(),
-      currentDate2.getDate() + 1
-    );
-
     this.cookieService.set('intentos', this.intentos.toString(), expirationDate);
     this.cookieService.set('intentos2', this.intentos2.toString(), expirationDate);
     this.cookieService.set('puntos', this.puntos.toString(), expirationDate);
-    this.cookieService.set('puntos2', this.puntos2.toString(), expirationDate2);
+    this.cookieService.set('puntos2', this.puntos2.toString(), expirationDate);
 
       if (Array.isArray(musicaData) && numero >= 0 && numero < musicaData.length) {
         musicaData.splice(numero, 1);
@@ -328,15 +315,8 @@ this.servicioService.postDatoRankingImagen(nuevo2).subscribe((datos) => {
         currentDate.getDate() + 1
       );
 
-      const currentDate2 = new Date();
-      const expirationDate2 = new Date(
-        currentDate2.getFullYear(),
-        currentDate2.getMonth(),
-        currentDate2.getDate() + 1
-      );
-
       this.cookieService.set('intentos', this.intentos.toString(), expirationDate);
-      this.cookieService.set('intentos2', this.intentos2.toString(),expirationDate2);
+      this.cookieService.set('intentos2', this.intentos2.toString(),expirationDate);
       if (this.intentos <= -1) {
         const nombreuser = this.cookieService.get('session');
         const nuevo = {
@@ -350,11 +330,11 @@ this.servicioService.postDatoRankingImagen(nuevo2).subscribe((datos) => {
           puntos: this.puntos2
         }
 
-        this.servicioService.postDatoRankingImagen(nuevo).subscribe((datos) => {
+        this.servicioService.postDatoRankingMusica(nuevo).subscribe((datos) => {
           console.log("Datos enviados al servidor:", datos);
         });
 
-        this.servicioService.postDatoRankingImagen(nuevo2).subscribe((datos) => {
+        this.servicioService.postDatoRankingMusica(nuevo2).subscribe((datos) => {
           console.log("Datos enviados al servidor:", datos);
         });
 
@@ -373,11 +353,11 @@ this.servicioService.postDatoRankingImagen(nuevo2).subscribe((datos) => {
           puntos: this.puntos
         }
 
-        this.servicioService.postDatoRankingImagen(nuevo2).subscribe((datos) => {
+        this.servicioService.postDatoRankingMusica(nuevo2).subscribe((datos) => {
           console.log("Datos enviados al servidor:", datos);
         });
 
-        this.servicioService.postDatoRankingImagen(nuevo).subscribe((datos) => {
+        this.servicioService.postDatoRankingMusica(nuevo).subscribe((datos) => {
           console.log("Datos enviados al servidor:", datos);
         });
         

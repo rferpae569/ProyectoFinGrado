@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Usuarios } from '../model/usuarios';
 import { ServicioService } from '../servicio.service';
 import { Observable } from 'rxjs';
+//importamos los modulos
 
 @Component({
   selector: 'app-registro',
@@ -10,33 +11,33 @@ import { Observable } from 'rxjs';
   styleUrls: ['./registro.component.scss']
 })
 export class RegistroComponent {
-  mostrarContrasena: boolean = false;
+  mostrarContrasena: boolean = false;  //creamos esta variable para mostrar la contraseña
 
-  newusuario: Usuarios = {
+  newusuario: Usuarios = { //definimos la estructura de usuarios
     Nombre: '',
     Passwrd: '',
     CodigoRanking: 0,
     Codigojugadas: 0
   };
-  newusuarioForm!: FormGroup;
+  newusuarioForm!: FormGroup; //creamos un formgroup para el formulario
   public message: string = '';
   public clasec: string = '';
   public clases: string = 'text-info';
   resp: any;
-  actuales$!: Observable<Usuarios[]>;;
+  actuales$!: Observable<Usuarios[]>;; //Declaramos la siguiente variable como un array del contenido de "Usuarios"
 
   constructor(
     private servicioService: ServicioService,
     private fb: FormBuilder
   ) {
-    this.newusuarioForm = this.fb.group({
+    this.newusuarioForm = this.fb.group({ //Añadimos una expresion regular para los campos pasados por formulario
       Nombre: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9]+$/)]],
       Passwrd: ['', [Validators.required, Validators.pattern(/^(?=.*[0-9])(?=.*\*)(?=.*[a-zA-Z])(.{8,})$/)]],
       Correo: ['', [Validators.required, Validators.email]]
     });
   }
 
-  entradausuario() {
+  entradausuario() { //Esta fucnion sirve para verificar e insentar en la base de datos el usuario pasado por el fomrulario
     if (this.newusuarioForm.invalid) {
       this.message = 'Por favor corrige los errores';
       this.clasec = 'text-danger';
@@ -60,19 +61,19 @@ export class RegistroComponent {
     }
   }
 
-  get Nombre() {
+  get Nombre() { //almacenamos el nombre
     return this.newusuarioForm.get('Nombre');
   }
 
-  get Passwrd() {
+  get Passwrd() { //amlacenamos la contraseña
     return this.newusuarioForm.get('Passwrd');
   }
 
-  get Correo() {
+  get Correo() { //almacenamos el correo
     return this.newusuarioForm.get('Correo');
   }
 
-  toggleMostrarContrasena() {
+  toggleMostrarContrasena() { //Esta funcion sirve para mostrar la contraseña
     const contrasenaInput = document.getElementById('contrasena') as HTMLInputElement;
     this.mostrarContrasena = !this.mostrarContrasena;
     contrasenaInput.type = this.mostrarContrasena ? 'text' : 'password';

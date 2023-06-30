@@ -26,7 +26,7 @@ export class JuegopreguntaComponent implements OnInit {
   preguntasPeliculas: Array<{id: number; pregunta: string; Respuesta: string[] }> = [];
   mostrarPista: boolean = false;
   pistaPregunta: Juegopreguntapista[] = [];
-  pistas: string = ''; //Esto es para la pista
+  pistas: string = '';
 
   ngOnInit() {
 

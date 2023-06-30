@@ -11,10 +11,11 @@
     overflow-y: auto;
   }
   
-  h1 {
+  h1 { //Especificamos que los h1 tengan el color blanco
     color: white;
   }
   
+  //Especicamos las posiciones de los contenedores
   .container {
     position: relative;
     z-index: 1;
@@ -34,9 +35,9 @@
   }
   
   #grafica1,
-  #grafica2 {
+  #grafica2 { //Le damos un tamaño a las graficas a traves de un id
     flex: 1;
-    margin-right: 10px; /* Ajusta el margen según tus necesidades */
+    margin-right: 10px;
   }
 
   

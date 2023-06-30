@@ -13,16 +13,16 @@ import { startWith, map } from 'rxjs/operators';
   styleUrls: ['./juegoimagen.component.scss']
 })
 export class JuegoimagenComponent implements OnInit {
-  datos!: Juegoimagen[]; //juegoimagen era juego
+  datos!: Juegoimagen[];
   respuesta: string = '';
-  intentos: number = 0; //vidas
+  intentos: number = 0;
   puntos: number= 0;
-  listaPeliculas: string[] = []; //listajuegos
-  peliculaControl = new FormControl(); //juegocontrol
+  listaPeliculas: string[] = [];
+  peliculaControl = new FormControl();
   session: string = ''
   numeroAleatorio: number = 0;
   palabrasecreta: string = '';
-  nombresPeliculas: Array<{ nombre: string; imagenes: string[] }> = [];//nombrejuegos
+  nombresPeliculas: Array<{ nombre: string; imagenes: string[] }> = [];
   titulosCoincidentes: string[] = [];
   filtroTituloControl = new FormControl();
 

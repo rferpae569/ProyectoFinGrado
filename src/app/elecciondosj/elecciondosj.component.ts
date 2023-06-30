@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ServicioService } from '../servicio.service';
 import { CookieService } from 'ngx-cookie-service';
+//Importamos los modulos
 
 @Component({
   selector: 'app-elecciondosj',
@@ -10,7 +11,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class ElecciondosjComponent {
   constructor(private servicio: ServicioService, private cookieService: CookieService) {}
 
-  incrementarJugadasImagen() {
+  incrementarJugadasImagen() { //Esta funcion sirve para incrementar el numero de jugadas de los usuarios que han iniciado sesion en el juego de las imagenes
     const nombreuser = this.cookieService.get('session');
     const nombreuser2 = this.cookieService.get('session2'); 
     const nuevo = {
@@ -28,7 +29,7 @@ export class ElecciondosjComponent {
 
   }
 
-  incrementarJugadasPreguntas(){
+  incrementarJugadasPreguntas(){ //Esta funcion sirve para incrementar el numero de jugadas de los usuarios que han iniciado sesion en el juego de las preguntas
     const nombreuser = this.cookieService.get('session');
     const nombreuser2 = this.cookieService.get('session2');
 const nuevo = {
@@ -45,7 +46,7 @@ const nuevo = {
     });
   }
 
-  incrementarJugadasMusica(){
+  incrementarJugadasMusica(){ //Esta funcion sirve para incrementar el numero de jugadas de los usuarios que han iniciado sesion en el juego de las canciones
     const nombreuser = this.cookieService.get('session');
     const nombreuser2 = this.cookieService.get('session2');
 const nuevo = {

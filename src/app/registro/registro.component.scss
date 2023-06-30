@@ -1,4 +1,4 @@
-.background-image {
+.background-image { //Añadimos el fondo a traves de una clase
     background-image: url('../../assets/fondos/fondoformularios.jpg');
     background-size: cover; 
     background-position: center; 
@@ -6,10 +6,10 @@
     height: 100vh; 
   }
 
-  h1,label,a{
+  h1,label,a{ //Aplicamos el color blanco a las siguientes etiquetas
     color: white;
   }
 
-  a:hover{
+  a:hover{ //Cuando pasemos el raton por la siguiente etiqueta, se pondra en rojo
     color: red;
   }

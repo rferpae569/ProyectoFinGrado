@@ -14,22 +14,22 @@ import { Juegomusicapista } from '../model/juegomusicapista';
   styleUrls: ['./juegomusica.component.scss']
 })
 export class JuegomusicaComponent implements OnInit {
-  datos!: Juegomusica[]; //juegoimagen era juego
+  datos!: Juegomusica[];
   respuesta: string = '';
-  intentos: number = 0; //vidas
+  intentos: number = 0;
   puntos: number= 0;
-  listaPeliculas: string[] = []; //listajuegos
-  peliculaControl = new FormControl(); //juegocontrol
+  listaPeliculas: string[] = [];
+  peliculaControl = new FormControl();
   session: string = ''
   numeroAleatorio: number = 0;
   palabrasecreta: string = '';
-  nombresPeliculas: Array<{ id: number; nombre: string; musica: string[] }> = [];//nombrejuegos
+  nombresPeliculas: Array<{ id: number; nombre: string; musica: string[] }> = [];
   // pistaMusica: Array<{ nombre: string; compositor: string; mclave: string;}> = [];
   mostrarPista: boolean = false;
   pistaMusica: Juegomusicapista[] = [];
-  pistas: string = ''; //Esto es para la pista
-  pistas2: string = ''; //Esto es para la pista
-  pistas3: string = ''; //Esto es para la pista
+  pistas: string = '';
+  pistas2: string = '';
+  pistas3: string = '';
   titulosCoincidentes: string[] = [];
   filtroTituloControl = new FormControl();
 

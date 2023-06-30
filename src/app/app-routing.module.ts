@@ -14,6 +14,7 @@ import { ElecciondosjComponent } from './elecciondosj/elecciondosj.component';
 import { JuegoimagendosjComponent } from './juegoimagendosj/juegoimagendosj.component';
 import { JuegomusicadosjComponent } from './juegomusicadosj/juegomusicadosj.component';
 import { Eleccion2dosjComponent } from './eleccion2dosj/eleccion2dosj.component';
+import { JuegopreguntadosjComponent } from './juegopreguntadosj/juegopreguntadosj.component';
 
 const routes: Routes = [
   { path: '', component: InicioComponent },
@@ -29,7 +30,7 @@ const routes: Routes = [
   { path: 'eleccion2', component:Eleccion2Component},
   { path: 'elecciondosj', component:ElecciondosjComponent},
   { path: 'juegoimagendosj', component:JuegoimagendosjComponent},
-  { path: 'juegopreguntadosj', component:JuegomusicadosjComponent},
+  { path: 'juegopreguntadosj', component:JuegopreguntadosjComponent},
   { path: 'juegomusicadosj', component:JuegomusicadosjComponent},
   { path: 'eleccion2dosj', component:Eleccion2dosjComponent}
 
