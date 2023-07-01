@@ -10,6 +10,7 @@ $nombre = $params->nombre;
 
 try {
     $mbd = new PDO('mysql:host=localhost;dbname=juegocine', "root", "");
+    //Nos conectamos por PDO
 
     // Consulta para obtener el CodigoJugadas basado en el nombre
     $res = $mbd->prepare("SELECT n.Codigojugadas FROM numjugadas AS n WHERE n.Codigojugadas IN (SELECT u.Codigojugadas FROM usuarios AS u WHERE u.Nombre = :nombre)");
@@ -40,7 +41,7 @@ try {
         echo json_encode(array('error' => array('msg' => 'Error en la consulta SQL', 'code' => '500')));
     }
 
-    $mbd = null;
+    $mbd = null; //Nos desconectamos
 } catch (PDOException $e) {
     echo json_encode(array('error' => array('msg' => $e->getMessage(), 'code' => $e->getCode())));
     die();

@@ -5,6 +5,7 @@ header("Access-Control-Allow-Methods: *");
 
 $json = file_get_contents('php://input');
  
+//pasamos los parametros
 $params = json_decode($json);
 $nombre=$params->nombre;
 $puntos=$params->puntos;
@@ -12,7 +13,9 @@ $puntos=$params->puntos;
 
 	try {	
 	  $mbd = new PDO('mysql:host=localhost;dbname=juegocine', "root", "");
+	  //Nos conectamos mediante PDO
 
+	  //Cogemos el codigoRanking de la tabla usuarios donde coincida el nombre pasado por parametro
 	  $sentencia = $mbd->prepare("SELECT CodigoRanking FROM usuarios WHERE Nombre = :Nombre");
 	  $sentencia->bindParam(':Nombre', $nombre);
 	  $sentencia->execute();
@@ -21,6 +24,7 @@ $puntos=$params->puntos;
         $id = $resultado['CodigoRanking'];
     }
 
+	//En la siguiente consulta cogemos los puntosMusica de la tabla ranking del codigoranking cogido en la anterior consulta
 	$consultaPuntos = $mbd->prepare("SELECT PuntosMusica FROM ranking WHERE CodigoRanking = :CodigoRanking");
     $consultaPuntos->bindParam(':CodigoRanking', $id);
 	$consultaPuntos->execute();
@@ -39,7 +43,8 @@ $puntos=$params->puntos;
             $consultaActualizarPuntos->execute();
 		}
 	}else{
-
+		
+		//En esta consulta insertaria el codigoRanking y los puntos si no estuvieran
 		$sentencia = $mbd->prepare("INSERT INTO ranking (CodigoRanking, PuntosMusica ) VALUES (:CodigoRanking, :PuntosMusica)");
 		$sentencia->bindParam(':CodigoRanking', $id);
 		$sentencia->bindParam(':PuntosMusica', $puntos);
@@ -48,7 +53,7 @@ $puntos=$params->puntos;
 
 	}
 
-		$mbd = null;
+		$mbd = null; //Nos desconectamos
 } catch (PDOException $e) {
 	header('Content-Type: application/json');
 	echo json_encode(array(

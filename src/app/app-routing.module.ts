@@ -15,6 +15,7 @@ import { JuegoimagendosjComponent } from './juegoimagendosj/juegoimagendosj.comp
 import { JuegomusicadosjComponent } from './juegomusicadosj/juegomusicadosj.component';
 import { Eleccion2dosjComponent } from './eleccion2dosj/eleccion2dosj.component';
 import { JuegopreguntadosjComponent } from './juegopreguntadosj/juegopreguntadosj.component';
+//importamos los modulos y los componentes necesarios
 
 const routes: Routes = [
   { path: '', component: InicioComponent },
@@ -33,6 +34,7 @@ const routes: Routes = [
   { path: 'juegopreguntadosj', component:JuegopreguntadosjComponent},
   { path: 'juegomusicadosj', component:JuegomusicadosjComponent},
   { path: 'eleccion2dosj', component:Eleccion2dosjComponent}
+  //Creamos las rutas para cada componente
 
 ];
 
