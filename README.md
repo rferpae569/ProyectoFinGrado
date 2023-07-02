@@ -29,7 +29,7 @@ En caso de que gane o pierda, al usuario se le mostrara dos graficos para que pu
 
 Aparte de eso, se ha implementado tambien el modod dos jugadores, donde el usuario podra jugar a los mismo juegos con otra persona una vez inicien sesion los dos juntos. Se puede acceder a ese modo dandole al enlace de "Modo dos jugadores" ubicado en el componente "Inicio".
 
-** Este proyecto ha sido realizado por Rubén Fernández **
+**Este proyecto ha sido realizado por Rubén Fernández**
 
 ## Estructura de código
 
