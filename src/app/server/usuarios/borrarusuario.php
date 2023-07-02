@@ -5,12 +5,14 @@ header("Access-Control-Allow-Methods: *");
 
 $json = file_get_contents('php://input');
 
+//Pasamos los parametros
 $params = json_decode($json);
 $nombre = $params->Nombre;
 $correo = $params->Correo;
 
 try {
     $mbd = new PDO('mysql:host=localhost;dbname=juegocine', "root", "");
+    //Nos conectamos a la base de datos mediante PDO
     $mbd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
     $mbd->beginTransaction();
@@ -48,7 +50,7 @@ try {
     header('Content-Type: application/json');
     echo json_encode(array('msg' => 'Usuario eliminado exitosamente'));
     
-    $mbd = null;
+    $mbd = null; //Nos desconectamos
 } catch (PDOException $e) {
     header('Content-Type: application/json');
     echo json_encode(array(

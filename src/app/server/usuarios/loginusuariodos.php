@@ -9,6 +9,9 @@ $params = json_decode($json);
 
 try {
   $mbd = new PDO('mysql:host=localhost;dbname=juegocine', "root", "");
+  //Nos conectamos a la base de datos mediante PDO
+
+  //Esta consulta selecciona todos los registros de la tabla "usuarios" donde el valor en la columna "Nombre" sea igual al valor proporcionado en el parámetro ":nombre1" o igual al valor proporcionado en el parámetro ":nombre2".
   $sentencia = $mbd->prepare("SELECT * FROM usuarios WHERE Nombre = :nombre1 OR Nombre = :nombre2");
   $sentencia->bindParam(':nombre1', $nombre1);
   $sentencia->bindParam(':nombre2', $nombre2);
@@ -22,7 +25,7 @@ try {
     header('Content-type: application/json');
     echo json_encode($rows);
   }
-  $mbd = null;
+  $mbd = null; //Nos desconectamos
 } catch (PDOException $e) {
   header('Content-Type: application/json');
   echo json_encode(array(
