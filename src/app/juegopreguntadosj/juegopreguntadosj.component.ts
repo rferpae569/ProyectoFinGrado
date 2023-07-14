@@ -76,6 +76,7 @@ export class JuegopreguntadosjComponent implements OnInit {
       this.pistaPregunta = datos;
       this.cookieService.set('pistas', JSON.stringify(this.pistaPregunta.slice(0, 20))); //Esto para pistas
 
+      this.seleccionarPalabraSecreta();
     });
 
     const turnoGuardado = localStorage.getItem('turno');
@@ -323,7 +324,7 @@ this.servicioService.postDatoRankingPregunta(nuevo2).subscribe((datos) => {
     }
     this.mostrarPista = true;
     this.Respuesta = '';
-    this.seleccionarPalabraSecreta();
+    // this.seleccionarPalabraSecreta();
   }
 
   generarArrayPreguntasPeliculas() {
