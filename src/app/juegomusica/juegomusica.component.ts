@@ -295,7 +295,7 @@ this.servicioService.postDatoRankingMusica(nuevo).subscribe((datos) => {
     // this.pistaMusica = JSON.parse(pistacookie2);
     // const pistacookie3 =this.cookieService.get('mclave'); //para pistas
     // this.pistaMusica = JSON.parse(pistacookie3);
-    // location.reload();
+    location.reload();
   }
 
   // reiniciar() {
