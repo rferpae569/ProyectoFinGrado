@@ -1,4 +1,4 @@
-.background-image {
+.background-image { //definimos la imagen de fondo
   background-image: url('../../assets/fondos/fondojuegos.jpg');
   background-size: 100% 100%;
   height: 150vh;
@@ -6,18 +6,18 @@
   overflow: hidden;
 }
 
-h1,label,li{
+h1,label,li{ //especificamos el color blanco para las siguientes etiquetas
   color: white;
 }
 
-.container {
+.container { //Posicionamos el div a traves de una clase
   position: relative;
   z-index: 1;
   height: 100%;
   margin-top: -50px;
 }
 
-.altoimagen {
+.altoimagen { //declaramos un alto para la imagen y un ancho para la imagen
   height: 300px;
   width: 600px;
 }
