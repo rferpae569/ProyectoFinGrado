@@ -1,4 +1,4 @@
-.background-image {
+.background-image { //definimos la imagen de fondo
     background-image: url('../../assets/fondos/fondojuegos.jpg');
     background-size: 100% 100%;
     height: 120vh;
@@ -6,23 +6,23 @@
     overflow: hidden;
   }
 
-  h1,label,li{
+  h1,label,li{ //especificamos el color blanco para las siguientes etiquetas
     color: white;
   }
 
-  .container {
+  .container { //Posicionamos el div a traves de una clase
     position: relative;
     z-index: 1;
     height: 100%;
     margin-top: -50px;
   }
 
-  audio {
+  audio { //posicionamos el audio
     display: block;
     margin: 0 auto;
   }
 
-  .table-style {
+  .table-style { //Aplicamos un estilo a la tabla y la posicionamos a traves de una clase
     background-color: white;
     border: 1px solid black;
     color: black;
@@ -34,7 +34,7 @@
     border-spacing: 5px; 
   }
   
-  .table-style td, th {
+  .table-style td, th { //Le damos estilo a las etiquetas que estan dentro de la tabla
     border: 1px solid black; 
     padding: 5px; 
   }

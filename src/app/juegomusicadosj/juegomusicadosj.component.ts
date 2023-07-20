@@ -36,6 +36,7 @@ export class JuegomusicadosjComponent {
   titulosCoincidentes: string[] = [];
   filtroTituloControl = new FormControl();
   turnoActual: number = 1;
+  datosCargados: boolean = false; // Variable para verificar si los datos se han cargado
 
 
   ngOnInit() {
@@ -129,7 +130,8 @@ export class JuegomusicadosjComponent {
       this.servicioService.getDatosPeliculaMusica().subscribe((datos) => {
         this.datos = datos;
         this.generarArrayNombresMusica();
-        this.seleccionarPalabraSecreta();
+        // this.seleccionarPalabraSecreta();
+        this.datosCargados = true; // Marcar los datos como cargados
       });
     } else {
       const nombresPeliculasCookie = this.cookieService.get('peliculas');
@@ -142,6 +144,12 @@ export class JuegomusicadosjComponent {
       this.intentos = parseInt(intentoscookie, 10);
       const intentoscookie2 = this.cookieService.get('intentos2');
       this.intentos2 = parseInt(intentoscookie2, 10);
+      this.datosCargados = true; // Marcar los datos como cargados
+    }
+
+     // Llamar a seleccionarPalabraSecreta solo si los datos ya están cargados
+     if (this.datosCargados) {
+      this.seleccionarPalabraSecreta();
     }
   }
 

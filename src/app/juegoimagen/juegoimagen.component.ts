@@ -148,7 +148,7 @@ this.servicioService.postDatoRankingImagen(nuevo).subscribe((datos) => {
     const puntoscookie = this.cookieService.get('puntos');
     this.puntos = parseInt(puntoscookie, 10);
 
-    // Establecer las cookies 'palabra' y 'numero' con la palabra secreta y el número aleatorio, respectivamente
+    // Establecemos las cookies 'palabra' y 'numero' con la palabra secreta y el número aleatorio, respectivamente
     this.cookieService.set('palabra', this.palabrasecreta, expirationDate);
     this.cookieService.set('numero', numeroAleatorio.toString(), expirationDate);
   }
@@ -255,7 +255,7 @@ this.servicioService.postDatoRankingImagen(nuevo).subscribe((datos) => {
         imagenes: imagenesPelicula
       };
 
-      //Agregamos le nombre de la pelicula al objeto
+      //Agregamos el nombre de la pelicula al objeto
       this.nombresPeliculas.push(peliculaObjeto);
     }
 
