@@ -24,7 +24,6 @@ export class JuegomusicaComponent implements OnInit {
   numeroAleatorio: number = 0;
   palabrasecreta: string = '';
   nombresPeliculas: Array<{ id: number; nombre: string; musica: string[] }> = [];
-  // pistaMusica: Array<{ nombre: string; compositor: string; mclave: string;}> = [];
   mostrarPista: boolean = false;
   pistaMusica: Juegomusicapista[] = [];
   pistas: string = '';
@@ -33,7 +32,6 @@ export class JuegomusicaComponent implements OnInit {
   titulosCoincidentes: string[] = [];
   filtroTituloControl = new FormControl();
   datosCargados: boolean = false; // Variable para verificar si los datos se han cargado
-
 
   ngOnInit() {
 
@@ -69,9 +67,14 @@ export class JuegomusicaComponent implements OnInit {
     this.servicioService.getDatosPeliculaPistaMusica().subscribe((datos) => {
       this.pistaMusica = datos;
       this.cookieService.set('pistas', JSON.stringify(this.pistaMusica.slice(0, 29))); //Esto para pistas
-      // this.cookieService.set('compositor', JSON.stringify(this.pistaMusica.slice(0, 25))); //Esto para pistas
-      // this.cookieService.set('mclave', JSON.stringify(this.pistaMusica.slice(0, 25))); //Esto para pistas
 
+      const existeCookieNumero = this.cookieService.check('numero');
+
+      if (!existeCookieNumero) {
+      // Si la cookie "numero" no existe, recargamos la página para crear las cookies necesarias.
+      location.reload();
+      return; // Retornamos para detener la ejecución del resto del código hasta después de la recarga.
+      }
     });
 
      // Suscribirse a los cambios en el control del input para filtrar los títulos
@@ -90,7 +93,6 @@ export class JuegomusicaComponent implements OnInit {
          this.titulosCoincidentes = []; // Vaciar la lista de títulos si no hay valor en el filtro
        }
      });
-    
   }
 
   constructor(
@@ -103,7 +105,6 @@ export class JuegomusicaComponent implements OnInit {
       this.servicioService.getDatosPeliculaMusica().subscribe((datos) => {
         this.datos = datos;
         this.generarArrayNombresMusica();
-        // this.seleccionarPalabraSecreta();
         this.datosCargados = true; // Marcar los datos como cargados
       });
     } else {
@@ -133,10 +134,6 @@ export class JuegomusicaComponent implements OnInit {
     this.nombresPeliculas = JSON.parse(nombresPeliculasCookie);
     const pistaPeliculasCookies = this.cookieService.get('pistas'); //Para pistas
     this.pistaMusica = JSON.parse(pistaPeliculasCookies);
-    // const pistaPeliculasCookies2 = this.cookieService.get('compositor');
-    // this.pistaMusica = JSON.parse(pistaPeliculasCookies2);
-    // const pistaPeliculasCookies3 = this.cookieService.get('mclave');
-    // this.pistaMusica = JSON.parse(pistaPeliculasCookies3);
 
     if (!this.nombresPeliculas || this.nombresPeliculas.length === 0) {
 
@@ -165,20 +162,10 @@ this.servicioService.postDatoRankingMusica(nuevo).subscribe((datos) => {
     const pista2 = this.pistaMusica.find(item => item.id === id )?.compositor;
     const pista3 = this.pistaMusica.find(item => item.id === id )?.mclave;
 
-
-    // console.log(id);
-    // console.log(pista);
-    // console.log(pista2);
-    // console.log(pista3);
-    // pista.toString();
     this.pistas = pista ? pista.toString() : '';
     this.pistas2 = pista2 ? pista2.toString() : '';
     this.pistas3 = pista3 ? pista3.toString() : '';
 
-    // console.log(this.pistas);
-    // console.log(this.pistas2);
-    // console.log(this.pistas3);
-    // console.log(this.pistaMusica);
     this.palabrasecreta = respuestaAleatoria;    
     
     this.palabrasecreta = this.nombresPeliculas[numeroAleatorio].nombre;
@@ -193,8 +180,6 @@ this.servicioService.postDatoRankingMusica(nuevo).subscribe((datos) => {
       this.puntos = parseInt(puntoscookie, 10);
     this.cookieService.set('palabra', this.palabrasecreta, expirationDate);
     this.cookieService.set('numero', numeroAleatorio.toString(), expirationDate);
-    // this.cookieService.set('intentos', '3', expirationDate);
-    // location.reload();
   }
 
   enviarRespuesta() {
@@ -202,11 +187,9 @@ this.servicioService.postDatoRankingMusica(nuevo).subscribe((datos) => {
 
     this.palabrasecreta = this.cookieService.get('palabra');
     const juegoActual = this.palabrasecreta;
-    // console.log(juegoActual);
 
     const inputElement = document.querySelector('#respuesta') as HTMLInputElement;
     this.respuesta = inputElement.value;
-    // console.log(this.respuesta);    
 
     if (this.respuesta.toLowerCase() === juegoActual.toLowerCase()) {
 
@@ -268,7 +251,6 @@ this.servicioService.postDatoRankingMusica(nuevo).subscribe((datos) => {
     this.mostrarPista = true;
     this.respuesta = '';
     this.seleccionarPalabraSecreta();
-
   }
 
   generarArrayNombresMusica() {
@@ -288,26 +270,15 @@ this.servicioService.postDatoRankingMusica(nuevo).subscribe((datos) => {
       const NombrePelicula = pelicula.NombrePelicula;
       this.listaPeliculas.push(NombrePelicula);
     }
-      // const nombresPeliculasCookie = this.nombresPeliculas.slice(0, 40); // Obtener los primeros 41 elementos
 
-//en juego musica solo me deja 34 peliculas
+//En juego musica solo me deja 34 peliculas
     const currentDate = new Date();
     const expirationDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 1);
     this.cookieService.set('peliculas', JSON.stringify(this.nombresPeliculas.slice(0, 29)), expirationDate);
-    // this.cookieService.set('intentos', '3', expirationDate);
     this.cookieService.set('listapeliculas', JSON.stringify(this.listaPeliculas), expirationDate);
     this.cookieService.set('puntos', "0", expirationDate);
     const pistacookie =this.cookieService.get('pistas'); //para pistas
     this.pistaMusica = JSON.parse(pistacookie);
-    // const pistacookie2 =this.cookieService.get('compositor'); //para pistas
-    // this.pistaMusica = JSON.parse(pistacookie2);
-    // const pistacookie3 =this.cookieService.get('mclave'); //para pistas
-    // this.pistaMusica = JSON.parse(pistacookie3);
     location.reload();
   }
-
-  // reiniciar() {
-  //   document.cookie = `peliculas=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-  //   location.reload();
-  // }
 }
