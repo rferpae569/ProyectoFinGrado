@@ -192,7 +192,7 @@ this.servicioService.postDatoRankingPregunta(nuevo2).subscribe((datos) => {
       
     }
 
-        //Si existen mas peliculas, continuamos con el codigo, generamos el numero aleatorio y obtenemos la palabra secreta y la pista correspondiente a traves del id
+    //Si existen mas peliculas, continuamos con el codigo, generamos el numero aleatorio y obtenemos la palabra secreta y la pista correspondiente a traves del id
     const longitudArray = this.preguntasPeliculas.length;
     const numeroAleatorio = this.generarNumeroAleatorio(longitudArray);
     this.numeroAleatorio = numeroAleatorio;
@@ -253,7 +253,7 @@ this.servicioService.postDatoRankingPregunta(nuevo2).subscribe((datos) => {
       const intentoscookie2 = this.cookieService.get('intentos2');
       this.intentos2 = parseInt(intentoscookie2, 10);
 
-    //Si el tunor vale uno, le damos los puntos al jugador1, en caso contrario, se lo damos al jugador2
+    //Si el turno vale uno, le damos los puntos al jugador1, en caso contrario, se lo damos al jugador2
       if (this.turnoActual === 1) {
         this.puntos += 1;
       } else if (this.turnoActual === 2) {
@@ -357,7 +357,7 @@ this.servicioService.postDatoRankingPregunta(nuevo2).subscribe((datos) => {
 
        }
     }
-    this.mostrarPista = true; //Declaramos la variable pista como true, y restablecemos la respuesta.
+    this.mostrarPista = true; //Declaramos la variable mostrarpista como true, y restablecemos la respuesta.
     this.Respuesta = '';
   }
 

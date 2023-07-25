@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { Juegomusica } from '../model/juegomusica';
 import { Juegomusicapista } from '../model/juegomusicapista';
+//Importamos los modulos
 
 @Component({
   selector: 'app-juegomusica',
@@ -31,8 +32,10 @@ export class JuegomusicaComponent implements OnInit {
   pistas3: string = '';
   titulosCoincidentes: string[] = [];
   filtroTituloControl = new FormControl();
-  datosCargados: boolean = false; // Variable para verificar si los datos se han cargado
+  datosCargados: boolean = false;
+  //Creamos las variables correspondientes
 
+  //Verificamos las cookies, creamos los intentos y establecemos el filtrado de las peliculas
   ngOnInit() {
 
     const sessionCookieExists = this.cookieService.check('session');
@@ -45,14 +48,14 @@ export class JuegomusicaComponent implements OnInit {
     if (intentosCookieExists) {
       this.intentos = parseInt(this.cookieService.get('intentos'), 10);
     } else {
-      this.intentos = 3; // Establecer el valor inicial en 3 si no existe la cookie 'intentos'
+      this.intentos = 3; // Establecemos el valor inicial en 3 si no existe la cookie 'intentos'
       const currentDate = new Date();
       const expirationDate = new Date(
         currentDate.getFullYear(),
         currentDate.getMonth(),
         currentDate.getDate() + 1
       );
-      this.cookieService.set('intentos', '3', expirationDate); // Guardar la cookie con el valor inicial de 3
+      this.cookieService.set('intentos', '3', expirationDate); // Guardamos la cookie con el valor inicial de 3
     }
 
     const listaPeliculasCookie = this.cookieService.get('listapeliculas');
@@ -66,7 +69,7 @@ export class JuegomusicaComponent implements OnInit {
 
     this.servicioService.getDatosPeliculaPistaMusica().subscribe((datos) => {
       this.pistaMusica = datos;
-      this.cookieService.set('pistas', JSON.stringify(this.pistaMusica.slice(0, 29))); //Esto para pistas
+      this.cookieService.set('pistas', JSON.stringify(this.pistaMusica.slice(0, 29))); //Esto es para las pistas
 
       const existeCookieNumero = this.cookieService.check('numero');
 
@@ -77,20 +80,20 @@ export class JuegomusicaComponent implements OnInit {
       }
     });
 
-     // Suscribirse a los cambios en el control del input para filtrar los títulos
+     // Suscribimos los cambios en el control del input para filtrar los títulos
      this.filtroTituloControl.valueChanges
      .pipe(
-       startWith(''), // Empezar con una cadena vacía
-       map(value => value.toLowerCase()) // Convertir a minúsculas
+       startWith(''), // Empezamos con una cadena vacía
+       map(value => value.toLowerCase()) // Convertimos a minúsculas
      )
      .subscribe(filterValue => {
-       // Filtrar los títulos solo si hay un valor en el filtro
+       // Filtramos los títulos solo si hay un valor en el filtro
        if (filterValue) {
          this.titulosCoincidentes = this.listaPeliculas.filter(
            titulo => titulo.toLowerCase().startsWith(filterValue)
          );
        } else {
-         this.titulosCoincidentes = []; // Vaciar la lista de títulos si no hay valor en el filtro
+         this.titulosCoincidentes = []; // Vaciamos la lista de títulos si no hay valor en el filtro
        }
      });
   }
@@ -100,14 +103,15 @@ export class JuegomusicaComponent implements OnInit {
     private cookieService: CookieService,
     private router: Router
   ) {
+    // Verificamos si existe la cookie 'peliculas', y si no existe, obtenemos los datos
     const sessionCookieExists = this.cookieService.check('peliculas');
     if (!sessionCookieExists) {
       this.servicioService.getDatosPeliculaMusica().subscribe((datos) => {
         this.datos = datos;
         this.generarArrayNombresMusica();
-        this.datosCargados = true; // Marcar los datos como cargados
+        this.datosCargados = true; // Marcamos los datos como cargados
       });
-    } else {
+    } else { //Si no existe, recuperamos los datos guardados en las cookies especificadas
       const nombresPeliculasCookie = this.cookieService.get('peliculas');
       this.nombresPeliculas = JSON.parse(nombresPeliculasCookie);
       const numeroAleatorioCookie = this.cookieService.get('numero');
@@ -116,41 +120,47 @@ export class JuegomusicaComponent implements OnInit {
       this.palabrasecreta = nombrejuegocookie;
       const intentoscookie = this.cookieService.get('intentos');
       this.intentos = parseInt(intentoscookie, 10);
-      this.datosCargados = true; // Marcar los datos como cargados
+      this.datosCargados = true; // Marcamos los datos como cargados
     }
 
-     // Llamar a seleccionarPalabraSecreta solo si los datos ya están cargados
+     // Llamamos a seleccionarPalabraSecreta solo si los datos ya están cargados
      if (this.datosCargados) {
       this.seleccionarPalabraSecreta();
     }
   }
 
+  //Generamos un numero aleatorio
   generarNumeroAleatorio(max: number) {
     return Math.floor(Math.random() * max);
   }
 
   seleccionarPalabraSecreta() {
+    // Obtenemos los nombres de las películas desde la cookie 'peliculas' y las pistas
     const nombresPeliculasCookie = this.cookieService.get('peliculas');
     this.nombresPeliculas = JSON.parse(nombresPeliculasCookie);
     const pistaPeliculasCookies = this.cookieService.get('pistas'); //Para pistas
     this.pistaMusica = JSON.parse(pistaPeliculasCookies);
 
+    //Comprobamos que no queden mas peliculas
     if (!this.nombresPeliculas || this.nombresPeliculas.length === 0) {
-
+      //Si no quedan mas, obtenemos el nombre del usuario de la cookie "session", y creamos un objeto con el nombre y sus puntos
       const nombreuser = this.cookieService.get('session');
 const nuevo = {
   nombre: nombreuser,
   puntos: this.puntos
 };
 
+//Enviamos los datos al servidor
 this.servicioService.postDatoRankingMusica(nuevo).subscribe((datos) => {
   console.log("Datos enviados al servidor:", datos);
 });
 
 
-      this.router.navigate(['/eleccion2']);
+      this.router.navigate(['/eleccion2']); //nos vamos a "eleccion2"
       
     }
+
+    //Si existen mas peliculas, continuamos con el codigo, generamos el numero aleatorio y obtenemos la palabra secreta, y la pista correspondiente
     const longitudArray = this.nombresPeliculas.length;
     const numeroAleatorio = this.generarNumeroAleatorio(longitudArray);
     this.numeroAleatorio = numeroAleatorio;
@@ -158,7 +168,7 @@ this.servicioService.postDatoRankingMusica(nuevo).subscribe((datos) => {
     const respuestaArray = this.nombresPeliculas[numeroAleatorio].nombre;
     const respuestaAleatoria = respuestaArray[this.generarNumeroAleatorio(respuestaArray.length)];
     const id = this.nombresPeliculas[numeroAleatorio].id; //para pistas
-    const pista = this.pistaMusica.find(item => item.id === id )?.nombre;
+    const pista = this.pistaMusica.find(item => item.id === id )?.nombre; //Esta linea y las siguientes cogeran la pista a traves del id
     const pista2 = this.pistaMusica.find(item => item.id === id )?.compositor;
     const pista3 = this.pistaMusica.find(item => item.id === id )?.mclave;
 
@@ -176,31 +186,41 @@ this.servicioService.postDatoRankingMusica(nuevo).subscribe((datos) => {
       currentDate.getDate() + 1
     );
 
+    //Obtenemos el valor de la cookie 'puntos' y se lo asignamos a la variable
     const puntoscookie = this.cookieService.get('puntos');
       this.puntos = parseInt(puntoscookie, 10);
+
+    // Establecemos las cookies 'palabra' y 'numero' con la palabra secreta y el número aleatorio, respectivamente
     this.cookieService.set('palabra', this.palabrasecreta, expirationDate);
     this.cookieService.set('numero', numeroAleatorio.toString(), expirationDate);
   }
 
   enviarRespuesta() {
+    // Obtenemos las preguntas de las películas desde la cookie 'peliculas'
     const musicaCookie = this.cookieService.get('peliculas');
 
+    // Obtenemos la palabra secreta actual desde la cookie 'palabra'
     this.palabrasecreta = this.cookieService.get('palabra');
     const juegoActual = this.palabrasecreta;
 
+    // Obtenemos la respuesta pasada a traves del formulario
     const inputElement = document.querySelector('#respuesta') as HTMLInputElement;
     this.respuesta = inputElement.value;
 
+    //Verificamos si la respuesta es correcta (Ya sea en mayuscula o minuscula)
     if (this.respuesta.toLowerCase() === juegoActual.toLowerCase()) {
 
+      // Obtenemos los datos de la pregunta desde la cookie 'peliculas'
       const musicaData = JSON.parse(musicaCookie);
       const numero = parseInt(this.cookieService.get('numero'), 10);
 
+      // Obtenemos los puntos y los intentos desde las cookies
       const puntoscookie = this.cookieService.get('puntos');
       this.puntos = parseInt(puntoscookie, 10);
       const intentoscookie = this.cookieService.get('intentos');
       this.intentos = parseInt(intentoscookie, 10);
 
+      // Incrementamos los puntos si los intentos están dentro del rango permitido (0 a 3)
       if (this.intentos <= 3 && this.intentos >= 0) {
         this.puntos += 1;
     }
@@ -214,9 +234,12 @@ this.servicioService.postDatoRankingMusica(nuevo).subscribe((datos) => {
       this.cookieService.set('intentos', this.intentos.toString(), expirationDate);
       this.cookieService.set('puntos', this.puntos.toString(), expirationDate);
 
+      // Eliminamos la musica actual del arreglo musicaData si los datos son válidos
       if (Array.isArray(musicaData) && numero >= 0 && numero < musicaData.length) {
         musicaData.splice(numero, 1);
         const updatedMusicaCookie = JSON.stringify(musicaData);
+
+        // Actualizamos la cookie 'peliculas' con los datos actualizados
         const currentDate = new Date();
         const expirationDate = new Date(
           currentDate.getFullYear(),
@@ -226,6 +249,7 @@ this.servicioService.postDatoRankingMusica(nuevo).subscribe((datos) => {
         this.cookieService.set('peliculas', updatedMusicaCookie, expirationDate);
       }
     } else {
+      // En caso contrario, si la respuesta es incorrecta, decrementamos los intentos
       this.intentos--;
       const currentDate = new Date();
       const expirationDate = new Date(
@@ -234,44 +258,60 @@ this.servicioService.postDatoRankingMusica(nuevo).subscribe((datos) => {
         currentDate.getDate() + 1
       );
       this.cookieService.set('intentos', this.intentos.toString(), expirationDate);
+
+      // Verificamos si se han agotado los intentos disponibles
       if (this.intentos <= -1) {
+        //Si se han agotado, obtenemos el nombre del usuario de la cookie "session", y lo almacenamos en un objeto con los puntos
         const nombreuser = this.cookieService.get('session');
         const nuevo = {
           nombre: nombreuser,
           puntos: this.puntos
         };
 
+        //Mandamos los datos al servidor
         this.servicioService.postDatoRankingMusica(nuevo).subscribe((datos) => {
           console.log("Datos enviados al servidor:", datos);
         });
-        this.router.navigate(['/eleccion2']);
+
+        this.router.navigate(['/eleccion2']);//Nos vamos a "eleccion2"
 
        }
     }
-    this.mostrarPista = true;
+    this.mostrarPista = true; //Declaramos la variable pista como true, restablecemos la respuesta, y cogemos otra palabra secreta para volver a jugar.
     this.respuesta = '';
     this.seleccionarPalabraSecreta();
   }
 
   generarArrayNombresMusica() {
+    // Inicializamos el arreglo de nombres de películas
     this.nombresPeliculas = [];
+
+    //Recorremos los datos de las peliculas
     for (const pelicula of this.datos) {
+      // Obtenemos el id de la película, el nombre, y la musica como un arreglo de un solo elemento
        const idPelicula = pelicula.id 
        const NombrePelicula = pelicula.NombrePelicula;
        const MusicaPelicula = [pelicula.musica.toString()];
+
+      //Creamos el objeto del id de la pelicula, su nombre (titulo) y su musica
        const peliculaObjeto = {
         id: idPelicula,
         nombre: NombrePelicula,
         musica: MusicaPelicula
       };
+
+      //Agregamos el nombre de la pelicula al objeto
       this.nombresPeliculas.push(peliculaObjeto);
     }
+
+    //Creamos una lista de los nombres de las peliculas
     for (const pelicula of this.datos) {
       const NombrePelicula = pelicula.NombrePelicula;
       this.listaPeliculas.push(NombrePelicula);
     }
 
-//En juego musica solo me deja 34 peliculas
+    //Establecemos las cookies correspondientes
+    //En juego musica solo me deja 34 peliculas
     const currentDate = new Date();
     const expirationDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 1);
     this.cookieService.set('peliculas', JSON.stringify(this.nombresPeliculas.slice(0, 29)), expirationDate);

@@ -238,7 +238,7 @@ this.servicioService.postDatoRankingPregunta(nuevo).subscribe((datos) => {
 
        }
     }
-    this.mostrarPista = true; //Declaramos la variable pista como true, y restablecemos la respuesta.
+    this.mostrarPista = true; //Declaramos la variable mostrarpista como true, y restablecemos la respuesta.
     this.Respuesta = '';
   }
 
