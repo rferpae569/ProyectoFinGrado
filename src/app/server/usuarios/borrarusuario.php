@@ -25,6 +25,11 @@ try {
     $codigoRanking = $row['CodigoRanking'];
     $codigoJugadas = $row['CodigoJugadas'];
 
+    // Eliminar registros relacionados en la tabla "dosjugadores"
+    $stmt = $mbd->prepare("DELETE FROM dosjugadores WHERE NombreUsuario1 = :Nombre OR NombreUsuario2 = :Nombre");
+    $stmt->bindParam(':Nombre', $nombre);
+    $stmt->execute();
+
     // Eliminar el correo
     $stmt = $mbd->prepare("DELETE FROM correos WHERE correo = :correo");
     $stmt->bindParam(':correo', $correo);
