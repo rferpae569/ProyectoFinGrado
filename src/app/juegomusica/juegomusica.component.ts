@@ -249,7 +249,11 @@ this.servicioService.postDatoRankingMusica(nuevo).subscribe((datos) => {
         this.cookieService.set('peliculas', updatedMusicaCookie, expirationDate);
       }
     } else {
-      // En caso contrario, si la respuesta es incorrecta, decrementamos los intentos
+      // En caso contrario, obtenemos los datos de la musica desde la cookie 'peliculas'
+      const musicaData = JSON.parse(musicaCookie);
+      const numero = parseInt(this.cookieService.get('numero'), 10);
+
+      // Si la respuesta es incorrecta, decrementamos los intentos
       this.intentos--;
       const currentDate = new Date();
       const expirationDate = new Date(
@@ -258,6 +262,15 @@ this.servicioService.postDatoRankingMusica(nuevo).subscribe((datos) => {
         currentDate.getDate() + 1
       );
       this.cookieService.set('intentos', this.intentos.toString(), expirationDate);
+
+       // Eliminamos la musica actual del arreglo nombresPeliculas si los datos son válidos
+    if (Array.isArray(musicaData) && numero >= 0 && numero < musicaData.length) {
+      musicaData.splice(numero, 1);
+      const updatedMusicaCookie = JSON.stringify(musicaData);
+
+      // Actualizamos la cookie 'peliculas' con los datos actualizados
+      this.cookieService.set('peliculas', updatedMusicaCookie, expirationDate);
+    }
 
       // Verificamos si se han agotado los intentos disponibles
       if (this.intentos <= -1) {

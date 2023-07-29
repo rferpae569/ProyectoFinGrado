@@ -207,7 +207,11 @@ this.servicioService.postDatoRankingImagen(nuevo).subscribe((datos) => {
         this.cookieService.set('peliculas', updatedImagenCookie, expirationDate);
       }
     } else {
-      // En caso contrario, si la respuesta es incorrecta, decrementamos los intentos
+      // En caso contrario, obtenemos los datos de la imagen desde la cookie 'peliculas'
+      const imagenData = JSON.parse(imagenCookie);
+      const numero = parseInt(this.cookieService.get('numero'), 10);
+
+      // Si la respuesta es incorrecta, decrementamos los intentos
       this.intentos--;
       const currentDate = new Date();
       const expirationDate = new Date(
@@ -216,6 +220,15 @@ this.servicioService.postDatoRankingImagen(nuevo).subscribe((datos) => {
         currentDate.getDate() + 1
       );
       this.cookieService.set('intentos', this.intentos.toString(), expirationDate);
+
+    // Eliminamos la imagen actual del arreglo nombresPeliculas si los datos son válidos
+    if (Array.isArray(imagenData) && numero >= 0 && numero < imagenData.length) {
+      imagenData.splice(numero, 1);
+      const updatedImagenCookie = JSON.stringify(imagenData);
+
+      // Actualizamos la cookie 'peliculas' con los datos actualizados
+      this.cookieService.set('peliculas', updatedImagenCookie, expirationDate);
+    }
 
       // Verificamos si se han agotado los intentos disponibles
       if (this.intentos <= -1) {

@@ -284,8 +284,11 @@ this.servicioService.postDatoRankingPregunta(nuevo2).subscribe((datos) => {
         this.cookieService.set('preguntas', updatedPreguntaCookie, expirationDate);
       }
     } else {
+      // En caso contrario, obtenemos los datos de la pregunta desde la cookie 'preguntas'
+      const preguntaData = JSON.parse(preguntaCookie);
+      const numero = parseInt(this.cookieService.get('numero'), 10);
 
-      // En caso contrario, si la respuesta es incorrecta, decrementamos los intentos dependiendo del turno
+      //Si la respuesta es incorrecta, decrementamos los intentos dependiendo del turno
       if (this.turnoActual === 1) {
         this.intentos--;
       } else if (this.turnoActual === 2) {
@@ -301,6 +304,15 @@ this.servicioService.postDatoRankingPregunta(nuevo2).subscribe((datos) => {
 
       this.cookieService.set('intentos', this.intentos.toString(), expirationDate);
       this.cookieService.set('intentos2', this.intentos2.toString(),expirationDate);
+
+       // Eliminamos la pregunta actual del arreglo preguntasPeliculas si los datos son válidos
+    if (Array.isArray(preguntaData) && numero >= 0 && numero < preguntaData.length) {
+      preguntaData.splice(numero, 1);
+      const updatedPreguntaCookie = JSON.stringify(preguntaData);
+
+      // Actualizamos la cookie 'preguntas' con los datos actualizados
+      this.cookieService.set('preguntas', updatedPreguntaCookie, expirationDate);
+    }
 
       // Verificamos si se han agotado los intentos disponibles del jugador 1
       if (this.intentos <= -1) {

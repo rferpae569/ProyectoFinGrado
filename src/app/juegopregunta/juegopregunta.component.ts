@@ -210,7 +210,11 @@ this.servicioService.postDatoRankingPregunta(nuevo).subscribe((datos) => {
         this.cookieService.set('preguntas', updatedPreguntaCookie, expirationDate);
       }
     } else {
-      // En caso contrario, si la respuesta es incorrecta, decrementamos los intentos
+      // En caso contrario, obtenemos los datos de la pregunta desde la cookie 'preguntas'
+      const preguntaData = JSON.parse(preguntaCookie);
+      const numero = parseInt(this.cookieService.get('numero'), 10);
+
+      // Si la respuesta es incorrecta, decrementamos los intentos
       this.intentos--;
       const currentDate = new Date();
       const expirationDate = new Date(
@@ -219,6 +223,15 @@ this.servicioService.postDatoRankingPregunta(nuevo).subscribe((datos) => {
         currentDate.getDate() + 1
       );
       this.cookieService.set('intentos', this.intentos.toString(), expirationDate);
+
+      // Eliminamos la pregunta actual del arreglo preguntasPeliculas si los datos son válidos
+    if (Array.isArray(preguntaData) && numero >= 0 && numero < preguntaData.length) {
+      preguntaData.splice(numero, 1);
+      const updatedPreguntaCookie = JSON.stringify(preguntaData);
+
+      // Actualizamos la cookie 'preguntas' con los datos actualizados
+      this.cookieService.set('preguntas', updatedPreguntaCookie, expirationDate);
+    }
 
       // Verificamos si se han agotado los intentos disponibles
       if (this.intentos <= -1) {
