@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Usuarios } from '../model/usuarios';
 import { ServicioService } from '../servicio.service';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 //importamos los modulos
 
 @Component({
@@ -28,7 +29,8 @@ export class RegistroComponent {
 
   constructor(
     private servicioService: ServicioService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ) {
     this.newusuarioForm = this.fb.group({ //Añadimos una expresion regular para los campos pasados por formulario
       Nombre: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9]+$/)]],
@@ -37,7 +39,7 @@ export class RegistroComponent {
     });
   }
 
-  entradausuario() { //Esta fucnion sirve para verificar e insentar en la base de datos el usuario pasado por el fomrulario
+  entradausuario() { //Esta funcion sirve para verificar e insentar en la base de datos el usuario pasado por el fomrulario
     if (this.newusuarioForm.invalid) {
       this.message = 'Por favor corrige los errores';
       this.clasec = 'text-danger';
@@ -49,6 +51,8 @@ export class RegistroComponent {
         next: resp => {
           this.resp = resp;
           console.log('Respuesta del servicio:', resp);
+          // Nos vamos a "Inicio"
+        this.router.navigate(['/inicio']);
         },
         error: err => {
           console.log('Error en la solicitud:', err);

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Usuarios } from '../model/usuarios';
 import { ServicioService } from '../servicio.service';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 //Importamos los modulos
 
 @Component({
@@ -26,7 +27,8 @@ export class BorrarComponent {
 
   constructor(
     private servicioService: ServicioService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ) {
     this.newusuarioForm = this.fb.group({ //Añadimos una expresion regular para los campos pasados por formulario
       Nombre: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9]+$/)]],
@@ -46,6 +48,8 @@ export class BorrarComponent {
         next: resp => {
           this.resp = resp;
           console.log('Respuesta del servicio:', resp);
+          // Nos vamos a "Inicio"
+        this.router.navigate(['/inicio']);
         },
         error: err => {
           console.log('Error en la solicitud:', err);
