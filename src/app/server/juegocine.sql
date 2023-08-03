@@ -64,7 +64,7 @@ CREATE TABLE `correos` (
 
 LOCK TABLES `correos` WRITE;
 /*!40000 ALTER TABLE `correos` DISABLE KEYS */;
-INSERT INTO `correos` VALUES ('carlos@gmail.com','carlos'),('juanmaEV@gmail.com','juanmaEV'),('manolo@gmail.com','manolo'),('prueba@gmail.com','prueba'),('rocio@gmail.com','rocio'),('ruben@gmail.com','ruben');
+INSERT INTO `correos` VALUES ('carlos@gmail.com','carlos'),('juanmaEV@gmail.com','juanmaEV'),('manolo@gmail.com','manolo'),('prueba@gmail.com','prueba'),('prueba2@gmail.com','prueba2'),('rocio@gmail.com','rocio'),('ruben@gmail.com','ruben');
 /*!40000 ALTER TABLE `correos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -91,7 +91,7 @@ CREATE TABLE `dosjugadores` (
 
 LOCK TABLES `dosjugadores` WRITE;
 /*!40000 ALTER TABLE `dosjugadores` DISABLE KEYS */;
-INSERT INTO `dosjugadores` VALUES ('carlos','manolo'),('juanmaEV','manolo'),('manolo','carlos'),('manolo','ruben'),('rocio','carlos'),('ruben','carlos'),('ruben','juanmaEV'),('ruben','manolo');
+INSERT INTO `dosjugadores` VALUES ('carlos','manolo'),('juanmaEV','manolo'),('manolo','carlos'),('manolo','ruben'),('prueba','prueba2'),('rocio','carlos'),('ruben','carlos'),('ruben','juanmaEV'),('ruben','manolo');
 /*!40000 ALTER TABLE `dosjugadores` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -141,7 +141,7 @@ CREATE TABLE `numjugadas` (
 
 LOCK TABLES `numjugadas` WRITE;
 /*!40000 ALTER TABLE `numjugadas` DISABLE KEYS */;
-INSERT INTO `numjugadas` VALUES (2,6,3,5),(3,4,1,1),(4,5,6,6),(5,7,4,4),(6,9,7,4),(7,0,0,0);
+INSERT INTO `numjugadas` VALUES (2,6,3,5),(3,4,1,1),(4,5,6,6),(5,7,4,4),(6,9,7,4),(7,0,0,0),(8,0,0,0);
 /*!40000 ALTER TABLE `numjugadas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -229,6 +229,33 @@ INSERT INTO `peliculasimagenes` VALUES ('Batman Begins',30),('Batman vs Superman
 UNLOCK TABLES;
 
 --
+-- Table structure for table `peliculaspoiler`
+--
+
+DROP TABLE IF EXISTS `peliculaspoiler`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `peliculaspoiler` (
+  `NombrePelicula` varchar(50) NOT NULL,
+  `idspoiler` int(11) NOT NULL,
+  PRIMARY KEY (`NombrePelicula`,`idspoiler`),
+  KEY `idspoiler` (`idspoiler`),
+  CONSTRAINT `peliculaspoiler_ibfk_1` FOREIGN KEY (`idspoiler`) REFERENCES `spoiler` (`id`),
+  CONSTRAINT `peliculaspoiler_ibfk_2` FOREIGN KEY (`NombrePelicula`) REFERENCES `peliculas` (`Nombre`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `peliculaspoiler`
+--
+
+LOCK TABLES `peliculaspoiler` WRITE;
+/*!40000 ALTER TABLE `peliculaspoiler` DISABLE KEYS */;
+INSERT INTO `peliculaspoiler` VALUES ('Batman Begins',1),('Batman vs Superman: El amanecer de la justicia',2),('Big Fish',3),('E.T., el extraterrestre',4),('Eduardo Manostijeras',5),('El bosque',6),('El caballero oscuro',7),('El cid',8),('El hobbit: La batalla de los cinco ejercitos',9),('El hobbit: La desolación de Smaug',10),('El hobbit: Un viaje Inesperado',11),('El hombre bicentenario',12),('El laberinto del fauno',13),('El padrino',14),('El padrino 2',15),('El planeta de los simios',16),('El señor de los anillos: El retorno del rey',17),('El señor de los anillos: La comunidad del anillo',18),('El señor de los Anillos: Las dos torres',19),('Gremlins',20),('Harry Potter y el cáliz de fuego',21),('Harry Potter y el misterio del príncipe',22),('Harry Potter y el prisionero de Azkaban',23),('Harry Potter y la cámara secreta',24),('Harry Potter y la orden del fenix',25),('Harry Potter y la piedra filosofal',26),('Harry Potter y las reliquias de la muerte: Parte 1',27),('Harry Potter y las reliquias de la muerte: Parte 2',28),('Hook',29),('Jumanji',30),('La ballena',31),('La familia addams',32),('La momia',33),('La naranja mecánica',34),('Los siete magníficos',35),('Mars Attacks!',36),('Matrix',37),('Moulin Rouge!',38),('Mrs. Doubtfire',39),('Múltiple',40),('Muñeco diabólico',41),('Muñeco diabólico 2',42),('Muñeco diabólico 3',43),('Pesadillas Antes de Navidad',44),('Regreso al futuro',45),('Regreso al futuro 2',46),('Regreso al futuro 3',47),('Saw',48),('Saw 2',49),('Sé lo que hicisteis el último verano',50),('Shrek',51),('Silencio desde el mal',52),('Spider-Man',53),('Star Wars: Episodio I - La amenaza fantasma',54),('Star Wars: Episodio II - El ataque de los clones',55),('Star Wars: Episodio III - La venganza de los Sith',56),('Sweeney Todd',57),('Vengadores: EndGame',58);
+/*!40000 ALTER TABLE `peliculaspoiler` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `peliculaspreguntas`
 --
 
@@ -303,8 +330,32 @@ CREATE TABLE `ranking` (
 
 LOCK TABLES `ranking` WRITE;
 /*!40000 ALTER TABLE `ranking` DISABLE KEYS */;
-INSERT INTO `ranking` VALUES (2,10,6,7),(3,4,3,1),(4,15,7,7),(5,7,6,9),(6,14,7,6),(7,0,0,0);
+INSERT INTO `ranking` VALUES (2,10,6,7),(3,4,3,1),(4,22,7,7),(5,7,6,9),(6,14,7,6),(7,0,0,0),(8,0,0,0);
 /*!40000 ALTER TABLE `ranking` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `spoiler`
+--
+
+DROP TABLE IF EXISTS `spoiler`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `spoiler` (
+  `id` int(11) NOT NULL,
+  `spoiler` varchar(90) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `spoiler`
+--
+
+LOCK TABLES `spoiler` WRITE;
+/*!40000 ALTER TABLE `spoiler` DISABLE KEYS */;
+INSERT INTO `spoiler` VALUES (1,'Ra\'s al ghul quiere destruir Gotham con la droga del espantapájaros'),(2,'Superman muere'),(3,'La historia del padre es cierta'),(4,'El extraterrestre muere, y al rato, resucita.'),(5,'Le hacen colarse en una casa para que lo detenga la policía'),(6,'Los monstruos que salen son los padres disfrazados'),(7,'La novia de Batman muere a manos del joker'),(8,'Destierran al protagonista por un supuesto robo'),(9,'El rey de los enanos muere a manos de los orcos'),(10,'El dragón acaba saliendo de la montaña'),(11,'Le roban el anillo a gollum'),(12,'Termina haciéndose humano, y muere'),(13,'La niña protagonista es asesinada por un falangista'),(14,'Sonny Corleone muere a manos de la familia Barzini'),(15,'Michael Corleone mata a Fredo Corleone'),(16,'El protagonista descubre que estaba en la tierra al ver la estatua de la libertad'),(17,'Aragorn se hace rey de Minas Tirith'),(18,'Boromir muere'),(19,'Merry y Pippin consiguen derrotar a Saruman'),(20,'los monstruos mueren en un cine a excepción del jefe'),(21,'Cedric Diggory muere en la competición'),(22,'Dumbledore muere'),(23,'El traidor es el mejor amigo de James Potter'),(24,'El basilisco es controlado por Voldemort'),(25,'Sirius Black muere delante de Harry Potter'),(26,'Harry Potter descubre que es un mago.'),(27,'Dobby, el elfo domestico muere'),(28,'Snape estaba enamorado de la madre de Harry Potter'),(29,'Uno de los niños perdidos muere a manos del Capitán Garfio'),(30,'Uno de los niños se convierte en mono por hacer trampas'),(31,'El protagonista esta mal por la muerte de su pareja'),(32,'El hermano viene a robarle su dinero'),(33,'Quiere traer de vuelta a su pareja mediante un ritual'),(34,'El experimento hace que el protagonista intente quitarse la vida'),(35,'De 7 vaqueros, mueren 4'),(36,'Los marcianos matan al presidente'),(37,'El protagonista descubre que la raza humana esta dominada por la inteligencia artificial'),(38,'La protagonista muere en el escenario por una enfermedad'),(39,'Los niños descubren que la canguro es su padre'),(40,'Secuestra a tres niñas, y mata a dos con sus personalidades'),(41,'Queman al muñeco para intentar matarle'),(42,'Destruyen al muñeco en una fabrica de juguetes'),(43,'El coronel muere de un infarto al ver el muñeco'),(44,'El protagonista quiere robarle la fiesta a Santa Claus'),(45,'La madre se enamora de su hijo sin saberlo'),(46,'Crea una linea temporal alternativa por culpa de una revista'),(47,'Viaja al salvaje oeste para encontrar al doctor, y volver a su tiempo'),(48,'El cadáver de la película es el villano'),(49,'El juego de \"Puzle\" no es en directo'),(50,'El asesino los persigue porque le atropellaron'),(51,'El protagonista se enamora de la princesa tras salvarla con un asno'),(52,'El espíritu es una ventrílocua'),(53,'Se convierte en héroe cuando muere tu tío'),(54,'El villano mata a uno de los protagonistas con un sable laser'),(55,'Anakin Skywalker pierde un brazo luchando con espadas laser'),(56,'Anakin Skywalker se convierte en Darth Vader'),(57,'El barbero mata a su mujer sin saberlo'),(58,'Iron man muere');
+/*!40000 ALTER TABLE `spoiler` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -333,7 +384,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES ('carlos','carlos*123',2,2),('juanmaEV','juanmaEV*123',4,4),('manolo','manolo*123',5,5),('prueba','prueba*123',7,7),('rocio','rocio*123',3,3),('ruben','ruben*123',6,6);
+INSERT INTO `usuarios` VALUES ('carlos','carlos*123',2,2),('juanmaEV','juanmaEV*123',4,4),('manolo','manolo*123',5,5),('prueba','prueba*123',7,7),('prueba2','prueba2*123',8,8),('rocio','rocio*123',3,3),('ruben','ruben*123',6,6);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -346,4 +397,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-06-04 17:32:02
+-- Dump completed on 2023-08-03 17:42:13
