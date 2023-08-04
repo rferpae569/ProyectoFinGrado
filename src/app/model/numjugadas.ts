@@ -5,4 +5,5 @@ export interface Numjugadas {
     JugadasImagen:    number;
     JugadasPreguntas: number;
     JugadasMusica:    number;
+    JugadasSpoiler:   number;
 }

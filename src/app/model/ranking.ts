@@ -5,5 +5,6 @@ export interface Ranking {
     PuntosImagen:    number;
     PuntosPreguntas: number;
     PuntosMusica:    number;
+    PuntosSpoiler:   number;
     nombre:          string;
 }

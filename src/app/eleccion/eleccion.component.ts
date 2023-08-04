@@ -43,5 +43,15 @@ const nuevo = {
     });
   }
 
+  incrementarJugadasSpoiler(){ //Esta funcion sirve para incrementar el numero de jugadas del usuario que ha iniciado sesion en el juego de los spoiler
+    const nombreuser = this.cookieService.get('session');
+    const nuevo = {
+      nombre: nombreuser
+    };
+        this.servicio.getIncrementarJugadasSpoiler(nuevo).subscribe((datos) => {
+          console.log("Datos enviados al servidor:", datos);
+        });
+  }
+
 }
 

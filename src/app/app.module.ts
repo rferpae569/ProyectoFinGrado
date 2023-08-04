@@ -21,6 +21,8 @@ import { JuegoimagendosjComponent } from './juegoimagendosj/juegoimagendosj.comp
 import { JuegopreguntadosjComponent } from './juegopreguntadosj/juegopreguntadosj.component';
 import { JuegomusicadosjComponent } from './juegomusicadosj/juegomusicadosj.component';
 import { Eleccion2dosjComponent } from './eleccion2dosj/eleccion2dosj.component';
+import { JuegospoilerComponent } from './juegospoiler/juegospoiler.component';
+import { JuegospoilerdosjComponent } from './juegospoilerdosj/juegospoilerdosj.component';
 //importamos los modules y los ocmponentes correspondientes
 
 @NgModule({
@@ -40,7 +42,9 @@ import { Eleccion2dosjComponent } from './eleccion2dosj/eleccion2dosj.component'
     JuegoimagendosjComponent,
     JuegopreguntadosjComponent,
     JuegomusicadosjComponent,
-    Eleccion2dosjComponent
+    Eleccion2dosjComponent,
+    JuegospoilerComponent,
+    JuegospoilerdosjComponent
   ],
   imports: [
     BrowserModule,

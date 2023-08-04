@@ -131,6 +131,7 @@ CREATE TABLE `numjugadas` (
   `JugadasImagen` int(40) NOT NULL,
   `JugadasPreguntas` int(40) NOT NULL,
   `JugadasMusica` int(40) NOT NULL,
+  `JugadasSpoiler` int(40) NOT NULL,
   PRIMARY KEY (`Codigojugadas`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -141,7 +142,7 @@ CREATE TABLE `numjugadas` (
 
 LOCK TABLES `numjugadas` WRITE;
 /*!40000 ALTER TABLE `numjugadas` DISABLE KEYS */;
-INSERT INTO `numjugadas` VALUES (2,6,3,5),(3,4,1,1),(4,5,6,6),(5,7,4,4),(6,9,7,4),(7,0,0,0),(8,0,0,0);
+INSERT INTO `numjugadas` VALUES (2,6,3,5,0),(3,4,1,1,0),(4,5,6,6,0),(5,7,4,4,0),(6,9,7,4,0),(7,0,0,0,0),(8,0,0,0,0);
 /*!40000 ALTER TABLE `numjugadas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -320,6 +321,7 @@ CREATE TABLE `ranking` (
   `PuntosImagen` int(40) NOT NULL,
   `PuntosPreguntas` int(40) NOT NULL,
   `PuntosMusica` int(40) NOT NULL,
+  `PuntosSpoiler` int(40) NOT NULL,
   PRIMARY KEY (`CodigoRanking`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -330,7 +332,7 @@ CREATE TABLE `ranking` (
 
 LOCK TABLES `ranking` WRITE;
 /*!40000 ALTER TABLE `ranking` DISABLE KEYS */;
-INSERT INTO `ranking` VALUES (2,10,6,7),(3,4,3,1),(4,22,7,7),(5,7,6,9),(6,14,7,6),(7,0,0,0),(8,0,0,0);
+INSERT INTO `ranking` VALUES (2,10,6,7,0),(3,4,3,1,0),(4,22,7,7,0),(5,7,6,9,0),(6,14,7,6,0),(7,0,0,0,0),(8,0,0,0,0);
 /*!40000 ALTER TABLE `ranking` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -397,4 +399,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-08-03 17:42:13
+-- Dump completed on 2023-08-04 13:38:11

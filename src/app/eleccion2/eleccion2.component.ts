@@ -97,6 +97,7 @@ export class Eleccion2Component implements OnInit {
         data.addColumn('number', 'PuntosImagen');
         data.addColumn('number', 'PuntosPregunta');
         data.addColumn('number', 'PuntosMusica');
+        data.addColumn('number', 'PuntosSpoiler');
   
         const options = {
           title: 'Ranking de Puntos',
@@ -116,7 +117,7 @@ export class Eleccion2Component implements OnInit {
         // Obtener los datos actualizados antes de dibujar el gráfico
         this.servicioService.getDatosRanking().subscribe(datos => {
           this.datos = datos;
-          const rows = this.datos.map((dato: any) => [dato.nombre, dato.PuntosImagen, dato.PuntosPreguntas, dato.PuntosMusica]);
+          const rows = this.datos.map((dato: any) => [dato.nombre, dato.PuntosImagen, dato.PuntosPreguntas, dato.PuntosMusica, dato.PuntosSpoiler]);
           data.addRows(rows);
           this.chart.draw(data, options);
         });
@@ -151,11 +152,13 @@ export class Eleccion2Component implements OnInit {
           const jugadasimagen = this.datos2.reduce((total, dato2) => total + dato2.JugadasImagen, 0);
           const jugadasPreguntas = this.datos2.reduce((total, dato2) => total + dato2.JugadasPreguntas, 0);
           const jugadasMusica = this.datos2.reduce((total, dato2) => total + dato2.JugadasMusica, 0);
+          const jugadasSpoiler = this.datos2.reduce((total, dato2 ) => total + dato2.JugadasSpoiler, 0);
   
           // Llenar los datos de la tabla
           data.addRow(['Imagen', jugadasimagen]);
           data.addRow(['Pregunta', jugadasPreguntas]);
           data.addRow(['Música', jugadasMusica]);
+          data.addRow(['Spoiler', jugadasSpoiler]);
   
           const options = {
             title: 'Porcentaje Veces jugadas',

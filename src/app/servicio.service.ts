@@ -11,6 +11,7 @@ import { Juegopregunta } from './model/juegopregunta';
 import { Juegopreguntapista } from './model/juegopreguntapista';
 import { Juegomusica } from './model/juegomusica';
 import { Juegomusicapista } from './model/juegomusicapista';
+import { Juegospoiler } from './model/juegospoiler';
 import { Usuariosdos } from './model/usuariosdos';
 //importamos los modulos
 
@@ -63,16 +64,24 @@ export class ServicioService { //Creamos la ruta y las funciones para necesarios
     return this.http.get<Juegomusicapista[]>(`${this.url}juegomusica/leerpistajuegomusica.php`);
   }
 
-  getIncrementarJugadasImagen(nuevo: any): Observable<any> { //Esta funcion sivrve para incrementar el numero de jugadas del juego de las imagenes en la base de datos gracias al al contenido dle archivo php
+  getDatosPeliculaSpoiler(): Observable<Juegospoiler[]>{ //Esta funcion sirve para leer los datos de juegospoiler que devuelve el archivo php de la base de datos
+    return this.http.get<Juegospoiler[]>(`${this.url}juegospoiler/leerjuegospoiler.php`);
+  }
+
+  getIncrementarJugadasImagen(nuevo: any): Observable<any> { //Esta funcion sivrve para incrementar el numero de jugadas del juego de las imagenes en la base de datos gracias al contenido del archivo php
     return this.http.post(`${this.url}numjugadas/incrementarjugadaimagen.php`, nuevo);
   }
 
-  getIncrementarJugadasPreguntas(nuevo: any): Observable<any> { //Esta funcion sivrve para incrementar el numero de jugadas del juego de las preguntas en la base de datos gracias al al contenido dle archivo php
+  getIncrementarJugadasPreguntas(nuevo: any): Observable<any> { //Esta funcion sivrve para incrementar el numero de jugadas del juego de las preguntas en la base de datos gracias al contenido del archivo php
     return this.http.post(`${this.url}numjugadas/incrementarjugadapregunta.php`, nuevo);
   }
 
-  getIncrementarJugadasMusica(nuevo: any): Observable<any> { //Esta funcion sirve para incrementar el numero de jugadas del juego de las canciones en la base de datos gracias al al contenido dle archivo php
+  getIncrementarJugadasMusica(nuevo: any): Observable<any> { //Esta funcion sirve para incrementar el numero de jugadas del juego de las canciones en la base de datos gracias al contenido del archivo php
     return this.http.post(`${this.url}numjugadas/incrementarjugadamusica.php`, nuevo);
+  }
+
+  getIncrementarJugadasSpoiler(nuevo: any): Observable<any>{ //Esta funcion sirve para incrementar el numero de jugadas del juego de los spoiler en la base de datos gracias al contenido del archivo php
+    return this.http.post(`${this.url}numjugadas/incrementarjugadaspoiler.php`,nuevo);
   }
   
   postDato(nuevo:Usuarios): Observable<Usuarios> { //Esta funcion sirve para insertar el usuario introducido por formulario en la base de datos gracias al contenido del php
@@ -101,6 +110,10 @@ export class ServicioService { //Creamos la ruta y las funciones para necesarios
 
   postDatoRankingMusica(nuevo: any): Observable<any> { //Esta funcion siirve para actualizar el ranking del juego de las canciones en la base de datos llamando al codigo que hay en el php
     return this.http.post(`${this.url}ranking/insertarrankingjuegomusica.php`, nuevo);
+  }
+
+  postDatoRankingSpoiler(nuevo:any):Observable<any>{
+    return this.http.post(`${this.url}ranking/insertarrankingjuegospoiler.php`,nuevo);
   }
 
   login(user: Usuarios): Observable<Usuarios[]> { //Esta funcion sirve para comprobar que el usuario esta en la base de datos cuando vayamos a iniciar sesion

@@ -9,3 +9,11 @@
  a{ //Aplicamos el color blanco a la siguiente etiqueta
     color: white;
   }
+
+  .enlaces-juegos2 { //Adaptamos el div para que se asemeja al de arriba
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 78.5%;
+  }
