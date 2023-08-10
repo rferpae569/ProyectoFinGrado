@@ -20,14 +20,15 @@ Cuando inicie sesion, el usuario sera llevado al componente "eleccion" donde pod
 - Juego de las Imagenes (Facil)
 - Juego de las Preguntas (Normal)
 - Juego de la musica (Dificil)
+- Juego del spoiler (Normal)
 
-En el juego de las imagenes, al usuario le aparecera una imagen aleatoria de una pelicula, y debera de adivinar a que pelicula pertenece escribiendo su titulo en el formulario. En el juego de las preguntas, al usuario le saldra una pregunta aleatoria en relacion a los datos de dicha pelicula (Quien la hizo, año en el que salio, su recaudacion, etc). Dependiendo de la pregunta, el usuario debera de escribir la respuesta correspondiente. En el juego de la musica, al usuario le saldra una banda sonora aleatoria de una pelicula, y debera de adivinar a que pelicula pertenece escribiendo su titulo en el formulario.
+En el juego de las imagenes, al usuario le aparecera una imagen aleatoria de una pelicula, y debera de adivinar a que pelicula pertenece escribiendo su titulo en el formulario. En el juego de las preguntas, al usuario le saldra una pregunta aleatoria en relacion a los datos de dicha pelicula (Quien la hizo, año en el que salio, su recaudacion, etc). Dependiendo de la pregunta, el usuario debera de escribir la respuesta correspondiente. En el juego de la musica, al usuario le saldra una banda sonora aleatoria de una pelicula, y debera de adivinar a que pelicula pertenece escribiendo su titulo en el formulario. En el juego del spoiler, el usuario le saldra un spoiler relacionado con una pelicula (Puede ser un spoiler del final, o de cualquier otra parte de la pelicula). Una vez lea el spoiler de la pelicula, el usuario debera de escribir el titulo de la pelicula al que pertenece.
 
-En los tres juegos, el usuario tendra tres intentos, si los gasta y pierde otra vez, el juego terminara.
+En los cuatro juegos, el usuario tendra tres intentos, si los gasta y pierde otra vez, el juego terminara.
 
 En caso de que gane o pierda, al usuario se le mostrara dos graficos para que pueda ver cual es el juego al que se juega mas, y cual es el record de los distintos usuarios que estan almacenados en la base de datos. Aparte de eso, se mostrara tambien un enlace para que pueda descargarse un pdf con los datos de los graficos.
 
-Aparte de eso, se ha implementado tambien el modod dos jugadores, donde el usuario podra jugar a los mismo juegos con otra persona una vez inicien sesion los dos juntos. Se puede acceder a ese modo dandole al enlace de "Modo dos jugadores" ubicado en el componente "Inicio".
+Aparte de eso, se ha implementado tambien el modo dos jugadores, donde el usuario podra jugar a los mismos juegos con otra persona una vez inicien sesion los dos juntos. Se puede acceder a ese modo dandole al enlace de "Modo dos jugadores" ubicado en el componente "Inicio".
 
 **Este proyecto ha sido realizado por Rubén Fernández**
 
