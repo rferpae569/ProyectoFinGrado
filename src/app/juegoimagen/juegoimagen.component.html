@@ -1,7 +1,12 @@
 <div class="background-image">
 <div class="container">
     <h1 class='text-center mt-5'>Usuario: {{session}}</h1>
-    <h1 class='text-center mt-5'>Intentos: {{intentos}}</h1>
+    <h1 class='text-center mt-5'>Intentos:</h1>
+    <div class="image-container">
+        <ng-container *ngFor="let _ of [].constructor(intentos); let i = index">
+          <img [src]="'../../assets/icono/claquetaicon.png'" class="img-intento" alt="Intento {{i + 1}}">
+        </ng-container>
+      </div>
     <h1 class='text-center mt-5'>Puntos: {{puntos}}</h1>
     <h1 class="text-center mt-5">¿A qué película pertenece esta imagen?</h1>
     <div class="row">
