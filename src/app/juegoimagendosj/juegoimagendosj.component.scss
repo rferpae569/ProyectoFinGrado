@@ -35,3 +35,19 @@ h1, label, li { //especificamos el color blanco para las siguientes etiquetas
 .text-right { //El texto del div con esta clase se pondra a la derecha
     text-align: right;
   }
+
+  /* Estilos para el contenedor de imágenes */
+.image-container {
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+}
+
+/* Estilos para la imagen del icono utilizada para los intentos*/
+.img-intento, .img-intento2 {
+  width: 30px; 
+  height: 30px; 
+  filter: invert(100%); 
+  margin-right: 10px; 
+  padding: 5px; 
+}
