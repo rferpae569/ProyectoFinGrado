@@ -1,71 +1,111 @@
 <div class="background-image">
-    <div class="container">
-        <div class="user-section">
-            <div class="text-left">
-              <h1 class="text-center mt-5">Usuario1: {{session}}</h1>
-              <h1 class="text-center mt-5">Puntos: {{puntos}}</h1>
-              <h1 class='text-center mt-5'>Intentos:</h1>
-              <div class="image-container">
-                  <ng-container *ngFor="let _ of [].constructor(intentos); let i = index">
-                    <img [src]="'../../assets/icono/claquetaicon.png'" class="img-intento" alt="Intento {{i + 1}}">
-                  </ng-container>
-                </div>
-            </div>
-            <div class="text-right">
-              <h1 class="text-center mt-5">Usuario2: {{session2}}</h1>
-              <h1 class="text-center mt-5">Puntos: {{puntos2}}</h1>
-              <h1 class='text-center mt-5'>Intentos:</h1>
-              <div class="image-container">
-                  <ng-container *ngFor="let _ of [].constructor(intentos2); let i = index">
-                    <img [src]="'../../assets/icono/claquetaicon.png'" class="img-intento2" alt="Intento2 {{i + 1}}">
-                  </ng-container>
-                </div>
-            </div>
-          </div>
-        <h1 class="text-center mt-5">Es el turno de {{ turnoActual === 1 ? session : session2 }}</h1>
-        <h1 class="text-center mt-5">¿A qué película pertenece esta cancion?</h1>
-        <div class="row">
-            <div class="col-md-6 mx-auto">
-                <audio controls>
-                    <source [src]="'../../assets/musica/' + nombresPeliculas[numeroAleatorio].musica[0]" type="audio/mp3">
-                    Tu navegador no soporta el elemento de audio.
-                  </audio><br>
-
-                  <div [hidden]="!mostrarPista">
-                    <h1 class="text-center">Pista Musical:</h1>
-                    <table class="table-style">
-                      <tr>
-                        <th>Nombre</th>
-                        <th>Compositor</th>
-                        <th>Clave</th>
-                      </tr>
-                      <tr>
-                        <td>{{ pistas }}</td>
-                        <td>{{ pistas2 }}</td>
-                        <td>{{ pistas3 }}</td>
-                      </tr>
-                    </table>
-                  </div><br>
-        
-                <button class="btn btn-primary mx-auto d-block" (click)="mostrarPista = !mostrarPista">Pista</button>
-                <!--Añadimos el boton para mostrar la pista al hacer click en el con javascript-->
-
-                <form autocomplete="off" class="mt-4" ngForm>
-                  <div id="titulopelicula">
-                    <ul>
-                        <li *ngFor="let titulo of titulosCoincidentes">{{ titulo }}</li>
-                    </ul>
-                  </div>
-                    <!--Creamos un formulario para que el usuario pueda responder-->
-                    <div class="form-group colorajax">
-                        <label for="respuesta">Introduce la respuesta</label>
-                        <input id="respuesta" type="text" class="form-control" placeholder="Respuesta" name="respuesta" [formControl]="filtroTituloControl">
-                    </div>
-                    <div class="text-center"><br>
-                        <button type="submit" class="btn btn-primary" (click)="enviarRespuesta()">Comprobar</button>
-                    </div> 
-                </form>
-            </div>
+  <div class="container">
+    <div class="user-section">
+      <div class="text-left">
+        <h1 class="text-center mt-5">Usuario1: {{ session }}</h1>
+        <h1 class="text-center mt-5">Puntos: {{ puntos }}</h1>
+        <h1 class="text-center mt-5">Intentos:</h1>
+        <div class="image-container">
+          <ng-container
+            *ngFor="let _ of [].constructor(intentos); let i = index"
+          >
+            <img
+              [src]="'../../assets/icono/claquetaicon.png'"
+              class="img-intento"
+              alt="Intento {{ i + 1 }}"
+            />
+          </ng-container>
         </div>
+      </div>
+      <div class="text-right">
+        <h1 class="text-center mt-5">Usuario2: {{ session2 }}</h1>
+        <h1 class="text-center mt-5">Puntos: {{ puntos2 }}</h1>
+        <h1 class="text-center mt-5">Intentos:</h1>
+        <div class="image-container">
+          <ng-container
+            *ngFor="let _ of [].constructor(intentos2); let i = index"
+          >
+            <img
+              [src]="'../../assets/icono/claquetaicon.png'"
+              class="img-intento2"
+              alt="Intento2 {{ i + 1 }}"
+            />
+          </ng-container>
+        </div>
+      </div>
     </div>
+    <h1 class="text-center mt-5">
+      Es el turno de {{ turnoActual === 1 ? session : session2 }}
+    </h1>
+    <h1 class="text-center mt-5">¿A qué película pertenece esta cancion?</h1>
+    <div class="row">
+      <div class="col-md-6 mx-auto">
+        <audio controls>
+          <source
+            [src]="
+              '../../assets/musica/' +
+              nombresPeliculas[numeroAleatorio].musica[0]
+            "
+            type="audio/mp3"
+          />
+          Tu navegador no soporta el elemento de audio.</audio
+        ><br />
+
+        <div [hidden]="!mostrarPista">
+          <h1 class="text-center">Pista Musical:</h1>
+          <table class="table-style">
+            <tr>
+              <th>Nombre</th>
+              <th>Compositor</th>
+              <th>Clave</th>
+            </tr>
+            <tr>
+              <td>{{ pistas }}</td>
+              <td>{{ pistas2 }}</td>
+              <td>{{ pistas3 }}</td>
+            </tr>
+          </table>
+        </div>
+        <br />
+
+        <button
+          class="btn btn-primary mx-auto d-block"
+          (click)="mostrarPista = !mostrarPista"
+        >
+          Pista
+        </button>
+        <!--Añadimos el boton para mostrar la pista al hacer click en el con javascript-->
+
+        <form autocomplete="off" class="mt-4" ngForm>
+          <div id="titulopelicula">
+            <ul>
+              <li *ngFor="let titulo of titulosCoincidentes">{{ titulo }}</li>
+            </ul>
+          </div>
+          <!--Creamos un formulario para que el usuario pueda responder-->
+          <div class="form-group colorajax">
+            <label for="respuesta">Introduce la respuesta</label>
+            <input
+              id="respuesta"
+              type="text"
+              class="form-control"
+              placeholder="Respuesta"
+              name="respuesta"
+              [formControl]="filtroTituloControl"
+            />
+          </div>
+          <div class="text-center">
+            <br />
+            <button
+              type="submit"
+              class="btn btn-primary"
+              (click)="enviarRespuesta()"
+            >
+              Comprobar
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
+  </div>
+</div>

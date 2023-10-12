@@ -23,6 +23,7 @@ export class InicioComponent implements OnInit, AfterViewInit {
 
   mostrarFooter: boolean = true; //Declaramos la variable para mostrar el footer
   mostrarContrasena: boolean = false; //Declaramos la variable para mostrar la contraseña
+  menuActive: boolean = false;
 
 
   constructor(private cookieService: CookieService,  private servicioService: ServicioService,
@@ -93,6 +94,10 @@ export class InicioComponent implements OnInit, AfterViewInit {
     const contrasenaInput = document.getElementById('contrasena') as HTMLInputElement;
     this.mostrarContrasena = !this.mostrarContrasena;
     contrasenaInput.type = this.mostrarContrasena ? 'text' : 'password';
+  }
+
+  toggleMenu() {
+    this.menuActive = !this.menuActive;
   }
 
 }

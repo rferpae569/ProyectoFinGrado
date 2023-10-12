@@ -11,7 +11,7 @@ import { Juegospoiler } from '../model/juegospoiler';
 @Component({
   selector: 'app-juegospoiler',
   templateUrl: './juegospoiler.component.html',
-  styleUrls: ['./juegospoiler.component.scss']
+  styleUrls: ['./juegospoiler.component.scss'],
 })
 export class JuegospoilerComponent {
   datos!: Juegospoiler[];
@@ -30,7 +30,6 @@ export class JuegospoilerComponent {
 
   //Verificamos las cookies, creamos los intentos y establecemos el filtrado de las peliculas
   ngOnInit() {
-
     const sessionCookieExists = this.cookieService.check('session');
     const intentosCookieExists = this.cookieService.check('intentos');
 
@@ -56,33 +55,33 @@ export class JuegospoilerComponent {
     if (listaPeliculasCookie) {
       this.listaPeliculas = JSON.parse(listaPeliculasCookie);
     }
-    
+
     const puntoscookie = this.cookieService.get('puntos');
     this.puntos = parseInt(puntoscookie, 10) || 0;
-    
+
     // Suscribimos los cambios en el control del input para filtrar los títulos
     this.filtroTituloControl.valueChanges
-    .pipe(
-      startWith(''), // Empezamos con una cadena vacía
-      map(value => value.toLowerCase()) // Convertimos a minúsculas
-    )
-    .subscribe(filterValue => {
-      // Filtramos los títulos solo si hay un valor en el filtro
-      if (filterValue) {
-        this.titulosCoincidentes = this.listaPeliculas.filter(
-          titulo => titulo.toLowerCase().startsWith(filterValue)
-        );
-      } else {
-        this.titulosCoincidentes = []; // Vaciamos la lista de títulos si no hay valor en el filtro
-      }
-    });
+      .pipe(
+        startWith(''), // Empezamos con una cadena vacía
+        map((value) => value.toLowerCase()) // Convertimos a minúsculas
+      )
+      .subscribe((filterValue) => {
+        // Filtramos los títulos solo si hay un valor en el filtro
+        if (filterValue) {
+          this.titulosCoincidentes = this.listaPeliculas.filter((titulo) =>
+            titulo.toLowerCase().startsWith(filterValue)
+          );
+        } else {
+          this.titulosCoincidentes = []; // Vaciamos la lista de títulos si no hay valor en el filtro
+        }
+      });
   }
 
   constructor(
     private servicioService: ServicioService,
     private cookieService: CookieService,
     private router: Router
-  ){
+  ) {
     // Verificamos si existe la cookie 'peliculas', y si no existe, obtenemos los datos
     const sessionCookieExists = this.cookieService.check('peliculas');
     if (!sessionCookieExists) {
@@ -91,7 +90,8 @@ export class JuegospoilerComponent {
         this.generarArrayNombresSpoiler();
         this.seleccionarPalabraSecreta();
       });
-    } else { //Si no existe, recuperamos los datos guardados en las cookies especificadas
+    } else {
+      //Si no existe, recuperamos los datos guardados en las cookies especificadas
       const spoilerPeliculasCookie = this.cookieService.get('peliculas');
       this.spoilerPeliculas = JSON.parse(spoilerPeliculasCookie);
       const numeroAleatorioCookie = this.cookieService.get('numero');
@@ -112,24 +112,22 @@ export class JuegospoilerComponent {
     // Obtenemos los nombres de las películas desde la cookie 'peliculas'
     const spoilerPeliculasCookie = this.cookieService.get('peliculas');
     this.spoilerPeliculas = JSON.parse(spoilerPeliculasCookie);
-    
+
     //Comprobamos que no queden mas nombres
     if (!this.spoilerPeliculas || this.spoilerPeliculas.length === 0) {
       //Si no quedan mas, obtenemos el nombre del usuario de la cookie "session", y creamos un objeto con el nombre y sus puntos
       const nombreuser = this.cookieService.get('session');
-const nuevo = {
-  nombre: nombreuser,
-  puntos: this.puntos
-};
+      const nuevo = {
+        nombre: nombreuser,
+        puntos: this.puntos,
+      };
 
-//Enviamos los datos al servidor
-this.servicioService.postDatoRankingSpoiler(nuevo).subscribe((datos) => {
-  console.log("Datos enviados al servidor:", datos);
-});
-
+      //Enviamos los datos al servidor
+      this.servicioService.postDatoRankingSpoiler(nuevo).subscribe((datos) => {
+        console.log('Datos enviados al servidor:', datos);
+      });
 
       this.router.navigate(['/eleccion2']); //Nos vamos a "eleccion2"
-      
     }
 
     //Si existen mas peliculas, continuamos con el codigo, generamos el numero aleatorio y obtenemos la palabra secreta
@@ -150,7 +148,11 @@ this.servicioService.postDatoRankingSpoiler(nuevo).subscribe((datos) => {
 
     // Establecemos las cookies 'palabra' y 'numero' con la palabra secreta y el número aleatorio, respectivamente
     this.cookieService.set('palabra', this.palabrasecreta, expirationDate);
-    this.cookieService.set('numero', numeroAleatorio.toString(), expirationDate);
+    this.cookieService.set(
+      'numero',
+      numeroAleatorio.toString(),
+      expirationDate
+    );
   }
 
   enviarRespuesta() {
@@ -162,12 +164,13 @@ this.servicioService.postDatoRankingSpoiler(nuevo).subscribe((datos) => {
     const juegoActual = this.palabrasecreta;
 
     // Obtenemos la respuesta pasada a traves del formulario
-    const inputElement = document.querySelector('#respuesta') as HTMLInputElement;
+    const inputElement = document.querySelector(
+      '#respuesta'
+    ) as HTMLInputElement;
     this.Respuesta = inputElement.value;
-    
+
     //Verificamos si la respuesta es correcta (Ya sea en mayuscula o minuscula)
     if (this.Respuesta.toLowerCase() === juegoActual.toLowerCase()) {
-
       // Obtenemos los datos del spoiler desde la cookie 'peliculas'
       const spoilerData = JSON.parse(spoilerCookie);
       const numero = parseInt(this.cookieService.get('numero'), 10);
@@ -181,19 +184,27 @@ this.servicioService.postDatoRankingSpoiler(nuevo).subscribe((datos) => {
       // Incrementamos los puntos si los intentos están dentro del rango permitido (0 a 3)
       if (this.intentos <= 3 && this.intentos >= 0) {
         this.puntos += 1;
-    }
+      }
       const currentDate = new Date();
       const expirationDate = new Date(
-      currentDate.getFullYear(),
-      currentDate.getMonth(),
-      currentDate.getDate() + 1
-    );
+        currentDate.getFullYear(),
+        currentDate.getMonth(),
+        currentDate.getDate() + 1
+      );
 
-      this.cookieService.set('intentos', this.intentos.toString(), expirationDate);
+      this.cookieService.set(
+        'intentos',
+        this.intentos.toString(),
+        expirationDate
+      );
       this.cookieService.set('puntos', this.puntos.toString(), expirationDate);
 
-     // Eliminamos el spoiler actual del arreglo spoilerData si los datos son válidos
-      if (Array.isArray(spoilerData) && numero >= 0 && numero < spoilerData.length) {
+      // Eliminamos el spoiler actual del arreglo spoilerData si los datos son válidos
+      if (
+        Array.isArray(spoilerData) &&
+        numero >= 0 &&
+        numero < spoilerData.length
+      ) {
         spoilerData.splice(numero, 1);
         const updatedSpoilerCookie = JSON.stringify(spoilerData);
 
@@ -204,7 +215,11 @@ this.servicioService.postDatoRankingSpoiler(nuevo).subscribe((datos) => {
           currentDate.getMonth(),
           currentDate.getDate() + 1
         );
-        this.cookieService.set('peliculas', updatedSpoilerCookie, expirationDate);
+        this.cookieService.set(
+          'peliculas',
+          updatedSpoilerCookie,
+          expirationDate
+        );
       }
     } else {
       // En caso contrario, obtenemos los datos de los spoiler desde la cookie 'peliculas'
@@ -219,16 +234,28 @@ this.servicioService.postDatoRankingSpoiler(nuevo).subscribe((datos) => {
         currentDate.getMonth(),
         currentDate.getDate() + 1
       );
-      this.cookieService.set('intentos', this.intentos.toString(), expirationDate);
+      this.cookieService.set(
+        'intentos',
+        this.intentos.toString(),
+        expirationDate
+      );
 
-    // Eliminamos el spoiler actual del arreglo spoilerPeliculas si los datos son válidos
-    if (Array.isArray(spoilerData) && numero >= 0 && numero < spoilerData.length) {
-      spoilerData.splice(numero, 1);
-      const updatedSpoilerCookie = JSON.stringify(spoilerData);
+      // Eliminamos el spoiler actual del arreglo spoilerPeliculas si los datos son válidos
+      if (
+        Array.isArray(spoilerData) &&
+        numero >= 0 &&
+        numero < spoilerData.length
+      ) {
+        spoilerData.splice(numero, 1);
+        const updatedSpoilerCookie = JSON.stringify(spoilerData);
 
-      // Actualizamos la cookie 'peliculas' con los datos actualizados
-      this.cookieService.set('peliculas', updatedSpoilerCookie, expirationDate);
-    }
+        // Actualizamos la cookie 'peliculas' con los datos actualizados
+        this.cookieService.set(
+          'peliculas',
+          updatedSpoilerCookie,
+          expirationDate
+        );
+      }
 
       // Verificamos si se han agotado los intentos disponibles
       if (this.intentos <= -1) {
@@ -236,17 +263,18 @@ this.servicioService.postDatoRankingSpoiler(nuevo).subscribe((datos) => {
         const nombreuser = this.cookieService.get('session');
         const nuevo = {
           nombre: nombreuser,
-          puntos: this.puntos
+          puntos: this.puntos,
         };
 
         //Mandamos los datos al servidor
-        this.servicioService.postDatoRankingSpoiler(nuevo).subscribe((datos) => {
-          console.log("Datos enviados al servidor:", datos);
-        });
-        
-        this.router.navigate(['/eleccion2']); //Nos vamos a eleccion2
+        this.servicioService
+          .postDatoRankingSpoiler(nuevo)
+          .subscribe((datos) => {
+            console.log('Datos enviados al servidor:', datos);
+          });
 
-       }
+        this.router.navigate(['/eleccion2']); //Nos vamos a eleccion2
+      }
     }
     this.Respuesta = ''; //Restablecemos la respuesta, y cogemos otra palabra secreta para volver a jugar
     this.seleccionarPalabraSecreta();
@@ -259,13 +287,13 @@ this.servicioService.postDatoRankingSpoiler(nuevo).subscribe((datos) => {
     //Recorremos los datos de las peliculas
     for (const pelicula of this.datos) {
       // Obtenemos el nombre de la película y el spoiler como un arreglo de un solo elemento
-       const NombrePelicula = pelicula.NombrePelicula;
-       const spoilerPelicula = [pelicula.spoiler.toString()];
+      const NombrePelicula = pelicula.NombrePelicula;
+      const spoilerPelicula = [pelicula.spoiler.toString()];
 
-       //Creamos el objeto del nombre de la pelicula y el spoiler
-       const peliculaObjeto = {
+      //Creamos el objeto del nombre de la pelicula y el spoiler
+      const peliculaObjeto = {
         nombre: NombrePelicula,
-        spoiler: spoilerPelicula
+        spoiler: spoilerPelicula,
       };
 
       //Agregamos el nombre de la pelicula al objeto
@@ -278,13 +306,25 @@ this.servicioService.postDatoRankingSpoiler(nuevo).subscribe((datos) => {
       this.listaPeliculas.push(NombrePelicula);
     }
 
-//me coge solo 26 peliculas
+    //me coge solo 26 peliculas
     //Establecemos las cookies correspondientes
     const currentDate = new Date();
-    const expirationDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 1);
-    this.cookieService.set('peliculas', JSON.stringify(this.spoilerPeliculas.slice(0, 26)), expirationDate);
-    this.cookieService.set('listapeliculas', JSON.stringify(this.listaPeliculas), expirationDate);
-    this.cookieService.set('puntos', "0", expirationDate);
+    const expirationDate = new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth(),
+      currentDate.getDate() + 1
+    );
+    this.cookieService.set(
+      'peliculas',
+      JSON.stringify(this.spoilerPeliculas.slice(0, 26)),
+      expirationDate
+    );
+    this.cookieService.set(
+      'listapeliculas',
+      JSON.stringify(this.listaPeliculas),
+      expirationDate
+    );
+    this.cookieService.set('puntos', '0', expirationDate);
     location.reload();
   }
 }

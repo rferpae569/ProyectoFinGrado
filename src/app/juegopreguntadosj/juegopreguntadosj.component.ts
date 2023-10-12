@@ -12,7 +12,7 @@ import { Juegopreguntapista } from '../model/juegopreguntapista';
 @Component({
   selector: 'app-juegopreguntadosj',
   templateUrl: './juegopreguntadosj.component.html',
-  styleUrls: ['./juegopreguntadosj.component.scss']
+  styleUrls: ['./juegopreguntadosj.component.scss'],
 })
 export class JuegopreguntadosjComponent implements OnInit {
   datos!: Juegopregunta[];
@@ -27,7 +27,11 @@ export class JuegopreguntadosjComponent implements OnInit {
   session2: string = '';
   numeroAleatorio: number = 0;
   palabrasecreta: string = '';
-  preguntasPeliculas: Array<{id: number; pregunta: string; Respuesta: string[] }> = [];
+  preguntasPeliculas: Array<{
+    id: number;
+    pregunta: string;
+    Respuesta: string[];
+  }> = [];
   mostrarPista: boolean = false;
   pistaPregunta: Juegopreguntapista[] = [];
   pistas: string = '';
@@ -36,7 +40,6 @@ export class JuegopreguntadosjComponent implements OnInit {
 
   //Verificamos las cookies, creamos los intentos y establecemos el filtrado de las peliculas
   ngOnInit() {
-
     const sessionCookieExists = this.cookieService.check('session');
     const sessionCookieExists2 = this.cookieService.check('session2');
     const intentosCookieExists = this.cookieService.check('intentos');
@@ -49,7 +52,7 @@ export class JuegopreguntadosjComponent implements OnInit {
 
     if (intentosCookieExists && intentosCookieExists2) {
       this.intentos = parseInt(this.cookieService.get('intentos'), 10);
-      this.intentos2 = parseInt(this.cookieService.get('intentos2'),10);
+      this.intentos2 = parseInt(this.cookieService.get('intentos2'), 10);
     } else {
       this.intentos = 3; // Establecemos el valor inicial en 3 si no existe la cookie 'intentos'
       const currentDate = new Date();
@@ -59,9 +62,9 @@ export class JuegopreguntadosjComponent implements OnInit {
         currentDate.getDate() + 1
       );
       this.cookieService.set('intentos', '3', expirationDate); // Guardamos la cookie con el valor inicial de 3
-      
-      this.intentos2=3;
-      this.cookieService.set('intentos2','3', expirationDate);//Guardamos la cookie con el valor inicial de 3 para el segundo jugador
+
+      this.intentos2 = 3;
+      this.cookieService.set('intentos2', '3', expirationDate); //Guardamos la cookie con el valor inicial de 3 para el segundo jugador
     }
 
     const listaPeliculasCookie = this.cookieService.get('listapeliculas');
@@ -69,21 +72,24 @@ export class JuegopreguntadosjComponent implements OnInit {
     if (listaPeliculasCookie) {
       this.listaPeliculas = JSON.parse(listaPeliculasCookie);
     }
-    
+
     const puntoscookie = this.cookieService.get('puntos');
     this.puntos = parseInt(puntoscookie, 10) || 0;
     const puntoscookie2 = this.cookieService.get('puntos2');
-    this.puntos2 = parseInt(puntoscookie2,10) || 0;
+    this.puntos2 = parseInt(puntoscookie2, 10) || 0;
 
     this.servicioService.getDatosPeliculaPistaPregunta().subscribe((datos) => {
       this.pistaPregunta = datos;
-      this.cookieService.set('pistas', JSON.stringify(this.pistaPregunta.slice(0, 20))); //Esto para pistas
+      this.cookieService.set(
+        'pistas',
+        JSON.stringify(this.pistaPregunta.slice(0, 20))
+      ); //Esto para pistas
 
       this.seleccionarPalabraSecreta();
     });
 
     const turnoGuardado = localStorage.getItem('turno');
-    
+
     // Verificamos si hay un turno guardado en el almacenamiento local
     if (turnoGuardado) {
       // Si existe, asignamos el valor del turno guardado a la variable 'turnoActual'
@@ -96,7 +102,8 @@ export class JuegopreguntadosjComponent implements OnInit {
 
     // Asignamos la sesión actual basada en el turno actual
     this.session = this.turnoActual === 1 ? this.getCookieValue('session') : '';
-    this.session2 = this.turnoActual === 2 ? this.getCookieValue('session2') : '';
+    this.session2 =
+      this.turnoActual === 2 ? this.getCookieValue('session2') : '';
 
     // Alternamos el turno para el siguiente ciclo
     this.alternarTurno();
@@ -115,7 +122,8 @@ export class JuegopreguntadosjComponent implements OnInit {
         this.generarArrayPreguntasPeliculas();
         this.seleccionarPalabraSecreta();
       });
-    } else { //Si no existe, recuperamos los datos guardados en las cookies especificadas
+    } else {
+      //Si no existe, recuperamos los datos guardados en las cookies especificadas
       const preguntasPeliculasCookie = this.cookieService.get('preguntas');
       this.preguntasPeliculas = JSON.parse(preguntasPeliculasCookie);
       const numeroAleatorioCookie = this.cookieService.get('numero');
@@ -162,50 +170,50 @@ export class JuegopreguntadosjComponent implements OnInit {
 
     //Comprobamos que no queden mas peliculas
     if (!this.preguntasPeliculas || this.preguntasPeliculas.length === 0) {
-      
       //Si no quedan mas, obtenemos el nombre del usuario de la cookie "session", y creamos un objeto con el nombre y sus puntos
       const nombreuser = this.cookieService.get('session');
-const nuevo = {
-  nombre: nombreuser,
-  puntos: this.puntos
-};
+      const nuevo = {
+        nombre: nombreuser,
+        puntos: this.puntos,
+      };
 
-//Repetimos el proceso para el jugador 2
-const nombreuser2= this.cookieService.get('session2');
-const nuevo2 = {
-  nombre: nombreuser2,
-  puntos: this.puntos2
-};
+      //Repetimos el proceso para el jugador 2
+      const nombreuser2 = this.cookieService.get('session2');
+      const nuevo2 = {
+        nombre: nombreuser2,
+        puntos: this.puntos2,
+      };
 
-//Enviamos los datos del jugador 1 al servidor
-this.servicioService.postDatoRankingPregunta(nuevo).subscribe((datos) => {
-  console.log("Datos enviados al servidor:", datos);
-});
+      //Enviamos los datos del jugador 1 al servidor
+      this.servicioService.postDatoRankingPregunta(nuevo).subscribe((datos) => {
+        console.log('Datos enviados al servidor:', datos);
+      });
 
-//Enviamos los datos del jugador 2 al servidor
-this.servicioService.postDatoRankingPregunta(nuevo2).subscribe((datos) => {
-  console.log("Datos enviados al servidor:", datos);
-});
-
+      //Enviamos los datos del jugador 2 al servidor
+      this.servicioService
+        .postDatoRankingPregunta(nuevo2)
+        .subscribe((datos) => {
+          console.log('Datos enviados al servidor:', datos);
+        });
 
       this.router.navigate(['/eleccion2dosj']); //Nos vamos a "eleccions2dosj"
-      
     }
 
     //Si existen mas peliculas, continuamos con el codigo, generamos el numero aleatorio y obtenemos la palabra secreta y la pista correspondiente a traves del id
     const longitudArray = this.preguntasPeliculas.length;
     const numeroAleatorio = this.generarNumeroAleatorio(longitudArray);
     this.numeroAleatorio = numeroAleatorio;
-    
+
     const respuestaArray = this.preguntasPeliculas[numeroAleatorio].Respuesta;
-    const respuestaAleatoria = respuestaArray[this.generarNumeroAleatorio(respuestaArray.length)];
+    const respuestaAleatoria =
+      respuestaArray[this.generarNumeroAleatorio(respuestaArray.length)];
     const id = this.preguntasPeliculas[numeroAleatorio].id; //para pistas
-    const pista = this.pistaPregunta.find(item => item.id === id )?.Pista;
-  
+    const pista = this.pistaPregunta.find((item) => item.id === id)?.Pista;
+
     this.pistas = pista ? pista.toString() : '';
-   
-    this.palabrasecreta = respuestaAleatoria;    
-    
+
+    this.palabrasecreta = respuestaAleatoria;
+
     const currentDate = new Date();
     const expirationDate = new Date(
       currentDate.getFullYear(),
@@ -221,7 +229,11 @@ this.servicioService.postDatoRankingPregunta(nuevo2).subscribe((datos) => {
 
     // Establecemos las cookies 'palabra' y 'numero' con la palabra secreta y el número aleatorio, respectivamente
     this.cookieService.set('palabra', this.palabrasecreta, expirationDate);
-    this.cookieService.set('numero', numeroAleatorio.toString(), expirationDate);
+    this.cookieService.set(
+      'numero',
+      numeroAleatorio.toString(),
+      expirationDate
+    );
   }
 
   enviarRespuesta() {
@@ -233,12 +245,13 @@ this.servicioService.postDatoRankingPregunta(nuevo2).subscribe((datos) => {
     const juegoActual = this.palabrasecreta;
 
     // Obtenemos la respuesta pasada a traves del formulario
-    const inputElement = document.querySelector('#respuesta') as HTMLInputElement;
+    const inputElement = document.querySelector(
+      '#respuesta'
+    ) as HTMLInputElement;
     this.Respuesta = inputElement.value;
 
     //Verificamos si la respuesta es correcta (Ya sea en mayuscula o minuscula)
     if (this.Respuesta.toLowerCase() === juegoActual.toLowerCase()) {
-
       // Obtenemos los datos de la imagen desde la cookie 'peliculas'
       const preguntaData = JSON.parse(preguntaCookie);
       const numero = parseInt(this.cookieService.get('numero'), 10);
@@ -253,7 +266,7 @@ this.servicioService.postDatoRankingPregunta(nuevo2).subscribe((datos) => {
       const intentoscookie2 = this.cookieService.get('intentos2');
       this.intentos2 = parseInt(intentoscookie2, 10);
 
-    //Si el turno vale uno, le damos los puntos al jugador1, en caso contrario, se lo damos al jugador2
+      //Si el turno vale uno, le damos los puntos al jugador1, en caso contrario, se lo damos al jugador2
       if (this.turnoActual === 1) {
         this.puntos += 1;
       } else if (this.turnoActual === 2) {
@@ -262,17 +275,33 @@ this.servicioService.postDatoRankingPregunta(nuevo2).subscribe((datos) => {
 
       const currentDate = new Date();
       const expirationDate = new Date(
-      currentDate.getFullYear(),
-      currentDate.getMonth(),
-      currentDate.getDate() + 1
-    );
+        currentDate.getFullYear(),
+        currentDate.getMonth(),
+        currentDate.getDate() + 1
+      );
 
-    this.cookieService.set('intentos', this.intentos.toString(), expirationDate);
-    this.cookieService.set('intentos2', this.intentos2.toString(), expirationDate);
-    this.cookieService.set('puntos', this.puntos.toString(), expirationDate);
-    this.cookieService.set('puntos2', this.puntos2.toString(), expirationDate);
+      this.cookieService.set(
+        'intentos',
+        this.intentos.toString(),
+        expirationDate
+      );
+      this.cookieService.set(
+        'intentos2',
+        this.intentos2.toString(),
+        expirationDate
+      );
+      this.cookieService.set('puntos', this.puntos.toString(), expirationDate);
+      this.cookieService.set(
+        'puntos2',
+        this.puntos2.toString(),
+        expirationDate
+      );
 
-      if (Array.isArray(preguntaData) && numero >= 0 && numero < preguntaData.length) {
+      if (
+        Array.isArray(preguntaData) &&
+        numero >= 0 &&
+        numero < preguntaData.length
+      ) {
         preguntaData.splice(numero, 1);
         const updatedPreguntaCookie = JSON.stringify(preguntaData);
         const currentDate = new Date();
@@ -281,7 +310,11 @@ this.servicioService.postDatoRankingPregunta(nuevo2).subscribe((datos) => {
           currentDate.getMonth(),
           currentDate.getDate() + 1
         );
-        this.cookieService.set('preguntas', updatedPreguntaCookie, expirationDate);
+        this.cookieService.set(
+          'preguntas',
+          updatedPreguntaCookie,
+          expirationDate
+        );
       }
     } else {
       // En caso contrario, obtenemos los datos de la pregunta desde la cookie 'preguntas'
@@ -302,17 +335,33 @@ this.servicioService.postDatoRankingPregunta(nuevo2).subscribe((datos) => {
         currentDate.getDate() + 1
       );
 
-      this.cookieService.set('intentos', this.intentos.toString(), expirationDate);
-      this.cookieService.set('intentos2', this.intentos2.toString(),expirationDate);
+      this.cookieService.set(
+        'intentos',
+        this.intentos.toString(),
+        expirationDate
+      );
+      this.cookieService.set(
+        'intentos2',
+        this.intentos2.toString(),
+        expirationDate
+      );
 
-       // Eliminamos la pregunta actual del arreglo preguntasPeliculas si los datos son válidos
-    if (Array.isArray(preguntaData) && numero >= 0 && numero < preguntaData.length) {
-      preguntaData.splice(numero, 1);
-      const updatedPreguntaCookie = JSON.stringify(preguntaData);
+      // Eliminamos la pregunta actual del arreglo preguntasPeliculas si los datos son válidos
+      if (
+        Array.isArray(preguntaData) &&
+        numero >= 0 &&
+        numero < preguntaData.length
+      ) {
+        preguntaData.splice(numero, 1);
+        const updatedPreguntaCookie = JSON.stringify(preguntaData);
 
-      // Actualizamos la cookie 'preguntas' con los datos actualizados
-      this.cookieService.set('preguntas', updatedPreguntaCookie, expirationDate);
-    }
+        // Actualizamos la cookie 'preguntas' con los datos actualizados
+        this.cookieService.set(
+          'preguntas',
+          updatedPreguntaCookie,
+          expirationDate
+        );
+      }
 
       // Verificamos si se han agotado los intentos disponibles del jugador 1
       if (this.intentos <= -1) {
@@ -320,54 +369,61 @@ this.servicioService.postDatoRankingPregunta(nuevo2).subscribe((datos) => {
         const nombreuser = this.cookieService.get('session');
         const nuevo = {
           nombre: nombreuser,
-          puntos: this.puntos
+          puntos: this.puntos,
         };
 
         const nombreuser2 = this.cookieService.get('session2');
-        const nuevo2 ={
+        const nuevo2 = {
           nombre: nombreuser2,
-          puntos: this.puntos2
-        }
+          puntos: this.puntos2,
+        };
 
         //Mandamos los datos del jugador 1 al servidor
-        this.servicioService.postDatoRankingPregunta(nuevo).subscribe((datos) => {
-          console.log("Datos enviados al servidor:", datos);
-        });
+        this.servicioService
+          .postDatoRankingPregunta(nuevo)
+          .subscribe((datos) => {
+            console.log('Datos enviados al servidor:', datos);
+          });
 
         //Mandamos los datos del jugador 2 al servidor
-        this.servicioService.postDatoRankingPregunta(nuevo2).subscribe((datos) => {
-          console.log("Datos enviados al servidor:", datos);
-        });
+        this.servicioService
+          .postDatoRankingPregunta(nuevo2)
+          .subscribe((datos) => {
+            console.log('Datos enviados al servidor:', datos);
+          });
 
         this.router.navigate(['/eleccion2dosj']); //Nos vamos a "eleccion2dosj"
-
-       }else if(this.intentos2 <= -1){//En caso contrario, si se han agotado los intentos del jugador2, hacemos lo mismo. 
+      } else if (this.intentos2 <= -1) {
+        //En caso contrario, si se han agotado los intentos del jugador2, hacemos lo mismo.
         //cogemos los nombres de los jugadores, y lo almacenamos en objetos junto a sus puntos
         const nombreuser2 = this.cookieService.get('session2');
         const nombreuser = this.cookieService.get('session');
         const nuevo2 = {
           nombre: nombreuser2,
-          puntos: this.puntos2
+          puntos: this.puntos2,
         };
 
         const nuevo = {
           nombre: nombreuser,
-          puntos: this.puntos
-        }
+          puntos: this.puntos,
+        };
 
         //Mandamos los datos del jugador 2 al servidor
-        this.servicioService.postDatoRankingPregunta(nuevo2).subscribe((datos) => {
-          console.log("Datos enviados al servidor:", datos);
-        });
+        this.servicioService
+          .postDatoRankingPregunta(nuevo2)
+          .subscribe((datos) => {
+            console.log('Datos enviados al servidor:', datos);
+          });
 
         //Mandamos los datos del jugador 1 al servidor
-        this.servicioService.postDatoRankingPregunta(nuevo).subscribe((datos) => {
-          console.log("Datos enviados al servidor:", datos);
-        });
-        
-        this.router.navigate(['/eleccion2dosj']); //Nos vamos a "eleccion2dosj"
+        this.servicioService
+          .postDatoRankingPregunta(nuevo)
+          .subscribe((datos) => {
+            console.log('Datos enviados al servidor:', datos);
+          });
 
-       }
+        this.router.navigate(['/eleccion2dosj']); //Nos vamos a "eleccion2dosj"
+      }
     }
     this.mostrarPista = true; //Declaramos la variable mostrarpista como true, y restablecemos la respuesta.
     this.Respuesta = '';
@@ -388,7 +444,7 @@ this.servicioService.postDatoRankingPregunta(nuevo2).subscribe((datos) => {
       const peliculaObjeto = {
         id: idPelicula,
         pregunta: preguntaPelicula,
-        Respuesta: respuestaPelicula
+        Respuesta: respuestaPelicula,
       };
 
       //Agregamos la pregunta de la pelicula al objeto
@@ -404,12 +460,24 @@ this.servicioService.postDatoRankingPregunta(nuevo2).subscribe((datos) => {
     //Establecemos las cookies correspondientes
     //Solo me coge 20 preguntas
     const currentDate = new Date();
-    const expirationDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 1);
-    this.cookieService.set('preguntas', JSON.stringify(this.preguntasPeliculas.slice(0, 20)), expirationDate);
-    this.cookieService.set('listapeliculas', JSON.stringify(this.listaPeliculas), expirationDate);
+    const expirationDate = new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth(),
+      currentDate.getDate() + 1
+    );
+    this.cookieService.set(
+      'preguntas',
+      JSON.stringify(this.preguntasPeliculas.slice(0, 20)),
+      expirationDate
+    );
+    this.cookieService.set(
+      'listapeliculas',
+      JSON.stringify(this.listaPeliculas),
+      expirationDate
+    );
     this.cookieService.set('puntos', '0', expirationDate);
-    this.cookieService.set('puntos2', "0", expirationDate);
-    const pistacookie =this.cookieService.get('pistas'); //para pistas
+    this.cookieService.set('puntos2', '0', expirationDate);
+    const pistacookie = this.cookieService.get('pistas'); //para pistas
     this.pistaPregunta = JSON.parse(pistacookie);
   }
 }

@@ -1,43 +1,43 @@
 :host {
-    display: block;
-    background-image: url('../../assets/fondos/fin.jpg');
-    background-size: cover;
-    background-position: center;
-    width: 100%;
-    height: 100vh;
-    margin: 0;
-    padding: 0;
-    position: relative;
-    overflow-y: auto;
-  }
-  
-  h1 { //Especificamos que los h1 tengan el color blanco
-    color: white;
-  }
-  
-  //Especicamos las posiciones de los contenedores
-  .container {
-    position: relative;
-    z-index: 1;
-  }
+  display: block;
+  background-image: url("../../assets/fondos/fin.jpg");
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  overflow-y: auto;
+}
 
-  .button-container {
-    display: flex;
-    justify-content: center;
-  }
-  
-  .button-container button {
-    margin: 0 10px;
-  }
+h1 {
+  //Especificamos que los h1 tengan el color blanco
+  color: white;
+}
 
-  .graficas-contenedor {
-    display: flex;
-  }
-  
-  #grafica1,
-  #grafica2 { //Le damos un tamaño a las graficas a traves de un id
-    flex: 1;
-    margin-right: 10px;
-  }
+//Especicamos las posiciones de los contenedores
+.container {
+  position: relative;
+  z-index: 1;
+}
 
-  
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+
+.button-container button {
+  margin: 0 10px;
+}
+
+.graficas-contenedor {
+  display: flex;
+}
+
+#grafica1,
+#grafica2 {
+  //Le damos un tamaño a las graficas a traves de un id
+  flex: 1;
+  margin-right: 10px;
+}

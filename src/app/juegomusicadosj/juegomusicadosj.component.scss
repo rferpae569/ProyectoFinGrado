@@ -1,70 +1,82 @@
-.background-image { //definimos la imagen de fondo
-    background-image: url('../../assets/fondos/fondojuegos.jpg');
-    background-size: 100% 100%;
-    height: 120vh;
-    background-attachment: scroll;
-    overflow: hidden;
-  }
+.background-image {
+  //definimos la imagen de fondo
+  background-image: url("../../assets/fondos/fondojuegos.jpg");
+  background-size: 100% 100%;
+  height: 120vh;
+  background-attachment: scroll;
+  overflow: hidden;
+}
 
-  h1,label,li{ //especificamos el color blanco para las siguientes etiquetas
-    color: white;
-  }
+h1,
+label,
+li {
+  //especificamos el color blanco para las siguientes etiquetas
+  color: white;
+}
 
-  .container { //Posicionamos el div a traves de una clase
-    position: relative;
-    z-index: 1;
-    height: 100%;
-    margin-top: -50px;
-  }
+.container {
+  //Posicionamos el div a traves de una clase
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  margin-top: -50px;
+}
 
-  audio { //posicionamos el audio
-    display: block;
-    margin: 0 auto;
-  }
+audio {
+  //posicionamos el audio
+  display: block;
+  margin: 0 auto;
+}
 
-  .table-style { //Aplicamos un estilo a la tabla y la posicionamos a traves de una clase
-    background-color: white;
-    border: 1px solid black;
-    color: black;
-    text-align: center;
-    margin: 0 auto;
-    width: 80%; 
-    max-width: 800px; 
-    border-collapse: separate; 
-    border-spacing: 5px; 
-  }
-  
-  .table-style td, th { //Le damos estilo a las etiquetas que estan dentro de la tabla
-    border: 1px solid black; 
-    padding: 5px; 
-  }
+.table-style {
+  //Aplicamos un estilo a la tabla y la posicionamos a traves de una clase
+  background-color: white;
+  border: 1px solid black;
+  color: black;
+  text-align: center;
+  margin: 0 auto;
+  width: 80%;
+  max-width: 800px;
+  border-collapse: separate;
+  border-spacing: 5px;
+}
 
-  .user-section {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-  }
-  
-.text-left { //El texto del div con esta clase se pondra a la izquierda
-    text-align: left;
-  }
-  
-.text-right { //El texto del div con esta clase se pondra a la derecha
-    text-align: right;
-  }
+.table-style td,
+th {
+  //Le damos estilo a las etiquetas que estan dentro de la tabla
+  border: 1px solid black;
+  padding: 5px;
+}
 
-    /* Estilos para el contenedor de imágenes */
+.user-section {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.text-left {
+  //El texto del div con esta clase se pondra a la izquierda
+  text-align: left;
+}
+
+.text-right {
+  //El texto del div con esta clase se pondra a la derecha
+  text-align: right;
+}
+
+/* Estilos para el contenedor de imágenes */
 .image-container {
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Estilos para la imagen del icono utilizada para los intentos*/
-.img-intento, .img-intento2 {
-  width: 30px; 
-  height: 30px; 
-  filter: invert(100%); 
-  margin-right: 10px; 
-  padding: 5px; 
+.img-intento,
+.img-intento2 {
+  width: 30px;
+  height: 30px;
+  filter: invert(100%);
+  margin-right: 10px;
+  padding: 5px;
 }

@@ -1,28 +1,52 @@
 <div class="background-image">
-<div class="container">
+  <div class="container">
     <div class="row">
-        <div class="text-center">
-            <h1 class="text-center mt-5">Lamentamos que quiera marcharse</h1>
-            <form (ngSubmit)="borrarusuario()" [formGroup]="newusuarioForm" autocomplete="off">
-                <!--Creamos un formulario para borrar el registro de la base de datos-->
-                <div class="form-group">
-                    <label for="usuario">Usuario:</label>
-                    <input type="text" class="form-control" placeholder="Introduce tu usuario" name="borrusuario" formControlName="Nombre">
-                </div>
-                <div class="form-group">
-                    <label for="correo">Correo:</label>
-                    <input type="text" class="form-control" placeholder="Introduce tu correo" name="borrcorreo" formControlName="Correo">
-                </div><br>
-                <input type="submit" class="btn btn-primary" id="borrar" name="borrar" value="Borrar">
-            </form><br>
-        </div>
-        <!--Creamos varias rutas para navegar por los componentes-->
-        <div class="text-center">
-            <a routerLink="/inicio" >Inicio</a> |
-            <a routerLink="/registro" >Aún no estoy registrado</a> |
-            <a routerLink="/actualizar" >Actualizar datos</a> |
-            <a routerLink="/dosjugadores" >Modo dos jugadores</a>
-        </div>
+      <div class="text-center">
+        <h1 class="text-center mt-5">Lamentamos que quiera marcharse</h1>
+        <form
+          (ngSubmit)="borrarusuario()"
+          [formGroup]="newusuarioForm"
+          autocomplete="off"
+        >
+          <!--Creamos un formulario para borrar el registro de la base de datos-->
+          <div class="form-group">
+            <label for="usuario">Usuario:</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Introduce tu usuario"
+              name="borrusuario"
+              formControlName="Nombre"
+            />
+          </div>
+          <div class="form-group">
+            <label for="correo">Correo:</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Introduce tu correo"
+              name="borrcorreo"
+              formControlName="Correo"
+            />
+          </div>
+          <br />
+          <input
+            type="submit"
+            class="btn btn-primary"
+            id="borrar"
+            name="borrar"
+            value="Borrar"
+          />
+        </form>
+        <br />
+      </div>
+      <!--Creamos varias rutas para navegar por los componentes-->
+      <div class="text-center">
+        <a routerLink="/inicio">Inicio</a> |
+        <a routerLink="/registro">Aún no estoy registrado</a> |
+        <a routerLink="/actualizar">Actualizar datos</a> |
+        <a routerLink="/dosjugadores">Modo dos jugadores</a>
+      </div>
     </div>
-</div>
+  </div>
 </div>

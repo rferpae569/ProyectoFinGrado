@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
@@ -44,16 +43,16 @@ import { JuegospoilerdosjComponent } from './juegospoilerdosj/juegospoilerdosj.c
     JuegomusicadosjComponent,
     Eleccion2dosjComponent,
     JuegospoilerComponent,
-    JuegospoilerdosjComponent
+    JuegospoilerdosjComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     RouterModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

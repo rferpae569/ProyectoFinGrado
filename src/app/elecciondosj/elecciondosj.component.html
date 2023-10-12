@@ -1,18 +1,39 @@
 <div class="background-image">
-    <div class="container"><!--Creamos los enlaces para los distintos juegos-->
-        <div class="btn-group" role="group" aria-label="Enlaces a juegos">
-            <a class="btn btn-secondary" (click)="incrementarJugadasImagen()" routerLink="/juegoimagendosj" >Adivina la película a través de imágenes
-                (Fácil)</a>
-            <a class="btn btn-secondary" (click)="incrementarJugadasPreguntas()" routerLink="/juegopreguntadosj">Adivina la película a través de preguntas
-                (Normal)</a>
-            <a class="btn btn-secondary" (click)="incrementarJugadasMusica()" routerLink="/juegomusicadosj">Adivina la película a través de su música
-                (Difícil)</a>
-        </div>
-        <div class="btn-group enlaces-juegos2" role="group" aria-label="Enlaces a juegos 2">
-            <a class="btn btn-secondary" (click)="incrementarJugadasSpoiler()" routerLink="/juegospoilerdosj" >Adivina la película a base de spoiler
-                (Normal)</a>
-            <a class="btn btn-secondary" >Juego en proceso</a>
-            <a class="btn btn-secondary" >Juego en proceso</a>
-        </div>
+  <div class="container">
+    <!--Creamos los enlaces para los distintos juegos-->
+    <div class="btn-group" role="group" aria-label="Enlaces a juegos">
+      <a
+        class="btn btn-secondary"
+        (click)="incrementarJugadasImagen()"
+        routerLink="/juegoimagendosj"
+        >Adivina la película a través de imágenes (Fácil)</a
+      >
+      <a
+        class="btn btn-secondary"
+        (click)="incrementarJugadasPreguntas()"
+        routerLink="/juegopreguntadosj"
+        >Adivina la película a través de preguntas (Normal)</a
+      >
+      <a
+        class="btn btn-secondary"
+        (click)="incrementarJugadasMusica()"
+        routerLink="/juegomusicadosj"
+        >Adivina la película a través de su música (Difícil)</a
+      >
     </div>
+    <div
+      class="btn-group enlaces-juegos2"
+      role="group"
+      aria-label="Enlaces a juegos 2"
+    >
+      <a
+        class="btn btn-secondary"
+        (click)="incrementarJugadasSpoiler()"
+        routerLink="/juegospoilerdosj"
+        >Adivina la película a base de spoiler (Normal)</a
+      >
+      <a class="btn btn-secondary">Juego en proceso</a>
+      <a class="btn btn-secondary">Juego en proceso</a>
     </div>
+  </div>
+</div>

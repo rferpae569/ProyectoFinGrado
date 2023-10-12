@@ -1,50 +1,99 @@
 <div class="background-image">
-<div class="container">
+  <div class="container">
     <h1 class="text-center mt-5">Modo dos jugadores</h1>
     <h2 class="text-center mt-3">Por favor, inicie sesión para jugar</h2>
-    <form class="mt-5" (ngSubmit)="mandardatos()" [formGroup]="newloginForm" *ngIf="!isLoggedIn" autocomplete="off">
-        <!--Creamos el formulario para que los dos jugadores inicien sesion-->
-        <div class="form-group">
-            <label for="usuario1">Jugador 1:</label>
-            <input type="text" class="form-control" id="usuario1" name="Nombre1" required formControlName="Nombre1"
-    placeholder="Introduce el nombre del jugador 1">
+    <form
+      class="mt-5"
+      (ngSubmit)="mandardatos()"
+      [formGroup]="newloginForm"
+      *ngIf="!isLoggedIn"
+      autocomplete="off"
+    >
+      <!--Creamos el formulario para que los dos jugadores inicien sesion-->
+      <div class="form-group">
+        <label for="usuario1">Jugador 1:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="usuario1"
+          name="Nombre1"
+          required
+          formControlName="Nombre1"
+          placeholder="Introduce el nombre del jugador 1"
+        />
+      </div>
+      <div class="form-group">
+        <label for="contrasena1">Contraseña Jugador 1:</label>
+        <div class="input-group">
+          <input
+            type="password"
+            class="form-control"
+            placeholder="Introduce tu contraseña"
+            name="Passwrd1"
+            id="contrasena1"
+            required
+            formControlName="Passwrd1"
+          />
+          <div class="input-group-append">
+            <button
+              type="button"
+              class="mostrar-contrasena btn btn-primary rounded"
+              data-id-contrasena="contrasena1"
+              (click)="toggleMostrarContrasena()"
+            >
+              Mostrar
+            </button>
+          </div>
         </div>
-        <div class="form-group">
-            <label for="contrasena1">Contraseña Jugador 1:</label>
-            <div class="input-group">
-                <input type="password" class="form-control" placeholder="Introduce tu contraseña" name="Passwrd1"
-    id="contrasena1" required formControlName="Passwrd1">
-                <div class="input-group-append">
-                    <button type="button" class="mostrar-contrasena btn btn-primary rounded"
-                        data-id-contrasena="contrasena1" (click)="toggleMostrarContrasena()">Mostrar</button>
-                </div>
-            </div>
+      </div>
+      <div class="form-group">
+        <label for="usuario2">Jugador 2:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="usuario2"
+          name="Nombre2"
+          required
+          formControlName="Nombre2"
+          placeholder="Introduce el nombre del jugador 2"
+        />
+      </div>
+      <div class="form-group">
+        <label for="contrasena2">Contraseña Jugador 2:</label>
+        <div class="input-group">
+          <input
+            type="password"
+            class="form-control"
+            placeholder="Introduce tu contraseña"
+            name="Passwrd2"
+            id="contrasena2"
+            required
+            formControlName="Passwrd2"
+          />
+          <div class="input-group-append">
+            <button
+              type="button"
+              class="mostrar-contrasena btn btn-primary rounded"
+              data-id-contrasena="contrasena2"
+              (click)="toggleMostrarContrasena2()"
+            >
+              Mostrar
+            </button>
+          </div>
         </div>
-        <div class="form-group">
-            <label for="usuario2">Jugador 2:</label>
-            <input type="text" class="form-control" id="usuario2" name="Nombre2" required formControlName="Nombre2"
-    placeholder="Introduce el nombre del jugador 2">
-        </div>
-        <div class="form-group">
-            <label for="contrasena2">Contraseña Jugador 2:</label>
-            <div class="input-group">
-                <input type="password" class="form-control" placeholder="Introduce tu contraseña" name="Passwrd2"
-    id="contrasena2" required formControlName="Passwrd2">
-                <div class="input-group-append">
-                    <button type="button" class="mostrar-contrasena btn btn-primary rounded"
-                        data-id-contrasena="contrasena2" (click)="toggleMostrarContrasena2()" >Mostrar</button>
-                </div>
-            </div>
-        </div>
-        <div class="text-center"><br>
-            <button type="submit" class="btn btn-primary">Iniciar sesión</button>
-        </div>
-    </form><br>
+      </div>
+      <div class="text-center">
+        <br />
+        <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+      </div>
+    </form>
+    <br />
     <!--Creamos varias rutas para navegar por los componentes-->
     <div class="text-center">
-        <a routerLink="/registro" >Aún no estoy registrado</a> |
-        <a routerLink="/actualizar" >Actualizar datos</a> |
-        <a routerLink="/borrar">Borrar cuenta</a> |
-        <a routerLink="/inicio" >Modo un jugador</a>
+      <a routerLink="/registro">Aún no estoy registrado</a> |
+      <a routerLink="/actualizar">Actualizar datos</a> |
+      <a routerLink="/borrar">Borrar cuenta</a> |
+      <a routerLink="/inicio">Modo un jugador</a>
     </div>
+  </div>
 </div>

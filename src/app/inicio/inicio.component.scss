@@ -19,3 +19,62 @@
   a:hover{ //Cuando pasemos el raton por la etiqueta a, se pondra en color rojo
     color: red;
   }
+
+ /* Estilo para el menú (nav) */
+nav {
+  position: fixed;
+  top: 0;
+  // bottom: 0;
+  width: 250px; /* Ancho del menú */
+  background-color: white; /* Color de fondo del menú */
+  transition: transform 0.4s, opacity 0.4s;
+  transform: translateX(-250px); /* Comienza con el menú oculto */
+  opacity: 1;
+  box-shadow: 2px 0 4px rgba(0, 0, 0, 0.2); /* Sombra en el lado derecho del menú */
+  border-right: 1px solid #666; /* Borde en el lado derecho del menú */
+  border-top-right-radius: 5px; /* Bordes redondeados en la parte superior derecha */
+  border-bottom-right-radius: 5px; /* Bordes redondeados en la parte inferior derecha */
+}
+
+/* Estilo de los enlaces del menú */
+.nav-link {
+  color: black; /* Cambia el color de texto predeterminado a negro */
+  text-decoration: none;
+  padding: 10px; /* Espaciado en los enlaces */
+  transition: all 0.3s;
+}
+
+.nav-link:hover {
+  font-weight: bold; /* Hace que el texto sea negrita al pasar el ratón */
+  color: white; /* Cambia el color de texto al pasar el ratón a blanco */
+  background-color: black; /* Color de fondo al pasar el ratón por encima */
+}
+
+/* Estilo para cuando se transforma en "menú desplegable" */
+nav.active {
+  transform: translateX(0); /* Muestra el menú deslizándose desde la izquierda */
+  opacity: 1;
+}
+
+/* Estilo del botón */
+.menu-toggle {
+  font-size: 24px;
+  cursor: pointer;
+  transition: 0.4s;
+  position: fixed;
+  top: 10px;
+  left: 0;
+  z-index: 2;
+  background-color: transparent; /* Cambia el fondo del botón a transparente */
+  color: white; /* Color del texto del botón */
+  padding: 10px 15px; /* Espaciado del botón */
+  border: none;
+  border-top-right-radius: 0; /* Bordes redondeados en la parte superior derecha */
+  border-bottom-right-radius: 0; /* Bordes redondeados en la parte inferior derecha */
+}
+
+
+/* Estilo de animación para el botón al moverse con el menú */
+.menu-toggle.active {
+  left: 250px; /* Ajusta la posición del botón cuando el menú está activo */
+}
