@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./borrar.component.scss'],
 })
 export class BorrarComponent {
+  menuActive: boolean = false;
+
   newusuario: Usuarios = {
     //definimos la estructura de usuarios
     Nombre: '',
@@ -73,5 +75,10 @@ export class BorrarComponent {
   get Correo() {
     //almacenamos el correo
     return this.newusuarioForm.get('Correo');
+  }
+
+  toggleMenu() {
+    //Esta funcion sirve para cambiar el valor del menu.
+    this.menuActive = !this.menuActive;
   }
 }

@@ -1,80 +1,79 @@
-.blur { //Especificamos que ponga borroso el componente si el footer esta visible a traves de una clase
-    filter: blur(4px); 
-    pointer-events: none; 
-
-  }
-
-  .background-image { //Especificamos el fondo a traves del componente a traves de una clase
-    background-image: url('../../assets/fondos/fondologin.jpg');
-    background-size: cover; 
-    background-position: center; 
-    width: 100%;
-    height: 100vh; 
-  }
-
-  h1,label,a{ //Especificamos que las siguientes etiquetas tengan el color blanco
-    color: white;
-  }
-
-  a:hover{ //Cuando pasemos el raton por la etiqueta a, se pondra en color rojo
-    color: red;
-  }
-
- /* Estilo para el menú (nav) */
-nav {
-  position: fixed;
-  top: 0;
-  // bottom: 0;
-  width: 250px; /* Ancho del menú */
-  background-color: white; /* Color de fondo del menú */
-  transition: transform 0.4s, opacity 0.4s;
-  transform: translateX(-250px); /* Comienza con el menú oculto */
-  opacity: 1;
-  box-shadow: 2px 0 4px rgba(0, 0, 0, 0.2); /* Sombra en el lado derecho del menú */
-  border-right: 1px solid #666; /* Borde en el lado derecho del menú */
-  border-top-right-radius: 5px; /* Bordes redondeados en la parte superior derecha */
-  border-bottom-right-radius: 5px; /* Bordes redondeados en la parte inferior derecha */
+.blur {
+  //Especificamos que ponga borroso el componente si el footer esta visible a traves de una clase
+  filter: blur(4px);
+  pointer-events: none;
 }
 
-/* Estilo de los enlaces del menú */
+.background-image {
+  //Especificamos el fondo a traves del componente a traves de una clase
+  background-image: url("../../assets/fondos/fondologin.jpg");
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100vh;
+}
+
+h1,
+label,
+a {
+  //Especificamos que las siguientes etiquetas tengan el color blanco
+  color: white;
+}
+
+// Estilo para el menú (nav)
+nav {
+  position: fixed;
+  top: 0; 
+  width: 100%; 
+  background-color: white;
+  transition: transform 0.4s, opacity 0.4s;
+  transform: translateY(-100%); 
+  opacity: 1;
+  box-shadow: 2px 0 4px rgba(0, 0, 0, 0.2);
+  border-right: 1px solid #666;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+// Estilo de los enlaces del menú
 .nav-link {
-  color: black; /* Cambia el color de texto predeterminado a negro */
+  color: black;
   text-decoration: none;
-  padding: 10px; /* Espaciado en los enlaces */
+  padding: 10px;
   transition: all 0.3s;
 }
 
+// Estilo para cuando pasemos el ratón por el nav
 .nav-link:hover {
-  font-weight: bold; /* Hace que el texto sea negrita al pasar el ratón */
-  color: white; /* Cambia el color de texto al pasar el ratón a blanco */
-  background-color: black; /* Color de fondo al pasar el ratón por encima */
+  font-weight: bold;
+  color: white;
+  background-color: black;
 }
 
-/* Estilo para cuando se transforma en "menú desplegable" */
+// Estilo para cuando se transforma en "menú desplegable"
 nav.active {
-  transform: translateX(0); /* Muestra el menú deslizándose desde la izquierda */
+  transform: translateY(0); /* Cambiado de translateX a translateY para mantenerlo arriba */
   opacity: 1;
 }
 
-/* Estilo del botón */
+// Estilo del botón
 .menu-toggle {
   font-size: 24px;
   cursor: pointer;
   transition: 0.4s;
   position: fixed;
-  top: 10px;
+  top: 0px;
   left: 0;
   z-index: 2;
-  background-color: transparent; /* Cambia el fondo del botón a transparente */
-  color: white; /* Color del texto del botón */
-  padding: 10px 15px; /* Espaciado del botón */
+  background-color: transparent;
+  color: white;
+  padding: 10px 15px;
   border: none;
-  border-top-right-radius: 0; /* Bordes redondeados en la parte superior derecha */
-  border-bottom-right-radius: 0; /* Bordes redondeados en la parte inferior derecha */
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
-
-/* Estilo de animación para el botón al moverse con el menú */
+// Estilo de animación para el botón al moverse con el menú
 .menu-toggle.active {
-  left: 250px; /* Ajusta la posición del botón cuando el menú está activo */
+  top: 30px;
 }

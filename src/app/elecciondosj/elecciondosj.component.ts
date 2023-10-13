@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { ServicioService } from '../servicio.service';
 import { CookieService } from 'ngx-cookie-service';
 //Importamos los modulos
@@ -10,6 +11,7 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class ElecciondosjComponent {
   constructor(
+    private router: Router,
     private servicio: ServicioService,
     private cookieService: CookieService
   ) {}
@@ -84,5 +86,16 @@ export class ElecciondosjComponent {
     this.servicio.getIncrementarJugadasSpoiler(nuevo2).subscribe((datos) => {
       console.log('Datos enviados al servidor:', datos);
     });
+  }
+
+  irAInicio() {
+    //Esta funcion nos llevara al inicio, y borrara las cookies especificadas.
+    const cookiesExistentes = ['session', 'session2'];
+    for (const cookie of cookiesExistentes) {
+      if (this.cookieService.check(cookie)) {
+        this.cookieService.delete(cookie);
+      }
+    }
+    this.router.navigate(['']);
   }
 }

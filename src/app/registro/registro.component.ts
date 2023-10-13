@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 })
 export class RegistroComponent {
   mostrarContrasena: boolean = false; //creamos esta variable para mostrar la contraseña
+  menuActive: boolean = false;
 
   newusuario: Usuarios = {
     //definimos la estructura de usuarios
@@ -96,5 +97,10 @@ export class RegistroComponent {
     ) as HTMLInputElement;
     this.mostrarContrasena = !this.mostrarContrasena;
     contrasenaInput.type = this.mostrarContrasena ? 'text' : 'password';
+  }
+
+  toggleMenu() {
+    //Esta funcion sirve para cambiar el valor del menu.
+    this.menuActive = !this.menuActive;
   }
 }

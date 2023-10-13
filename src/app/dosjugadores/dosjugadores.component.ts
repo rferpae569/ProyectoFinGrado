@@ -19,6 +19,7 @@ export class DosjugadoresComponent implements AfterViewInit {
   isLoggedIn = false;
   entrada: boolean = false;
   fallo: boolean = false;
+  menuActive: boolean = false;
 
   newusuarioForm!: FormGroup;
   public message: string = '';
@@ -171,5 +172,10 @@ export class DosjugadoresComponent implements AfterViewInit {
     ) as HTMLInputElement;
     this.mostrarContrasena = !this.mostrarContrasena;
     contrasenaInput.type = this.mostrarContrasena ? 'text' : 'password';
+  }
+
+  toggleMenu() {
+    //Esta funcion sirve para cambiar el valor del menu.
+    this.menuActive = !this.menuActive;
   }
 }

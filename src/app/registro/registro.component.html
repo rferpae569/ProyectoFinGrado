@@ -64,13 +64,33 @@
         </form>
         <br />
       </div>
-      <!--Creamos varias rutas para navegar por los componentes-->
-      <div class="text-center">
-        <a routerLink="/inicio">Inicio</a> |
-        <a routerLink="/actualizar">Actualizar datos</a> |
-        <a routerLink="/borrar">Borrar cuenta</a> |
-        <a routerLink="/dosjugadores">Modo dos jugadores</a>
-      </div>
     </div>
+  </div>
+  <div class="nav-container">
+    <button
+      class="menu-toggle"
+      [class.active]="menuActive"
+      (click)="toggleMenu()"
+    >
+      ☰
+    </button>
+    <nav [class.active]="menuActive">
+      <ul class="nav nav d-flex flex-row">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/inicio"> Inicio </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/actualizar"> Actualizar datos </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/borrar"> Borrar cuenta </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/dosjugadores">
+            Modo dos jugadores
+          </a>
+        </li>
+      </ul>
+    </nav>
   </div>
 </div>
