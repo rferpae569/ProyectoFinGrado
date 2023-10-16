@@ -67,10 +67,15 @@ export class InicioComponent implements OnInit, AfterViewInit {
   }
 
   entradalogin() {
-    //Esta funcion sirve para mandarnos al componente eleccion si todo esta bien y se crea la cookie session.
+    // Verificar si el formulario cumple con las expresiones regulares
+    if (this.newloginForm.invalid) {
+      alert('No has completado bien los campos. El nombre de usuario debe de tener numeros, y la contraseña ocho caracteres (Letras y numeros).');
+      return;
+    }
+  
+    // Continuar con la verificación de la base de datos
     this.newlogin = this.newloginForm.value;
     this.servicioService.login(this.newlogin).subscribe((data) => {
-      console.log(data);
       if (data.length > 0) {
         const currentDate = new Date();
         const expirationDate = new Date(
@@ -83,6 +88,7 @@ export class InicioComponent implements OnInit, AfterViewInit {
         this.router.navigateByUrl('eleccion');
       } else {
         this.fallo = true;
+        alert('El usuario no se encuentra en la base de datos');
       }
     });
   }

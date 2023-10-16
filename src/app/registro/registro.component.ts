@@ -26,7 +26,6 @@ export class RegistroComponent {
   public message: string = '';
   public clasec: string = '';
   public clases: string = 'text-info';
-  resp: any;
   actuales$!: Observable<Usuarios[]>; //Declaramos la siguiente variable como un array del contenido de "Usuarios"
 
   constructor(
@@ -49,31 +48,28 @@ export class RegistroComponent {
   }
 
   entradausuario() {
-    //Esta funcion sirve para verificar e insentar en la base de datos el usuario pasado por el fomrulario
     if (this.newusuarioForm.invalid) {
       this.message = 'Por favor corrige los errores';
       this.clasec = 'text-danger';
+      alert('El usuario pasado no es valido. Asegurese de que el nombre incluye numeros, la contraseña tiene 8 caracteres e incluye numeros, y que el correo este bien escrito');
     } else {
       this.clasec = 'text-success';
       this.newusuario = this.newusuarioForm.value;
       console.log('Entrada correcta', this.newusuario);
       this.servicioService.postDato(this.newusuario).subscribe({
-        next: (resp) => {
-          this.resp = resp;
-          console.log('Respuesta del servicio:', resp);
-          // Nos vamos a "Inicio"
+        next: () => {
           this.router.navigate(['/inicio']);
         },
-        error: (err) => {
-          console.log('Error en la solicitud:', err);
+        error: () => {
+          alert('Error al insertar el usuario en la base de datos.');
         },
         complete: () => {
-          console.log('Solicitud completada');
           this.actuales$ = this.servicioService.getDatosUsuarios();
         },
       });
     }
   }
+  
 
   get Nombre() {
     //almacenamos el nombre

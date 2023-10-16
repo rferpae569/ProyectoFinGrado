@@ -26,7 +26,6 @@ export class ActualizarComponent {
   public message: string = '';
   public clasec: string = '';
   public clases: string = 'text-info';
-  resp: any;
   actuales$!: Observable<Usuarios[]>; //Declaramos la siguiente variable como un array del contenido de "Usuarios"
 
   constructor(
@@ -49,26 +48,22 @@ export class ActualizarComponent {
   }
 
   actualizarusuario() {
-    //Esta funcion sirve para actualizar los campos pasados por el formulario en la base de datos.
     if (this.newusuarioForm.invalid) {
       this.message = 'Por favor corrige los errores';
       this.clasec = 'text-danger';
+      alert('No se ha podido actualizar el usuario. Asegurese de haber puesto bien el nombre de usuario, el correo, y una contraseña adecuada (8 caracteres, letras y numeros) ');
     } else {
       this.clasec = 'text-success';
       this.newusuario = this.newusuarioForm.value;
       console.log('Entrada correcta', this.newusuario);
       this.servicioService.postActualizarDato(this.newusuario).subscribe({
-        next: (resp) => {
-          this.resp = resp;
-          console.log('Respuesta del servicio:', resp);
-          // Nos vamos a "Inicio"
+        next: () => {
           this.router.navigate(['/inicio']);
         },
-        error: (err) => {
-          console.log('Error en la solicitud:', err);
+        error: () => {
+          alert('Error al actualizar el usuario en la base de datos.');
         },
         complete: () => {
-          console.log('Solicitud completada');
           this.actuales$ = this.servicioService.getDatosUsuarios();
         },
       });

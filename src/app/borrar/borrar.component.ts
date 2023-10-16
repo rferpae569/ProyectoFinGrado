@@ -25,7 +25,6 @@ export class BorrarComponent {
   public message: string = '';
   public clasec: string = '';
   public clases: string = 'text-info';
-  resp: any;
   actuales$!: Observable<Usuarios[]>; //Declaramos la siguiente variable como un array del contenido de "Usuarios"
 
   constructor(
@@ -41,26 +40,22 @@ export class BorrarComponent {
   }
 
   borrarusuario() {
-    //Esta funcion sirve para borrar el usuario pasado por formulario
     if (this.newusuarioForm.invalid) {
       this.message = 'Por favor corrige los errores';
       this.clasec = 'text-danger';
+      alert('Los valores introducidos no son correctos. Por favor, asegurese del que el nombre de usuario y el correo son correctos.');
     } else {
       this.clasec = 'text-success';
       this.newusuario = this.newusuarioForm.value;
       console.log('Entrada correcta', this.newusuario);
       this.servicioService.postBorrarDato(this.newusuario).subscribe({
-        next: (resp) => {
-          this.resp = resp;
-          console.log('Respuesta del servicio:', resp);
-          // Nos vamos a "Inicio"
+        next: () => {
           this.router.navigate(['/inicio']);
         },
-        error: (err) => {
-          console.log('Error en la solicitud:', err);
+        error: () => {
+          alert('Error al borrar el usuario en la base de datos.');
         },
         complete: () => {
-          console.log('Solicitud completada');
           this.actuales$ = this.servicioService.getDatosUsuarios();
         },
       });

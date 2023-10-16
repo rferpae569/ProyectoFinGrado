@@ -25,7 +25,6 @@ export class DosjugadoresComponent implements AfterViewInit {
   public message: string = '';
   public clasec: string = '';
   public clases: string = 'text-info';
-  resp: any;
   actuales$!: Observable<Usuariosdos[]>; //Declaramos la siguiente variable como un array del contenido de "Usuariosdos"
   mostrarContrasena: boolean = false; //Declaramos la siguiente variable para mostrar u ocultar la contraseña
 
@@ -91,37 +90,28 @@ export class DosjugadoresComponent implements AfterViewInit {
   }
 
   entradalogin() {
-    //Esta funcion sirve para comprobar el inicio de sesion de los usuarios, crear las cookies correspondientes, y mandarlos a elecciondosj si todo es correcto
     this.newlogin = this.newloginForm.value;
-
     this.servicioService.logindos(this.newlogin).subscribe((data) => {
-      console.log(data);
-      if (data.length > 0) {
+      if (data.length === 2) {
         const currentDate = new Date();
         const expirationDate = new Date(
           currentDate.getFullYear(),
           currentDate.getMonth(),
           currentDate.getDate() + 1
         );
-
-        // Guardar el primer usuario en la cookie 'session'
+  
         this.cookieService.set('session', data[0].Nombre, expirationDate);
-
-        if (data.length > 1) {
-          // Guardar el segundo usuario en la cookie 'session2'
-          this.cookieService.set('session2', data[1].Nombre, expirationDate);
-        }
-
+        this.cookieService.set('session2', data[1].Nombre, expirationDate);
+  
         this.isLoggedIn = true;
         this.router.navigateByUrl('elecciondosj');
       } else {
-        this.fallo = true;
+        alert('Inicio de sesión fallido. Comprueba los datos ingresados.');
       }
     });
   }
-
+  
   entradausuariodos() {
-    //Esta funcion sirve comprobar los nombres pasados por el formulario
     if (this.newloginForm.invalid) {
       this.message = 'Por favor corrige los errores';
       this.clasec = 'text-danger';
@@ -130,28 +120,19 @@ export class DosjugadoresComponent implements AfterViewInit {
       const newUsuariosdos: Usuariosdos = {
         NombreUsuario1: this.newloginForm.get('Nombre1')?.value,
         NombreUsuario2: this.newloginForm.get('Nombre2')?.value,
-      };
-
-      console.log('Entrada correcta', newUsuariosdos);
-
+      };  
       this.servicioService.postDato2(newUsuariosdos).subscribe({
-        next: (resp) => {
-          this.resp = resp;
-          console.log('Respuesta del servicio:', resp);
-        },
         error: (err) => {
           console.log('Error en la solicitud:', err);
         },
         complete: () => {
-          console.log('Solicitud completada');
           this.actuales$ = this.servicioService.getDatosUsuarios2();
         },
       });
     }
   }
-
+  
   mandardatos() {
-    //En esta funcion llamamos a las funciones entradalogin y entradausuariodos
     this.entradalogin();
     this.entradausuariodos();
   }
