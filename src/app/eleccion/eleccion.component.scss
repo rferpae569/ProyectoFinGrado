@@ -12,6 +12,10 @@ a {
   color: white;
 }
 
+a:hover{
+  color: red;
+}
+
 .enlaces-juegos2 {
   //Adaptamos el div para que se asemeja al de arriba
   position: absolute;
@@ -40,3 +44,80 @@ a {
     background-color: #af1818;
   }
 }
+
+.actualizar {
+  //Aplicamos un estilo la boton y le dmaos una posicion
+  position: absolute;
+  top: 70px;
+  right: 10px;
+  z-index: 3;
+  background-color: rgb(17, 110, 196);
+  color: #fff;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  /* Estilo al pasar el ratón por encima del botón */
+  &:hover {
+    background-color: #2917ca;
+  }
+}
+
+.borrar {
+  //Aplicamos un estilo la boton y le dmaos una posicion
+  position: absolute;
+  top: 140px;
+  right: 10px;
+  z-index: 3;
+  background-color: rgb(17, 110, 196);
+  color: #fff;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  /* Estilo al pasar el ratón por encima del botón */
+  &:hover {
+    background-color: #2917ca;
+  }
+}
+
+// Estilo para el menú (nav)
+nav {
+  position: fixed;
+  top: 35%;
+  width: 100%;
+  transition: transform 0.4s, opacity 0.4s;
+  transform: translateX(100%);
+  opacity: 1;
+}
+
+// Estilo para cuando se transforma en "menú desplegable"
+nav.active {
+  transform: translateX(-10%);
+  opacity: 1;
+}
+
+// Estilo del botón
+.menu-toggle {
+  font-size: 24px;
+  cursor: pointer;
+  transition: 0.4s;
+  position: fixed;
+  top: 170px;
+  right: 0;
+  z-index: 2;
+  background-color: transparent;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+
+
+

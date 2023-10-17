@@ -60,43 +60,12 @@
       </div>
     </div>
   </div>
-  <div class="nav-container">
-    <button
-      class="menu-toggle"
-      [class.active]="menuActive"
-      (click)="toggleMenu()"
-    >
-      ☰
-    </button>
-    <nav [class.active]="menuActive">
-      <ul class="nav nav d-flex flex-row">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/registro">
-            Aún no estoy registrado
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/actualizar"> Actualizar datos </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/borrar"> Borrar cuenta </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/dosjugadores">
-            Modo dos jugadores
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </div>
   <br>
-    <!--Creamos varias rutas para navegar por los componentes-->
-<!-- <div class="text-center">
+    <!-- Creamos varias rutas para navegar por los componentes-->
+<div class="text-center">
     <a routerLink="/registro" >Aún no estoy registrado</a> |
-    <a routerLink="/actualizar" >Actualizar datos</a> |
-    <a routerLink="/borrar">Borrar cuenta</a> |
     <a routerLink="/dosjugadores" >Modo dos jugadores</a>
-</div> -->
+</div>
 </div>
 <!--Creamos un footer para mostrar el mensaje de las cookies y aceptarlas-->
 <footer class="footer fixed-bottom bg-white" *ngIf="mostrarFooter">

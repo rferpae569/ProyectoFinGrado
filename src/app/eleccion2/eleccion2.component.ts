@@ -97,14 +97,14 @@ export class Eleccion2Component implements OnInit {
       setTimeout(() => {
         const data = new google.visualization.DataTable();
         data.addColumn('string', 'nombre');
-        data.addColumn('number', 'PuntosImagen');
-        data.addColumn('number', 'PuntosPregunta');
-        data.addColumn('number', 'PuntosMusica');
-        data.addColumn('number', 'PuntosSpoiler');
+        data.addColumn('number', 'Imagen');
+        data.addColumn('number', 'Pregunta');
+        data.addColumn('number', 'Musica');
+        data.addColumn('number', 'Spoiler');
 
         const options = {
           title: 'Ranking de Puntos',
-          width: 500,
+          width: 550,
           height: 400,
         };
 

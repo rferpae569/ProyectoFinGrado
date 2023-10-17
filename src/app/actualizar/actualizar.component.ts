@@ -58,7 +58,7 @@ export class ActualizarComponent {
       console.log('Entrada correcta', this.newusuario);
       this.servicioService.postActualizarDato(this.newusuario).subscribe({
         next: () => {
-          this.router.navigate(['/inicio']);
+          this.router.navigate(['/eleccion']);
         },
         error: () => {
           alert('Error al actualizar el usuario en la base de datos.');

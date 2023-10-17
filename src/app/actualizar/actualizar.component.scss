@@ -14,65 +14,6 @@ a {
   color: white;
 }
 
-// a:hover{
-//   color: red;
-// }
-
-
-// Estilo para el menú (nav)
-nav {
-  position: fixed;
-  top: 0; 
-  width: 100%; 
-  background-color: white;
-  transition: transform 0.4s, opacity 0.4s;
-  transform: translateY(-100%); 
-  opacity: 1;
-  box-shadow: 2px 0 4px rgba(0, 0, 0, 0.2);
-  border-right: 1px solid #666;
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
-}
-
-// Estilo de los enlaces del menú
-.nav-link {
-  color: black;
-  text-decoration: none;
-  padding: 10px;
-  transition: all 0.3s;
-}
-
-// Estilo para cuando pasemos el ratón por el nav
-.nav-link:hover {
-  font-weight: bold;
-  color: white;
-  background-color: black;
-}
-
-// Estilo para cuando se transforma en "menú desplegable"
-nav.active {
-  transform: translateY(0);
-  opacity: 1;
-}
-
-// Estilo del botón
-.menu-toggle {
-  font-size: 24px;
-  cursor: pointer;
-  transition: 0.4s;
-  position: fixed;
-  top: 0px;
-  left: 0;
-  z-index: 2;
-  background-color: transparent;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-}
-
-// Estilo de animación para el botón al moverse con el menú
-.menu-toggle.active {
-  top: 30px;
+a:hover{
+  color: red;
 }

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Usuarios } from '../model/usuarios';
 import { ServicioService } from '../servicio.service';
+import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 //Importamos los modulos
@@ -29,6 +30,7 @@ export class BorrarComponent {
 
   constructor(
     private servicioService: ServicioService,
+    private cookieService: CookieService,
     private fb: FormBuilder,
     private router: Router
   ) {
@@ -75,5 +77,18 @@ export class BorrarComponent {
   toggleMenu() {
     //Esta funcion sirve para cambiar el valor del menu.
     this.menuActive = !this.menuActive;
+  }
+
+  irAInicio() {
+    //Esta funcion nos llevara al inicio, y borrara las cookies especificadas.
+    const cookiesExistentes = [
+      'session'
+    ];
+    for (const cookie of cookiesExistentes) {
+      if (this.cookieService.check(cookie)) {
+        this.cookieService.delete(cookie);
+      }
+    }
+    this.router.navigate(['']);
   }
 }

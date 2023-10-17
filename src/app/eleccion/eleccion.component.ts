@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
   providers: [ServicioService],
 })
 export class EleccionComponent {
+  menuActive: boolean = false;
+
   constructor(
     private router: Router,
     private servicio: ServicioService,
@@ -70,5 +72,10 @@ export class EleccionComponent {
       }
     }
     this.router.navigate(['']);
+  }
+
+  toggleMenu() {
+    //Esta funcion sirve para cambiar el valor del menu.
+    this.menuActive = !this.menuActive;
   }
 }
