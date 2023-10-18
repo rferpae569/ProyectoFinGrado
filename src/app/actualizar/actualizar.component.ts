@@ -51,14 +51,19 @@ export class ActualizarComponent {
     if (this.newusuarioForm.invalid) {
       this.message = 'Por favor corrige los errores';
       this.clasec = 'text-danger';
-      alert('No se ha podido actualizar el usuario. Asegurese de haber puesto bien el nombre de usuario, el correo, y una contraseña adecuada (8 caracteres, letras y numeros) ');
+      alert('No se ha podido actualizar el usuario. Asegúrese de haber puesto bien el nombre de usuario, el correo y una contraseña adecuada (8 caracteres, letras y números)');
     } else {
       this.clasec = 'text-success';
       this.newusuario = this.newusuarioForm.value;
       console.log('Entrada correcta', this.newusuario);
       this.servicioService.postActualizarDato(this.newusuario).subscribe({
         next: () => {
-          this.router.navigate(['/eleccion']);
+          // Verificar la existencia de cookies
+          if (document.cookie.includes('session') && document.cookie.includes('session2')) {
+            this.router.navigate(['/elecciondosj']);
+          } else if (document.cookie.includes('session')) {
+            this.router.navigate(['/eleccion']);
+          }
         },
         error: () => {
           alert('Error al actualizar el usuario en la base de datos.');
@@ -92,5 +97,22 @@ export class ActualizarComponent {
   toggleMenu() {
     //Esta funcion sirve para cambiar el valor del menu.
     this.menuActive = !this.menuActive;
+  }
+
+  //Dependiendo del numero de sesiones que haya, ira a un sitio o a otro al pulsar en el enlace de juegos.
+  redirigirJuegos() {
+    if (document.cookie.includes('session') && document.cookie.includes('session2')) {
+      this.router.navigate(['/elecciondosj']);
+    } else if (document.cookie.includes('session')) {
+      this.router.navigate(['/eleccion']);
+    }
+  }
+
+  //Esta funcion hara que la etiqueta a cmabie de color al pasar el raton
+  cambiarColor(nuevoColor: string) {
+    const linkElement = document.querySelector('a');
+    if (linkElement) {
+      linkElement.style.color = nuevoColor;
+    }
   }
 }

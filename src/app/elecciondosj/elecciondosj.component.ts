@@ -10,6 +10,8 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./elecciondosj.component.scss'],
 })
 export class ElecciondosjComponent {
+  menuActive: boolean = false;
+
   constructor(
     private router: Router,
     private servicio: ServicioService,
@@ -97,5 +99,10 @@ export class ElecciondosjComponent {
       }
     }
     this.router.navigate(['']);
+  }
+
+  toggleMenu() {
+    //Esta funcion sirve para cambiar el valor del menu.
+    this.menuActive = !this.menuActive;
   }
 }

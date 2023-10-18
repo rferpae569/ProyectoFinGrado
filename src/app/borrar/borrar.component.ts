@@ -82,7 +82,8 @@ export class BorrarComponent {
   irAInicio() {
     //Esta funcion nos llevara al inicio, y borrara las cookies especificadas.
     const cookiesExistentes = [
-      'session'
+      'session',
+      'session2'
     ];
     for (const cookie of cookiesExistentes) {
       if (this.cookieService.check(cookie)) {
@@ -90,5 +91,22 @@ export class BorrarComponent {
       }
     }
     this.router.navigate(['']);
+  }
+
+  //Dependiendo del numero de sesiones que haya, ira a un sitio o a otro al pulsar en el enlace de juegos.
+  redirigirJuegos() {
+    if (document.cookie.includes('session') && document.cookie.includes('session2')) {
+      this.router.navigate(['/elecciondosj']);
+    } else if (document.cookie.includes('session')) {
+      this.router.navigate(['/eleccion']);
+    }
+  }
+
+  //Esta funcion hara que la etiqueta a cmabie de color al pasar el raton
+  cambiarColor(nuevoColor: string) {
+    const linkElement = document.querySelector('a');
+    if (linkElement) {
+      linkElement.style.color = nuevoColor;
+    }
   }
 }
