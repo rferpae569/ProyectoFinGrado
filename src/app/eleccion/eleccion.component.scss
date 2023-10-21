@@ -118,6 +118,13 @@ nav.active {
   border-bottom-right-radius: 0;
 }
 
+//Response para la imagen de fondo
+@media (max-width: 1200px) {
+  .background-image {
+    background-size: 100% 100%;
+  }
+}
+
 
 
 

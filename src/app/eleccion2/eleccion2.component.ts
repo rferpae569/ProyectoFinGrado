@@ -87,6 +87,8 @@ export class Eleccion2Component implements OnInit {
       return;
     }
 
+    const isMobile = window.innerWidth <= 1200; // Define un punto de corte para dispositivos móviles
+
     if (this.mostrarGrafica) {
       // Si se está cerrando la gráfica, ocultarla
       const grafica1 = document.getElementById('grafica1');
@@ -104,8 +106,8 @@ export class Eleccion2Component implements OnInit {
 
         const options = {
           title: 'Ranking de Puntos',
-          width: 550,
-          height: 400,
+          width: isMobile ? 350 : 550, // Ancho ajustado para móviles o no
+          height: isMobile ? 300 : 400, // Alto ajustado para móviles o no
         };
 
         const chart = new google.visualization.BarChart(
@@ -143,6 +145,8 @@ export class Eleccion2Component implements OnInit {
     if (!this.googleChartsLoaded) {
       return;
     }
+
+    const isMobile = window.innerWidth <= 1200; // Define un punto de corte para dispositivos móviles
 
     if (this.mostrarGrafica2) {
       // Si se está cerrando la gráfica, ocultarla
@@ -186,8 +190,8 @@ export class Eleccion2Component implements OnInit {
 
           const options = {
             title: 'Porcentaje Veces jugadas',
-            width: 500,
-            height: 400,
+            width: isMobile ? 350 : 550, // Ancho ajustado para móviles o no
+            height: isMobile ? 300 : 400, // Alto ajustado para móviles o no
             is3D: true,
             pieSliceText: 'percentage',
           };

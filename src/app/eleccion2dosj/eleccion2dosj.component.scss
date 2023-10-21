@@ -39,3 +39,25 @@ h1 {
   flex: 1;
   margin-right: 10px; /* Ajusta el margen según tus necesidades */
 }
+
+//Response para la imagen de fondo
+@media (max-width: 1200px) {
+  :host {
+    background-size: 100% 100%;
+  }
+}
+
+// Response para los gráficos
+@media (max-width: 1200px) {
+  .graficas-contenedor {
+    flex-direction: column; // Cambiamos la dirección de flex a columna
+  }
+
+  #grafica1,
+  #grafica2 {
+    margin-right: 0; // Eliminamos el margen en pantallas más pequeñas
+    margin-bottom: 10px; // Agregamos un margen inferior para separar los gráficos
+  }
+}
+
+

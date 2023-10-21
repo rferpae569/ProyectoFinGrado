@@ -17,3 +17,10 @@ a {
 a:hover{
   color: red;
 }
+
+//Response para la imagen de fondo
+@media (max-width: 1200px) {
+  .background-image {
+    background-size: 100% 100%;
+  }
+}
