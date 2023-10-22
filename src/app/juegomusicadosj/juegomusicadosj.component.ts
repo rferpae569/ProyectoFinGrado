@@ -512,4 +512,8 @@ export class JuegomusicadosjComponent {
     const pistacookie = this.cookieService.get('pistas'); //para pistas
     this.pistaMusica = JSON.parse(pistacookie);
   }
+
+  seleccionarTitulo(event: any) {
+    this.filtroTituloControl.setValue(event.target.value); // Establece el valor del input
+  }
 }

@@ -327,4 +327,8 @@ export class JuegospoilerComponent {
     this.cookieService.set('puntos', '0', expirationDate);
     location.reload();
   }
+
+  seleccionarTitulo(event: any) {
+    this.filtroTituloControl.setValue(event.target.value); // Establece el valor del input
+  }
 }

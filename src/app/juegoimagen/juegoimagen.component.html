@@ -23,12 +23,6 @@
         />
         <!--Cogemos la imagen de la base de datos-->
         <form autocomplete="off" class="mt-4" ngForm>
-          <!--Creamos un formulario para que el usuario pueda responder-->
-          <div id="titulopelicula">
-            <ul>
-              <li *ngFor="let titulo of titulosCoincidentes">{{ titulo }}</li>
-            </ul>
-          </div>
           <div class="form-group colorajax">
             <label for="respuesta">Introduce la respuesta</label>
             <input
@@ -39,6 +33,11 @@
               name="respuesta"
               [formControl]="filtroTituloControl"
             />
+            <label for="peliculaSelect">Titulos coincidentes</label>
+            <select id="peliculaSelect" class="form-control" name="peliculaSelect" [disabled]="!titulosCoincidentes.length" (change)="seleccionarTitulo($event)" size="5">
+              <option value="" disabled>Selecciona la pelicula automáticamente</option>
+              <option *ngFor="let titulo of titulosCoincidentes" [value]="titulo">{{ titulo }}</option>
+            </select>
           </div>
           <div class="text-center">
             <br />

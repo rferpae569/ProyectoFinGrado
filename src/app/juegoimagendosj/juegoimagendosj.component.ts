@@ -461,4 +461,8 @@ export class JuegoimagendosjComponent implements OnInit {
     this.cookieService.set('puntos2', '0', expirationDate);
     location.reload();
   }
+
+  seleccionarTitulo(event: any) {
+    this.filtroTituloControl.setValue(event.target.value); // Establece el valor del input
+  }
 }

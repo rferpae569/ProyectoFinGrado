@@ -26,6 +26,7 @@ export class JuegoimagenComponent implements OnInit {
   nombresPeliculas: Array<{ nombre: string; imagenes: string[] }> = [];
   titulosCoincidentes: string[] = [];
   filtroTituloControl = new FormControl();
+  selectedTitulo: string = ''; // Declaración de la variable
   //Creamos las variables correspondientes
 
   //Verificamos las cookies, creamos los intentos y establecemos el filtrado de las peliculas
@@ -324,5 +325,9 @@ export class JuegoimagenComponent implements OnInit {
     );
     this.cookieService.set('puntos', '0', expirationDate);
     location.reload();
+  }
+
+  seleccionarTitulo(event: any) {
+    this.filtroTituloControl.setValue(event.target.value); // Establece el valor del input
   }
 }

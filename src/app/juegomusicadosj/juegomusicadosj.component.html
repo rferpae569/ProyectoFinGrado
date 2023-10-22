@@ -77,11 +77,6 @@
         <!--Añadimos el boton para mostrar la pista al hacer click en el con javascript-->
 
         <form autocomplete="off" class="mt-4" ngForm>
-          <div id="titulopelicula">
-            <ul>
-              <li *ngFor="let titulo of titulosCoincidentes">{{ titulo }}</li>
-            </ul>
-          </div>
           <!--Creamos un formulario para que el usuario pueda responder-->
           <div class="form-group colorajax">
             <label for="respuesta">Introduce la respuesta</label>
@@ -93,6 +88,11 @@
               name="respuesta"
               [formControl]="filtroTituloControl"
             />
+            <label for="peliculaSelect">Titulos coincidentes</label>
+            <select id="peliculaSelect" class="form-control" name="peliculaSelect" [disabled]="!titulosCoincidentes.length" (change)="seleccionarTitulo($event)" size="5">
+              <option value="" disabled>Selecciona la pelicula automáticamente</option>
+              <option *ngFor="let titulo of titulosCoincidentes" [value]="titulo">{{ titulo }}</option>
+            </select>
           </div>
           <div class="text-center">
             <br />

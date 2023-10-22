@@ -377,4 +377,8 @@ export class JuegomusicaComponent implements OnInit {
     this.pistaMusica = JSON.parse(pistacookie);
     location.reload();
   }
+
+  seleccionarTitulo(event: any) {
+    this.filtroTituloControl.setValue(event.target.value); // Establece el valor del input
+  }
 }
