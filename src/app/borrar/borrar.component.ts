@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Usuarios } from '../model/usuarios';
 import { ServicioService } from '../servicio.service';
@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
   templateUrl: './borrar.component.html',
   styleUrls: ['./borrar.component.scss'],
 })
-export class BorrarComponent {
+export class BorrarComponent implements OnInit {
   menuActive: boolean = false;
 
   newusuario: Usuarios = {
@@ -39,6 +39,20 @@ export class BorrarComponent {
       Nombre: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9]+$/)]],
       Correo: ['', [Validators.required, Validators.email]],
     });
+  }
+
+  ngOnInit() {
+    const sessionCookie = this.getCookie("session");
+    if (sessionCookie) {
+      this.newusuarioForm.get('Nombre')?.setValue(sessionCookie);
+    }
+  }
+
+  getCookie(name: string): string {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop()?.split(';').shift() || '';
+    return '';
   }
 
   borrarusuario() {

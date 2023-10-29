@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Usuarios } from '../model/usuarios';
 import { ServicioService } from '../servicio.service';
@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   templateUrl: './actualizar.component.html',
   styleUrls: ['./actualizar.component.scss'],
 })
-export class ActualizarComponent {
+export class ActualizarComponent implements OnInit {
   mostrarContrasena: boolean = false; //creamos esta variable para mostrar la contraseña
   menuActive: boolean = false;
 
@@ -45,6 +45,20 @@ export class ActualizarComponent {
       ],
       Correo: ['', [Validators.required, Validators.email]],
     });
+  }
+
+  ngOnInit() {
+    const sessionCookie = this.getCookie("session");
+    if (sessionCookie) {
+      this.newusuarioForm.get('Nombre')?.setValue(sessionCookie);
+    }
+  }
+
+  getCookie(name: string): string {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop()?.split(';').shift() || '';
+    return '';
   }
 
   actualizarusuario() {

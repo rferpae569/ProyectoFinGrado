@@ -12,13 +12,13 @@ Ejecuta `ng serve` para iniciar un servidor de desarrollo. Navega a `http://loca
 
 Este repositorio almacena un proyecto realizado en Angular en el que se puede jugar a varios juegos relacionados con peliculas.
 
-La primera vez que se meta el usuario, se encontrara con el contenido del componente inicio. En el, tendra que aceptar el mensaje de las cookies, y luego, debera de iniciar sesion para poder acceder a los distintos juegos. EN caso de que no este registrado en la base de datos, debera de crearse una cuenta dandole al enlace de "Aun no estoy registrado" que lo llevara al componente "Registro" donde se le mostrara un formulario para registrarse. Si el suuario desea hacer otra operacion (Actualizar, borrar, etc) debera de darle a los enlaces que lo llevaran al componente correspondiente.
+La primera vez que se meta el usuario, se encontrara con el contenido del componente inicio. En el, tendra que aceptar el mensaje de las cookies, y luego, debera de iniciar sesion para poder acceder a los distintos juegos. En caso de que no este registrado en la base de datos, debera de crearse una cuenta dandole al enlace de "Aun no estoy registrado" que lo llevara al componente "Registro" donde se le mostrara un formulario para registrarse.
 
-Cuando inicie sesion, el usuario sera llevado al componente "eleccion" donde podra elegir uno de estos tres juegos.
+Cuando inicie sesion, el usuario sera llevado al componente "eleccion" donde podra cerrar sesion, actualizar sus datos, borrarse la cuenta, y jugar a uno de estos cuatro juegos:
 
 ## Lista de juegos: 
-- Juego de las Imagenes (Facil)
-- Juego de las Preguntas (Normal)
+- Juego de las imagenes (Facil)
+- Juego de las preguntas (Normal)
 - Juego de la musica (Dificil)
 - Juego del spoiler (Normal)
 
