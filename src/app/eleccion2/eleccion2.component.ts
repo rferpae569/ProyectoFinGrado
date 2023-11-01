@@ -28,6 +28,12 @@ export class Eleccion2Component implements OnInit {
     private cookieService: CookieService,
     private servicioService: ServicioService
   ) {
+    // Verificamos si la cookie 'session' existe al acceder al componente
+    if (!this.cookieService.check('session')) {
+      // Si la cookie no existe, redirigimos al componente 'inicio'
+      this.router.navigate(['inicio']);
+    }
+    
     servicioService.getDatosRanking().subscribe((datos) => {
       this.datos = datos;
     });

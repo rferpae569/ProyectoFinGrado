@@ -114,6 +114,12 @@ export class JuegospoilerdosjComponent {
     private cookieService: CookieService,
     private router: Router
   ) {
+    // Verificamos si la cookie 'session' y 'session2 existen al acceder al componente
+    if (!this.cookieService.check('session' && 'session2')) {
+      // Si las cookies no existe, redirigimos al componente 'dosjugadores'
+      this.router.navigate(['dosjugadores']);
+    }
+
     // Verificamos si existe la cookie 'peliculas', y si no existe, obtenemos los datos
     const sessionCookieExists = this.cookieService.check('peliculas');
     if (!sessionCookieExists) {

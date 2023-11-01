@@ -39,7 +39,16 @@
             value="Borrar"
             (click)="borrarusuario()"
             (click)="irAInicio()"
+            style="margin-right: 20px"
           />
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="toggleCookieValue()"
+            *ngIf="sessionCookie2"
+          >
+            Cambiar Usuario
+          </button>
         </form>
         <br />
       </div>

@@ -59,16 +59,32 @@
             class="btn btn-primary"
             id="actualizar"
             name="actualizar"
+            style="margin-right: 20px"
           >
             Actualizar
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="toggleCookieValue()"
+            *ngIf="sessionCookie2"
+          >
+            Cambiar Usuario
           </button>
         </div>
         <br />
       </form>
     </div>
     <div class="text-center">
-      <a (click)="redirigirJuegos()" style="cursor: pointer; color: white;" (mouseover)="cambiarColor('red')" (mouseout)="cambiarColor('white')">Juegos</a> |
+      <a
+        (click)="redirigirJuegos()"
+        style="cursor: pointer; color: white"
+        (mouseover)="cambiarColor('red')"
+        (mouseout)="cambiarColor('white')"
+        >Juegos</a
+      >
+      |
       <a routerLink="/borrar">Borrar cuenta</a>
-  </div>
+    </div>
   </div>
 </div>

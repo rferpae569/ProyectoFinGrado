@@ -16,7 +16,13 @@ export class ElecciondosjComponent {
     private router: Router,
     private servicio: ServicioService,
     private cookieService: CookieService
-  ) {}
+  ) {
+    // Verificamos si la cookie 'session' y 'session2 existen al acceder al componente
+    if (!this.cookieService.check('session' && 'session2')) {
+      // Si las cookies no existe, redirigimos al componente 'dosjugadores'
+      this.router.navigate(['dosjugadores']);
+    }
+  }
 
   incrementarJugadasImagen() {
     //Esta funcion sirve para incrementar el numero de jugadas de los usuarios que han iniciado sesion en el juego de las imagenes

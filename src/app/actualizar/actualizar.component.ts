@@ -4,6 +4,7 @@ import { Usuarios } from '../model/usuarios';
 import { ServicioService } from '../servicio.service';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 //Importamos los modulos
 
 @Component({
@@ -14,6 +15,8 @@ import { Router } from '@angular/router';
 export class ActualizarComponent implements OnInit {
   mostrarContrasena: boolean = false; //creamos esta variable para mostrar la contraseña
   menuActive: boolean = false;
+  sessionCookie: string | undefined;
+  sessionCookie2: string | undefined;
 
   newusuario: Usuarios = {
     //definimos la estructura de usuarios
@@ -31,7 +34,8 @@ export class ActualizarComponent implements OnInit {
   constructor(
     private servicioService: ServicioService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private cookieService: CookieService
   ) {
     this.newusuarioForm = this.fb.group({
       //Añadimos una expresion regular para los campos pasados por formulario
@@ -45,12 +49,24 @@ export class ActualizarComponent implements OnInit {
       ],
       Correo: ['', [Validators.required, Validators.email]],
     });
+
+    // Verificamos si la cookie 'session' existe al acceder al componente
+    if (!this.cookieService.check('session')) {
+      // Si la cookie no existe, redirigimos al componente 'inicio'
+      this.router.navigate(['inicio']);
+    }
   }
 
   ngOnInit() {
-    const sessionCookie = this.getCookie("session");
+    const sessionCookie = this.getCookie('session');
     if (sessionCookie) {
-      this.newusuarioForm.get('Nombre')?.setValue(sessionCookie);
+      this.sessionCookie = sessionCookie; // Asigna el valor correctamente
+      this.newusuarioForm.get('Nombre')?.setValue(this.sessionCookie);
+    }
+  
+    const sessionCookie2 = this.getCookie('session2');
+    if (sessionCookie2) {
+      this.sessionCookie2 = sessionCookie2; // Asigna el valor correctamente
     }
   }
 
@@ -61,11 +77,21 @@ export class ActualizarComponent implements OnInit {
     return '';
   }
 
+  toggleCookieValue() {
+    if (this.newusuarioForm.get('Nombre')?.value === this.sessionCookie) {
+      this.newusuarioForm.get('Nombre')?.setValue(this.sessionCookie2);
+    } else {
+      this.newusuarioForm.get('Nombre')?.setValue(this.sessionCookie);
+    }
+  }
+
   actualizarusuario() {
     if (this.newusuarioForm.invalid) {
       this.message = 'Por favor corrige los errores';
       this.clasec = 'text-danger';
-      alert('No se ha podido actualizar el usuario. Asegúrese de haber puesto bien el nombre de usuario, el correo y una contraseña adecuada (8 caracteres, letras y números)');
+      alert(
+        'No se ha podido actualizar el usuario. Asegúrese de haber puesto bien el nombre de usuario, el correo y una contraseña adecuada (8 caracteres, letras y números)'
+      );
     } else {
       this.clasec = 'text-success';
       this.newusuario = this.newusuarioForm.value;
@@ -73,7 +99,10 @@ export class ActualizarComponent implements OnInit {
       this.servicioService.postActualizarDato(this.newusuario).subscribe({
         next: () => {
           // Verificar la existencia de cookies
-          if (document.cookie.includes('session') && document.cookie.includes('session2')) {
+          if (
+            document.cookie.includes('session') &&
+            document.cookie.includes('session2')
+          ) {
             this.router.navigate(['/elecciondosj']);
           } else if (document.cookie.includes('session')) {
             this.router.navigate(['/eleccion']);
@@ -115,7 +144,10 @@ export class ActualizarComponent implements OnInit {
 
   //Dependiendo del numero de sesiones que haya, ira a un sitio o a otro al pulsar en el enlace de juegos.
   redirigirJuegos() {
-    if (document.cookie.includes('session') && document.cookie.includes('session2')) {
+    if (
+      document.cookie.includes('session') &&
+      document.cookie.includes('session2')
+    ) {
       this.router.navigate(['/elecciondosj']);
     } else if (document.cookie.includes('session')) {
       this.router.navigate(['/eleccion']);

@@ -14,6 +14,8 @@ import { Router } from '@angular/router';
 })
 export class BorrarComponent implements OnInit {
   menuActive: boolean = false;
+  sessionCookie: string | undefined;
+  sessionCookie2: string | undefined;
 
   newusuario: Usuarios = {
     //definimos la estructura de usuarios
@@ -39,12 +41,24 @@ export class BorrarComponent implements OnInit {
       Nombre: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9]+$/)]],
       Correo: ['', [Validators.required, Validators.email]],
     });
+
+    // Verificamos si la cookie 'session' existe al acceder al componente
+    if (!this.cookieService.check('session')) {
+      // Si la cookie no existe, redirigimos al componente 'inicio'
+      this.router.navigate(['inicio']);
+    }
   }
 
   ngOnInit() {
-    const sessionCookie = this.getCookie("session");
+    const sessionCookie = this.getCookie('session');
     if (sessionCookie) {
-      this.newusuarioForm.get('Nombre')?.setValue(sessionCookie);
+      this.sessionCookie = sessionCookie; // Asigna el valor correctamente
+      this.newusuarioForm.get('Nombre')?.setValue(this.sessionCookie);
+    }
+  
+    const sessionCookie2 = this.getCookie('session2');
+    if (sessionCookie2) {
+      this.sessionCookie2 = sessionCookie2; // Asigna el valor correctamente
     }
   }
 
@@ -55,11 +69,21 @@ export class BorrarComponent implements OnInit {
     return '';
   }
 
+  toggleCookieValue() {
+    if (this.newusuarioForm.get('Nombre')?.value === this.sessionCookie) {
+      this.newusuarioForm.get('Nombre')?.setValue(this.sessionCookie2);
+    } else {
+      this.newusuarioForm.get('Nombre')?.setValue(this.sessionCookie);
+    }
+  }
+
   borrarusuario() {
     if (this.newusuarioForm.invalid) {
       this.message = 'Por favor corrige los errores';
       this.clasec = 'text-danger';
-      alert('Los valores introducidos no son correctos. Por favor, asegurese del que el nombre de usuario y el correo son correctos.');
+      alert(
+        'Los valores introducidos no son correctos. Por favor, asegurese del que el nombre de usuario y el correo son correctos.'
+      );
     } else {
       this.clasec = 'text-success';
       this.newusuario = this.newusuarioForm.value;
@@ -95,10 +119,7 @@ export class BorrarComponent implements OnInit {
 
   irAInicio() {
     //Esta funcion nos llevara al inicio, y borrara las cookies especificadas.
-    const cookiesExistentes = [
-      'session',
-      'session2'
-    ];
+    const cookiesExistentes = ['session', 'session2'];
     for (const cookie of cookiesExistentes) {
       if (this.cookieService.check(cookie)) {
         this.cookieService.delete(cookie);
@@ -109,7 +130,10 @@ export class BorrarComponent implements OnInit {
 
   //Dependiendo del numero de sesiones que haya, ira a un sitio o a otro al pulsar en el enlace de juegos.
   redirigirJuegos() {
-    if (document.cookie.includes('session') && document.cookie.includes('session2')) {
+    if (
+      document.cookie.includes('session') &&
+      document.cookie.includes('session2')
+    ) {
       this.router.navigate(['/elecciondosj']);
     } else if (document.cookie.includes('session')) {
       this.router.navigate(['/eleccion']);

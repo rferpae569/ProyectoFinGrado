@@ -30,6 +30,12 @@ export class Eleccion2dosjComponent implements OnInit {
     private cookieService: CookieService,
     private servicioService: ServicioService
   ) {
+    // Verificamos si la cookie 'session' y 'session2 existen al acceder al componente
+    if (!this.cookieService.check('session' && 'session2')) {
+      // Si las cookies no existe, redirigimos al componente 'dosjugadores'
+      this.router.navigate(['dosjugadores']);
+    }
+
     servicioService.getDatosRanking().subscribe((datos) => {
       this.datos = datos;
     });
@@ -124,7 +130,7 @@ export class Eleccion2dosjComponent implements OnInit {
 
         const options = {
           title: 'Ranking de Puntos',
-           width: isMobile ? 350 : 550, // Ancho ajustado para móviles o no
+          width: isMobile ? 350 : 550, // Ancho ajustado para móviles o no
           height: isMobile ? 300 : 400, // Alto ajustado para móviles o no
         };
 

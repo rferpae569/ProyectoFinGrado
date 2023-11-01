@@ -81,6 +81,12 @@ export class JuegopreguntaComponent implements OnInit {
     private cookieService: CookieService,
     private router: Router
   ) {
+    // Verificamos si la cookie 'session' existe al acceder al componente
+    if (!this.cookieService.check('session')) {
+      // Si la cookie no existe, redirigimos al componente 'inicio'
+      this.router.navigate(['inicio']);
+    }
+
     // Verificamos si existe la cookie 'preguntas', y si no existe, obtenemos los datos
     const sessionCookieExists = this.cookieService.check('preguntas');
     if (!sessionCookieExists) {

@@ -17,7 +17,13 @@ export class EleccionComponent {
     private router: Router,
     private servicio: ServicioService,
     private cookieService: CookieService
-  ) {}
+  ) {
+    // Verificamos si la cookie 'session' existe al acceder al componente
+    if (!this.cookieService.check('session')) {
+      // Si la cookie no existe, redirigimos al componente 'inicio'
+      this.router.navigate(['inicio']);
+    }
+  }
 
   incrementarJugadasImagen() {
     //Esta funcion sirve para incrementar el numero de jugadas del usuario que ha iniciado sesion en el juego de las imagenes
