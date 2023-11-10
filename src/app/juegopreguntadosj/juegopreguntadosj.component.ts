@@ -22,7 +22,7 @@ export class JuegopreguntadosjComponent implements OnInit {
   puntos: number = 0;
   puntos2: number = 0;
   listaPeliculas: string[] = [];
-  peliculaControl = new FormControl();
+  RespuestaControl = new FormControl();
   session: string = '';
   session2: string = '';
   numeroAleatorio: number = 0;
@@ -485,5 +485,15 @@ export class JuegopreguntadosjComponent implements OnInit {
     this.cookieService.set('puntos2', '0', expirationDate);
     const pistacookie = this.cookieService.get('pistas'); //para pistas
     this.pistaPregunta = JSON.parse(pistacookie);
+  }
+
+  // Método para borrar el texto
+  borrarTexto() {
+    this.RespuestaControl.setValue('');
+  }
+
+  // Al pulsar el boton, iremos a eleccion2dosj por si queremos temrinar la partida antes de tiempo.
+  irAEleccion2() {
+    this.router.navigate(['/eleccion2dosj']);
   }
 }

@@ -111,7 +111,7 @@ export class JuegomusicaComponent implements OnInit {
       // Si la cookie no existe, redirigimos al componente 'inicio'
       this.router.navigate(['inicio']);
     }
-    
+
     // Verificamos si existe la cookie 'peliculas', y si no existe, obtenemos los datos
     const sessionCookieExists = this.cookieService.check('peliculas');
     if (!sessionCookieExists) {
@@ -386,5 +386,15 @@ export class JuegomusicaComponent implements OnInit {
 
   seleccionarTitulo(event: any) {
     this.filtroTituloControl.setValue(event.target.value); // Establece el valor del input
+  }
+
+  // Método para borrar el texto
+  borrarTexto() {
+    this.filtroTituloControl.setValue('');
+  }
+
+  // Al pulsar el boton, iremos a eleccion2 por si queremos temrinar la partida antes de tiempo.
+  irAEleccion2() {
+    this.router.navigate(['/eleccion2']);
   }
 }

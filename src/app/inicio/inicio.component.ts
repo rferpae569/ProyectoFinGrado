@@ -1,10 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ElementRef,
-  ViewChild,
-  AfterViewInit,
-} from '@angular/core';
+import {Component, OnInit, ElementRef, ViewChild, AfterViewInit,} from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Usuarios } from '../model/usuarios';
@@ -69,10 +63,12 @@ export class InicioComponent implements OnInit, AfterViewInit {
   entradalogin() {
     // Verificar si el formulario cumple con las expresiones regulares
     if (this.newloginForm.invalid) {
-      alert('No has completado bien los campos. El nombre de usuario debe de tener numeros, y la contraseña ocho caracteres (Letras y numeros).');
+      alert(
+        'No has completado bien los campos. El nombre de usuario debe de tener numeros, y la contraseña ocho caracteres (Letras y numeros).'
+      );
       return;
     }
-  
+
     // Continuar con la verificación de la base de datos
     this.newlogin = this.newloginForm.value;
     this.servicioService.login(this.newlogin).subscribe((data) => {

@@ -99,10 +99,10 @@ export class DosjugadoresComponent implements AfterViewInit {
           currentDate.getMonth(),
           currentDate.getDate() + 1
         );
-  
+
         this.cookieService.set('session', data[0].Nombre, expirationDate);
         this.cookieService.set('session2', data[1].Nombre, expirationDate);
-  
+
         this.isLoggedIn = true;
         this.router.navigateByUrl('elecciondosj');
       } else {
@@ -110,7 +110,7 @@ export class DosjugadoresComponent implements AfterViewInit {
       }
     });
   }
-  
+
   entradausuariodos() {
     if (this.newloginForm.invalid) {
       this.message = 'Por favor corrige los errores';
@@ -120,7 +120,7 @@ export class DosjugadoresComponent implements AfterViewInit {
       const newUsuariosdos: Usuariosdos = {
         NombreUsuario1: this.newloginForm.get('Nombre1')?.value,
         NombreUsuario2: this.newloginForm.get('Nombre2')?.value,
-      };  
+      };
       this.servicioService.postDato2(newUsuariosdos).subscribe({
         error: (err) => {
           console.log('Error en la solicitud:', err);
@@ -131,7 +131,7 @@ export class DosjugadoresComponent implements AfterViewInit {
       });
     }
   }
-  
+
   mandardatos() {
     this.entradalogin();
     this.entradausuariodos();

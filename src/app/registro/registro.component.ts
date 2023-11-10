@@ -51,7 +51,9 @@ export class RegistroComponent {
     if (this.newusuarioForm.invalid) {
       this.message = 'Por favor corrige los errores';
       this.clasec = 'text-danger';
-      alert('El usuario pasado no es valido. Asegurese de que el nombre incluye numeros, la contraseña tiene 8 caracteres e incluye numeros, y que el correo este bien escrito');
+      alert(
+        'El usuario pasado no es valido. Asegurese de que el nombre incluye numeros, la contraseña tiene 8 caracteres e incluye numeros, y que el correo este bien escrito'
+      );
     } else {
       this.clasec = 'text-success';
       this.newusuario = this.newusuarioForm.value;
@@ -69,7 +71,6 @@ export class RegistroComponent {
       });
     }
   }
-  
 
   get Nombre() {
     //almacenamos el nombre

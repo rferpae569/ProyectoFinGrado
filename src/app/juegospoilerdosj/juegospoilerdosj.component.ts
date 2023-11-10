@@ -476,4 +476,14 @@ export class JuegospoilerdosjComponent {
   seleccionarTitulo(event: any) {
     this.filtroTituloControl.setValue(event.target.value); // Establece el valor del input
   }
+
+  // Método para borrar el texto
+  borrarTexto() {
+    this.filtroTituloControl.setValue('');
+  }
+
+  // Al pulsar el boton, iremos a eleccion2dosj por si queremos temrinar la partida antes de tiempo.
+  irAEleccion2() {
+    this.router.navigate(['/eleccion2dosj']);
+  }
 }

@@ -3,8 +3,8 @@
   background-image: url("../../assets/fondos/fondojuegos.jpg");
   background-size: 100% 100%;
   background-attachment: scroll;
-  overflow: auto; 
-  height: 100%; 
+  overflow: auto;
+  height: 100%;
 }
 
 h1,
@@ -35,30 +35,30 @@ audio {
 
 /* Creamos un estilo para las tablas*/
 .table-style {
-  background-color: #f2f2f2; 
-  border: 1px solid #ddd; 
-  color: #333; 
-  text-align: left; 
+  background-color: #f2f2f2;
+  border: 1px solid #ddd;
+  color: #333;
+  text-align: left;
   margin: 0 auto;
   width: 80%;
   max-width: 800px;
-  border-spacing: 0; 
-  border-radius: 10px; 
-  overflow: hidden; 
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+  border-spacing: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 /*Especificamos un estilo para los th y los td*/
 .table-style th {
-  background-color: #3498db; 
+  background-color: #3498db;
   color: white;
 }
 
 .table-style th,
 .table-style td {
-  padding: 15px; 
+  padding: 15px;
   text-align: center;
-  border: 1px solid #ddd; 
+  border: 1px solid #ddd;
 }
 
 /* Cambio de color al pasar el ratón sobre las filas */
@@ -100,9 +100,20 @@ audio {
   padding: 5px;
 }
 
+button {
+  margin-right: 15px;
+}
+
 //Response para la imagen de fondo
 @media (max-width: 1200px) {
   .background-image {
     background-size: 100% 100%;
+  }
+}
+
+/*Para que haya un poco de margen entre los dos botones con el metodo responsive*/
+@media (max-width: 767px) {
+  .text-center button:last-child {
+    margin-top: 5px;
   }
 }

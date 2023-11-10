@@ -21,17 +21,19 @@
           {{ preguntasPeliculas[numeroAleatorio].pregunta }}
         </h1>
 
-        <div class="alert alert-info" role="alert" [hidden]="!mostrarPista">
+        <div
+          class="alert alert-info"
+          role="alert"
+          [@slideDownUp]="estadoAnimacion"
+          [hidden]="!mostrarPista"
+        >
           <h4>Pista:</h4>
-          <p>
-            {{ pistas }}
-          </p>
+          <p>{{ pistas }}</p>
         </div>
-        <br />
 
         <button
           class="btn btn-primary mx-auto d-block"
-          (click)="mostrarPista = !mostrarPista"
+          (click)="togglePistaAnimation()"
         >
           Pista
         </button>
@@ -47,6 +49,7 @@
               class="form-control"
               placeholder="Respuesta"
               name="respuesta"
+              [formControl]="RespuestaControl"
             />
           </div>
           <div class="text-center">
@@ -57,6 +60,16 @@
               (click)="enviarRespuesta()"
             >
               Comprobar
+            </button>
+            <button
+              class="btn btn-secondary"
+              type="button"
+              (click)="borrarTexto()"
+            >
+              Borrar Respuesta
+            </button>
+            <button class="btn btn-dark" (click)="irAEleccion2()">
+              Terminar juego
             </button>
           </div>
         </form>

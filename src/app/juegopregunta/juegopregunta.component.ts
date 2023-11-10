@@ -7,12 +7,21 @@ import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { Juegopreguntapista } from '../model/juegopreguntapista';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 //Importamos los modulos
 
 @Component({
   selector: 'app-juegopregunta',
   templateUrl: './juegopregunta.component.html',
   styleUrls: ['./juegopregunta.component.scss'],
+  animations: [
+    trigger('slideDownUp', [
+      state('down', style({ opacity: 1, transform: 'translateY(0%)' })),
+      state('up', style({ opacity: 0, transform: 'translateY(-100%)' })),
+      transition('up => down', animate('300ms ease-in')),
+      transition('down => up', animate('300ms ease-out')),
+    ]),
+  ],
 })
 export class JuegopreguntaComponent implements OnInit {
   datos!: Juegopregunta[];
@@ -20,7 +29,7 @@ export class JuegopreguntaComponent implements OnInit {
   intentos: number = 0;
   puntos: number = 0;
   listaPeliculas: string[] = [];
-  peliculaControl = new FormControl();
+  RespuestaControl = new FormControl();
   session: string = '';
   numeroAleatorio: number = 0;
   palabrasecreta: string = '';
@@ -32,6 +41,7 @@ export class JuegopreguntaComponent implements OnInit {
   mostrarPista: boolean = false;
   pistaPregunta: Juegopreguntapista[] = [];
   pistas: string = '';
+  estadoAnimacion = 'up'; 
   //Creamos las variables correspondientes
 
   //Verificamos las cookies, creamos los intentos y establecemos el filtrado de las peliculas
@@ -346,5 +356,20 @@ export class JuegopreguntaComponent implements OnInit {
     this.cookieService.set('puntos', '0', expirationDate);
     const pistacookie = this.cookieService.get('pistas'); //para pistas
     this.pistaPregunta = JSON.parse(pistacookie);
+  }
+
+  // Método para borrar el texto
+  borrarTexto() {
+    this.RespuestaControl.setValue('');
+  }
+
+  // Al pulsar el boton, iremos a eleccion2 por si queremos temrinar la partida antes de tiempo.
+  irAEleccion2() {
+    this.router.navigate(['/eleccion2']);
+  }
+
+  togglePistaAnimation() {
+    this.mostrarPista = !this.mostrarPista;
+    this.estadoAnimacion = this.mostrarPista ? 'down' : 'up';
   }
 }

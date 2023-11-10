@@ -22,6 +22,7 @@ import { JuegomusicadosjComponent } from './juegomusicadosj/juegomusicadosj.comp
 import { Eleccion2dosjComponent } from './eleccion2dosj/eleccion2dosj.component';
 import { JuegospoilerComponent } from './juegospoiler/juegospoiler.component';
 import { JuegospoilerdosjComponent } from './juegospoilerdosj/juegospoilerdosj.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //importamos los modules y los ocmponentes correspondientes
 
 @NgModule({
@@ -51,6 +52,7 @@ import { JuegospoilerdosjComponent } from './juegospoilerdosj/juegospoilerdosj.c
     RouterModule,
     HttpClientModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

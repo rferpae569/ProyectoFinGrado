@@ -55,9 +55,20 @@ label {
   padding: 5px;
 }
 
+button {
+  margin-right: 15px;
+}
+
 //Response para la imagen de fondo
 @media (max-width: 1200px) {
   .background-image {
     background-size: 100% 100%;
+  }
+}
+
+/*Para que haya un poco de margen entre los dos botones con el metodo responsive*/
+@media (max-width: 767px) {
+  .text-center button:last-child {
+    margin-top: 5px;
   }
 }

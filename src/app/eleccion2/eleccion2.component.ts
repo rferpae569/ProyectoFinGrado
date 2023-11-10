@@ -33,7 +33,7 @@ export class Eleccion2Component implements OnInit {
       // Si la cookie no existe, redirigimos al componente 'inicio'
       this.router.navigate(['inicio']);
     }
-    
+
     servicioService.getDatosRanking().subscribe((datos) => {
       this.datos = datos;
     });

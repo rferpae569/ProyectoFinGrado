@@ -63,7 +63,7 @@ export class ActualizarComponent implements OnInit {
       this.sessionCookie = sessionCookie; // Asigna el valor correctamente
       this.newusuarioForm.get('Nombre')?.setValue(this.sessionCookie);
     }
-  
+
     const sessionCookie2 = this.getCookie('session2');
     if (sessionCookie2) {
       this.sessionCookie2 = sessionCookie2; // Asigna el valor correctamente

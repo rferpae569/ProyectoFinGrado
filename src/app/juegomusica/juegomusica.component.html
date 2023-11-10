@@ -23,8 +23,8 @@
             "
             type="audio/mp3"
           />
-          Tu navegador no soporta el elemento de audio.</audio
-        >
+          Tu navegador no soporta el elemento de audio.
+        </audio>
 
         <div [hidden]="!mostrarPista">
           <h1 class="text-center">Pista Musical:</h1>
@@ -64,9 +64,23 @@
               [formControl]="filtroTituloControl"
             />
             <label for="peliculaSelect">Titulos coincidentes</label>
-            <select id="peliculaSelect" class="form-control" name="peliculaSelect" [disabled]="!titulosCoincidentes.length" (change)="seleccionarTitulo($event)" size="5">
-              <option value="" disabled>Selecciona la pelicula automáticamente</option>
-              <option *ngFor="let titulo of titulosCoincidentes" [value]="titulo">{{ titulo }}</option>
+            <select
+              id="peliculaSelect"
+              class="form-control"
+              name="peliculaSelect"
+              [disabled]="!titulosCoincidentes.length"
+              (change)="seleccionarTitulo($event)"
+              size="5"
+            >
+              <option value="" disabled>
+                Selecciona la pelicula automáticamente
+              </option>
+              <option
+                *ngFor="let titulo of titulosCoincidentes"
+                [value]="titulo"
+              >
+                {{ titulo }}
+              </option>
             </select>
           </div>
           <div class="text-center">
@@ -77,6 +91,16 @@
               (click)="enviarRespuesta()"
             >
               Comprobar
+            </button>
+            <button
+              class="btn btn-secondary"
+              type="button"
+              (click)="borrarTexto()"
+            >
+              Borrar Respuesta
+            </button>
+            <button class="btn btn-dark" (click)="irAEleccion2()">
+              Terminar juego
             </button>
           </div>
         </form>
