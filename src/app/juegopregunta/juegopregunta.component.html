@@ -25,7 +25,7 @@
           class="alert alert-info"
           role="alert"
           [@slideDownUp]="estadoAnimacion"
-          [hidden]="!mostrarPista"
+          [style.height]="mostrarPista ? 'auto' : '0'"
         >
           <h4>Pista:</h4>
           <p>{{ pistas }}</p>

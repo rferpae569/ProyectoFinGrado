@@ -59,6 +59,11 @@ button {
   margin-right: 15px;
 }
 
+.alert-info {
+  display: block;
+  overflow: hidden;
+}
+
 //Response para la imagen de fondo
 @media (max-width: 1200px) {
   .background-image {

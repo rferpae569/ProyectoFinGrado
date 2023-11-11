@@ -51,10 +51,9 @@ button {
   }
 }
 
-/* Ajusta el margen superior del contenedor de la pista */
 .alert-info {
-  margin-top: 20px; 
-  overflow: hidden; 
+  display: block;
+  overflow: hidden;
 }
 
 /*Para que haya un poco de margen entre los dos botones con el metodo responsive*/

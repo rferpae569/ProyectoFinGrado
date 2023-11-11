@@ -51,7 +51,10 @@
           Tu navegador no soporta el elemento de audio.
         </audio>
 
-        <div [hidden]="!mostrarPista">
+        <div  class="alert-info"
+        role="alert"
+        [@slideDownUp]="estadoAnimacion"
+        [style.height]="mostrarPista ? 'auto' : '0'">
           <h1 class="text-center">Pista Musical:</h1>
           <table class="table-style">
             <tr>
@@ -70,7 +73,7 @@
 
         <button
           class="btn btn-primary mx-auto d-block"
-          (click)="mostrarPista = !mostrarPista"
+          (click)="togglePistaAnimation()"
         >
           Pista
         </button>

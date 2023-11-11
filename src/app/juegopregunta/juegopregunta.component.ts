@@ -16,8 +16,8 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
   styleUrls: ['./juegopregunta.component.scss'],
   animations: [
     trigger('slideDownUp', [
-      state('down', style({ opacity: 1, transform: 'translateY(0%)' })),
-      state('up', style({ opacity: 0, transform: 'translateY(-100%)' })),
+      state('down', style({ opacity: 1, height: '*' })),
+      state('up', style({ opacity: 0, height: '50px' })), // Ajusta la altura según tu preferencia
       transition('up => down', animate('300ms ease-in')),
       transition('down => up', animate('300ms ease-out')),
     ]),

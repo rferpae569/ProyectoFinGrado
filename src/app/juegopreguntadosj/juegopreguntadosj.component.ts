@@ -7,12 +7,21 @@ import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { Juegopreguntapista } from '../model/juegopreguntapista';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 //Importamos los modulos
 
 @Component({
   selector: 'app-juegopreguntadosj',
   templateUrl: './juegopreguntadosj.component.html',
   styleUrls: ['./juegopreguntadosj.component.scss'],
+  animations: [
+    trigger('slideDownUp', [
+      state('down', style({ opacity: 1, height: '*' })),
+      state('up', style({ opacity: 0, height: '50px' })), // Ajusta la altura según tu preferencia
+      transition('up => down', animate('300ms ease-in')),
+      transition('down => up', animate('300ms ease-out')),
+    ]),
+  ],
 })
 export class JuegopreguntadosjComponent implements OnInit {
   datos!: Juegopregunta[];
@@ -36,6 +45,7 @@ export class JuegopreguntadosjComponent implements OnInit {
   pistaPregunta: Juegopreguntapista[] = [];
   pistas: string = '';
   turnoActual: number = 1;
+  estadoAnimacion = 'up'; 
   //Creamos las variables correspondientes
 
   //Verificamos las cookies, creamos los intentos y establecemos el filtrado de las peliculas
@@ -495,5 +505,10 @@ export class JuegopreguntadosjComponent implements OnInit {
   // Al pulsar el boton, iremos a eleccion2dosj por si queremos temrinar la partida antes de tiempo.
   irAEleccion2() {
     this.router.navigate(['/eleccion2dosj']);
+  }
+
+  togglePistaAnimation() {
+    this.mostrarPista = !this.mostrarPista;
+    this.estadoAnimacion = this.mostrarPista ? 'down' : 'up';
   }
 }

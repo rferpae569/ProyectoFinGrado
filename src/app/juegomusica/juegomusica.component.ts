@@ -7,12 +7,21 @@ import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { Juegomusica } from '../model/juegomusica';
 import { Juegomusicapista } from '../model/juegomusicapista';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 //Importamos los modulos
 
 @Component({
   selector: 'app-juegomusica',
   templateUrl: './juegomusica.component.html',
   styleUrls: ['./juegomusica.component.scss'],
+  animations: [
+    trigger('slideDownUp', [
+      state('down', style({ opacity: 1, height: '*' })),
+      state('up', style({ opacity: 0, height: '50px' })),
+      transition('up => down', animate('300ms ease-in')),
+      transition('down => up', animate('300ms ease-out')),
+    ]),
+  ],
 })
 export class JuegomusicaComponent implements OnInit {
   datos!: Juegomusica[];
@@ -24,8 +33,7 @@ export class JuegomusicaComponent implements OnInit {
   session: string = '';
   numeroAleatorio: number = 0;
   palabrasecreta: string = '';
-  nombresPeliculas: Array<{ id: number; nombre: string; musica: string[] }> =
-    [];
+  nombresPeliculas: Array<{ id: number; nombre: string; musica: string[] }> = [];
   mostrarPista: boolean = false;
   pistaMusica: Juegomusicapista[] = [];
   pistas: string = '';
@@ -34,6 +42,7 @@ export class JuegomusicaComponent implements OnInit {
   titulosCoincidentes: string[] = [];
   filtroTituloControl = new FormControl();
   datosCargados: boolean = false;
+  estadoAnimacion = 'up'; 
   //Creamos las variables correspondientes
 
   //Verificamos las cookies, creamos los intentos y establecemos el filtrado de las peliculas
@@ -396,5 +405,10 @@ export class JuegomusicaComponent implements OnInit {
   // Al pulsar el boton, iremos a eleccion2 por si queremos temrinar la partida antes de tiempo.
   irAEleccion2() {
     this.router.navigate(['/eleccion2']);
+  }
+
+  togglePistaAnimation() {
+    this.mostrarPista = !this.mostrarPista;
+    this.estadoAnimacion = this.mostrarPista ? 'down' : 'up';
   }
 }
