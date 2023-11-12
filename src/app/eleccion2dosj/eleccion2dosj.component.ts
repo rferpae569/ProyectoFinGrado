@@ -285,4 +285,8 @@ export class Eleccion2dosjComponent implements OnInit {
     }
     this.router.navigate(['']);
   }
+
+  get juegoTerminadoAntesDeTiempo(): boolean {
+    return this.servicioService.juegoTerminadoAntesDeTiempo;
+  }
 }

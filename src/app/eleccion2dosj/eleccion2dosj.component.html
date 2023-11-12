@@ -1,11 +1,24 @@
 <div>
   <div class="container">
-    <h1 class="text-center my-4">El juego ha terminado</h1>
-    <h1 class="text-center my-4" *ngIf="!hayEmpate">
+    <h1 class="text-center my-4" *ngIf="!juegoTerminadoAntesDeTiempo">
+      El juego ha terminado
+    </h1>
+    <h1
+      class="text-center my-4"
+      *ngIf="!hayEmpate && !juegoTerminadoAntesDeTiempo"
+    >
       El ganador es: {{ usuarioConMasPuntos }}
     </h1>
-    <h1 class="text-center my-4" *ngIf="hayEmpate">Empate</h1>
-    <h1 class="text-center my-4">¿Desea jugar otra vez o a otro juego?</h1>
+    <h1 class="text-center my-4" *ngIf="juegoTerminadoAntesDeTiempo">
+      El juego ha acabado antes de tiempo
+    </h1>
+    <h1
+      class="text-center my-4"
+      *ngIf="hayEmpate && !juegoTerminadoAntesDeTiempo"
+    >
+      Empate
+    </h1>
+    <h1 class="text-center my-4">¿Desea jugar otra vez?</h1>
     <div class="d-flex justify-content-center">
       <form method="post" class="d-flex flex-column">
         <!--Creamos el formulario para saber si queremos volver a jugar o no-->

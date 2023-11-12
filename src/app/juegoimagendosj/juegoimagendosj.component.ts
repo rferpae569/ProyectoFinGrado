@@ -479,6 +479,7 @@ export class JuegoimagendosjComponent implements OnInit {
 
   // Al pulsar el boton, iremos a eleccion2dosj por si queremos temrinar la partida antes de tiempo.
   irAEleccion2() {
+    this.servicioService.juegoTerminadoAntesDeTiempo = true;
     this.router.navigate(['/eleccion2dosj']);
   }
 }

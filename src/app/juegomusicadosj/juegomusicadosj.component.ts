@@ -7,7 +7,13 @@ import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { Juegomusica } from '../model/juegomusica';
 import { Juegomusicapista } from '../model/juegomusicapista';
-import { trigger, state, style, animate, transition } from '@angular/animations';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+} from '@angular/animations';
 //Importamos los modulos
 
 @Component({
@@ -36,7 +42,8 @@ export class JuegomusicadosjComponent {
   session2: string = '';
   numeroAleatorio: number = 0;
   palabrasecreta: string = '';
-  nombresPeliculas: Array<{ id: number; nombre: string; musica: string[] }> = [];
+  nombresPeliculas: Array<{ id: number; nombre: string; musica: string[] }> =
+    [];
   mostrarPista: boolean = false;
   pistaMusica: Juegomusicapista[] = [];
   pistas: string = '';
@@ -46,7 +53,7 @@ export class JuegomusicadosjComponent {
   filtroTituloControl = new FormControl();
   turnoActual: number = 1;
   datosCargados: boolean = false;
-  estadoAnimacion = 'up'; 
+  estadoAnimacion = 'up';
   //Creamos las variables correspondientes
 
   //Verificamos las cookies, creamos los intentos y establecemos el filtrado de las peliculas
@@ -537,13 +544,14 @@ export class JuegomusicadosjComponent {
     this.filtroTituloControl.setValue('');
   }
 
- // Al pulsar el boton, iremos a eleccion2dosj por si queremos temrinar la partida antes de tiempo.
- irAEleccion2() {
-  this.router.navigate(['/eleccion2dosj']);
-}
+  // Al pulsar el boton, iremos a eleccion2dosj por si queremos temrinar la partida antes de tiempo.
+  irAEleccion2() {
+    this.servicioService.juegoTerminadoAntesDeTiempo = true;
+    this.router.navigate(['/eleccion2dosj']);
+  }
 
-togglePistaAnimation() {
-  this.mostrarPista = !this.mostrarPista;
-  this.estadoAnimacion = this.mostrarPista ? 'down' : 'up';
-}
+  togglePistaAnimation() {
+    this.mostrarPista = !this.mostrarPista;
+    this.estadoAnimacion = this.mostrarPista ? 'down' : 'up';
+  }
 }

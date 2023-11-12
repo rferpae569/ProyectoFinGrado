@@ -206,4 +206,7 @@ export class ServicioService {
       user
     );
   }
+
+  juegoTerminadoAntesDeTiempo: boolean = false;
+
 }

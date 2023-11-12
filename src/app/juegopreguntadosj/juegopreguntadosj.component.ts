@@ -7,7 +7,13 @@ import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { Juegopreguntapista } from '../model/juegopreguntapista';
-import { trigger, state, style, animate, transition } from '@angular/animations';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+} from '@angular/animations';
 //Importamos los modulos
 
 @Component({
@@ -45,7 +51,7 @@ export class JuegopreguntadosjComponent implements OnInit {
   pistaPregunta: Juegopreguntapista[] = [];
   pistas: string = '';
   turnoActual: number = 1;
-  estadoAnimacion = 'up'; 
+  estadoAnimacion = 'up';
   //Creamos las variables correspondientes
 
   //Verificamos las cookies, creamos los intentos y establecemos el filtrado de las peliculas
@@ -504,6 +510,7 @@ export class JuegopreguntadosjComponent implements OnInit {
 
   // Al pulsar el boton, iremos a eleccion2dosj por si queremos temrinar la partida antes de tiempo.
   irAEleccion2() {
+    this.servicioService.juegoTerminadoAntesDeTiempo = true;
     this.router.navigate(['/eleccion2dosj']);
   }
 
