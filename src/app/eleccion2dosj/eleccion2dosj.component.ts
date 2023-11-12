@@ -130,8 +130,28 @@ export class Eleccion2dosjComponent implements OnInit {
 
         const options = {
           title: 'Ranking de Puntos',
-          width: isMobile ? 350 : 550, // Ancho ajustado para móviles o no
-          height: isMobile ? 300 : 400, // Alto ajustado para móviles o no
+          width: isMobile ? 350 : 550,
+          height: isMobile ? 300 : 400,
+          backgroundColor: 'transparent',
+          titleTextStyle: {
+            color: 'white',
+            fontSize: 16,
+          },
+          legend: {
+            textStyle: {
+              color: 'white',
+            },
+          },
+          hAxis: {
+            textStyle: {
+              color: 'white', // Color del texto del eje horizontal (nombre de usuario)
+            },
+          },
+          vAxis: {
+            textStyle: {
+              color: 'white', // Color del texto del eje vertical (puntos)
+            },
+          },
         };
 
         const chart = new google.visualization.BarChart(
@@ -214,10 +234,20 @@ export class Eleccion2dosjComponent implements OnInit {
 
           const options = {
             title: 'Porcentaje Veces jugadas',
-            width: isMobile ? 350 : 550, // Ancho ajustado para móviles o no
-            height: isMobile ? 300 : 400, // Alto ajustado para móviles o no
+            width: isMobile ? 350 : 550,
+            height: isMobile ? 300 : 400,
             is3D: true,
             pieSliceText: 'percentage',
+            backgroundColor: 'transparent',
+            titleTextStyle: {
+              color: 'white', // Color del título
+              fontSize: 16, // Tamaño del título
+            },
+            legend: {
+              textStyle: {
+                color: 'white', // Color del texto de la leyenda
+              },
+            },
           };
 
           const chart = new google.visualization.PieChart(
