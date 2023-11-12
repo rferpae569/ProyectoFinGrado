@@ -42,8 +42,7 @@
     </div>
 
     <div class="graficas-contenedor">
-      <div id="grafica1"></div>
-      <div id="grafica2"></div>
+      <div id="grafica1" [@fadeInOut]="mostrarGrafica ? 'active' : 'inactive'"></div>
+      <div id="grafica2" [@fadeInOut]="mostrarGrafica2 ? 'active' : 'inactive'"></div>
     </div>
-  </div>
 </div>

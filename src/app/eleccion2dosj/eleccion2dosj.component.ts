@@ -6,6 +6,7 @@ import { Ranking } from '../model/ranking';
 import { Numjugadas } from '../model/numjugadas';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
+import {trigger, state, style, animate, transition} from '@angular/animations';
 import 'jspdf-autotable';
 declare var google: any;
 //Importamos los modulos y declaramos la variable para el grafico
@@ -14,6 +15,26 @@ declare var google: any;
   selector: 'app-eleccion2dosj',
   templateUrl: './eleccion2dosj.component.html',
   styleUrls: ['./eleccion2dosj.component.scss'],
+  animations: [
+    trigger('fadeInOut', [
+      state(
+        'inactive',
+        style({
+          display: 'none',
+          opacity: 0,
+        })
+      ),
+      state(
+        'active',
+        style({
+          display: 'block',
+          opacity: 1,
+        })
+      ),
+      transition('inactive => active', animate('0.5s ease-in')),
+      transition('active => inactive', animate('0.5s ease-out')),
+    ]),
+  ],
 })
 export class Eleccion2dosjComponent implements OnInit {
   datos!: Ranking[];
@@ -117,7 +138,8 @@ export class Eleccion2dosjComponent implements OnInit {
       // Si se está cerrando la gráfica, ocultarla
       const grafica1 = document.getElementById('grafica1');
       if (grafica1) {
-        grafica1.style.display = 'none';
+        grafica1.classList.toggle('fade-in');
+        grafica1.classList.toggle('active');
       }
     } else {
       setTimeout(() => {
@@ -196,7 +218,8 @@ export class Eleccion2dosjComponent implements OnInit {
       // Si se está cerrando la gráfica, ocultarla
       const grafica2 = document.getElementById('grafica2');
       if (grafica2) {
-        grafica2.style.display = 'none';
+        grafica2.classList.toggle('fade-in');
+        grafica2.classList.toggle('active');
       }
     } else {
       setTimeout(() => {

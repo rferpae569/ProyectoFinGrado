@@ -40,6 +40,16 @@ h1 {
   margin-right: 10px; /* Ajusta el margen según tus necesidades */
 }
 
+/* Animación de graficos */
+.fade-in {
+  opacity: 0;
+}
+
+.fade-in.active {
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+
 //Response para la imagen de fondo
 @media (max-width: 1200px) {
   :host {
