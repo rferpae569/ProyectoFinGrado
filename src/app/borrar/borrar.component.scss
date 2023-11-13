@@ -18,6 +18,15 @@ a:hover {
   color: red;
 }
 
+.readonly-input {
+  color: #888;
+  background-color: #ccc; 
+  cursor: not-allowed; 
+  outline: 1px solid transparent; 
+  box-shadow: none; 
+  border: 1px solid #ccc;
+}
+
 //Response para la imagen de fondo
 @media (max-width: 1200px) {
   .background-image {
