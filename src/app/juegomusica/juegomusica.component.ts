@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { Juegomusica } from '../model/juegomusica';
 import { Juegomusicapista } from '../model/juegomusicapista';
-import { trigger, state, style, animate, transition } from '@angular/animations';
+import {trigger, state, style, animate, transition} from '@angular/animations';
 //Importamos los modulos
 
 @Component({
@@ -33,7 +33,7 @@ export class JuegomusicaComponent implements OnInit {
   session: string = '';
   numeroAleatorio: number = 0;
   palabrasecreta: string = '';
-  nombresPeliculas: Array<{ id: number; nombre: string; musica: string[] }> = [];
+  nombresPeliculas: Array<{ id: number; nombre: string; musica: string[] }> =[];
   mostrarPista: boolean = false;
   pistaMusica: Juegomusicapista[] = [];
   pistas: string = '';
@@ -42,7 +42,8 @@ export class JuegomusicaComponent implements OnInit {
   titulosCoincidentes: string[] = [];
   filtroTituloControl = new FormControl();
   datosCargados: boolean = false;
-  estadoAnimacion = 'up'; 
+  estadoAnimacion = 'up';
+  showAnimation = false;
   //Creamos las variables correspondientes
 
   //Verificamos las cookies, creamos los intentos y establecemos el filtrado de las peliculas
@@ -218,6 +219,9 @@ export class JuegomusicaComponent implements OnInit {
   }
 
   enviarRespuesta() {
+    //Activar animacion
+    this.showAnimation = true;
+
     // Obtenemos las preguntas de las películas desde la cookie 'peliculas'
     const musicaCookie = this.cookieService.get('peliculas');
 
@@ -370,7 +374,6 @@ export class JuegomusicaComponent implements OnInit {
     }
 
     //Establecemos las cookies correspondientes
-    //En juego musica solo me deja 34 peliculas
     const currentDate = new Date();
     const expirationDate = new Date(
       currentDate.getFullYear(),
@@ -394,7 +397,7 @@ export class JuegomusicaComponent implements OnInit {
   }
 
   seleccionarTitulo(event: any) {
-    this.filtroTituloControl.setValue(event.target.value); // Establece el valor del input
+    this.filtroTituloControl.setValue(event.target.value); // Establecemos el valor del input
   }
 
   // Método para borrar el texto
@@ -407,6 +410,7 @@ export class JuegomusicaComponent implements OnInit {
     this.router.navigate(['/eleccion2']);
   }
 
+  //Esta funcion sirve para cmabiar el tipo de animacion de la pista
   togglePistaAnimation() {
     this.mostrarPista = !this.mostrarPista;
     this.estadoAnimacion = this.mostrarPista ? 'down' : 'up';

@@ -7,7 +7,7 @@ import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { Juegopreguntapista } from '../model/juegopreguntapista';
-import { trigger, state, style, animate, transition } from '@angular/animations';
+import {trigger, state, style, animate, transition} from '@angular/animations';
 //Importamos los modulos
 
 @Component({
@@ -17,7 +17,7 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
   animations: [
     trigger('slideDownUp', [
       state('down', style({ opacity: 1, height: '*' })),
-      state('up', style({ opacity: 0, height: '50px' })), // Ajusta la altura según tu preferencia
+      state('up', style({ opacity: 0, height: '50px' })),
       transition('up => down', animate('300ms ease-in')),
       transition('down => up', animate('300ms ease-out')),
     ]),
@@ -41,7 +41,8 @@ export class JuegopreguntaComponent implements OnInit {
   mostrarPista: boolean = false;
   pistaPregunta: Juegopreguntapista[] = [];
   pistas: string = '';
-  estadoAnimacion = 'up'; 
+  estadoAnimacion = 'up';
+  showAnimation = false;
   //Creamos las variables correspondientes
 
   //Verificamos las cookies, creamos los intentos y establecemos el filtrado de las peliculas
@@ -183,6 +184,9 @@ export class JuegopreguntaComponent implements OnInit {
   }
 
   enviarRespuesta() {
+    //Activar animacion
+    this.showAnimation = true;
+
     // Obtenemos las preguntas de las películas desde la cookie 'preguntas'
     const preguntaCookie = this.cookieService.get('preguntas');
 
@@ -336,7 +340,6 @@ export class JuegopreguntaComponent implements OnInit {
     }
 
     //Establecemos las cookies correspondientes
-    //Solo me coge 20 preguntas
     const currentDate = new Date();
     const expirationDate = new Date(
       currentDate.getFullYear(),
@@ -368,6 +371,7 @@ export class JuegopreguntaComponent implements OnInit {
     this.router.navigate(['/eleccion2']);
   }
 
+  //Esta funcion sirve para cmabiar el tipo de animacion de la pista
   togglePistaAnimation() {
     this.mostrarPista = !this.mostrarPista;
     this.estadoAnimacion = this.mostrarPista ? 'down' : 'up';

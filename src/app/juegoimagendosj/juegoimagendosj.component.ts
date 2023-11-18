@@ -30,6 +30,7 @@ export class JuegoimagendosjComponent implements OnInit {
   titulosCoincidentes: string[] = [];
   filtroTituloControl = new FormControl();
   turnoActual: number = 1;
+  showAnimation = false;
   //Creamos las variables correspondientes
 
   //Verificamos las cookies, creamos los intentos y establecemos el filtrado de las peliculas
@@ -230,6 +231,9 @@ export class JuegoimagendosjComponent implements OnInit {
   }
 
   enviarRespuesta() {
+    //Activar animacion
+    this.showAnimation = true;
+
     // Obtenemos los nombres de las películas desde la cookie 'peliculas'
     const imagenCookie = this.cookieService.get('peliculas');
 
@@ -445,7 +449,6 @@ export class JuegoimagendosjComponent implements OnInit {
       this.listaPeliculas.push(NombrePelicula);
     }
 
-    //me coge solo 38 peliculas
     //Establecemos las cookies correspondientes
     const currentDate = new Date();
     const expirationDate = new Date(
@@ -469,7 +472,7 @@ export class JuegoimagendosjComponent implements OnInit {
   }
 
   seleccionarTitulo(event: any) {
-    this.filtroTituloControl.setValue(event.target.value); // Establece el valor del input
+    this.filtroTituloControl.setValue(event.target.value); // Establecemos el valor del input
   }
 
   // Método para borrar el texto

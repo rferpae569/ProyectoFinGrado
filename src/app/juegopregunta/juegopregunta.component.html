@@ -12,7 +12,14 @@
       </ng-container>
     </div>
     <h1 class="text-center mt-5">Puntos: {{ puntos }}</h1>
-    <div class="row">
+    <div
+      class="row"
+      [ngClass]="{
+        'animate-left': showAnimation && !showAnimation,
+        'animate-right': showAnimation,
+        'animate-enter-left': !showAnimation
+      }"
+    >
       <div class="col-md-6 mx-auto">
         <h1
           class="text-center mt-5"

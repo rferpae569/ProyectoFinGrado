@@ -7,13 +7,7 @@ import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { Juegomusica } from '../model/juegomusica';
 import { Juegomusicapista } from '../model/juegomusicapista';
-import {
-  trigger,
-  state,
-  style,
-  animate,
-  transition,
-} from '@angular/animations';
+import {trigger,state,style,animate,transition} from '@angular/animations';
 //Importamos los modulos
 
 @Component({
@@ -42,8 +36,7 @@ export class JuegomusicadosjComponent {
   session2: string = '';
   numeroAleatorio: number = 0;
   palabrasecreta: string = '';
-  nombresPeliculas: Array<{ id: number; nombre: string; musica: string[] }> =
-    [];
+  nombresPeliculas: Array<{ id: number; nombre: string; musica: string[] }> =[];
   mostrarPista: boolean = false;
   pistaMusica: Juegomusicapista[] = [];
   pistas: string = '';
@@ -54,6 +47,7 @@ export class JuegomusicadosjComponent {
   turnoActual: number = 1;
   datosCargados: boolean = false;
   estadoAnimacion = 'up';
+  showAnimation = false;
   //Creamos las variables correspondientes
 
   //Verificamos las cookies, creamos los intentos y establecemos el filtrado de las peliculas
@@ -72,7 +66,7 @@ export class JuegomusicadosjComponent {
       this.intentos = parseInt(this.cookieService.get('intentos'), 10);
       this.intentos2 = parseInt(this.cookieService.get('intentos2'), 10);
     } else {
-      this.intentos = 3; // Establecemod el valor inicial en 3 si no existe la cookie 'intentos'
+      this.intentos = 3; // Establecemos el valor inicial en 3 si no existe la cookie 'intentos'
       const currentDate = new Date();
       const expirationDate = new Date(
         currentDate.getFullYear(),
@@ -293,6 +287,9 @@ export class JuegomusicadosjComponent {
   }
 
   enviarRespuesta() {
+    //Activar animacion
+    this.showAnimation = true;
+    
     // Obtenemos los nombres de las películas desde la cookie 'peliculas'
     const musicaCookie = this.cookieService.get('peliculas');
 
@@ -512,7 +509,6 @@ export class JuegomusicadosjComponent {
     }
 
     //Establecemos las cookies correspondientes
-    //En juego musica solo me deja 34 peliculas
     const currentDate = new Date();
     const expirationDate = new Date(
       currentDate.getFullYear(),
@@ -536,7 +532,7 @@ export class JuegomusicadosjComponent {
   }
 
   seleccionarTitulo(event: any) {
-    this.filtroTituloControl.setValue(event.target.value); // Establece el valor del input
+    this.filtroTituloControl.setValue(event.target.value); // Establecemos el valor del input
   }
 
   // Método para borrar el texto
@@ -550,6 +546,7 @@ export class JuegomusicadosjComponent {
     this.router.navigate(['/eleccion2dosj']);
   }
 
+  //Esta funcion sirve para cmabiar el tipo de animacion de la pista
   togglePistaAnimation() {
     this.mostrarPista = !this.mostrarPista;
     this.estadoAnimacion = this.mostrarPista ? 'down' : 'up';

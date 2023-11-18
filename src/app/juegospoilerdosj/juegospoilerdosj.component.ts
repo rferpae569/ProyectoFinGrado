@@ -30,6 +30,7 @@ export class JuegospoilerdosjComponent {
   titulosCoincidentes: string[] = [];
   filtroTituloControl = new FormControl();
   turnoActual: number = 1;
+  showAnimation = false;
   //Creamos las variables correspondientes
 
   //Verificamos las cookies, creamos los intentos y establecemos el filtrado de las peliculas
@@ -229,6 +230,9 @@ export class JuegospoilerdosjComponent {
   }
 
   enviarRespuesta() {
+    //Activar animacion
+    this.showAnimation = true;
+
     // Obtenemos los nombres de las películas desde la cookie 'peliculas'
     const spoilerCookie = this.cookieService.get('peliculas');
 
@@ -450,7 +454,6 @@ export class JuegospoilerdosjComponent {
       this.listaPeliculas.push(NombrePelicula);
     }
 
-    //me coge solo 26 peliculas
     //Establecemos las cookies correspondientes
     const currentDate = new Date();
     const expirationDate = new Date(
@@ -474,7 +477,7 @@ export class JuegospoilerdosjComponent {
   }
 
   seleccionarTitulo(event: any) {
-    this.filtroTituloControl.setValue(event.target.value); // Establece el valor del input
+    this.filtroTituloControl.setValue(event.target.value); // Establecemos el valor del input
   }
 
   // Método para borrar el texto

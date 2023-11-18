@@ -26,7 +26,8 @@ export class JuegoimagenComponent implements OnInit {
   nombresPeliculas: Array<{ nombre: string; imagenes: string[] }> = [];
   titulosCoincidentes: string[] = [];
   filtroTituloControl = new FormControl();
-  selectedTitulo: string = ''; // Declaración de la variable
+  selectedTitulo: string = '';
+  showAnimation = false;
   //Creamos las variables correspondientes
 
   //Verificamos las cookies, creamos los intentos y establecemos el filtrado de las peliculas
@@ -163,6 +164,9 @@ export class JuegoimagenComponent implements OnInit {
   }
 
   enviarRespuesta() {
+    //Activar animacion
+    this.showAnimation = true;
+
     // Obtenemos los nombres de las películas desde la cookie 'peliculas'
     const imagenCookie = this.cookieService.get('peliculas');
 
@@ -311,7 +315,6 @@ export class JuegoimagenComponent implements OnInit {
       this.listaPeliculas.push(NombrePelicula);
     }
 
-    //me coge solo 38 peliculas
     //Establecemos las cookies correspondientes
     const currentDate = new Date();
     const expirationDate = new Date(
@@ -334,7 +337,7 @@ export class JuegoimagenComponent implements OnInit {
   }
 
   seleccionarTitulo(event: any) {
-    this.filtroTituloControl.setValue(event.target.value); // Establece el valor del input
+    this.filtroTituloControl.setValue(event.target.value); // Establecemos el valor del input
   }
 
   // Método para borrar el texto
