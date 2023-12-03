@@ -288,7 +288,7 @@ export class Eleccion2Component implements OnInit {
     ];
     for (const cookie of cookiesExistentes) {
       if (this.cookieService.check(cookie)) {
-        this.cookieService.delete(cookie); // Eliminar la cookie
+        this.cookieService.delete(cookie);
       }
     }
 

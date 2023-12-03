@@ -1,4 +1,4 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component,OnInit, AfterViewInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Usuarios } from '../model/usuarios';
@@ -13,20 +13,25 @@ import { Observable } from 'rxjs';
   templateUrl: './dosjugadores.component.html',
   styleUrls: ['./dosjugadores.component.scss'],
 })
-export class DosjugadoresComponent implements AfterViewInit {
-  newloginForm!: FormGroup; //creamos un formgroup para el formulario
+export class DosjugadoresComponent implements OnInit, AfterViewInit {
+  //Creamos las variables para verificar el usuario y los datos pasados por formulario
+  newloginForm!: FormGroup;
   newlogin!: Usuarios;
   isLoggedIn = false;
   entrada: boolean = false;
   fallo: boolean = false;
   menuActive: boolean = false;
-
   newusuarioForm!: FormGroup;
   public message: string = '';
   public clasec: string = '';
   public clases: string = 'text-info';
-  actuales$!: Observable<Usuariosdos[]>; //Declaramos la siguiente variable como un array del contenido de "Usuariosdos"
-  mostrarContrasena: boolean = false; //Declaramos la siguiente variable para mostrar u ocultar la contraseña
+  actuales$!: Observable<Usuariosdos[]>; 
+  mostrarContrasena: boolean = false; 
+  sessionValue: string = '';
+  sessionValue2: string = '';
+  sessionCookieExists = false;
+  session2CookieExists = false;
+  isSessionActive: boolean = false;
 
   constructor(
     private cookieService: CookieService,
@@ -81,15 +86,65 @@ export class DosjugadoresComponent implements AfterViewInit {
     return this.newloginForm.get('Passwrd2');
   }
 
+  /*Comprobamos si existe las dos sesiones. Si existen, se escribiran el nombre de usuario1 y usuario2 en el input correspondiente */
+  ngOnInit() {
+    const sessionCookieExists = this.cookieService.check('session');
+    const session2CookieExists = this.cookieService.check('session2');
+    if (sessionCookieExists) {
+      this.sessionValue = this.cookieService.get('session');
+      this.newloginForm.patchValue({
+        Nombre1: this.sessionValue
+      });
+    } else {
+      this.sessionValue = '';
+      this.isLoggedIn = false;
+    }
+
+    if (session2CookieExists) {
+      this.sessionValue2 = this.cookieService.get('session2');
+      this.newloginForm.patchValue({
+        Nombre2: this.sessionValue2
+      });
+    } else {
+      this.sessionValue2 = '';
+      this.isLoggedIn = false;
+    }
+
+    //Este condicional sera para cambiar el valor del boton de "iniciar sesion" por "acceder"
+    if (sessionCookieExists && session2CookieExists) {
+      this.isSessionActive = true;
+    } else {
+      this.isSessionActive = false;
+    }
+
+    this.sessionCookieExists = sessionCookieExists;
+    this.session2CookieExists = session2CookieExists;
+  }
+
   ngAfterViewInit() {
     //Esta funcion comprobara si existe la cookie session. Si existe, isloggedIn valdra true.
     const sessionCookieExists = this.cookieService.check('session');
     if (sessionCookieExists) {
-      this.isLoggedIn = true;
+      this.isLoggedIn = false;
     }
   }
 
   entradalogin() {
+    //Si existe la sesion y no se introduce la constraseña, saltara el siguiente mensaje
+    if (this.isSessionActive && !this.passwrd1?.value) {
+      alert('Por seguridad, debeis de introducir la contraseña.');
+      return;
+    }
+
+    // Verificamos si el formulario cumple con las expresiones regulares
+    if (this.newloginForm.invalid) {
+      alert(
+        'No habeis completado bien los campos. El nombre de usuario debe de tener numeros, y la contraseña ocho caracteres (Letras y numeros).'
+      );
+      return;
+    }
+
+    // Continuamos con la verificación de la base de datos
     this.newlogin = this.newloginForm.value;
     this.servicioService.logindos(this.newlogin).subscribe((data) => {
       if (data.length === 2) {
@@ -158,5 +213,38 @@ export class DosjugadoresComponent implements AfterViewInit {
   toggleMenu() {
     //Esta funcion sirve para cambiar el valor del menu.
     this.menuActive = !this.menuActive;
+  }
+
+  //Comprobamos si esta abierta la sesion.
+  tieneSesionActiva(): boolean {
+    return this.cookieService.check('session');
+  }
+
+  //Esta funcion mostrara la alerta si le damos al enlace de registro con la sesion abierta.
+  mostrarAlert() {
+    if (this.tieneSesionActiva()) {
+      alert('Debeis cerrar sesión para acceder al registro');
+    }
+  }
+
+  //Funcion para cerrar la sesion de los dos susuarios la pulsar el boton correspondiente
+  cerrarSesion() {
+    this.cookieService.delete('session');
+    this.cookieService.delete('session2');
+
+    this.sessionCookieExists = this.cookieService.check('session');
+    this.session2CookieExists = this.cookieService.check('session2');
+    
+    this.newloginForm.reset({
+      Nombre1: '',
+      Passwrd1: '',
+      Nombre2: '',
+      Passwrd2: ''
+    });
+  
+    this.isLoggedIn = false;
+    this.sessionValue = '';
+    this.sessionValue2 = '';
+    this.isSessionActive=false;
   }
 }

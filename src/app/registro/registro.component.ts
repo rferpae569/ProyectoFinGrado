@@ -47,6 +47,7 @@ export class RegistroComponent {
     });
   }
 
+  //Funcion que inserta el usuario en la base de datos ras comprobar que los datos son correctos
   entradausuario() {
     if (this.newusuarioForm.invalid) {
       this.message = 'Por favor corrige los errores';

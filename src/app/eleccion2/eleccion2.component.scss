@@ -62,12 +62,12 @@ h1 {
 // Response para los gráficos
 @media (max-width: 1200px) {
   .graficas-contenedor {
-    flex-direction: column; // Cambiamos la dirección de flex a columna
+    flex-direction: column;
   }
 
   #grafica1,
   #grafica2 {
-    margin-right: 0; // Eliminamos el margen en pantallas más pequeñas
-    margin-bottom: 10px; // Agregamos un margen inferior para separar los gráficos
+    margin-right: 0; 
+    margin-bottom: 10px;
   }
 }

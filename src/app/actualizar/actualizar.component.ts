@@ -13,7 +13,7 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./actualizar.component.scss'],
 })
 export class ActualizarComponent implements OnInit {
-  mostrarContrasena: boolean = false; //creamos esta variable para mostrar la contraseña
+  mostrarContrasena: boolean = false;
   menuActive: boolean = false;
   sessionCookie: string | undefined;
   sessionCookie2: string | undefined;
@@ -57,16 +57,17 @@ export class ActualizarComponent implements OnInit {
     }
   }
 
+  //Logica para que se pinte en el formulario el nombre de los usuarios que hayan iniciado sesion.
   ngOnInit() {
     const sessionCookie = this.getCookie('session');
     if (sessionCookie) {
-      this.sessionCookie = sessionCookie; // Asigna el valor correctamente
+      this.sessionCookie = sessionCookie; 
       this.newusuarioForm.get('Nombre')?.setValue(this.sessionCookie);
     }
 
     const sessionCookie2 = this.getCookie('session2');
     if (sessionCookie2) {
-      this.sessionCookie2 = sessionCookie2; // Asigna el valor correctamente
+      this.sessionCookie2 = sessionCookie2;
     }
   }
 
@@ -77,6 +78,7 @@ export class ActualizarComponent implements OnInit {
     return '';
   }
 
+  //Funcion para cambiar el nombre del usuario al pulsar el boton
   toggleCookieValue() {
     if (this.newusuarioForm.get('Nombre')?.value === this.sessionCookie) {
       this.newusuarioForm.get('Nombre')?.setValue(this.sessionCookie2);
@@ -85,6 +87,7 @@ export class ActualizarComponent implements OnInit {
     }
   }
 
+  //Funcion que comprueba si los datos son correctos y de actualizar los datos del usuario
   actualizarusuario() {
     if (this.newusuarioForm.invalid) {
       this.message = 'Por favor corrige los errores';
@@ -98,7 +101,6 @@ export class ActualizarComponent implements OnInit {
       console.log('Entrada correcta', this.newusuario);
       this.servicioService.postActualizarDato(this.newusuario).subscribe({
         next: () => {
-          // Verificar la existencia de cookies
           if (
             document.cookie.includes('session') &&
             document.cookie.includes('session2')

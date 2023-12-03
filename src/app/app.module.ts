@@ -23,6 +23,7 @@ import { Eleccion2dosjComponent } from './eleccion2dosj/eleccion2dosj.component'
 import { JuegospoilerComponent } from './juegospoiler/juegospoiler.component';
 import { JuegospoilerdosjComponent } from './juegospoilerdosj/juegospoilerdosj.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DosjugadoresonlineComponent } from './dosjugadoresonline/dosjugadoresonline.component';
 //importamos los modules y los ocmponentes correspondientes
 
 @NgModule({
@@ -45,6 +46,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     Eleccion2dosjComponent,
     JuegospoilerComponent,
     JuegospoilerdosjComponent,
+    DosjugadoresonlineComponent,
   ],
   imports: [
     BrowserModule,

@@ -49,16 +49,17 @@ export class BorrarComponent implements OnInit {
     }
   }
 
+  //Logica para que se pinte en el formulario el nombre de los usuarios que hayan iniciado sesion.
   ngOnInit() {
     const sessionCookie = this.getCookie('session');
     if (sessionCookie) {
-      this.sessionCookie = sessionCookie; // Asigna el valor correctamente
+      this.sessionCookie = sessionCookie; 
       this.newusuarioForm.get('Nombre')?.setValue(this.sessionCookie);
     }
 
     const sessionCookie2 = this.getCookie('session2');
     if (sessionCookie2) {
-      this.sessionCookie2 = sessionCookie2; // Asigna el valor correctamente
+      this.sessionCookie2 = sessionCookie2;
     }
   }
 
@@ -69,6 +70,7 @@ export class BorrarComponent implements OnInit {
     return '';
   }
 
+  //Funcion para poder cambiar de usuario al darle al boton correspondiente
   toggleCookieValue() {
     if (this.newusuarioForm.get('Nombre')?.value === this.sessionCookie) {
       this.newusuarioForm.get('Nombre')?.setValue(this.sessionCookie2);
@@ -77,6 +79,7 @@ export class BorrarComponent implements OnInit {
     }
   }
 
+  //Funcion que comprueba si los datos del usuario son correctos para luego poder borrarlos de la base de datos
   borrarusuario() {
     if (this.newusuarioForm.invalid) {
       this.message = 'Por favor corrige los errores';

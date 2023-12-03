@@ -18,10 +18,11 @@ export class InicioComponent implements OnInit, AfterViewInit {
   isLoggedIn = false;
   entrada: boolean = false;
   fallo: boolean = false;
-
-  mostrarFooter: boolean = true; //Declaramos la variable para mostrar el footer
-  mostrarContrasena: boolean = false; //Declaramos la variable para mostrar la contraseña
+  mostrarFooter: boolean = true; 
+  mostrarContrasena: boolean = false; 
   menuActive: boolean = false;
+  sessionValue: string = '';
+  isSessionActive: boolean = false;
 
   constructor(
     private cookieService: CookieService,
@@ -56,12 +57,18 @@ export class InicioComponent implements OnInit, AfterViewInit {
     //Verificamos si existe la cookie session con esta funcion
     const sessionCookieExists = this.cookieService.check('session');
     if (sessionCookieExists) {
-      this.isLoggedIn = true;
+      this.isLoggedIn = false;
     }
   }
 
   entradalogin() {
-    // Verificar si el formulario cumple con las expresiones regulares
+    //Si existe la sesion y no se introduce la constraseña, saltara el siguiente mensaje
+    if (this.isSessionActive && !this.passwrd?.value) {
+      alert('Por seguridad, debes introducir la contraseña.');
+      return;
+    }
+
+    // Verifica si el formulario cumple con las expresiones regulares
     if (this.newloginForm.invalid) {
       alert(
         'No has completado bien los campos. El nombre de usuario debe de tener numeros, y la contraseña ocho caracteres (Letras y numeros).'
@@ -69,7 +76,7 @@ export class InicioComponent implements OnInit, AfterViewInit {
       return;
     }
 
-    // Continuar con la verificación de la base de datos
+    // Continuamos con la verificación de la base de datos
     this.newlogin = this.newloginForm.value;
     this.servicioService.login(this.newlogin).subscribe((data) => {
       if (data.length > 0) {
@@ -84,33 +91,56 @@ export class InicioComponent implements OnInit, AfterViewInit {
         this.router.navigateByUrl('eleccion');
       } else {
         this.fallo = true;
-        alert('El usuario no se encuentra en la base de datos');
+        alert('Los campos no coinciden con el usuario especificado');
       }
     });
   }
 
+  /*Comprobamos si existe la sesion. Si existe, se escribira el nombre de usuario en el input correspondiente
+  Aparte de eso, mostrara el footer si no se han aceptado las cookies */
   ngOnInit() {
-    //El ngOnInit servira para ocultar o no el footer si existe la cookie llamada "Cookies"
+    const sessionCookieExists = this.cookieService.check('session');
+    if (sessionCookieExists) {
+      this.sessionValue = this.cookieService.get('session');
+      this.newloginForm.patchValue({
+        Nombre: this.sessionValue
+      });
+      this.isSessionActive = true;
+    } else {
+      this.sessionValue = '';
+      this.isLoggedIn = false;
+    }
+    
     this.mostrarFooter = !this.cookieService.check('Cookies');
   }
 
-  aceptarCookies() {
-    //Esta funcion sirve para crear las cookies correspondientes si se aceptan
-    // Obtener la fecha actual
+ //Esta funcion sirve para crear las cookies correspondientes si se aceptan y activar la animacion
+  aceptarCookies(event: Event) {
+    event.preventDefault();
+  
+    // Obtenemos la fecha actual
     const fechaActual = new Date();
 
-    // Obtener la fecha de expiración (sumar 1 día a la fecha actual)
+    // Obtenemos la fecha de expiración (sumar 1 día a la fecha actual)
     const fechaExpiracion = new Date();
     fechaExpiracion.setDate(fechaActual.getDate() + 1);
-
-    // Establecer la cookie con la fecha de expiración
+  
+    // Establecemos la cookie con la fecha de expiración
     this.cookieService.set('Cookies', 'Aceptadas', fechaExpiracion);
-
-    this.mostrarFooter = false;
+  
+    const footerElement = document.querySelector('.footer');
+    if (footerElement) {
+      footerElement.classList.add('hide-animation');
+  
+      // Esperamos a que termine la animación antes de ocultar el footer
+      setTimeout(() => {
+        this.mostrarFooter = false;
+      }, 500);
+    }
   }
 
   rechazarCookies() {
-    //Esta funcion sirve apra rechazar las cookies, al hacerlo, mostrara un mensaje de alerta
+    //Esta funcion sirve para rechazar las cookies, al hacerlo, mostrara un mensaje de alerta
     alert('Debes de aceptar las cookies');
     this.mostrarFooter = true;
     return false;
@@ -128,5 +158,26 @@ export class InicioComponent implements OnInit, AfterViewInit {
   toggleMenu() {
     //Esta funcion sirve para cambiar el valor del menu.
     this.menuActive = !this.menuActive;
+  }
+
+  //Comprobamos si esta abierta la sesion.
+  tieneSesionActiva(): boolean {
+    return this.cookieService.check('session');
+  }
+
+  //Esta funcion cerrara la sesion si pulsamos el boton que se mostrara en caso e que la tengamos abierta.
+  cerrarSesion() {
+    this.cookieService.delete('session');
+    this.newloginForm.get('Nombre')?.setValue('');
+    this.sessionValue = ''; 
+    this.isLoggedIn = false;
+    this.isSessionActive = false; 
+  }
+
+  //Esta funcion mostrara la alerta si le damos al enlace de registro con la sesion abierta.
+  mostrarAlert() {
+    if (this.tieneSesionActiva()) {
+      alert('Debes cerrar sesión para acceder al registro');
+    }
   }
 }

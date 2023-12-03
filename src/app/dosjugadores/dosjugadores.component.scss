@@ -33,6 +33,29 @@ body {
   justify-content: center;
 }
 
+.botones-container button {
+  margin-right: 10px;
+}
+
+//Estilo para que el input se ponga en gris cuando no se pueda usar al tener la sesion iniciada
+.readonly-input {
+  color: #888;
+  background-color: #ccc;
+  cursor: not-allowed;
+  outline: 1px solid transparent;
+  box-shadow: none;
+  border: 1px solid #ccc;
+}
+
+//Para el boton de cerrar sesion
+.cerrarSesion {
+  background-color: rgb(196, 17, 17);
+
+  &:hover {
+    background-color: #af1818;
+  }
+}
+
 //Response para la imagen de fondo
 @media (max-width: 1200px) {
   .background-image {
