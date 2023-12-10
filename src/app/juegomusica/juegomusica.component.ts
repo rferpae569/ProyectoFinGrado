@@ -184,8 +184,7 @@ export class JuegomusicaComponent implements OnInit {
     this.numeroAleatorio = numeroAleatorio;
 
     const respuestaArray = this.nombresPeliculas[numeroAleatorio].nombre;
-    const respuestaAleatoria =
-      respuestaArray[this.generarNumeroAleatorio(respuestaArray.length)];
+    const respuestaAleatoria = respuestaArray[this.generarNumeroAleatorio(respuestaArray.length)];
     const id = this.nombresPeliculas[numeroAleatorio].id; //para pistas
     const pista = this.pistaMusica.find((item) => item.id === id)?.nombre; //Esta linea y las siguientes cogeran la pista a traves del id
     const pista2 = this.pistaMusica.find((item) => item.id === id)?.compositor;

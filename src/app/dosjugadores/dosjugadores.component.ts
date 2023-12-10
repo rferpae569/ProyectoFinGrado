@@ -77,7 +77,7 @@ export class DosjugadoresComponent implements OnInit, AfterViewInit {
   }
 
   get nombre2() {
-    //almacenamos el nombre dle jugador2
+    //almacenamos el nombre del jugador2
     return this.newloginForm.get('Nombre2');
   }
 

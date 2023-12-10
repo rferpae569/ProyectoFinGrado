@@ -104,8 +104,7 @@ export class JuegoimagendosjComponent implements OnInit {
 
     // Asignamos la sesión actual basada en el turno actual
     this.session = this.turnoActual === 1 ? this.getCookieValue('session') : '';
-    this.session2 =
-      this.turnoActual === 2 ? this.getCookieValue('session2') : '';
+    this.session2 = this.turnoActual === 2 ? this.getCookieValue('session2') : '';
 
     // Alternamos el turno para el siguiente ciclo
     this.alternarTurno();

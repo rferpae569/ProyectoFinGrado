@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./registro.component.scss'],
 })
 export class RegistroComponent {
-  mostrarContrasena: boolean = false; //creamos esta variable para mostrar la contraseña
+  mostrarContrasena: boolean = false;
   menuActive: boolean = false;
 
   newusuario: Usuarios = {
@@ -79,7 +79,7 @@ export class RegistroComponent {
   }
 
   get Passwrd() {
-    //amlacenamos la contraseña
+    //almacenamos la contraseña
     return this.newusuarioForm.get('Passwrd');
   }
 

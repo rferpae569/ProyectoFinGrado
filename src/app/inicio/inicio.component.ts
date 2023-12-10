@@ -121,7 +121,7 @@ export class InicioComponent implements OnInit, AfterViewInit {
     // Obtenemos la fecha actual
     const fechaActual = new Date();
 
-    // Obtenemos la fecha de expiración (sumar 1 día a la fecha actual)
+    // Obtenemos la fecha de expiración
     const fechaExpiracion = new Date();
     fechaExpiracion.setDate(fechaActual.getDate() + 1);
   
