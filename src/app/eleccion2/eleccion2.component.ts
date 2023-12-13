@@ -93,15 +93,15 @@ export class Eleccion2Component implements OnInit {
     const grafica2Element = document.getElementById('grafica2');
 
     if (grafica1Element && grafica2Element) {
-      html2canvas(grafica1Element).then((canvas) => {
+      html2canvas(grafica1Element, { backgroundColor: '#000000' }).then((canvas) => {
         const imgData = canvas.toDataURL('image/png');
         doc.addImage(imgData, 'PNG', 10, 20, 180, 140); // Ajustar tamaño de la primera imagen
-
-        html2canvas(grafica2Element).then((canvas2) => {
+  
+        html2canvas(grafica2Element, { backgroundColor: '#000000' }).then((canvas2) => {
           const imgData2 = canvas2.toDataURL('image/png');
           doc.addPage();
           doc.addImage(imgData2, 'PNG', 10, 20, 180, 140); // Ajustar tamaño de la segunda imagen
-
+  
           doc.save('Graficos.pdf');
         });
       });
