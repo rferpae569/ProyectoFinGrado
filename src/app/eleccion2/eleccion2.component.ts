@@ -43,12 +43,18 @@ export class Eleccion2Component implements OnInit {
   mostrarGrafica2: boolean = false;
   googleChartsLoaded: boolean = false;
   chart: any;
+  usuarioConMasPuntos: string = '';
+  hayEmpate: boolean = false;
+  session: string | null;
+  session2: string | null;
 
   constructor(
     private router: Router,
     private cookieService: CookieService,
     private servicioService: ServicioService
   ) {
+    this.session = this.cookieService.get('session');
+    this.session2 = this.cookieService.get('session2');
     // Verificamos si la cookie 'session' existe al acceder al componente
     if (!this.cookieService.check('session')) {
       // Si la cookie no existe, redirigimos al componente 'inicio'
@@ -68,6 +74,26 @@ export class Eleccion2Component implements OnInit {
     google.charts.setOnLoadCallback(() => {
       this.googleChartsLoaded = true;
     });
+
+    const sessionCookie = this.cookieService.get('session');
+    const session2Cookie = this.cookieService.get('session2');
+
+    // Verificar si existen las cookies 'session' y 'session2'
+    if (sessionCookie && session2Cookie) {
+      // Obtener los puntos de los usuarios desde las cookies
+      const puntosUsuario1 = this.cookieService.get('puntos');
+      const puntosUsuario2 = this.cookieService.get('puntos2');
+
+      // Comparar los puntos y determinar el usuario con más puntos
+      if (puntosUsuario1 > puntosUsuario2) {
+        this.usuarioConMasPuntos = sessionCookie;
+      } else if (puntosUsuario2 > puntosUsuario1) {
+        this.usuarioConMasPuntos = session2Cookie;
+      } else {
+        this.usuarioConMasPuntos = 'Empate';
+        this.hayEmpate = true;
+      }
+    }
   }
 
   guardarGraficos() {
@@ -93,18 +119,22 @@ export class Eleccion2Component implements OnInit {
     const grafica2Element = document.getElementById('grafica2');
 
     if (grafica1Element && grafica2Element) {
-      html2canvas(grafica1Element, { backgroundColor: '#000000' }).then((canvas) => {
-        const imgData = canvas.toDataURL('image/png');
-        doc.addImage(imgData, 'PNG', 10, 20, 180, 140); // Ajustar tamaño de la primera imagen
-  
-        html2canvas(grafica2Element, { backgroundColor: '#000000' }).then((canvas2) => {
-          const imgData2 = canvas2.toDataURL('image/png');
-          doc.addPage();
-          doc.addImage(imgData2, 'PNG', 10, 20, 180, 140); // Ajustar tamaño de la segunda imagen
-  
-          doc.save('Graficos.pdf');
-        });
-      });
+      html2canvas(grafica1Element, { backgroundColor: '#000000' }).then(
+        (canvas) => {
+          const imgData = canvas.toDataURL('image/png');
+          doc.addImage(imgData, 'PNG', 10, 20, 180, 140); // Ajustar tamaño de la primera imagen
+
+          html2canvas(grafica2Element, { backgroundColor: '#000000' }).then(
+            (canvas2) => {
+              const imgData2 = canvas2.toDataURL('image/png');
+              doc.addPage();
+              doc.addImage(imgData2, 'PNG', 10, 20, 180, 140); // Ajustar tamaño de la segunda imagen
+
+              doc.save('Graficos.pdf');
+            }
+          );
+        }
+      );
     }
   }
 
@@ -280,8 +310,10 @@ export class Eleccion2Component implements OnInit {
       'numero',
       'palabra',
       'puntos',
+      'puntos2',
       'listapeliculas',
       'intentos',
+      'intentos2',
       'peliculas',
       'pistas',
       'preguntas',
@@ -302,9 +334,12 @@ export class Eleccion2Component implements OnInit {
       'numero',
       'palabra',
       'puntos',
+      'puntos2',
       'listapeliculas',
       'intentos',
+      'intentos2',
       'session',
+      'session2',
       'peliculas',
       'pistas',
       'preguntas',
@@ -315,5 +350,9 @@ export class Eleccion2Component implements OnInit {
       }
     }
     this.router.navigate(['']);
+  }
+
+  get juegoTerminadoAntesDeTiempo(): boolean {
+    return this.servicioService.juegoTerminadoAntesDeTiempo;
   }
 }

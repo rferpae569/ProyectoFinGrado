@@ -347,6 +347,7 @@ export class JuegoimagenComponent implements OnInit {
 
   // Al pulsar el boton, iremos a eleccion2 por si queremos temrinar la partida antes de tiempo.
   irAEleccion2() {
+    this.servicioService.juegoTerminadoAntesDeTiempo = true;
     this.router.navigate(['/eleccion2']);
   }
 }

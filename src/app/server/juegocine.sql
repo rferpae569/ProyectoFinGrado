@@ -64,7 +64,7 @@ CREATE TABLE `correos` (
 
 LOCK TABLES `correos` WRITE;
 /*!40000 ALTER TABLE `correos` DISABLE KEYS */;
-INSERT INTO `correos` VALUES ('carlos23@gmail.com','carlos'),('juanmaEV@gmail.com','juanmaEV'),('manolo@gmail.com','manolo'),('prueba@gmail.com','prueba'),('rocio@gmail.com','rocio'),('ruben@gmail.com','ruben');
+INSERT INTO `correos` VALUES ('carlos23@gmail.com','carlos'),('juanmaEV@gmail.com','juanmaEV'),('manolo@gmail.com','manolo'),('rocio@gmail.com','rocio'),('ruben@gmail.com','ruben');
 /*!40000 ALTER TABLE `correos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -92,35 +92,8 @@ CREATE TABLE `dosjugadores` (
 
 LOCK TABLES `dosjugadores` WRITE;
 /*!40000 ALTER TABLE `dosjugadores` DISABLE KEYS */;
-INSERT INTO `dosjugadores` VALUES ('carlos','manolo'),('juanmaEV','manolo'),('manolo','carlos'),('manolo','ruben'),('rocio','carlos'),('ruben','carlos'),('ruben','juanmaEV'),('ruben','manolo');
+INSERT INTO `dosjugadores` VALUES ('carlos','manolo'),('juanmaEV','manolo'),('manolo','carlos'),('manolo','rocio'),('manolo','ruben'),('rocio','carlos'),('ruben','carlos'),('ruben','juanmaEV'),('ruben','manolo');
 /*!40000 ALTER TABLE `dosjugadores` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `dosjugadoresonline`
---
-
-DROP TABLE IF EXISTS `dosjugadoresonline`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `dosjugadoresonline` (
-  `NombreUsuario1` varchar(20) NOT NULL,
-  `NombreUsuario2` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`NombreUsuario1`),
-  KEY `NombreUsuario2` (`NombreUsuario2`),
-  CONSTRAINT `NombreUsuario1` FOREIGN KEY (`NombreUsuario1`) REFERENCES `usuarios` (`Nombre`),
-  CONSTRAINT `dosjugadoresonline_ibfk_1` FOREIGN KEY (`NombreUsuario1`) REFERENCES `usuarios` (`Nombre`),
-  CONSTRAINT `dosjugadoresonline_ibfk_2` FOREIGN KEY (`NombreUsuario2`) REFERENCES `usuarios` (`Nombre`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `dosjugadoresonline`
---
-
-LOCK TABLES `dosjugadoresonline` WRITE;
-/*!40000 ALTER TABLE `dosjugadoresonline` DISABLE KEYS */;
-/*!40000 ALTER TABLE `dosjugadoresonline` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -170,7 +143,7 @@ CREATE TABLE `numjugadas` (
 
 LOCK TABLES `numjugadas` WRITE;
 /*!40000 ALTER TABLE `numjugadas` DISABLE KEYS */;
-INSERT INTO `numjugadas` VALUES (2,22,10,20,4),(3,4,1,1,0),(4,5,6,6,0),(5,8,4,6,0),(6,28,25,25,13),(7,0,0,0,0);
+INSERT INTO `numjugadas` VALUES (2,23,11,21,4),(3,4,1,1,0),(4,5,6,6,0),(5,8,4,6,0),(6,30,27,29,16);
 /*!40000 ALTER TABLE `numjugadas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -360,7 +333,7 @@ CREATE TABLE `ranking` (
 
 LOCK TABLES `ranking` WRITE;
 /*!40000 ALTER TABLE `ranking` DISABLE KEYS */;
-INSERT INTO `ranking` VALUES (2,10,6,7,3),(3,4,3,1,0),(4,22,7,7,0),(5,7,6,9,0),(6,14,7,6,4),(7,0,0,0,0);
+INSERT INTO `ranking` VALUES (2,10,6,7,3),(3,4,3,1,0),(4,22,7,7,0),(5,7,6,9,0),(6,14,7,6,4);
 /*!40000 ALTER TABLE `ranking` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -414,7 +387,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES ('carlos','carlos*1234',2,2),('juanmaEV','juanmaEV*123',4,4),('manolo','manolo*1234',5,5),('prueba','prueba*123',7,7),('rocio','rocio*123',3,3),('ruben','ruben*123',6,6);
+INSERT INTO `usuarios` VALUES ('carlos','carlos*1234',2,2),('juanmaEV','juanmaEV*123',4,4),('manolo','manolo*1234',5,5),('rocio','rocio*123',3,3),('ruben','ruben*123',6,6);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -427,4 +400,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-12-03 21:15:08
+-- Dump completed on 2023-12-22 23:10:54

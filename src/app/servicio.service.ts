@@ -14,7 +14,6 @@ import { Juegomusica } from './model/juegomusica';
 import { Juegomusicapista } from './model/juegomusicapista';
 import { Juegospoiler } from './model/juegospoiler';
 import { Usuariosdos } from './model/usuariosdos';
-import { Usuariosdosonline } from './model/usuariosdosonline';
 //importamos los modulos
 
 @Injectable({
@@ -36,13 +35,6 @@ export class ServicioService {
     //Esta funcion sirve para leer los usuarios de dos jugadores que devuelve el archivo php de la base de datos
     return this.http.get<Usuariosdos[]>(
       `${this.url}usuarios/leerusuariodos.php`
-    );
-  }
-
-  getDatosUsuariosdosonline(): Observable<Usuariosdosonline[]>{
-    //Esta funcion sirve para leer los usuarios de dos jugadores online que devuelve el archivo php de la base de datos
-    return this.http.get<Usuariosdosonline[]>(
-      `${this.url}usuarios/leerusuariodosonline.php`
     );
   }
 
@@ -150,21 +142,6 @@ export class ServicioService {
     return this.http.post<Usuariosdos>(
       `${this.url}usuarios/insertarusuariodos.php`,
       nuevo
-    );
-  }
-
-  postDato2online(nuevo: Usuariosdosonline): Observable<Usuariosdosonline> {
-    //Esta funcion sirve para insertar los usuarios que juegan online en la base de datos y para traer sus datos y añadirlos en una sesion.
-    return this.http.post<Usuariosdosonline>(
-      `${this.url}usuarios/insertarusuariodosonline.php`,
-      nuevo
-    ).pipe(
-      map((response: any) => {
-        const nuevoNombreUsuario1 = response.NombreUsuario1;
-        const nuevoNombreUsuario2 = response.NombreUsuario2;
-        console.log('Nombre de usuario creado:', nuevoNombreUsuario1, nuevoNombreUsuario2);
-        return response;
-      })
     );
   }
 

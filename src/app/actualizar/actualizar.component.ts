@@ -105,7 +105,7 @@ export class ActualizarComponent implements OnInit {
             document.cookie.includes('session') &&
             document.cookie.includes('session2')
           ) {
-            this.router.navigate(['/elecciondosj']);
+            this.router.navigate(['/eleccion']);
           } else if (document.cookie.includes('session')) {
             this.router.navigate(['/eleccion']);
           }
@@ -142,18 +142,6 @@ export class ActualizarComponent implements OnInit {
   toggleMenu() {
     //Esta funcion sirve para cambiar el valor del menu.
     this.menuActive = !this.menuActive;
-  }
-
-  //Dependiendo del numero de sesiones que haya, ira a un sitio o a otro al pulsar en el enlace de juegos.
-  redirigirJuegos() {
-    if (
-      document.cookie.includes('session') &&
-      document.cookie.includes('session2')
-    ) {
-      this.router.navigate(['/elecciondosj']);
-    } else if (document.cookie.includes('session')) {
-      this.router.navigate(['/eleccion']);
-    }
   }
 
   //Esta funcion hara que la etiqueta a cmabie de color al pasar el raton

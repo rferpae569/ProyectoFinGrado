@@ -15,15 +15,12 @@ import { JuegoimagenComponent } from './juegoimagen/juegoimagen.component';
 import { JuegopreguntaComponent } from './juegopregunta/juegopregunta.component';
 import { JuegomusicaComponent } from './juegomusica/juegomusica.component';
 import { Eleccion2Component } from './eleccion2/eleccion2.component';
-import { ElecciondosjComponent } from './elecciondosj/elecciondosj.component';
 import { JuegoimagendosjComponent } from './juegoimagendosj/juegoimagendosj.component';
 import { JuegopreguntadosjComponent } from './juegopreguntadosj/juegopreguntadosj.component';
 import { JuegomusicadosjComponent } from './juegomusicadosj/juegomusicadosj.component';
-import { Eleccion2dosjComponent } from './eleccion2dosj/eleccion2dosj.component';
 import { JuegospoilerComponent } from './juegospoiler/juegospoiler.component';
 import { JuegospoilerdosjComponent } from './juegospoilerdosj/juegospoilerdosj.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DosjugadoresonlineComponent } from './dosjugadoresonline/dosjugadoresonline.component';
 //importamos los modules y los ocmponentes correspondientes
 
 @NgModule({
@@ -39,14 +36,11 @@ import { DosjugadoresonlineComponent } from './dosjugadoresonline/dosjugadoreson
     JuegopreguntaComponent,
     JuegomusicaComponent,
     Eleccion2Component,
-    ElecciondosjComponent,
     JuegoimagendosjComponent,
     JuegopreguntadosjComponent,
     JuegomusicadosjComponent,
-    Eleccion2dosjComponent,
     JuegospoilerComponent,
     JuegospoilerdosjComponent,
-    DosjugadoresonlineComponent,
   ],
   imports: [
     BrowserModule,

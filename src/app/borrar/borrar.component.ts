@@ -131,18 +131,6 @@ export class BorrarComponent implements OnInit {
     this.router.navigate(['']);
   }
 
-  //Dependiendo del numero de sesiones que haya, ira a un sitio o a otro al pulsar en el enlace de juegos.
-  redirigirJuegos() {
-    if (
-      document.cookie.includes('session') &&
-      document.cookie.includes('session2')
-    ) {
-      this.router.navigate(['/elecciondosj']);
-    } else if (document.cookie.includes('session')) {
-      this.router.navigate(['/eleccion']);
-    }
-  }
-
   //Esta funcion hara que la etiqueta a cmabie de color al pasar el raton
   cambiarColor(nuevoColor: string) {
     const linkElement = document.querySelector('a');

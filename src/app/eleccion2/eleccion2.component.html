@@ -1,6 +1,26 @@
 <div>
   <div class="container">
-    <h1 class="text-center my-4">El juego ha terminado</h1>
+    <h1
+      class="text-center my-4"
+      *ngIf="!juegoTerminadoAntesDeTiempo && (session || session2)"
+    >
+      El juego ha terminado
+    </h1>
+    <h1
+      class="text-center my-4"
+      *ngIf="!hayEmpate && !juegoTerminadoAntesDeTiempo && session && session2"
+    >
+      El ganador es: {{ usuarioConMasPuntos }}
+    </h1>
+    <h1 class="text-center my-4" *ngIf="juegoTerminadoAntesDeTiempo">
+      El juego ha acabado antes de tiempo
+    </h1>
+    <h1
+      class="text-center my-4"
+      *ngIf="hayEmpate && !juegoTerminadoAntesDeTiempo"
+    >
+      Empate
+    </h1>
     <h1 class="text-center my-4">¿Desea jugar otra vez o a otro juego?</h1>
     <div class="d-flex justify-content-center">
       <form method="post" class="d-flex flex-column">
@@ -42,7 +62,14 @@
     </div>
 
     <div class="graficas-contenedor">
-      <div id="grafica1" [@fadeInOut]="mostrarGrafica ? 'active' : 'inactive'"></div>
-      <div id="grafica2" [@fadeInOut]="mostrarGrafica2 ? 'active' : 'inactive'"></div>
+      <div
+        id="grafica1"
+        [@fadeInOut]="mostrarGrafica ? 'active' : 'inactive'"
+      ></div>
+      <div
+        id="grafica2"
+        [@fadeInOut]="mostrarGrafica2 ? 'active' : 'inactive'"
+      ></div>
     </div>
+  </div>
 </div>

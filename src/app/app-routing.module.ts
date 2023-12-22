@@ -10,14 +10,11 @@ import { JuegoimagenComponent } from './juegoimagen/juegoimagen.component';
 import { JuegopreguntaComponent } from './juegopregunta/juegopregunta.component';
 import { JuegomusicaComponent } from './juegomusica/juegomusica.component';
 import { Eleccion2Component } from './eleccion2/eleccion2.component';
-import { ElecciondosjComponent } from './elecciondosj/elecciondosj.component';
 import { JuegoimagendosjComponent } from './juegoimagendosj/juegoimagendosj.component';
 import { JuegomusicadosjComponent } from './juegomusicadosj/juegomusicadosj.component';
-import { Eleccion2dosjComponent } from './eleccion2dosj/eleccion2dosj.component';
 import { JuegopreguntadosjComponent } from './juegopreguntadosj/juegopreguntadosj.component';
 import { JuegospoilerComponent } from './juegospoiler/juegospoiler.component';
 import { JuegospoilerdosjComponent } from './juegospoilerdosj/juegospoilerdosj.component';
-import { DosjugadoresonlineComponent } from './dosjugadoresonline/dosjugadoresonline.component';
 //importamos los modulos y los componentes necesarios
 
 const routes: Routes = [
@@ -32,14 +29,11 @@ const routes: Routes = [
   { path: 'juegopregunta', component:JuegopreguntaComponent},
   { path: 'juegomusica', component:JuegomusicaComponent},
   { path: 'eleccion2', component:Eleccion2Component},
-  { path: 'elecciondosj', component:ElecciondosjComponent},
   { path: 'juegoimagendosj', component:JuegoimagendosjComponent},
   { path: 'juegopreguntadosj', component:JuegopreguntadosjComponent},
   { path: 'juegomusicadosj', component:JuegomusicadosjComponent},
-  { path: 'eleccion2dosj', component:Eleccion2dosjComponent},
   { path: 'juegospoiler', component:JuegospoilerComponent},
   { path: 'juegospoilerdosj', component:JuegospoilerdosjComponent},
-  {path: 'dosjugadoresonline', component:DosjugadoresonlineComponent}
   //Creamos las rutas para cada componente
 
 ];

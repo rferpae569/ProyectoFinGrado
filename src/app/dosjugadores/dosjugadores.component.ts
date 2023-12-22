@@ -159,7 +159,7 @@ export class DosjugadoresComponent implements OnInit, AfterViewInit {
         this.cookieService.set('session2', data[1].Nombre, expirationDate);
 
         this.isLoggedIn = true;
-        this.router.navigateByUrl('elecciondosj');
+        this.router.navigateByUrl('eleccion');
       } else {
         alert('Inicio de sesión fallido. Comprueba los datos ingresados.');
       }
