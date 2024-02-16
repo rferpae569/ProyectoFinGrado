@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { InicioComponent } from './inicio/inicio.component';
 import { RegistroComponent } from './registro/registro.component';
@@ -6,15 +6,21 @@ import { ActualizarComponent } from './actualizar/actualizar.component';
 import { BorrarComponent } from './borrar/borrar.component';
 import { DosjugadoresComponent } from './dosjugadores/dosjugadores.component';
 import { EleccionComponent } from './eleccion/eleccion.component';
-import { JuegoimagenComponent } from './juegoimagen/juegoimagen.component';
-import { JuegopreguntaComponent } from './juegopregunta/juegopregunta.component';
-import { JuegomusicaComponent } from './juegomusica/juegomusica.component';
+import { ClasificacionComponent } from './clasificacion/clasificacion.component';
 import { Eleccion2Component } from './eleccion2/eleccion2.component';
-import { JuegoimagendosjComponent } from './juegoimagendosj/juegoimagendosj.component';
-import { JuegomusicadosjComponent } from './juegomusicadosj/juegomusicadosj.component';
-import { JuegopreguntadosjComponent } from './juegopreguntadosj/juegopreguntadosj.component';
-import { JuegospoilerComponent } from './juegospoiler/juegospoiler.component';
-import { JuegospoilerdosjComponent } from './juegospoilerdosj/juegospoilerdosj.component';
+import { JuegoimagenfantasiaComponent } from './juegoimagenfantasia/juegoimagenfantasia.component';
+import { CarteleraComponent } from './cartelera/cartelera.component';
+import { JuegoimagenterrorComponent } from './juegoimagenterror/juegoimagenterror.component';
+import { JuegoimagenfantasiadosjComponent } from './juegoimagenfantasiadosj/juegoimagenfantasiadosj.component';
+import { JuegoimagenterrordosjComponent } from './juegoimagenterrordosj/juegoimagenterrordosj.component';
+import { JuegopreguntafantasiaComponent } from './juegopreguntafantasia/juegopreguntafantasia.component';
+import { JuegopreguntaterrorComponent } from './juegopreguntaterror/juegopreguntaterror.component';
+import { JuegopreguntaterrordosjComponent } from './juegopreguntaterrordosj/juegopreguntaterrordosj.component';
+import { JuegopreguntafantasiadosjComponent } from './juegopreguntafantasiadosj/juegopreguntafantasiadosj.component';
+import { JuegomusicafantasiaComponent } from './juegomusicafantasia/juegomusicafantasia.component';
+import { JuegomusicafantasiadosjComponent } from './juegomusicafantasiadosj/juegomusicafantasiadosj.component';
+import { JuegomusicaterrorComponent } from './juegomusicaterror/juegomusicaterror.component';
+import { JuegomusicaterrordosjComponent } from './juegomusicaterrordosj/juegomusicaterrordosj.component';
 //importamos los modulos y los componentes necesarios
 
 const routes: Routes = [
@@ -25,15 +31,21 @@ const routes: Routes = [
   { path: 'borrar', component: BorrarComponent},
   { path: 'dosjugadores', component:DosjugadoresComponent},
   { path: 'eleccion', component:EleccionComponent},
-  { path: 'juegoimagen', component:JuegoimagenComponent},
-  { path: 'juegopregunta', component:JuegopreguntaComponent},
-  { path: 'juegomusica', component:JuegomusicaComponent},
+  { path: 'clasificacion', component:ClasificacionComponent},
+  { path: 'cartelera', component:CarteleraComponent},
+  { path: 'juegoimagenfantasia', component:JuegoimagenfantasiaComponent},
+  { path: 'juegoimagenterror', component:JuegoimagenterrorComponent},
+  { path: 'juegopreguntafantasia', component:JuegopreguntafantasiaComponent},
+  { path: 'juegopreguntafantasiadosj', component:JuegopreguntafantasiadosjComponent},
+  { path: 'juegopreguntaterror', component:JuegopreguntaterrorComponent},
+  { path: 'juegopreguntaterrordosj', component:JuegopreguntaterrordosjComponent},
   { path: 'eleccion2', component:Eleccion2Component},
-  { path: 'juegoimagendosj', component:JuegoimagendosjComponent},
-  { path: 'juegopreguntadosj', component:JuegopreguntadosjComponent},
-  { path: 'juegomusicadosj', component:JuegomusicadosjComponent},
-  { path: 'juegospoiler', component:JuegospoilerComponent},
-  { path: 'juegospoilerdosj', component:JuegospoilerdosjComponent},
+  { path: 'juegoimagenfantasiadosj', component:JuegoimagenfantasiadosjComponent},
+  { path: 'juegoimagenterrordosj', component:JuegoimagenterrordosjComponent},
+  { path: 'juegomusicafantasia', component: JuegomusicafantasiaComponent},
+  { path: 'juegomusicafantasiadosj', component: JuegomusicafantasiadosjComponent},
+  { path: 'juegomusicaterror', component: JuegomusicaterrorComponent},
+  { path: 'juegomusicaterrordosj', component: JuegomusicaterrordosjComponent}
   //Creamos las rutas para cada componente
 
 ];

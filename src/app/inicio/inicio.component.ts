@@ -1,4 +1,4 @@
-import {Component, OnInit, ElementRef, ViewChild, AfterViewInit,} from '@angular/core';
+import {Component, OnInit, AfterViewInit,} from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Usuarios } from '../model/usuarios';

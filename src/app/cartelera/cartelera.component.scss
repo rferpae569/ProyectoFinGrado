@@ -1,0 +1,216 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #ad3955;
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #ad3955;
+}
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+body {
+  background: #191919;
+}
+
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, #1c0025, #000000);
+  background-size: 200% 200%;
+  background-repeat: no-repeat;
+}
+.background .gradient {
+  position: absolute;
+  top: calc(50% - 2rem);
+  left: calc(50% - 8rem);
+  transform: translate3d(-50%, -50%, 0);
+  width: 30rem;
+  height: 25rem;
+  background: radial-gradient(
+    circle at center,
+    rgb(225 199 98 / 16%),
+    rgba(28, 0, 37, 0) 10rem
+  );
+  filter: blur(20px);
+}
+.background .gradient-2 {
+  position: absolute;
+  top: calc(50% + 5rem);
+  left: calc(50% + 8rem);
+  transform: translate3d(-50%, -50%, 0);
+  width: 12rem;
+  height: 17rem;
+  background: radial-gradient(
+    circle at center,
+    rgb(33 165 123 / 16%),
+    rgba(28, 0, 37, 0) 10rem
+  );
+  filter: blur(20px);
+}
+
+.scroller {
+  position: relative;
+  height: 500vh;  
+  width: 100%;
+}
+
+.container {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  position: sticky;
+  display: grid;
+  place-items: center;  
+  perspective: 6400px;
+  transform-style: preserve-3d;	
+}
+
+.movies {
+  margin-top: 10rem;
+  display: flex;
+  flex-direction: column;
+  transform-style: preserve-3d;
+  perspective: 6400px;
+  gap: 5rem;
+  transition: transform 0.75s ease-out;
+  transform: translateY(0%) translateZ(-300px) rotateY(18deg) rotateX(-12deg) rotateZ(-3deg);	
+}
+
+.movies {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Esto creará 5 columnas */
+  gap: 22rem; /* Espacio entre las películas */
+}
+
+.movie {
+  margin-top: 0rem;
+  margin-bottom: 0rem;
+  cursor: pointer;
+  position: relative;
+  perspective: 6400px;
+  transform-style: preserve-3d;
+  transform: rotateX(0deg) translate3d(0rem, 0rem, 0rem);	
+  transition: transform 0.75s ease-in-out, margin 1.5s linear;
+}
+
+.movie {
+  width: 100%; /* Cada película ocupará el 100% del ancho de su columna */
+}
+.movie.selected {
+    margin-top: 22rem;
+    margin-bottom: 10rem;
+    transform: rotateX(-90deg) translate3d(0rem,15rem,12rem);
+    transition: transform 1.5s ease-in-out, margin 0.75s linear;
+    perspective: 6400px;  
+}
+.movie div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* border: 2px solid #fff; */
+  background: #e1e0df;
+  box-shadow: 0 8px 16px -8px #000, inset 0px 2px 16px #FFF, inset 0px -2px 16px -4px #000;
+}
+.movie div:nth-child(1) {
+  width: 20rem;
+  height: 4rem;
+  display: flex;
+  padding: 0.75rem;
+}
+.movie div:nth-child(1) span {
+  margin: auto 0;
+  font-size: 1.25rem;
+  user-select: none;
+}
+.movie div:nth-child(2) {
+  width: 35rem;
+  height: 4rem;
+  transform: rotatey(90deg) translate3d(17.5rem, 0, 2.5rem)
+}
+.movie div:nth-child(3) {
+  width: 35rem;
+  height: 4rem;
+  transform: rotatey(90deg) translate3d(17.5rem, 0, -17.5rem);
+}
+.movie div:nth-child(4) {
+  width: 20rem;
+  height: 4rem;
+  transform: translate3d(0, 0, -35rem);
+}
+.movie div:nth-child(5) {
+  width: 20rem;
+  height: 35rem;
+  transform: rotatex(90deg) translate3d(0, -17.5rem, 13.5rem);
+  box-shadow: none;
+}
+.movie div:nth-child(6) {
+  width: 20rem;
+  height: 35rem;
+  transform: rotatex(90deg) translate3d(0, -17.5rem, 17.5rem);
+  box-shadow: none;
+  background-size: cover;
+  background-position: bottom center;
+}
+
+.logo-wrapper {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  animation: fade-in 0.8s linear forwards;
+}
+@keyframes fade-in {
+  to {
+    opacity: 1;
+  }
+}
+.logo {
+  width: 3rem;
+  height: auto;
+  color: #fff;
+}
+.circle {
+  position: absolute;
+  width: 4rem;
+  height: 4rem;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  stroke-dasharray: 52;
+  stroke-dashoffset: 40;
+  animation: rotate 3s linear infinite;
+  filter: drop-shadow(0px 0px 6px #fff);
+}
+@keyframes rotate {
+  from {
+    transform: translate3d(-50%, -50%, 0) rotate(0deg);
+  }
+  to {
+    transform: translate3d(-50%, -50%, 0) rotate(360deg);
+  }
+}

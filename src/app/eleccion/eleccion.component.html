@@ -1,57 +1,80 @@
 <div class="background-image">
+  <header class="header">
+    <div class="left-content">
+      <img src="../../assets/icono/AdivinaLapeliculaLogo.png" alt="ImagenlogoAdivinaLaPelicula" width="200" height="200">
+    </div>
+    <div class="center-content">
+    <ul class="horizontal-list">
+      <li>Juegos existentes</li>
+      <li><a routerLink="/cartelera">Cartelera</a></li>
+      <li><a routerLink="/clasificacion">Clasificacion</a></li>
+    </ul>
+  </div>
+  <div class="right-content">
+    <p class="dropdown-toggle" (click)="toggleDropdown()">Usuario: <span class="username">{{usuariosession}}</span>
+      <ng-container *ngIf="usuariosession2"> y {{usuariosession2}}</ng-container>
+    </p>    
+    <ul class="dropdown-menu"  [ngClass]="{'show': isDropdownOpen, 'hide': !isDropdownOpen}">
+      <li><a routerLink="/actualizar">Actualizar Datos</a></li>
+      <li><a routerLink="/borrar">Borrar Cuenta</a></li>
+      <li><a routerLink="/irAInicio" (click)="irAInicio()">Cerrar Sesion</a></li>
+    </ul>
+  </div>
+  </header>
   <div class="container">
     <!--Creamos los enlaces para los distintos juegos-->
-    <div class="btn-group" role="group" aria-label="Enlaces a juegos">
-      <a
-        class="btn btn-secondary"
-        (click)="incrementarJugadasImagen()"
-        routerLink="/juegoimagen"
-        >Adivina la película a través de imágenes (Fácil)</a
-      >
-      <a
-        class="btn btn-secondary"
-        (click)="incrementarJugadasPreguntas()"
-        routerLink="/juegopregunta"
-        >Adivina la película a través de preguntas (Normal)</a
-      >
-      <a
-        class="btn btn-secondary"
-        (click)="incrementarJugadasMusica()"
-        routerLink="/juegomusica"
-        >Adivina la película a través de su música (Difícil)</a
-      >
-    </div>
-    <div class="nav-container">
-      <button
-        class="menu-toggle"
-        [class.active]="menuActive"
-        (click)="toggleMenu()"
-      >
-        ☰
-      </button>
-      <nav [class.active]="menuActive">
-        <button (click)="irAInicio()" class="cerrar-sesion">
-          Cerrar Sesion
-        </button>
-        <button routerLink="/actualizar" class="actualizar">
-          Actualizar Datos
-        </button>
-        <button routerLink="/borrar" class="borrar">Borrar Cuenta</button>
-      </nav>
-    </div>
-    <div
-      class="btn-group enlaces-juegos2"
-      role="group"
-      aria-label="Enlaces a juegos 2"
-    >
-      <a
-        class="btn btn-secondary"
-        (click)="incrementarJugadasSpoiler()"
-        routerLink="/juegospoiler"
-        >Adivina la película a base de spoiler (Normal)</a
-      >
-      <a class="btn btn-secondary">Juego en proceso</a>
-      <a class="btn btn-secondary">Juego en proceso</a>
+      <div class="pricing-wrapper clearfix">
+        <div class="pricing-table">
+          <h3 class="pricing-title">Juego Imagenes</h3>
+          <!-- Lista de Caracteristicas / Propiedades -->
+          <ul class="table-list hidden-list">
+            <li> <a (click)="incrementarJugadasImagenFantasia()" routerLink="/juegoimagenfantasia"
+              >Adivina las películas de fantasia a través de imágenes</a
+            ></li>
+            <li> <a (click)="incrementarJugadasImagenTerror()" routerLink="/juegoimagenterror"
+              >Adivina las películas de terror  a través de imágenes</a
+            ></li>
+            <li>Se añadiran juegos en un futuro no muy, muy lejano</li>
+          </ul>
+        </div>
+        <div class="pricing-table recommended">
+          <h3 class="pricing-title">Juego Preguntas</h3>
+          <!-- Lista de Caracteristicas / Propiedades -->
+          <ul class="table-list">
+            <li>
+              <a
+                (click)="incrementarJugadasPreguntasFantasia()"
+                routerLink="/juegopreguntafantasia"
+                >Adivina las películas de fantasia a través de preguntas</a
+              >
+            </li>
+            <li>
+              <a
+                (click)="incrementarJugadasPreguntasTerror()"
+                routerLink="/juegopreguntaterror"
+                >Adivina las películas de terror a través de preguntas</a
+              >
+            </li>
+            <li>Se añadiran juegos en un futuro no muy, muy lejano</li>
+          </ul>
+        </div>
+        <div class="pricing-table">
+          <h3 class="pricing-title">Juego Canciones</h3>
+          <!-- Lista de Caracteristicas / Propiedades -->
+          <ul class="table-list">
+            <li>
+              <a (click)="incrementarJugadasMusicaFantasia()" routerLink="/juegomusicafantasia"
+                >Adivina la película de fantasia a través de su música</a
+              >
+            </li>
+            <li>
+              <a (click)="incrementarJugadasMusicaTerror()" routerLink="/juegomusicaterror"
+                >Adivina la película de terror a través de su música</a
+              >
+            </li>
+            <li>Se añadiran juegos en un futuro no muy, muy lejano</li>
+          </ul>
+        </div>
     </div>
   </div>
 </div>

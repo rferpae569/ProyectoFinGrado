@@ -4,7 +4,6 @@ import { CookieService } from 'ngx-cookie-service';
 import { ServicioService } from '../servicio.service';
 import { Ranking } from '../model/ranking';
 import { Numjugadas } from '../model/numjugadas';
-import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 import {trigger, state, style, animate, transition} from '@angular/animations';
 import 'jspdf-autotable';
@@ -96,48 +95,6 @@ export class Eleccion2Component implements OnInit {
     }
   }
 
-  guardarGraficos() {
-    //Creamos esta funcion para crear el pdf cuando pulemos el boton y guardar los graficos
-    const doc = new jsPDF();
-    const title = 'Gráficos de "AdivinaLaPelicula"';
-
-    // Configurar el estilo del título
-    doc.setFont('Arial', 'bold');
-    doc.setFontSize(16);
-
-    // Calcular el ancho del título
-    const titleWidth = doc.getTextWidth(title);
-
-    // Calcular la posición horizontal centrada del título
-    const pdfWidth = doc.internal.pageSize.getWidth();
-    const titleX = (pdfWidth - titleWidth) / 2;
-
-    // Agregar el título al PDF en la posición centrada
-    doc.text(title, titleX, 10);
-
-    const grafica1Element = document.getElementById('grafica1');
-    const grafica2Element = document.getElementById('grafica2');
-
-    if (grafica1Element && grafica2Element) {
-      html2canvas(grafica1Element, { backgroundColor: '#000000' }).then(
-        (canvas) => {
-          const imgData = canvas.toDataURL('image/png');
-          doc.addImage(imgData, 'PNG', 10, 20, 180, 140); // Ajustar tamaño de la primera imagen
-
-          html2canvas(grafica2Element, { backgroundColor: '#000000' }).then(
-            (canvas2) => {
-              const imgData2 = canvas2.toDataURL('image/png');
-              doc.addPage();
-              doc.addImage(imgData2, 'PNG', 10, 20, 180, 140); // Ajustar tamaño de la segunda imagen
-
-              doc.save('Graficos.pdf');
-            }
-          );
-        }
-      );
-    }
-  }
-
   toggleGrafica() {
     //Con esta funcion creamos el grafico de los puntos
     if (!this.googleChartsLoaded) {
@@ -157,10 +114,12 @@ export class Eleccion2Component implements OnInit {
       setTimeout(() => {
         const data = new google.visualization.DataTable();
         data.addColumn('string', 'nombre');
-        data.addColumn('number', 'Imagen');
-        data.addColumn('number', 'Pregunta');
-        data.addColumn('number', 'Musica');
-        data.addColumn('number', 'Spoiler');
+        data.addColumn('number', 'ImagenFantasia');
+        data.addColumn('number', 'ImagenTerror');
+        data.addColumn('number', 'PreguntaFantasia');
+        data.addColumn('number', 'PreguntaTerror');
+        data.addColumn('number', 'MusicaFantasia');
+        data.addColumn('number', 'MusicaTerror');
 
         const options = {
           title: 'Ranking de Puntos',
@@ -204,10 +163,12 @@ export class Eleccion2Component implements OnInit {
           this.datos = datos;
           const rows = this.datos.map((dato: any) => [
             dato.nombre,
-            dato.PuntosImagen,
-            dato.PuntosPreguntas,
-            dato.PuntosMusica,
-            dato.PuntosSpoiler,
+            dato.PuntosImagenFantasia,
+            dato.PuntosImagenTerror,
+            dato.PuntosPreguntasFantasia,
+            dato.PuntosPreguntasTerror,
+            dato.PuntosMusicaFantasia,
+            dato.PuntosMusicaTerror,
           ]);
           data.addRows(rows);
           this.chart.draw(data, options);
@@ -245,28 +206,38 @@ export class Eleccion2Component implements OnInit {
           data.addColumn('number', 'Puntos');
 
           // Calcular la suma de puntos por categoría
-          const jugadasimagen = this.datos2.reduce(
-            (total, dato2) => total + dato2.JugadasImagen,
+          const JugadasImagenFantasia = this.datos2.reduce(
+            (total, dato2) => total + dato2.JugadasImagenFantasia,
             0
           );
-          const jugadasPreguntas = this.datos2.reduce(
-            (total, dato2) => total + dato2.JugadasPreguntas,
+          const JugadasImagenTerror = this.datos2.reduce(
+            (total, dato2) => total + dato2.JugadasImagenTerror,
             0
           );
-          const jugadasMusica = this.datos2.reduce(
-            (total, dato2) => total + dato2.JugadasMusica,
+          const jugadasPreguntasFantasia = this.datos2.reduce(
+            (total, dato2) => total + dato2.JugadasPreguntasFantasia,
             0
           );
-          const jugadasSpoiler = this.datos2.reduce(
-            (total, dato2) => total + dato2.JugadasSpoiler,
+          const jugadasPreguntasTerror = this.datos2.reduce(
+            (total, dato2) => total + dato2.JugadasPreguntasTerror,
+            0
+          );
+          const jugadasMusicaFantasia = this.datos2.reduce(
+            (total, dato2) => total + dato2.JugadasMusicaFantasia,
+            0
+          );
+          const jugadasMusicaTerror = this.datos2.reduce(
+            (total, dato2) => total + dato2.JugadasMusicaTerror,
             0
           );
 
           // Llenar los datos de la tabla
-          data.addRow(['Imagen', jugadasimagen]);
-          data.addRow(['Pregunta', jugadasPreguntas]);
-          data.addRow(['Música', jugadasMusica]);
-          data.addRow(['Spoiler', jugadasSpoiler]);
+          data.addRow(['ImagenFantasia', JugadasImagenFantasia]);
+          data.addRow(['ImagenTerror', JugadasImagenTerror]);
+          data.addRow(['PreguntaFantasia', jugadasPreguntasFantasia]);
+          data.addRow(['PreguntaTerror', jugadasPreguntasTerror]);
+          data.addRow(['MúsicaFantasia', jugadasMusicaFantasia]);
+          data.addRow(['MúsicaTerror', jugadasMusicaTerror]);
 
           const options = {
             title: 'Porcentaje Veces jugadas',

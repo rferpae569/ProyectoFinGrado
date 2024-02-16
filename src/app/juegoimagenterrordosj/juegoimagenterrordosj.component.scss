@@ -1,0 +1,104 @@
+.background-image {
+    //definimos la imagen de fondo
+    background-image: url("../../assets/fondos/fondojuegos.jpg");
+    background-size: 100% 100%;
+    background-attachment: scroll;
+    overflow: auto;
+    height: 100%;
+  }
+  
+  h1,
+  label,
+  li {
+    //especificamos el color blanco para las siguientes etiquetas
+    color: white;
+  }
+  
+  .container {
+    //Posicionamos el div a traves de una clase
+    position: relative;
+    z-index: 1;
+    margin-top: 0;
+  }
+  
+  .altoimagen {
+    //Declaramos un alto y un ancho a la imagen a traves de una clase
+    height: 300px;
+    width: 600px;
+  }
+  
+  .user-section {
+    //Le damos un estilo flexible al div, le damos un margen inferior, y distribuimos los espacios entre los elementos
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  .text-left {
+    //El texto del div con esta clase se pondra a la izquierda
+    text-align: left;
+  }
+  
+  .text-right {
+    //El texto del div con esta clase se pondra a la derecha
+    text-align: right;
+  }
+  
+  /* Estilos para el contenedor de imágenes */
+  .image-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Estilos para la imagen del icono utilizada para los intentos*/
+  .img-intento,
+  .img-intento2 {
+    width: 30px;
+    height: 30px;
+    filter: invert(100%);
+    margin-right: 10px;
+    padding: 5px;
+  }
+  
+  button {
+    margin-right: 15px;
+  }
+  
+  //Response para la imagen de fondo
+  @media (max-width: 1200px) {
+    .background-image {
+      background-size: 100% 100%;
+    }
+  }
+  
+  /*Para que haya un poco de margen entre los dos botones con el metodo responsive*/
+  @media (max-width: 767px) {
+    .text-center button:last-child {
+      margin-top: 5px;
+    }
+  }
+  
+  //Estilos para las animaciones
+  .animate-left {
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(0);
+  }
+  
+  .animate-right {
+    transition: transform 0.2s ease-in-out;
+    transform: translateX(200%);
+  }
+  
+  .animate-enter-left {
+    animation: entradaDesdeIzquierda 0.5s ease-in-out;
+  }
+  
+  @keyframes entradaDesdeIzquierda {
+    from {
+      transform: translateX(-180%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }

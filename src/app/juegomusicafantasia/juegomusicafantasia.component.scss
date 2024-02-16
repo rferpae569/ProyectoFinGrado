@@ -1,0 +1,131 @@
+.background-image {
+    //definimos la imagen de fondo
+    background-image: url("../../assets/fondos/fondojuegos.jpg");
+    background-size: 100% 100%;
+    background-attachment: scroll;
+    overflow: auto;
+    height: 100%;
+  }
+  
+  h1,
+  label,
+  li {
+    //especificamos el color blanco para las siguientes etiquetas
+    color: white;
+  }
+  
+  .container {
+    //Posicionamos el div a traves de una clase
+    position: relative;
+    z-index: 1;
+    margin-top: 0;
+  }
+  
+  /* Estilo moderno para el elemento audio */
+  audio {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 400px;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Creamos un estilo para las tablas*/
+  .table-style {
+    background-color: #f2f2f2;
+    border: 1px solid #ddd;
+    color: #333;
+    text-align: left;
+    margin: 0 auto;
+    width: 80%;
+    max-width: 800px;
+    border-spacing: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /*Especificamos un estilo para los th y los td*/
+  .table-style th {
+    background-color: #3498db;
+    color: white;
+  }
+  
+  .table-style th,
+  .table-style td {
+    padding: 15px;
+    text-align: center;
+    border: 1px solid #ddd;
+  }
+  
+  /* Cambio de color al pasar el ratón sobre las filas */
+  .table-style tr:hover {
+    background-color: #e0e0e0;
+    transition: background-color 0.3s;
+  }
+  
+  /* Estilos para el contenedor de imágenes */
+  .image-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Estilos para la imagen del icono utilizada para los intentos*/
+  .img-intento {
+    width: 30px;
+    height: 30px;
+    filter: invert(100%);
+    margin-right: 10px;
+    padding: 5px;
+  }
+  
+  button {
+    margin-right: 15px;
+  }
+  
+  .alert-info {
+    display: block;
+    overflow: hidden;
+  }
+  
+  //Response para la imagen de fondo
+  @media (max-width: 1200px) {
+    .background-image {
+      background-size: 100% 100%;
+    }
+  }
+  
+  /*Para que haya un poco de margen entre los dos botones con el metodo responsive*/
+  @media (max-width: 767px) {
+    .text-center button:last-child {
+      margin-top: 5px;
+    }
+  }
+  
+  //Estilos para las animaciones
+  .animate-left {
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(0);
+  }
+  
+  .animate-right {
+    transition: transform 0.2s ease-in-out;
+    transform: translateX(200%);
+  }
+  
+  .animate-enter-left {
+    animation: entradaDesdeIzquierda 0.5s ease-in-out;
+  }
+  
+  @keyframes entradaDesdeIzquierda {
+    from {
+      transform: translateX(-200%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
