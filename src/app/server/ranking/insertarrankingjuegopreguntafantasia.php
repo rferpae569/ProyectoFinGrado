@@ -63,4 +63,3 @@ $puntos=$params->puntos;
         )
     ));
 }
-?>

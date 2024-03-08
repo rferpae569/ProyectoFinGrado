@@ -1,0 +1,65 @@
+.background-image {
+    background-image: url("../../assets/fondos/fondoClasificacion.jpg");
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 140vh;
+    margin: 0;
+    padding: 0; 
+}
+
+.container {
+    background-color: rgba(212, 212, 212, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 600px; 
+    margin: auto; 
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.form-label {
+    font-weight: bold;
+}
+
+.form-control, .form-select, .btn {
+    border-radius: 0; 
+}
+
+.btn-primary {
+    background-color: #007bff; 
+    border-color: #007bff; 
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3; 
+}
+
+.form-check-input[type="radio"],
+.form-check-input[type="checkbox"] {
+    margin-top: 0;
+}
+
+.gris {
+    background-color: #f2f2f2; 
+    color: #6c757d; 
+    pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 90%;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 576px) {
+  .container {
+    width: 95%;
+  }
+}
+
+  

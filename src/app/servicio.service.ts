@@ -13,6 +13,7 @@ import { Juegopreguntapista } from './model/juegopreguntapista';
 import { Juegomusica } from './model/juegomusica';
 import { Juegomusicapista } from './model/juegomusicapista';
 import { Usuariosdos } from './model/usuariosdos';
+import { Encuesta } from './model/encuesta';
 //importamos los modulos
 
 @Injectable({
@@ -124,6 +125,13 @@ export class ServicioService {
     );
   }
 
+  getEncuesta(): Observable<Encuesta[]>{
+    return this.http.get<Encuesta[]>(
+      `${this.url}encuesta/leerencuesta.php`
+    )
+  }
+
+
   getClasificacion(nuevo?: any): Observable<any> {
     return this.http.get(`${this.url}ranking/leerRankingClasificacion.php`, nuevo);
   }
@@ -170,6 +178,13 @@ export class ServicioService {
     //Esta funcion sirve para incrementar el numero de jugadas del juego de las canciones de terror en la base de datos gracias al contenido del archivo php
     return this.http.post(
       `${this.url}numjugadas/incrementarjugadamusicaterror.php`,
+      nuevo
+    );
+  }
+
+  postEncuesta(nuevo: Encuesta): Observable<Encuesta>{
+    return this.http.post<Encuesta>(
+      `${this.url}encuesta/insertarencuesta.php`,
       nuevo
     );
   }

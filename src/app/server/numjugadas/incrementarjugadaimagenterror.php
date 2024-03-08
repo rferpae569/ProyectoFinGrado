@@ -46,4 +46,3 @@ try {
     echo json_encode(array('error' => array('msg' => $e->getMessage(), 'code' => $e->getCode())));
     die();
 }
-?>

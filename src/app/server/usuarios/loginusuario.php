@@ -35,4 +35,3 @@ $params = json_decode($json);
         )
     ));
 }
-?>

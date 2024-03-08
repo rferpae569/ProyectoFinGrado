@@ -21,6 +21,7 @@ import { JuegomusicafantasiaComponent } from './juegomusicafantasia/juegomusicaf
 import { JuegomusicafantasiadosjComponent } from './juegomusicafantasiadosj/juegomusicafantasiadosj.component';
 import { JuegomusicaterrorComponent } from './juegomusicaterror/juegomusicaterror.component';
 import { JuegomusicaterrordosjComponent } from './juegomusicaterrordosj/juegomusicaterrordosj.component';
+import { FormularioencuestaComponent } from './formularioencuesta/formularioencuesta.component';
 //importamos los modulos y los componentes necesarios
 
 const routes: Routes = [
@@ -45,7 +46,8 @@ const routes: Routes = [
   { path: 'juegomusicafantasia', component: JuegomusicafantasiaComponent},
   { path: 'juegomusicafantasiadosj', component: JuegomusicafantasiadosjComponent},
   { path: 'juegomusicaterror', component: JuegomusicaterrorComponent},
-  { path: 'juegomusicaterrordosj', component: JuegomusicaterrordosjComponent}
+  { path: 'juegomusicaterrordosj', component: JuegomusicaterrordosjComponent},
+  { path: 'encuesta', component:FormularioencuestaComponent}
   //Creamos las rutas para cada componente
 
 ];

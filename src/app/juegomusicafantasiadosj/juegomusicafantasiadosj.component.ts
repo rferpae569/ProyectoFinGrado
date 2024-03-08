@@ -93,7 +93,7 @@ export class JuegomusicafantasiadosjComponent implements OnInit {
       this.pistaMusica = datos;
       this.cookieService.set(
         'pistas',
-        JSON.stringify(this.pistaMusica.slice(0, 26))
+        JSON.stringify(this.pistaMusica.slice(0, 25))
       ); //Esto es para las pistas
 
       const existeCookieNumero = this.cookieService.check('numero');
@@ -572,7 +572,7 @@ this.cookieService.set('pistas', updatedPistaMusicaCookie, expirationDate);
     );
     this.cookieService.set(
       'peliculas',
-      JSON.stringify(this.nombresPeliculas.slice(0, 26)),
+      JSON.stringify(this.nombresPeliculas.slice(0, 25)),
       expirationDate
     );
     this.cookieService.set(

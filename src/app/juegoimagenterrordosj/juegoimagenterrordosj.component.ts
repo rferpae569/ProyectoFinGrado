@@ -456,7 +456,7 @@ export class JuegoimagenterrordosjComponent implements OnInit {
     );
     this.cookieService.set(
       'peliculas',
-      JSON.stringify(this.nombresPeliculas.slice(0, 32)),
+      JSON.stringify(this.nombresPeliculas.slice(0, 25)),
       expirationDate
     );
     this.cookieService.set(

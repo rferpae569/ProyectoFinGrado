@@ -93,7 +93,7 @@ export class JuegomusicaterrordosjComponent implements OnInit {
     //   this.pistaMusica = datos;
     //   this.cookieService.set(
     //     'pistas',
-    //     JSON.stringify(this.pistaMusica.slice(0, 15))
+    //     JSON.stringify(this.pistaMusica.slice(0, 25))
     //   ); //Esto es para las pistas
 
     //   const existeCookieNumero = this.cookieService.check('numero');
@@ -571,7 +571,7 @@ export class JuegomusicaterrordosjComponent implements OnInit {
     );
     this.cookieService.set(
       'peliculas',
-      JSON.stringify(this.nombresPeliculas.slice(0, 15)),
+      JSON.stringify(this.nombresPeliculas.slice(0, 25)),
       expirationDate
     );
     this.cookieService.set(

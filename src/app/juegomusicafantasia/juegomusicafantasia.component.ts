@@ -6,13 +6,7 @@ import { FormControl } from '@angular/forms';
 import { startWith, map } from 'rxjs/operators';
 import { Juegomusica } from '../model/juegomusica';
 import { Juegomusicapista } from '../model/juegomusicapista';
-import {
-  trigger,
-  state,
-  style,
-  animate,
-  transition,
-} from '@angular/animations';
+import {trigger, state, style, animate, transition} from '@angular/animations';
 //Importamos los modulos
 
 @Component({
@@ -89,7 +83,7 @@ export class JuegomusicafantasiaComponent implements OnInit {
         this.pistaMusica = datos;
         this.cookieService.set(
           'pistas',
-          JSON.stringify(this.pistaMusica.slice(0, 26))
+          JSON.stringify(this.pistaMusica.slice(0, 25))
         ); //Esto es para las pistas
 
         const existeCookieNumero = this.cookieService.check('numero');
@@ -430,7 +424,7 @@ export class JuegomusicafantasiaComponent implements OnInit {
         this.router.navigate(['/eleccion2']); //Nos vamos a "eleccion2"
       }
     }
-    // this.mostrarPista = true; //Declaramos la variable pista como true, restablecemos la respuesta, y cogemos otra palabra secreta para volver a jugar.
+    this.mostrarPista = true; //Declaramos la variable pista como true, restablecemos la respuesta, y cogemos otra palabra secreta para volver a jugar.
     this.respuesta = '';
     this.seleccionarPalabraSecreta();
   }
@@ -472,7 +466,7 @@ export class JuegomusicafantasiaComponent implements OnInit {
     );
     this.cookieService.set(
       'peliculas',
-      JSON.stringify(this.nombresPeliculas.slice(0, 26)),
+      JSON.stringify(this.nombresPeliculas.slice(0, 25)),
       expirationDate
     );
     this.cookieService.set(
