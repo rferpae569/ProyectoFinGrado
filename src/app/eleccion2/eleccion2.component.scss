@@ -31,17 +31,6 @@ h1 {
   margin: 0 10px;
 }
 
-.graficas-contenedor {
-  display: flex;
-}
-
-#grafica1,
-#grafica2 {
-  //Le damos un tamaño a las graficas a traves de un id
-  flex: 1;
-  margin-right: 10px;
-}
-
 /* Animación de graficos */
 .fade-in {
   opacity: 0;
@@ -56,18 +45,5 @@ h1 {
 @media (max-width: 1200px) {
   :host {
     background-size: 100% 100%;
-  }
-}
-
-// Response para los gráficos
-@media (max-width: 1200px) {
-  .graficas-contenedor {
-    flex-direction: column;
-  }
-
-  #grafica1,
-  #grafica2 {
-    margin-right: 0; 
-    margin-bottom: 10px;
   }
 }

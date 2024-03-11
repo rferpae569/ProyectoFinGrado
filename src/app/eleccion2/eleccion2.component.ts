@@ -2,12 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { ServicioService } from '../servicio.service';
-import { Ranking } from '../model/ranking';
-import { Numjugadas } from '../model/numjugadas';
-import html2canvas from 'html2canvas';
 import {trigger, state, style, animate, transition} from '@angular/animations';
-import 'jspdf-autotable';
-declare var google: any;
 //Importamos los modulos y declaramos la variable para el grafico
 
 @Component({
@@ -36,12 +31,8 @@ declare var google: any;
   ],
 })
 export class Eleccion2Component implements OnInit {
-  datos!: Ranking[];
-  datos2!: Numjugadas[];
-  mostrarGrafica: boolean = false;
-  mostrarGrafica2: boolean = false;
-  googleChartsLoaded: boolean = false;
-  chart: any;
+  // datos!: Ranking[];
+  // datos2!: Numjugadas[];
   usuarioConMasPuntos: string = '';
   hayEmpate: boolean = false;
   session: string | null;
@@ -59,20 +50,9 @@ export class Eleccion2Component implements OnInit {
       // Si la cookie no existe, redirigimos al componente 'inicio'
       this.router.navigate(['inicio']);
     }
-
-    servicioService.getDatosRanking().subscribe((datos) => {
-      this.datos = datos;
-    });
-    servicioService.getDatosNumJugadas().subscribe((datos2) => {
-      this.datos2 = datos2;
-    });
   }
 
   ngOnInit() {
-    google.charts.load('current', { packages: ['corechart'] });
-    google.charts.setOnLoadCallback(() => {
-      this.googleChartsLoaded = true;
-    });
 
     const sessionCookie = this.cookieService.get('session');
     const session2Cookie = this.cookieService.get('session2');
@@ -93,185 +73,6 @@ export class Eleccion2Component implements OnInit {
         this.hayEmpate = true;
       }
     }
-  }
-
-  toggleGrafica() {
-    //Con esta funcion creamos el grafico de los puntos
-    if (!this.googleChartsLoaded) {
-      return;
-    }
-
-    const isMobile = window.innerWidth <= 1200; // Define un punto de corte para dispositivos móviles
-
-    if (this.mostrarGrafica) {
-      // Si se está cerrando la gráfica, ocultarla
-      const grafica1 = document.getElementById('grafica1');
-      if (grafica1) {
-        grafica1.classList.toggle('fade-in');
-        grafica1.classList.toggle('active');
-      }
-    } else {
-      setTimeout(() => {
-        const data = new google.visualization.DataTable();
-        data.addColumn('string', 'nombre');
-        data.addColumn('number', 'ImagenFantasia');
-        data.addColumn('number', 'ImagenTerror');
-        data.addColumn('number', 'PreguntaFantasia');
-        data.addColumn('number', 'PreguntaTerror');
-        data.addColumn('number', 'MusicaFantasia');
-        data.addColumn('number', 'MusicaTerror');
-
-        const options = {
-          title: 'Ranking de Puntos',
-          width: isMobile ? 350 : 550,
-          height: isMobile ? 300 : 400,
-          backgroundColor: 'transparent',
-          titleTextStyle: {
-            color: 'white',
-            fontSize: 16,
-          },
-          legend: {
-            textStyle: {
-              color: 'white',
-            },
-          },
-          hAxis: {
-            textStyle: {
-              color: 'white', // Color del texto del eje horizontal (nombre de usuario)
-            },
-          },
-          vAxis: {
-            textStyle: {
-              color: 'white', // Color del texto del eje vertical (puntos)
-            },
-          },
-        };
-
-        const chart = new google.visualization.BarChart(
-          document.getElementById('grafica1')
-        );
-        this.chart = chart; // Guardar una referencia al gráfico
-
-        // Mostrar la gráfica restableciendo la propiedad 'display'
-        const grafica1 = document.getElementById('grafica1');
-        if (grafica1) {
-          grafica1.style.display = 'block';
-        }
-
-        // Obtener los datos actualizados antes de dibujar el gráfico
-        this.servicioService.getDatosRanking().subscribe((datos) => {
-          this.datos = datos;
-          const rows = this.datos.map((dato: any) => [
-            dato.nombre,
-            dato.PuntosImagenFantasia,
-            dato.PuntosImagenTerror,
-            dato.PuntosPreguntasFantasia,
-            dato.PuntosPreguntasTerror,
-            dato.PuntosMusicaFantasia,
-            dato.PuntosMusicaTerror,
-          ]);
-          data.addRows(rows);
-          this.chart.draw(data, options);
-        });
-      }, 0);
-    }
-
-    this.mostrarGrafica = !this.mostrarGrafica;
-  }
-
-  toggleGrafica2() {
-    //Con esta funcion creamos el grafico de los porcentajes
-    if (!this.googleChartsLoaded) {
-      return;
-    }
-
-    const isMobile = window.innerWidth <= 1200; // Define un punto de corte para dispositivos móviles
-
-    if (this.mostrarGrafica2) {
-      // Si se está cerrando la gráfica, ocultarla
-      const grafica2 = document.getElementById('grafica2');
-      if (grafica2) {
-        // grafica2.style.display = 'none';
-        grafica2.classList.toggle('fade-in');
-        grafica2.classList.toggle('active');
-      }
-    } else {
-      setTimeout(() => {
-        // Obtener los datos actualizados antes de dibujar el gráfico
-        this.servicioService.getDatosNumJugadas().subscribe((datos2) => {
-          this.datos2 = datos2;
-
-          const data = new google.visualization.DataTable();
-          data.addColumn('string', 'Categoría');
-          data.addColumn('number', 'Puntos');
-
-          // Calcular la suma de puntos por categoría
-          const JugadasImagenFantasia = this.datos2.reduce(
-            (total, dato2) => total + dato2.JugadasImagenFantasia,
-            0
-          );
-          const JugadasImagenTerror = this.datos2.reduce(
-            (total, dato2) => total + dato2.JugadasImagenTerror,
-            0
-          );
-          const jugadasPreguntasFantasia = this.datos2.reduce(
-            (total, dato2) => total + dato2.JugadasPreguntasFantasia,
-            0
-          );
-          const jugadasPreguntasTerror = this.datos2.reduce(
-            (total, dato2) => total + dato2.JugadasPreguntasTerror,
-            0
-          );
-          const jugadasMusicaFantasia = this.datos2.reduce(
-            (total, dato2) => total + dato2.JugadasMusicaFantasia,
-            0
-          );
-          const jugadasMusicaTerror = this.datos2.reduce(
-            (total, dato2) => total + dato2.JugadasMusicaTerror,
-            0
-          );
-
-          // Llenar los datos de la tabla
-          data.addRow(['ImagenFantasia', JugadasImagenFantasia]);
-          data.addRow(['ImagenTerror', JugadasImagenTerror]);
-          data.addRow(['PreguntaFantasia', jugadasPreguntasFantasia]);
-          data.addRow(['PreguntaTerror', jugadasPreguntasTerror]);
-          data.addRow(['MúsicaFantasia', jugadasMusicaFantasia]);
-          data.addRow(['MúsicaTerror', jugadasMusicaTerror]);
-
-          const options = {
-            title: 'Porcentaje Veces jugadas',
-            width: isMobile ? 350 : 550,
-            height: isMobile ? 300 : 400,
-            is3D: true,
-            pieSliceText: 'percentage',
-            backgroundColor: 'transparent',
-            titleTextStyle: {
-              color: 'white', // Color del título
-              fontSize: 16, // Tamaño del título
-            },
-            legend: {
-              textStyle: {
-                color: 'white', // Color del texto de la leyenda
-              },
-            },
-          };
-
-          const chart = new google.visualization.PieChart(
-            document.getElementById('grafica2')
-          );
-          chart.draw(data, options);
-
-          // Mostrar la gráfica restableciendo la propiedad 'display'
-          const grafica2 = document.getElementById('grafica2');
-          if (grafica2) {
-            grafica2.style.display = 'block';
-          }
-        });
-      }, 0);
-    }
-
-    this.mostrarGrafica2 = !this.mostrarGrafica2;
   }
 
   irAEleccion() {
