@@ -219,25 +219,6 @@ export class JuegomusicafantasiaComponent implements OnInit {
       currentDate.getDate() + 1
     );
 
-    // console.log('this.nombresPeliculas:', this.nombresPeliculas);
-    // console.log('this.pistaMusica:', this.pistaMusica);
-
-    // ...
-
-    // console.log('ID:', id);
-    // console.log(
-    //   'this.pistaMusica.find result:',
-    //   this.pistaMusica.find((item) => item.id === id)
-    // );
-
-    // ...
-
-    // console.log('Respuesta Aleatoria:', respuestaAleatoria);
-    // console.log('Pistas:', this.pistas);
-    // console.log('Pistas2:', this.pistas2);
-    // console.log('Pistas3:', this.pistas3);
-    // console.log('Palabra Secreta:', this.palabrasecreta);
-
     //Obtenemos el valor de la cookie 'puntos' y se lo asignamos a la variable
     const puntoscookie = this.cookieService.get('puntos');
     this.puntos = parseInt(puntoscookie, 10);

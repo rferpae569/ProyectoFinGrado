@@ -35,8 +35,6 @@ En caso de que gane o pierda, al usuario se le mostrara dos graficos para que pu
 
 Aparte de eso, se ha implementado tambien el modo dos jugadores, donde el usuario podra jugar a los mismos juegos con otra persona una vez inicien sesion los dos juntos. Se puede acceder a ese modo dandole al enlace de "Modo dos jugadores" ubicado en el componente "Inicio".
 
-Actualmente se esta trabajando en la pista de los juegos de las canciones. Por lo tanto, en esos juegos la pistas no estaran disponible actualmente.
-
 **Este proyecto ha sido realizado por Rubén Fernández**
 
 ## Estructura de código

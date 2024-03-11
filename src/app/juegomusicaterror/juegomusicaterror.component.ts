@@ -33,11 +33,11 @@ export class JuegomusicaterrorComponent implements OnInit {
   numeroAleatorio: number = 0;
   palabrasecreta: string = '';
   nombresPeliculas: Array<{ id: number; nombre: string; musica: string[] }> =[];
-  // mostrarPista: boolean = false;
-  // pistaMusica: Juegomusicapista[] = [];
-  // pistas: string = '';
-  // pistas2: string = '';
-  // pistas3: string = '';
+  mostrarPista: boolean = false;
+  pistaMusica: Juegomusicapista[] = [];
+  pistas: string = '';
+  pistas2: string = '';
+  pistas3: string = '';
   titulosCoincidentes: string[] = [];
   filtroTituloControl = new FormControl();
   datosCargados: boolean = false;
@@ -76,21 +76,21 @@ export class JuegomusicaterrorComponent implements OnInit {
     const puntoscookie = this.cookieService.get('puntos');
     this.puntos = parseInt(puntoscookie, 10) || 0;
 
-    // this.servicioService.getDatosPeliculaPistaMusicaTerror().subscribe((datos) => {
-    //   this.pistaMusica = datos;
-    //   this.cookieService.set(
-    //     'pistas',
-    //     JSON.stringify(this.pistaMusica.slice(0, 25))
-    //   ); //Esto es para las pistas
+    this.servicioService.getDatosPeliculaPistaMusicaTerror().subscribe((datos) => {
+      this.pistaMusica = datos;
+      this.cookieService.set(
+        'pistas',
+        JSON.stringify(this.pistaMusica.slice(0, 25))
+      ); //Esto es para las pistas
 
-    //   const existeCookieNumero = this.cookieService.check('numero');
+      const existeCookieNumero = this.cookieService.check('numero');
 
-    //   if (!existeCookieNumero) {
-    //     // Si la cookie "numero" no existe, recargamos la página para crear las cookies necesarias.
-    //     location.reload();
-    //     return; // Retornamos para detener la ejecución del resto del código hasta después de la recarga.
-    //   }
-    // });
+      if (!existeCookieNumero) {
+        // Si la cookie "numero" no existe, recargamos la página para crear las cookies necesarias.
+        location.reload();
+        return; // Retornamos para detener la ejecución del resto del código hasta después de la recarga.
+      }
+    });
 
     // Suscribimos los cambios en el control del input para filtrar los títulos
     this.filtroTituloControl.valueChanges
@@ -165,9 +165,8 @@ export class JuegomusicaterrorComponent implements OnInit {
     id: index, // Puedes ajustar esto según tus necesidades
   }));
 }
-
-    // const pistaPeliculasCookies = this.cookieService.get('pistas'); //Para pistas
-    // this.pistaMusica = JSON.parse(pistaPeliculasCookies);
+    const pistaPeliculasCookies = this.cookieService.get('pistas'); //Para pistas
+    this.pistaMusica = JSON.parse(pistaPeliculasCookies);
 
     //Comprobamos que no queden mas peliculas
     if (!this.nombresPeliculas || this.nombresPeliculas.length === 0) {
@@ -194,13 +193,13 @@ export class JuegomusicaterrorComponent implements OnInit {
     const respuestaArray = this.nombresPeliculas[numeroAleatorio].nombre;
     const respuestaAleatoria = respuestaArray[this.generarNumeroAleatorio(respuestaArray.length)];
     const id = this.nombresPeliculas[numeroAleatorio].id; //para pistas
-    // const pista = this.pistaMusica.find((item) => item.id === id)?.nombre; //Esta linea y las siguientes cogeran la pista a traves del id
-    // const pista2 = this.pistaMusica.find((item) => item.id === id)?.compositor;
-    // const pista3 = this.pistaMusica.find((item) => item.id === id)?.mclave;
+    const pista = this.pistaMusica.find((item) => item.id === id)?.nombre; //Esta linea y las siguientes cogeran la pista a traves del id
+    const pista2 = this.pistaMusica.find((item) => item.id === id)?.compositor;
+    const pista3 = this.pistaMusica.find((item) => item.id === id)?.mclave;
 
-    // this.pistas = pista ? pista.toString() : '';
-    // this.pistas2 = pista2 ? pista2.toString() : '';
-    // this.pistas3 = pista3 ? pista3.toString() : '';
+    this.pistas = pista ? pista.toString() : '';
+    this.pistas2 = pista2 ? pista2.toString() : '';
+    this.pistas3 = pista3 ? pista3.toString() : '';
 
     this.palabrasecreta = respuestaAleatoria;
 
@@ -211,22 +210,6 @@ export class JuegomusicaterrorComponent implements OnInit {
       currentDate.getMonth(),
       currentDate.getDate() + 1
     );
-
-//     console.log("this.nombresPeliculas:", this.nombresPeliculas);
-// console.log("this.pistaMusica:", this.pistaMusica);
-
-// ...
-
-// console.log("ID:", id);
-// console.log("this.pistaMusica.find result:", this.pistaMusica.find((item) => item.id === id));
-
-// ...
-
-// console.log("Respuesta Aleatoria:", respuestaAleatoria);
-// console.log("Pistas:", this.pistas);
-// console.log("Pistas2:", this.pistas2);
-// console.log("Pistas3:", this.pistas3);
-// console.log("Palabra Secreta:", this.palabrasecreta);
 
     //Obtenemos el valor de la cookie 'puntos' y se lo asignamos a la variable
     const puntoscookie = this.cookieService.get('puntos');
@@ -247,7 +230,7 @@ export class JuegomusicaterrorComponent implements OnInit {
 
     // Obtenemos las preguntas de las películas desde la cookie 'peliculas'
     const musicaCookie = this.cookieService.get('peliculas');
-    // const pistaCookie = this.cookieService.get('pistas');
+    const pistaCookie = this.cookieService.get('pistas');
 
     // Obtenemos la palabra secreta actual desde la cookie 'palabra'
     this.palabrasecreta = this.cookieService.get('palabra');
@@ -263,7 +246,7 @@ export class JuegomusicaterrorComponent implements OnInit {
     if (this.respuesta.toLowerCase() === juegoActual.toLowerCase()) {
       // Obtenemos los datos de la pregunta desde la cookie 'peliculas'
       const musicaData = JSON.parse(musicaCookie);
-      // const pistaData = JSON.parse(pistaCookie);
+      const pistaData = JSON.parse(pistaCookie);
       const numero = parseInt(this.cookieService.get('numero'), 10);
 
       // Obtenemos los puntos y los intentos desde las cookies
@@ -314,23 +297,23 @@ export class JuegomusicaterrorComponent implements OnInit {
       }
 
       // Eliminamos la pista actual del arreglo pistaMusica si los datos son válidos
-// if (Array.isArray(pistaData) && numero >= 0 && numero < pistaData.length) {
-//   pistaData.splice(numero, 1);
+if (Array.isArray(pistaData) && numero >= 0 && numero < pistaData.length) {
+  pistaData.splice(numero, 1);
 
-//   // Actualizamos los IDs de las pistas restantes
-//   pistaData.forEach((pista, index) => {
-//     pista.id = index;
-//   });
+  // Actualizamos los IDs de las pistas restantes
+  pistaData.forEach((pista, index) => {
+    pista.id = index;
+  });
 
-//   const updatedPistaMusicaCookie = JSON.stringify(pistaData);
+  const updatedPistaMusicaCookie = JSON.stringify(pistaData);
 
-// // Actualizamos la cookie 'pistas' con los datos actualizados
-// this.cookieService.set('pistas', updatedPistaMusicaCookie, expirationDate);
-// }
+// Actualizamos la cookie 'pistas' con los datos actualizados
+this.cookieService.set('pistas', updatedPistaMusicaCookie, expirationDate);
+}
     } else {
       // En caso contrario, obtenemos los datos de la musica desde la cookie 'peliculas'
       const musicaData = JSON.parse(musicaCookie);
-      // const pistaData = JSON.parse(pistaCookie);
+      const pistaData = JSON.parse(pistaCookie);
       const numero = parseInt(this.cookieService.get('numero'), 10);
 
       // Si la respuesta es incorrecta, decrementamos los intentos
@@ -365,19 +348,19 @@ export class JuegomusicaterrorComponent implements OnInit {
       }
 
 // Eliminamos la pista actual del arreglo pistaMusica si los datos son válidos
-// if (Array.isArray(pistaData) && numero >= 0 && numero < pistaData.length) {
-//   pistaData.splice(numero, 1);
+if (Array.isArray(pistaData) && numero >= 0 && numero < pistaData.length) {
+  pistaData.splice(numero, 1);
 
-//   // Actualizamos los IDs de las pistas restantes
-//   pistaData.forEach((pista, index) => {
-//     pista.id = index;
-//   });
+  // Actualizamos los IDs de las pistas restantes
+  pistaData.forEach((pista, index) => {
+    pista.id = index;
+  });
 
-//   const updatedPistaMusicaCookie = JSON.stringify(pistaData);
+  const updatedPistaMusicaCookie = JSON.stringify(pistaData);
 
-// // Actualizamos la cookie 'pistas' con los datos actualizados
-// this.cookieService.set('pistas', updatedPistaMusicaCookie, expirationDate);
-// }
+// Actualizamos la cookie 'pistas' con los datos actualizados
+this.cookieService.set('pistas', updatedPistaMusicaCookie, expirationDate);
+}
 
       // Verificamos si se han agotado los intentos disponibles
       if (this.intentos <= -1) {
@@ -447,8 +430,8 @@ export class JuegomusicaterrorComponent implements OnInit {
       expirationDate
     );
     this.cookieService.set('puntos', '0', expirationDate);
-    // const pistacookie = this.cookieService.get('pistas'); //para pistas
-    // this.pistaMusica = JSON.parse(pistacookie);
+    const pistacookie = this.cookieService.get('pistas'); //para pistas
+    this.pistaMusica = JSON.parse(pistacookie);
     location.reload();
   }
 
@@ -468,8 +451,8 @@ export class JuegomusicaterrorComponent implements OnInit {
   }
 
   //Esta funcion sirve para cmabiar el tipo de animacion de la pista
-  // togglePistaAnimation() {
-  //   this.mostrarPista = !this.mostrarPista;
-  //   this.estadoAnimacion = this.mostrarPista ? 'down' : 'up';
-  // }
+  togglePistaAnimation() {
+    this.mostrarPista = !this.mostrarPista;
+    this.estadoAnimacion = this.mostrarPista ? 'down' : 'up';
+  }
 }
