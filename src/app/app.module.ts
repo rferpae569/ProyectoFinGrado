@@ -29,6 +29,7 @@ import { JuegomusicaterrordosjComponent } from './juegomusicaterrordosj/juegomus
 import { ClasificacionComponent } from './clasificacion/clasificacion.component';
 import { MatSortModule } from '@angular/material/sort';
 import { FormularioencuestaComponent } from './formularioencuesta/formularioencuesta.component';
+import { InfoCookieComponent } from './info-cookie/info-cookie.component';
 
 //importamos los modules y los ocmponentes correspondientes
 
@@ -57,6 +58,7 @@ import { FormularioencuestaComponent } from './formularioencuesta/formularioencu
     JuegomusicaterrordosjComponent,
     ClasificacionComponent,
     FormularioencuestaComponent,
+    InfoCookieComponent,
   ],
   imports: [
     BrowserModule,

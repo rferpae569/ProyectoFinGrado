@@ -1,0 +1,24 @@
+.background-image {
+    background-image: url("../../assets/fondos/fondologin.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1; /* Coloca la imagen de fondo detrás del contenido */
+  }
+  
+  .container {
+    background-color: rgba(153, 153, 153, 0.568);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 90%;
+    margin: auto;
+    position: relative;
+    z-index: 1;
+  }
