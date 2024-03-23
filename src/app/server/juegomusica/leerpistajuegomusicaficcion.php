@@ -6,12 +6,12 @@ try {
     // Nos conectamos a la base de datos por PDO
 
     // La consulta busca obtener el ID de la canción y la pista asociada a través de la relación entre las tablas "peliculascanciones", "canciones" y "generospeliculas". 
-    // Se agrega la condición "generospeliculas.idgenero = 10" para obtener solo las pistas que tienen el idgenero igual a 10 en la tabla generospeliculas.
+    // Se agrega la condición "generospeliculas.idgenero = 3" para obtener solo las pistas que tienen el idgenero igual a 3 en la tabla generospeliculas.
     $res = $mbd->query('SELECT canciones.id, canciones.nombre, canciones.compositor, canciones.mclave 
                         FROM peliculascanciones 
                         JOIN canciones ON peliculascanciones.idmusica = canciones.id 
                         JOIN generospeliculas ON peliculascanciones.NombrePelicula = generospeliculas.NombrePelicula 
-                        WHERE generospeliculas.idgenero = 10');
+                        WHERE generospeliculas.idgenero = 3');
 
     if ($res->errorCode() == 0) {
         $rows = $res->fetchAll(PDO::FETCH_ASSOC);

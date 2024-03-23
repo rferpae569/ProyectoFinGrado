@@ -20,6 +20,7 @@ Cuando inicie sesion, el usuario sera llevado al componente "eleccion" donde pod
 - Juego de las imagenes
     - Genero fantasia
     - Genero Terror
+    - Genero Ciencia Ficcion.
 - Juego de las preguntas
     - Genero fantasia
     - Genero Terror
@@ -32,6 +33,8 @@ En el juego de las imagenes, al usuario le aparecera una imagen aleatoria de una
 En los juegos de cada seccion, el usuario tendra tres intentos, si los gasta y pierde otra vez, el juego terminara.
 
 Aparte de eso, se ha implementado tambien el modo dos jugadores, donde el usuario podra jugar a los mismos juegos con otra persona una vez inicien sesion los dos juntos. Se puede acceder a ese modo dandole al enlace de "Modo dos jugadores" ubicado en el componente "Inicio".
+
+Actualmente se esta trabajando para jugar con el genero de Ciencia Ficcion.
 
 **Este proyecto ha sido realizado por Rubén Fernández**
 

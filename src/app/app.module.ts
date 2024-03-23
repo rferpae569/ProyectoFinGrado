@@ -30,6 +30,8 @@ import { ClasificacionComponent } from './clasificacion/clasificacion.component'
 import { MatSortModule } from '@angular/material/sort';
 import { FormularioencuestaComponent } from './formularioencuesta/formularioencuesta.component';
 import { InfoCookieComponent } from './info-cookie/info-cookie.component';
+import { JuegoimagenficcionComponent } from './juegoimagenficcion/juegoimagenficcion.component';
+import { JuegoimagenficciondosjComponent } from './juegoimagenficciondosj/juegoimagenficciondosj.component';
 
 //importamos los modules y los ocmponentes correspondientes
 
@@ -59,6 +61,8 @@ import { InfoCookieComponent } from './info-cookie/info-cookie.component';
     ClasificacionComponent,
     FormularioencuestaComponent,
     InfoCookieComponent,
+    JuegoimagenficcionComponent,
+    JuegoimagenficciondosjComponent,
   ],
   imports: [
     BrowserModule,

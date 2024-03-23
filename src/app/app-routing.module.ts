@@ -23,6 +23,8 @@ import { JuegomusicaterrorComponent } from './juegomusicaterror/juegomusicaterro
 import { JuegomusicaterrordosjComponent } from './juegomusicaterrordosj/juegomusicaterrordosj.component';
 import { FormularioencuestaComponent } from './formularioencuesta/formularioencuesta.component';
 import { InfoCookieComponent } from './info-cookie/info-cookie.component';
+import { JuegoimagenficcionComponent } from './juegoimagenficcion/juegoimagenficcion.component';
+import { JuegoimagenficciondosjComponent } from './juegoimagenficciondosj/juegoimagenficciondosj.component';
 //importamos los modulos y los componentes necesarios
 
 const routes: Routes = [
@@ -49,7 +51,9 @@ const routes: Routes = [
   { path: 'juegomusicaterror', component: JuegomusicaterrorComponent},
   { path: 'juegomusicaterrordosj', component: JuegomusicaterrordosjComponent},
   { path: 'encuesta', component:FormularioencuestaComponent},
-  {path: 'infocookie', component:InfoCookieComponent}
+  { path: 'infocookie', component:InfoCookieComponent},
+  { path: 'juegoimagenficcion', component:JuegoimagenficcionComponent},
+  { path: 'juegoimagenficciondosj', component: JuegoimagenficciondosjComponent},
   //Creamos las rutas para cada componente
 
 ];

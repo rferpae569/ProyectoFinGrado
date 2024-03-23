@@ -69,6 +69,13 @@ export class ServicioService {
     );
   }
 
+  getDatosPeliculaImagenFiccion(): Observable<Juegoimagen[]>{
+    //Esta funcion sirve para leer los datos de juegoimagenficcion que devuelve el archivo php de la base de datos
+    return this.http.get<Juegoimagen[]>(
+      `${this.url}juegoimagen/leerjuegoimagenficcion.php`
+    );
+  }
+
   getDatosPeliculaPreguntaFantasia(): Observable<Juegopregunta[]>{
     //Esta funcion sirve para leer los datos de juegopreguntafantasia que devuelve el archivo php de la base de datos
     return this.http.get<Juegopregunta[]>(
@@ -80,6 +87,12 @@ export class ServicioService {
     //Esta funcion sirve para leer los datos de juegopreguntaterror que devuelve el archivo php de la base de datos
     return this.http.get<Juegopregunta[]>(
       `${this.url}juegopregunta/leerjuegopreguntaterror.php`
+    );
+  }
+
+  getDatosPeliculaPreguntaFiccion(): Observable<Juegopregunta[]>{
+    return this.http.get<Juegopregunta[]>(
+      `${this.url}juegopregunta/leerjuegopreguntaficcion.php`
     );
   }
 
@@ -97,6 +110,13 @@ export class ServicioService {
     );
   }
 
+  getDatosPeliculaPistaPreguntaFiccion(): Observable<Juegopreguntapista[]>{
+    //Esta funcion sirve para leer las pistas del juego de las preguntas de ficcion que devuelve el archivo php de la base de datos
+    return this.http.get<Juegopreguntapista[]>(
+      `${this.url}juegopregunta/leerpistajuegopreguntaficcion.php`
+    );
+  }
+
   getDatosPeliculaMusicaFantasia(): Observable<Juegomusica[]>{
     //Esta funcion sirve para leer los datos del juego de las canciones de fantasia que devuelve el archivo php de la base de datos
     return this.http.get<Juegomusica[]>(
@@ -111,6 +131,13 @@ export class ServicioService {
     );
   }
 
+  getDatosPeliculaMusicaFiccion(): Observable<Juegomusica[]>{
+    //Esta funcion sirve para leer los datos del juego de las canciones de ficcion que devuelve el archivo php de la base de datos
+    return this.http.get<Juegomusica[]>(
+      `${this.url}juegomusica/leerjuegomusicaficcion.php`
+    );
+  }
+
   getDatosPeliculaPistaMusicaFantasia(): Observable<Juegomusicapista[]>{
     //Esta funcion sirve para leer las pistas del juego de la musica de fantasia que devuelve el archivo php de la base de datos
     return this.http.get<Juegomusicapista[]>(
@@ -119,9 +146,16 @@ export class ServicioService {
   }
 
   getDatosPeliculaPistaMusicaTerror(): Observable<Juegomusicapista[]>{
-        //Esta funcion sirve para leer las pistas del juego de la musica de terror que devuelve el archivo php de la base de datos
+    //Esta funcion sirve para leer las pistas del juego de la musica de terror que devuelve el archivo php de la base de datos
     return this.http.get<Juegomusicapista[]>(
       `${this.url}juegomusica/leerpistajuegomusicaterror.php`
+    );
+  }
+
+  getDatosPeliculaPistaMusicaFiccion(): Observable<Juegomusicapista[]>{
+    //Esta funcion sirve para leer las pistas del juego de la musica de ficcion que devuelve el archivo php de la base de datos
+    return this.http.get<Juegomusicapista[]>(
+      `${this.url}juegomusica/leerpistajuegomusicaficcion.php`
     );
   }
 
@@ -152,6 +186,14 @@ export class ServicioService {
     );
   }
 
+  getIncrementarJugadasImagenFiccion(nuevo: any): Observable<any>{
+    //Esta funcion sirve para incrementar el numero de jugadas del juego de las imagenes de ficcion en la base de datos gracias al contenido del archivo php
+    return this.http.post(
+      `${this.url}numjugadas/incrementarjugadaimagenficcion.php`,
+      nuevo
+    );
+  }
+
   getIncrementarJugadasPreguntasFantasia(nuevo: any): Observable<any>{
     return this.http.post(
       `${this.url}numjugadas/incrementarjugadapreguntafantasia.php`,
@@ -162,6 +204,13 @@ export class ServicioService {
   getIncrementarJugadasPreguntasTerror(nuevo: any): Observable<any>{
     return this.http.post(
       `${this.url}numjugadas/incrementarjugadapreguntaterror.php`,
+      nuevo
+    );
+  }
+
+  getIncrementarJugadasPreguntasFiccion(nuevo: any):Observable<any>{
+    return this.http.post(
+      `${this.url}numjugadas/incrementarjugadapreguntaficcion.php`,
       nuevo
     );
   }
@@ -178,6 +227,14 @@ export class ServicioService {
     //Esta funcion sirve para incrementar el numero de jugadas del juego de las canciones de terror en la base de datos gracias al contenido del archivo php
     return this.http.post(
       `${this.url}numjugadas/incrementarjugadamusicaterror.php`,
+      nuevo
+    );
+  }
+
+  getIncrementarJugadasMusicaFiccion(nuevo:any):Observable<any>{
+    //Esta funcion sirve para incrementar el numero de jugadas del juego de las canciones de ficcion en la base de datos gracias al contenido del archivo php
+    return this.http.post(
+      `${this.url}numjugadas/incrementarjugadamusicaficcion.php`,
       nuevo
     );
   }
@@ -230,9 +287,17 @@ export class ServicioService {
   }
 
   postDatoRankingImagenTerror(nuevo: any): Observable<any> {
-    //Esta funcion sirve para actualizar el ranking del juego de las imagenes de fantasia en la base de datos llamando al codigo que hay en el php
+    //Esta funcion sirve para actualizar el ranking del juego de las imagenes de terror en la base de datos llamando al codigo que hay en el php
     return this.http.post(
       `${this.url}ranking/insertarrankingjuegoimagenterror.php`,
+      nuevo
+    );
+  }
+
+  postDatoRankingImagenFiccion(nuevo:any):Observable<any>{
+    //Esta funcion sirve para actualizar el ranking del juego de las imagenes de ficcion en la base de datos llamando al codigo que hay en el php
+    return this.http.post(
+      `${this.url}ranking/insertarrankingjuegoimagenficcion.php`,
       nuevo
     );
   }
@@ -251,6 +316,13 @@ export class ServicioService {
     );
   }
 
+  postDatoRankingPreguntaFiccion(nuevo: any): Observable<any>{
+    return this.http.post(
+      `${this.url}ranking/insertarrankingjuegopreguntaficcion.php`,
+      nuevo
+    );
+  }
+
   postDatoRankingMusicaFantasia(nuevo: any): Observable<any>{
     //Esta funcion sirve para actualizar el ranking del juego de las canciones de fantasia en la base de datos llamando al codigo que hay en el php
     return this.http.post(
@@ -263,6 +335,14 @@ export class ServicioService {
     //Esta funcion sirve para actualizar el ranking del juego de las canciones de terror en la base de datos llamando al codigo que hay en el php
     return this.http.post(
       `${this.url}ranking/insertarrankingjuegomusicaterror.php`,
+      nuevo
+    );
+  }
+
+  postDatoRankingMusicaFiccion(nuevo: any): Observable<any>{
+    //Esta funcion sirve para actualizar el ranking del juego de las canciones de ficcion en la base de datos llamando al codigo que hay en el php
+    return this.http.post(
+      `${this.url}ranking/insertarrankingjuegomusicaficcion.php`,
       nuevo
     );
   }
