@@ -5,13 +5,12 @@ import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import { Juegopreguntapista } from '../model/juegopreguntapista';
-import {trigger,state,style,animate,transition,} from '@angular/animations';
-//Importamos los modulos
+import {trigger, state, style, animate, transition} from '@angular/animations';
 
 @Component({
-  selector: 'app-juegopreguntaterrordosj',
-  templateUrl: './juegopreguntaterrordosj.component.html',
-  styleUrls: ['./juegopreguntaterrordosj.component.scss'],
+  selector: 'app-juegopreguntaficcion',
+  templateUrl: './juegopreguntaficcion.component.html',
+  styleUrls: ['./juegopreguntaficcion.component.scss'],
   animations: [
     trigger('slideDownUp', [
       state('down', style({ opacity: 1, height: '*' })),
@@ -21,17 +20,15 @@ import {trigger,state,style,animate,transition,} from '@angular/animations';
     ]),
   ],
 })
-export class JuegopreguntaterrordosjComponent implements OnInit {
+export class JuegopreguntaficcionComponent implements OnInit {
+
   datos!: Juegopregunta[];
   Respuesta: string = '';
   intentos: number = 0;
-  intentos2: number = 0;
   puntos: number = 0;
-  puntos2: number = 0;
   listaPeliculas: string[] = [];
   RespuestaControl = new FormControl();
   session: string = '';
-  session2: string = '';
   numeroAleatorio: number = 0;
   palabrasecreta: string = '';
   preguntasPeliculas: Array<{
@@ -42,7 +39,6 @@ export class JuegopreguntaterrordosjComponent implements OnInit {
   mostrarPista: boolean = false;
   pistaPregunta: Juegopreguntapista[] = [];
   pistas: string = '';
-  turnoActual: number = 1;
   estadoAnimacion = 'up';
   showAnimation = false;
   //Creamos las variables correspondientes
@@ -50,18 +46,14 @@ export class JuegopreguntaterrordosjComponent implements OnInit {
   //Verificamos las cookies, creamos los intentos y establecemos el filtrado de las peliculas
   ngOnInit() {
     const sessionCookieExists = this.cookieService.check('session');
-    const sessionCookieExists2 = this.cookieService.check('session2');
     const intentosCookieExists = this.cookieService.check('intentos');
-    const intentosCookieExists2 = this.cookieService.check('intentos2');
 
-    if (sessionCookieExists && sessionCookieExists2) {
+    if (sessionCookieExists) {
       this.session = this.cookieService.get('session');
-      this.session2 = this.cookieService.get('session2');
     }
 
-    if (intentosCookieExists && intentosCookieExists2) {
+    if (intentosCookieExists) {
       this.intentos = parseInt(this.cookieService.get('intentos'), 10);
-      this.intentos2 = parseInt(this.cookieService.get('intentos2'), 10);
     } else {
       this.intentos = 3; // Establecemos el valor inicial en 3 si no existe la cookie 'intentos'
       const currentDate = new Date();
@@ -71,9 +63,6 @@ export class JuegopreguntaterrordosjComponent implements OnInit {
         currentDate.getDate() + 1
       );
       this.cookieService.set('intentos', '3', expirationDate); // Guardamos la cookie con el valor inicial de 3
-
-      this.intentos2 = 3;
-      this.cookieService.set('intentos2', '3', expirationDate); //Guardamos la cookie con el valor inicial de 3 para el segundo jugador
     }
 
     const listaPeliculasCookie = this.cookieService.get('listapeliculas');
@@ -84,37 +73,16 @@ export class JuegopreguntaterrordosjComponent implements OnInit {
 
     const puntoscookie = this.cookieService.get('puntos');
     this.puntos = parseInt(puntoscookie, 10) || 0;
-    const puntoscookie2 = this.cookieService.get('puntos2');
-    this.puntos2 = parseInt(puntoscookie2, 10) || 0;
 
-    this.servicioService.getDatosPeliculaPistaPreguntaTerror().subscribe((datos) => {
+    this.servicioService.getDatosPeliculaPistaPreguntaFiccion().subscribe((datos) => {
       this.pistaPregunta = datos;
       this.cookieService.set(
         'pistas',
-        JSON.stringify(this.pistaPregunta.slice(0, 21))
-      ); //Esto para pistas
+        JSON.stringify(this.pistaPregunta.slice(0, 20))
+      ); //Esto es para las pistas
 
       this.seleccionarPalabraSecreta();
     });
-
-    const turnoGuardado = localStorage.getItem('turno');
-
-    // Verificamos si hay un turno guardado en el almacenamiento local
-    if (turnoGuardado) {
-      // Si existe, asignamos el valor del turno guardado a la variable 'turnoActual'
-      this.turnoActual = Number(turnoGuardado);
-    } else {
-      // Si no existe, asignamos el valor inicial de 1 a 'turnoActual' y lo guardamos en el almacenamiento local
-      this.turnoActual = 1;
-      localStorage.setItem('turno', '1');
-    }
-
-    // Asignamos la sesión actual basada en el turno actual
-    this.session = this.turnoActual === 1 ? this.getCookieValue('session') : '';
-    this.session2 = this.turnoActual === 2 ? this.getCookieValue('session2') : '';
-
-    // Alternamos el turno para el siguiente ciclo
-    this.alternarTurno();
   }
 
   constructor(
@@ -122,16 +90,16 @@ export class JuegopreguntaterrordosjComponent implements OnInit {
     private cookieService: CookieService,
     private router: Router
   ) {
-    // Verificamos si la cookie 'session' y 'session2 existen al acceder al componente
-    if (!this.cookieService.check('session' && 'session2')) {
-      // Si las cookies no existe, redirigimos al componente 'dosjugadores'
-      this.router.navigate(['dosjugadores']);
+    // Verificamos si la cookie 'session' existe al acceder al componente
+    if (!this.cookieService.check('session')) {
+      // Si la cookie no existe, redirigimos al componente 'inicio'
+      this.router.navigate(['inicio']);
     }
 
     // Verificamos si existe la cookie 'preguntas', y si no existe, obtenemos los datos
     const sessionCookieExists = this.cookieService.check('preguntas');
     if (!sessionCookieExists) {
-      this.servicioService.getDatosPeliculaPreguntaTerror().subscribe((datos) => {
+      this.servicioService.getDatosPeliculaPreguntaFiccion().subscribe((datos) => {
         this.datos = datos;
         this.generarArrayPreguntasPeliculas();
         this.seleccionarPalabraSecreta();
@@ -146,28 +114,7 @@ export class JuegopreguntaterrordosjComponent implements OnInit {
       this.palabrasecreta = nombrejuegocookie;
       const intentoscookie = this.cookieService.get('intentos');
       this.intentos = parseInt(intentoscookie, 10);
-      const intentoscookie2 = this.cookieService.get('intentos2');
-      this.intentos2 = parseInt(intentoscookie2, 10);
     }
-  }
-
-  //Esta funcion sirve para alternar el turno de los jugadores, y saber cuando le toca a cada uno
-  alternarTurno() {
-    this.turnoActual = this.turnoActual === 1 ? 2 : 1;
-    localStorage.setItem('turno', String(this.turnoActual));
-    this.session = this.getCookieValue('session');
-    this.session2 = this.getCookieValue('session2');
-  }
-
-  getCookieValue(cookieName: string): string {
-    const cookies = document.cookie.split(';');
-    for (let i = 0; i < cookies.length; i++) {
-      const cookie = cookies[i].trim();
-      if (cookie.startsWith(`${cookieName}=`)) {
-        return cookie.substring(cookieName.length + 1);
-      }
-    }
-    return '';
   }
 
   //Generamos un numero aleatorio
@@ -176,7 +123,7 @@ export class JuegopreguntaterrordosjComponent implements OnInit {
   }
 
   seleccionarPalabraSecreta() {
-    // Obtenemos los nombres de las películas desde la cookie 'preguntas' y las pistas desde la cookie "pistas"
+    // Obtenemos los nombres de las películas desde la cookie 'preguntas' y las pistas
     const preguntasPeliculasCookie = this.cookieService.get('preguntas');
     this.preguntasPeliculas = JSON.parse(preguntasPeliculasCookie);
     const pistaPeliculasCookies = this.cookieService.get('pistas');
@@ -191,29 +138,15 @@ export class JuegopreguntaterrordosjComponent implements OnInit {
         puntos: this.puntos,
       };
 
-      //Repetimos el proceso para el jugador 2
-      const nombreuser2 = this.cookieService.get('session2');
-      const nuevo2 = {
-        nombre: nombreuser2,
-        puntos: this.puntos2,
-      };
-
-      //Enviamos los datos del jugador 1 al servidor
-      this.servicioService.postDatoRankingPreguntaTerror(nuevo).subscribe((datos) => {
+      //Enviamos los datos al servidor
+      this.servicioService.postDatoRankingPreguntaFiccion(nuevo).subscribe((datos) => {
         console.log('Datos enviados al servidor:', datos);
       });
 
-      //Enviamos los datos del jugador 2 al servidor
-      this.servicioService
-        .postDatoRankingPreguntaTerror(nuevo2)
-        .subscribe((datos) => {
-          console.log('Datos enviados al servidor:', datos);
-        });
-
-      this.router.navigate(['/eleccion2']); //Nos vamos a "eleccion2"
+      this.router.navigate(['/eleccion2']); //nos vamos a "eleccion2"
     }
 
-    //Si existen mas peliculas, continuamos con el codigo, generamos el numero aleatorio y obtenemos la palabra secreta y la pista correspondiente a traves del id
+    //Si existen mas peliculas, continuamos con el codigo, generamos el numero aleatorio y obtenemos la palabra secreta, y la pista correspondiente
     const longitudArray = this.preguntasPeliculas.length;
     const numeroAleatorio = this.generarNumeroAleatorio(longitudArray);
     this.numeroAleatorio = numeroAleatorio;
@@ -221,8 +154,8 @@ export class JuegopreguntaterrordosjComponent implements OnInit {
     const respuestaArray = this.preguntasPeliculas[numeroAleatorio].Respuesta;
     const respuestaAleatoria =
       respuestaArray[this.generarNumeroAleatorio(respuestaArray.length)];
-    const id = this.preguntasPeliculas[numeroAleatorio].id; //para pistas
-    const pista = this.pistaPregunta.find((item) => item.id === id)?.Pista;
+    const id = this.preguntasPeliculas[numeroAleatorio].id;
+    const pista = this.pistaPregunta.find((item) => item.id === id)?.Pista; //Esta linea y la anterior cogeran la pista a traves del id
 
     this.pistas = pista ? pista.toString() : '';
 
@@ -235,11 +168,9 @@ export class JuegopreguntaterrordosjComponent implements OnInit {
       currentDate.getDate() + 1
     );
 
-    //Obtenemos el valor de la cookie 'puntos' y se lo asignamos a la variable. Hacemos lo mismo con los puntos del jugador 2
+    //Obtenemos el valor de la cookie 'puntos' y se lo asignamos a la variable
     const puntoscookie = this.cookieService.get('puntos');
     this.puntos = parseInt(puntoscookie, 10);
-    const puntos2cookie = this.cookieService.get('puntos2');
-    this.puntos2 = parseInt(puntos2cookie, 10);
 
     // Establecemos las cookies 'palabra' y 'numero' con la palabra secreta y el número aleatorio, respectivamente
     this.cookieService.set('palabra', this.palabrasecreta, expirationDate);
@@ -251,10 +182,10 @@ export class JuegopreguntaterrordosjComponent implements OnInit {
   }
 
   enviarRespuesta() {
-     //Activar animacion
-     this.showAnimation = true;
+    //Activar animacion
+    this.showAnimation = true;
 
-    // Obtenemos los nombres de las películas desde la cookie 'preguntas'
+    // Obtenemos las preguntas de las películas desde la cookie 'preguntas'
     const preguntaCookie = this.cookieService.get('preguntas');
 
     // Obtenemos la palabra secreta actual desde la cookie 'palabra'
@@ -269,27 +200,20 @@ export class JuegopreguntaterrordosjComponent implements OnInit {
 
     //Verificamos si la respuesta es correcta (Ya sea en mayuscula o minuscula)
     if (this.Respuesta.toLowerCase() === juegoActual.toLowerCase()) {
-      // Obtenemos los datos de la imagen desde la cookie 'peliculas'
+      // Obtenemos los datos de la pregunta desde la cookie 'preguntas'
       const preguntaData = JSON.parse(preguntaCookie);
       const numero = parseInt(this.cookieService.get('numero'), 10);
 
-      //Obtenemos los puntos y lo intentos de ambos jugadores a traves de las cookies
+      // Obtenemos los puntos y los intentos desde las cookies
       const puntoscookie = this.cookieService.get('puntos');
       this.puntos = parseInt(puntoscookie, 10);
-      const puntoscookie2 = this.cookieService.get('puntos2');
-      this.puntos2 = parseInt(puntoscookie2, 10);
       const intentoscookie = this.cookieService.get('intentos');
       this.intentos = parseInt(intentoscookie, 10);
-      const intentoscookie2 = this.cookieService.get('intentos2');
-      this.intentos2 = parseInt(intentoscookie2, 10);
 
-      //Si el turno vale uno, le damos los puntos al jugador1, en caso contrario, se lo damos al jugador2
-      if (this.turnoActual === 1) {
+      // Incrementamos los puntos si los intentos están dentro del rango permitido (0 a 3)
+      if (this.intentos <= 3 && this.intentos >= 0) {
         this.puntos += 1;
-      } else if (this.turnoActual === 2) {
-        this.puntos2 += 1;
       }
-
       const currentDate = new Date();
       const expirationDate = new Date(
         currentDate.getFullYear(),
@@ -302,18 +226,9 @@ export class JuegopreguntaterrordosjComponent implements OnInit {
         this.intentos.toString(),
         expirationDate
       );
-      this.cookieService.set(
-        'intentos2',
-        this.intentos2.toString(),
-        expirationDate
-      );
       this.cookieService.set('puntos', this.puntos.toString(), expirationDate);
-      this.cookieService.set(
-        'puntos2',
-        this.puntos2.toString(),
-        expirationDate
-      );
 
+      // Eliminamos la pregunta actual del arreglo preguntaData si los datos son válidos
       if (
         Array.isArray(preguntaData) &&
         numero >= 0 &&
@@ -321,6 +236,8 @@ export class JuegopreguntaterrordosjComponent implements OnInit {
       ) {
         preguntaData.splice(numero, 1);
         const updatedPreguntaCookie = JSON.stringify(preguntaData);
+
+        // Actualizamos la cookie 'preguntas' con los datos actualizados
         const currentDate = new Date();
         const expirationDate = new Date(
           currentDate.getFullYear(),
@@ -338,28 +255,17 @@ export class JuegopreguntaterrordosjComponent implements OnInit {
       const preguntaData = JSON.parse(preguntaCookie);
       const numero = parseInt(this.cookieService.get('numero'), 10);
 
-      //Si la respuesta es incorrecta, decrementamos los intentos dependiendo del turno
-      if (this.turnoActual === 1) {
-        this.intentos--;
-      } else if (this.turnoActual === 2) {
-        this.intentos2--;
-      }
-
+      // Si la respuesta es incorrecta, decrementamos los intentos
+      this.intentos--;
       const currentDate = new Date();
       const expirationDate = new Date(
         currentDate.getFullYear(),
         currentDate.getMonth(),
         currentDate.getDate() + 1
       );
-
       this.cookieService.set(
         'intentos',
         this.intentos.toString(),
-        expirationDate
-      );
-      this.cookieService.set(
-        'intentos2',
-        this.intentos2.toString(),
         expirationDate
       );
 
@@ -380,61 +286,18 @@ export class JuegopreguntaterrordosjComponent implements OnInit {
         );
       }
 
-      // Verificamos si se han agotado los intentos disponibles del jugador 1
+      // Verificamos si se han agotado los intentos disponibles
       if (this.intentos <= -1) {
-        //Si se han agotado, obtenemos el nombre del usuario de la cookie "session" y el de "session2", y lo almacenamos en un objeto con los puntos
+        //Si se han agotado, obtenemos el nombre del usuario de la cookie "session", y lo almacenamos en un objeto con los puntos
         const nombreuser = this.cookieService.get('session');
         const nuevo = {
           nombre: nombreuser,
           puntos: this.puntos,
         };
 
-        const nombreuser2 = this.cookieService.get('session2');
-        const nuevo2 = {
-          nombre: nombreuser2,
-          puntos: this.puntos2,
-        };
-
-        //Mandamos los datos del jugador 1 al servidor
+        //Mandamos los datos al servidor
         this.servicioService
-          .postDatoRankingPreguntaTerror(nuevo)
-          .subscribe((datos) => {
-            console.log('Datos enviados al servidor:', datos);
-          });
-
-        //Mandamos los datos del jugador 2 al servidor
-        this.servicioService
-          .postDatoRankingPreguntaTerror(nuevo2)
-          .subscribe((datos) => {
-            console.log('Datos enviados al servidor:', datos);
-          });
-
-        this.router.navigate(['/eleccion2']); //Nos vamos a "eleccion2"
-      } else if (this.intentos2 <= -1) {
-        //En caso contrario, si se han agotado los intentos del jugador2, hacemos lo mismo.
-        //cogemos los nombres de los jugadores, y lo almacenamos en objetos junto a sus puntos
-        const nombreuser2 = this.cookieService.get('session2');
-        const nombreuser = this.cookieService.get('session');
-        const nuevo2 = {
-          nombre: nombreuser2,
-          puntos: this.puntos2,
-        };
-
-        const nuevo = {
-          nombre: nombreuser,
-          puntos: this.puntos,
-        };
-
-        //Mandamos los datos del jugador 2 al servidor
-        this.servicioService
-          .postDatoRankingPreguntaTerror(nuevo2)
-          .subscribe((datos) => {
-            console.log('Datos enviados al servidor:', datos);
-          });
-
-        //Mandamos los datos del jugador 1 al servidor
-        this.servicioService
-          .postDatoRankingPreguntaTerror(nuevo)
+          .postDatoRankingPreguntaFiccion(nuevo)
           .subscribe((datos) => {
             console.log('Datos enviados al servidor:', datos);
           });
@@ -483,7 +346,7 @@ export class JuegopreguntaterrordosjComponent implements OnInit {
     );
     this.cookieService.set(
       'preguntas',
-      JSON.stringify(this.preguntasPeliculas.slice(0, 21)),
+      JSON.stringify(this.preguntasPeliculas.slice(0, 20)),
       expirationDate
     );
     this.cookieService.set(
@@ -492,7 +355,6 @@ export class JuegopreguntaterrordosjComponent implements OnInit {
       expirationDate
     );
     this.cookieService.set('puntos', '0', expirationDate);
-    this.cookieService.set('puntos2', '0', expirationDate);
     const pistacookie = this.cookieService.get('pistas'); //para pistas
     this.pistaPregunta = JSON.parse(pistacookie);
   }
@@ -505,7 +367,7 @@ export class JuegopreguntaterrordosjComponent implements OnInit {
   // Al pulsar el boton, iremos a eleccion2 por si queremos temrinar la partida antes de tiempo.
   irAEleccion2() {
     this.servicioService.juegoTerminadoAntesDeTiempo = true;
-    this.router.navigate(['eleccion2']);
+    this.router.navigate(['/eleccion2']);
   }
 
   //Esta funcion sirve para cmabiar el tipo de animacion de la pista

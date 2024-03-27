@@ -1,0 +1,86 @@
+<div class="background-image">
+    <div class="container">
+      <h1 class="text-center mt-5">Usuario: {{ session }}</h1>
+      <h1 class="text-center mt-5">Intentos:</h1>
+      <div class="image-container">
+        <ng-container *ngFor="let _ of [].constructor(intentos); let i = index">
+          <img
+            [src]="'../../assets/icono/claquetaicon.png'"
+            class="img-intento"
+            alt="Intento {{ i + 1 }}"
+          />
+        </ng-container>
+      </div>
+      <h1 class="text-center mt-5">Puntos: {{ puntos }}</h1>
+      <div
+        class="row"
+        [ngClass]="{
+          'animate-left': showAnimation && !showAnimation,
+          'animate-right': showAnimation,
+          'animate-enter-left': !showAnimation
+        }"
+      >
+        <div class="col-md-6 mx-auto">
+          <h1
+            class="text-center mt-5"
+            *ngIf="preguntasPeliculas[numeroAleatorio]"
+          >
+            {{ preguntasPeliculas[numeroAleatorio].pregunta }}
+          </h1>
+  
+          <div
+            class="alert alert-info"
+            role="alert"
+            [@slideDownUp]="estadoAnimacion"
+            [style.height]="mostrarPista ? 'auto' : '0'"
+          >
+            <h4>Pista:</h4>
+            <p>{{ pistas }}</p>
+          </div>
+  
+          <button
+            class="btn btn-primary mx-auto d-block"
+            (click)="togglePistaAnimation()"
+          >
+            Pista
+          </button>
+          <!--Añadimos el boton para mostrar la pista al hacer click en el con javascript-->
+  
+          <form autocomplete="off" class="mt-4" ngform>
+            <!--Creamos un formulario para que el usuario pueda responder-->
+            <div class="form-group colorajax">
+              <label for="respuesta">Introduce la respuesta</label>
+              <input
+                id="respuesta"
+                type="text"
+                class="form-control"
+                placeholder="Respuesta"
+                name="respuesta"
+                [formControl]="RespuestaControl"
+              />
+            </div>
+            <div class="text-center">
+              <br />
+              <button
+                type="submit"
+                class="btn btn-primary"
+                (click)="enviarRespuesta()"
+              >
+                Comprobar
+              </button>
+              <button
+                class="btn btn-secondary"
+                type="button"
+                (click)="borrarTexto()"
+              >
+                Borrar Respuesta
+              </button>
+              <button class="btn btn-dark" (click)="irAEleccion2()">
+                Terminar juego
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

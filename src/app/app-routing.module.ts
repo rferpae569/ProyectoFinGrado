@@ -25,6 +25,8 @@ import { FormularioencuestaComponent } from './formularioencuesta/formularioencu
 import { InfoCookieComponent } from './info-cookie/info-cookie.component';
 import { JuegoimagenficcionComponent } from './juegoimagenficcion/juegoimagenficcion.component';
 import { JuegoimagenficciondosjComponent } from './juegoimagenficciondosj/juegoimagenficciondosj.component';
+import { JuegopreguntaficcionComponent } from './juegopreguntaficcion/juegopreguntaficcion.component';
+import { JuegopreguntaficciondosjComponent } from './juegopreguntaficciondosj/juegopreguntaficciondosj.component';
 //importamos los modulos y los componentes necesarios
 
 const routes: Routes = [
@@ -54,6 +56,8 @@ const routes: Routes = [
   { path: 'infocookie', component:InfoCookieComponent},
   { path: 'juegoimagenficcion', component:JuegoimagenficcionComponent},
   { path: 'juegoimagenficciondosj', component: JuegoimagenficciondosjComponent},
+  { path: 'juegopreguntaficcion', component: JuegopreguntaficcionComponent},
+  { path: 'juegopreguntaficciondosj', component: JuegopreguntaficciondosjComponent}
   //Creamos las rutas para cada componente
 
 ];

@@ -32,6 +32,8 @@ import { FormularioencuestaComponent } from './formularioencuesta/formularioencu
 import { InfoCookieComponent } from './info-cookie/info-cookie.component';
 import { JuegoimagenficcionComponent } from './juegoimagenficcion/juegoimagenficcion.component';
 import { JuegoimagenficciondosjComponent } from './juegoimagenficciondosj/juegoimagenficciondosj.component';
+import { JuegopreguntaficcionComponent } from './juegopreguntaficcion/juegopreguntaficcion.component';
+import { JuegopreguntaficciondosjComponent } from './juegopreguntaficciondosj/juegopreguntaficciondosj.component';
 
 //importamos los modules y los ocmponentes correspondientes
 
@@ -63,6 +65,8 @@ import { JuegoimagenficciondosjComponent } from './juegoimagenficciondosj/juegoi
     InfoCookieComponent,
     JuegoimagenficcionComponent,
     JuegoimagenficciondosjComponent,
+    JuegopreguntaficcionComponent,
+    JuegopreguntaficciondosjComponent,
   ],
   imports: [
     BrowserModule,

@@ -79,7 +79,7 @@ export class JuegopreguntaterrorComponent implements OnInit {
       this.pistaPregunta = datos;
       this.cookieService.set(
         'pistas',
-        JSON.stringify(this.pistaPregunta.slice(0, 18))
+        JSON.stringify(this.pistaPregunta.slice(0, 21))
       ); //Esto es para las pistas
 
       this.seleccionarPalabraSecreta();
@@ -347,7 +347,7 @@ export class JuegopreguntaterrorComponent implements OnInit {
     );
     this.cookieService.set(
       'preguntas',
-      JSON.stringify(this.preguntasPeliculas.slice(0, 18)),
+      JSON.stringify(this.preguntasPeliculas.slice(0, 21)),
       expirationDate
     );
     this.cookieService.set(

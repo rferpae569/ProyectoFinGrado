@@ -215,6 +215,44 @@ export class EleccionComponent {
     }
   }
 
+  incrementarJugadasPreguntasFiccion() {
+    //Esta funcion sirve para incrementar el numero de jugadas de los usuarios que han iniciado sesion en el juego de las preguntas de ficcion
+    //Si son dos usuarios, lo hara dos veces, una para cada uno
+    const nombreuser = this.cookieService.get('session');
+    const nombreuser2 = this.cookieService.get('session2');
+
+    if (nombreuser && nombreuser2) {
+      const nuevo = {
+        nombre: nombreuser,
+      };
+
+      this.servicio.getIncrementarJugadasPreguntasFiccion(nuevo).subscribe((datos) => {
+        console.log('Datos enviados al servidor:', datos);
+      });
+
+      const nuevo2 = {
+        nombre: nombreuser2,
+      };
+
+      this.servicio
+        .getIncrementarJugadasPreguntasFiccion(nuevo2)
+        .subscribe((datos) => {
+          console.log('Datos enviados al servidor:', datos);
+        });
+
+      // Si ambos usuarios están en sesión, redirige al juego de las preguntas para dos jugadores
+      this.router.navigate(['juegopreguntaficciondosj']);
+    } else if (nombreuser) {
+      //Si solo es un jugador, hara la incrementacion una vez para el usuario correspondiente y ira al juego de las preguntas de un jugador
+      const nuevo = { nombre: nombreuser };
+      this.servicio.getIncrementarJugadasPreguntasFiccion(nuevo).subscribe((datos) => {
+        console.log('Datos enviados al servidor:', datos);
+      });
+    } else {
+      console.log('Sesiones no encontradas');
+    }
+  }
+
   incrementarJugadasMusicaFantasia() {
     //Esta funcion sirve para incrementar el numero de jugadas de los usuarios que han iniciado sesion en el juego de las canciones
     //Si son dos usuarios, lo hara dos veces, una para cada uno

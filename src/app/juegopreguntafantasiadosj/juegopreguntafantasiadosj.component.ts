@@ -92,7 +92,7 @@ export class JuegopreguntafantasiadosjComponent implements OnInit {
       this.pistaPregunta = datos;
       this.cookieService.set(
         'pistas',
-        JSON.stringify(this.pistaPregunta.slice(0, 18))
+        JSON.stringify(this.pistaPregunta.slice(0, 21))
       ); //Esto para pistas
 
       this.seleccionarPalabraSecreta();
@@ -484,7 +484,7 @@ export class JuegopreguntafantasiadosjComponent implements OnInit {
     );
     this.cookieService.set(
       'preguntas',
-      JSON.stringify(this.preguntasPeliculas.slice(0, 18)),
+      JSON.stringify(this.preguntasPeliculas.slice(0, 21)),
       expirationDate
     );
     this.cookieService.set(

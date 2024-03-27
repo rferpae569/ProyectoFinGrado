@@ -9,9 +9,9 @@ import {trigger,state,style,animate,transition,} from '@angular/animations';
 //Importamos los modulos
 
 @Component({
-  selector: 'app-juegopreguntaterrordosj',
-  templateUrl: './juegopreguntaterrordosj.component.html',
-  styleUrls: ['./juegopreguntaterrordosj.component.scss'],
+  selector: 'app-juegopreguntaficciondosj',
+  templateUrl: './juegopreguntaficciondosj.component.html',
+  styleUrls: ['./juegopreguntaficciondosj.component.scss'],
   animations: [
     trigger('slideDownUp', [
       state('down', style({ opacity: 1, height: '*' })),
@@ -21,7 +21,8 @@ import {trigger,state,style,animate,transition,} from '@angular/animations';
     ]),
   ],
 })
-export class JuegopreguntaterrordosjComponent implements OnInit {
+export class JuegopreguntaficciondosjComponent implements OnInit {
+
   datos!: Juegopregunta[];
   Respuesta: string = '';
   intentos: number = 0;
@@ -87,11 +88,11 @@ export class JuegopreguntaterrordosjComponent implements OnInit {
     const puntoscookie2 = this.cookieService.get('puntos2');
     this.puntos2 = parseInt(puntoscookie2, 10) || 0;
 
-    this.servicioService.getDatosPeliculaPistaPreguntaTerror().subscribe((datos) => {
+    this.servicioService.getDatosPeliculaPistaPreguntaFiccion().subscribe((datos) => {
       this.pistaPregunta = datos;
       this.cookieService.set(
         'pistas',
-        JSON.stringify(this.pistaPregunta.slice(0, 21))
+        JSON.stringify(this.pistaPregunta.slice(0, 20))
       ); //Esto para pistas
 
       this.seleccionarPalabraSecreta();
@@ -131,7 +132,7 @@ export class JuegopreguntaterrordosjComponent implements OnInit {
     // Verificamos si existe la cookie 'preguntas', y si no existe, obtenemos los datos
     const sessionCookieExists = this.cookieService.check('preguntas');
     if (!sessionCookieExists) {
-      this.servicioService.getDatosPeliculaPreguntaTerror().subscribe((datos) => {
+      this.servicioService.getDatosPeliculaPreguntaFiccion().subscribe((datos) => {
         this.datos = datos;
         this.generarArrayPreguntasPeliculas();
         this.seleccionarPalabraSecreta();
@@ -199,13 +200,13 @@ export class JuegopreguntaterrordosjComponent implements OnInit {
       };
 
       //Enviamos los datos del jugador 1 al servidor
-      this.servicioService.postDatoRankingPreguntaTerror(nuevo).subscribe((datos) => {
+      this.servicioService.postDatoRankingPreguntaFiccion(nuevo).subscribe((datos) => {
         console.log('Datos enviados al servidor:', datos);
       });
 
       //Enviamos los datos del jugador 2 al servidor
       this.servicioService
-        .postDatoRankingPreguntaTerror(nuevo2)
+        .postDatoRankingPreguntaFiccion(nuevo2)
         .subscribe((datos) => {
           console.log('Datos enviados al servidor:', datos);
         });
@@ -397,14 +398,14 @@ export class JuegopreguntaterrordosjComponent implements OnInit {
 
         //Mandamos los datos del jugador 1 al servidor
         this.servicioService
-          .postDatoRankingPreguntaTerror(nuevo)
+          .postDatoRankingPreguntaFiccion(nuevo)
           .subscribe((datos) => {
             console.log('Datos enviados al servidor:', datos);
           });
 
         //Mandamos los datos del jugador 2 al servidor
         this.servicioService
-          .postDatoRankingPreguntaTerror(nuevo2)
+          .postDatoRankingPreguntaFiccion(nuevo2)
           .subscribe((datos) => {
             console.log('Datos enviados al servidor:', datos);
           });
@@ -427,14 +428,14 @@ export class JuegopreguntaterrordosjComponent implements OnInit {
 
         //Mandamos los datos del jugador 2 al servidor
         this.servicioService
-          .postDatoRankingPreguntaTerror(nuevo2)
+          .postDatoRankingPreguntaFiccion(nuevo2)
           .subscribe((datos) => {
             console.log('Datos enviados al servidor:', datos);
           });
 
         //Mandamos los datos del jugador 1 al servidor
         this.servicioService
-          .postDatoRankingPreguntaTerror(nuevo)
+          .postDatoRankingPreguntaFiccion(nuevo)
           .subscribe((datos) => {
             console.log('Datos enviados al servidor:', datos);
           });
@@ -483,7 +484,7 @@ export class JuegopreguntaterrordosjComponent implements OnInit {
     );
     this.cookieService.set(
       'preguntas',
-      JSON.stringify(this.preguntasPeliculas.slice(0, 21)),
+      JSON.stringify(this.preguntasPeliculas.slice(0, 20)),
       expirationDate
     );
     this.cookieService.set(
