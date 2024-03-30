@@ -34,6 +34,8 @@ import { JuegoimagenficcionComponent } from './juegoimagenficcion/juegoimagenfic
 import { JuegoimagenficciondosjComponent } from './juegoimagenficciondosj/juegoimagenficciondosj.component';
 import { JuegopreguntaficcionComponent } from './juegopreguntaficcion/juegopreguntaficcion.component';
 import { JuegopreguntaficciondosjComponent } from './juegopreguntaficciondosj/juegopreguntaficciondosj.component';
+import { JuegomusicaficcionComponent } from './juegomusicaficcion/juegomusicaficcion.component';
+import { JuegomusicaficciondosjComponent } from './juegomusicaficciondosj/juegomusicaficciondosj.component';
 
 //importamos los modules y los ocmponentes correspondientes
 
@@ -67,6 +69,8 @@ import { JuegopreguntaficciondosjComponent } from './juegopreguntaficciondosj/ju
     JuegoimagenficciondosjComponent,
     JuegopreguntaficcionComponent,
     JuegopreguntaficciondosjComponent,
+    JuegomusicaficcionComponent,
+    JuegomusicaficciondosjComponent,
   ],
   imports: [
     BrowserModule,

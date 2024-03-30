@@ -24,17 +24,17 @@ Cuando inicie sesion, el usuario sera llevado al componente "eleccion" donde pod
 - Juego de las preguntas
     - Genero fantasia
     - Genero Terror
+    - Genero Ciencia Ficcion
 - Juego de la musica 
     - Genero fantasia
     - Genero Terror
+    - Genero Ciencia Ficcion
 
 En el juego de las imagenes, al usuario le aparecera una imagen aleatoria de una pelicula, y debera de adivinar a que pelicula pertenece escribiendo su titulo en el formulario. En el juego de las preguntas, al usuario le saldra una pregunta aleatoria en relacion a los datos de dicha pelicula (Quien la hizo, año en el que salio, su recaudacion, etc). Dependiendo de la pregunta, el usuario debera de escribir la respuesta correspondiente. En el juego de la musica, al usuario le saldra una banda sonora aleatoria de una pelicula, y debera de adivinar a que pelicula pertenece escribiendo su titulo en el formulario.
 
 En los juegos de cada seccion, el usuario tendra tres intentos, si los gasta y pierde otra vez, el juego terminara.
 
 Aparte de eso, se ha implementado tambien el modo dos jugadores, donde el usuario podra jugar a los mismos juegos con otra persona una vez inicien sesion los dos juntos. Se puede acceder a ese modo dandole al enlace de "Modo dos jugadores" ubicado en el componente "Inicio".
-
-Actualmente se esta trabajando para jugar con el genero de Ciencia Ficcion.
 
 **Este proyecto ha sido realizado por Rubén Fernández**
 

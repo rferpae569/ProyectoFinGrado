@@ -27,6 +27,8 @@ import { JuegoimagenficcionComponent } from './juegoimagenficcion/juegoimagenfic
 import { JuegoimagenficciondosjComponent } from './juegoimagenficciondosj/juegoimagenficciondosj.component';
 import { JuegopreguntaficcionComponent } from './juegopreguntaficcion/juegopreguntaficcion.component';
 import { JuegopreguntaficciondosjComponent } from './juegopreguntaficciondosj/juegopreguntaficciondosj.component';
+import { JuegomusicaficcionComponent } from './juegomusicaficcion/juegomusicaficcion.component';
+import { JuegomusicaficciondosjComponent } from './juegomusicaficciondosj/juegomusicaficciondosj.component';
 //importamos los modulos y los componentes necesarios
 
 const routes: Routes = [
@@ -57,7 +59,9 @@ const routes: Routes = [
   { path: 'juegoimagenficcion', component:JuegoimagenficcionComponent},
   { path: 'juegoimagenficciondosj', component: JuegoimagenficciondosjComponent},
   { path: 'juegopreguntaficcion', component: JuegopreguntaficcionComponent},
-  { path: 'juegopreguntaficciondosj', component: JuegopreguntaficciondosjComponent}
+  { path: 'juegopreguntaficciondosj', component: JuegopreguntaficciondosjComponent},
+  { path: 'juegomusicaficcion', component:JuegomusicaficcionComponent},
+  { path: 'juegomusicaficciondosj', component:JuegomusicaficciondosjComponent}
   //Creamos las rutas para cada componente
 
 ];

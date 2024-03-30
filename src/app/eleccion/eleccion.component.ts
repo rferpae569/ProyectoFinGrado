@@ -325,6 +325,42 @@ export class EleccionComponent {
     }
   }
 
+  incrementarJugadasMusicaFiccion(){
+    //Esta funcion sirve para incrementar el numero de jugadas de los usuarios que han iniciado sesion en el juego de las canciones
+    //Si son dos usuarios, lo hara dos veces, una para cada uno
+    const nombreuser = this.cookieService.get('session');
+    const nombreuser2 = this.cookieService.get('session2');
+
+    if (nombreuser && nombreuser2) {
+      const nuevo = {
+        nombre: nombreuser,
+      };
+
+      this.servicio.getIncrementarJugadasMusicaFiccion(nuevo).subscribe((datos) => {
+        console.log('Datos enviados al servidor:', datos);
+      });
+
+      const nuevo2 = {
+        nombre: nombreuser2,
+      };
+
+      this.servicio.getIncrementarJugadasMusicaFiccion(nuevo2).subscribe((datos) => {
+        console.log('Datos enviados al servidor:', datos);
+      });
+
+      // Si ambos usuarios están en sesión, redirige al juego de las canciones para dos jugadores
+      this.router.navigate(['juegomusicaficciondosj']);
+    } else if (nombreuser) {
+      //Si solo es un jugador, hara la incrementacion una vez para el usuario correspondiente y ira al juego de las canciones de un jugador
+      const nuevo = { nombre: nombreuser };
+      this.servicio.getIncrementarJugadasMusicaFiccion(nuevo).subscribe((datos) => {
+        console.log('Datos enviados al servidor:', datos);
+      });
+    } else {
+      console.log('Sesiones no encontradas');
+    }
+  }
+
   irAInicio() {
     //Esta funcion nos llevara al inicio, y borrara las cookies especificadas.
     const cookiesExistentes = [
