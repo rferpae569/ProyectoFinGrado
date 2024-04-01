@@ -18,11 +18,11 @@ export class ClasificacionComponent implements OnInit {
 
   usuariosImagen: any[] = []; 
   usuariosPreguntas: any[] = []; 
-  usuariosMusica: any[] = []; 
+  usuariosMusica: any[] = [];
 
   mostrarTablaI: boolean = true; 
   mostrarTablaP: boolean = false; 
-  mostrarTablaM: boolean = false; 
+  mostrarTablaM: boolean = false;
 
   constructor(private servicioService: ServicioService, private router: Router) { }
 
@@ -35,7 +35,8 @@ export class ClasificacionComponent implements OnInit {
             nombre: usuario.nombre,
             puntosImagenFantasia: usuario.PuntosImagenFantasia,
             puntosImagenTerror: usuario.PuntosImagenTerror,
-            totalImagen: usuario.PuntosImagenFantasia + usuario.PuntosImagenTerror,
+            puntosImagenFiccion: usuario.PuntosImagenFiccion,
+            totalImagen: usuario.PuntosImagenFantasia + usuario.PuntosImagenTerror + usuario.PuntosImagenFiccion,
           };
         });
        // Ordenar los usuarios por los tres criterios: imagen, preguntas y música
@@ -54,7 +55,8 @@ export class ClasificacionComponent implements OnInit {
           nombre: usuario.nombre,
           PuntosPreguntasFantasia: usuario.PuntosPreguntasFantasia,
           PuntosPreguntasTerror: usuario.PuntosPreguntasTerror,
-          totalPreguntas: usuario.PuntosPreguntasFantasia + usuario.PuntosPreguntasTerror
+          PuntosPreguntasFiccion: usuario.PuntosPreguntasFiccion,
+          totalPreguntas: usuario.PuntosPreguntasFantasia + usuario.PuntosPreguntasTerror + usuario.PuntosPreguntasFiccion
         };
       });
      // Ordenar los usuarios por los tres criterios: imagen, preguntas y música
@@ -73,7 +75,8 @@ export class ClasificacionComponent implements OnInit {
         nombre: usuario.nombre,
         PuntosMusicaFantasia: usuario.PuntosMusicaFantasia,
         PuntosMusicaTerror: usuario.PuntosMusicaTerror,
-        totalMusica: usuario.PuntosMusicaFantasia + usuario.PuntosMusicaTerror
+        PuntosMusicaFiccion: usuario.PuntosMusicaFiccion,
+        totalMusica: usuario.PuntosMusicaFantasia + usuario.PuntosMusicaTerror + usuario.PuntosMusicaFiccion
       };
     });
    // Ordenar los usuarios por los tres criterios: imagen, preguntas y música
@@ -113,6 +116,8 @@ export class ClasificacionComponent implements OnInit {
       return this.compare(a.puntosImagenFantasia, b.puntosImagenFantasia, isAsc);
     case 'puntosImagenTerror':
       return this.compare(a.puntosImagenTerror, b.puntosImagenTerror, isAsc);
+    case 'puntosImagenFiccion':
+      return this.compare(a.puntosImagenFiccion, b.puntosImagenFiccion, isAsc);
     case 'totalImagen':
       return this.compare(a.totalImagen, b.totalImagen, isAsc);
     default:
@@ -129,6 +134,8 @@ this.usuariosPreguntas = data.sort((a, b) => {
       return this.compare(a.PuntosPreguntasFantasia, b.PuntosPreguntasFantasia, isAsc);
     case 'PuntosPreguntasTerror':
       return this.compare(a.PuntosPreguntasTerror, b.PuntosPreguntasTerror, isAsc);
+    case 'PuntosPreguntasFiccion':
+      return this.compare(a.PuntosPreguntasFiccion, b.PuntosPreguntasFiccion, isAsc);
     case 'totalPreguntas':
       return this.compare(a.totalPreguntas, b.totalPreguntas, isAsc);
     default:
@@ -143,6 +150,8 @@ this.usuariosMusica = data.sort((a, b) => {
       return this.compare(a.PuntosMusicaFantasia, b.PuntosMusicaFantasia, isAsc);
     case 'PuntosMusicaTerror':
       return this.compare(a.PuntosMusicaTerror, b.PuntosMusicaTerror, isAsc);
+    case 'PuntosMusicaFiccion':
+      return this.compare(a.PuntosMusicaFiccion, b.PuntosMusicaFiccion, isAsc);
     case 'totalMusica':
       return this.compare(a.totalMusica, b.totalMusica, isAsc);
     default:
@@ -185,5 +194,4 @@ this.usuariosMusica = data.sort((a, b) => {
     this.mostrarTablaM = true;
     this.tablaActual = 'musica';
   }
-
 }

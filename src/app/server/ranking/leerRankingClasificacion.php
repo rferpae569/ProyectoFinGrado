@@ -10,7 +10,7 @@ try {
     // que el valor de la columna "codigoRanking" en ambas tablas sea igual. 
     // Esto implica que se obtendrá información del ranking y el nombre del usuario 
     // asociado a ese ranking.
-    $res = $mbd->query('SELECT r.PuntosImagenFantasia, r.PuntosImagenTerror, r.PuntosPreguntasFantasia, r.PuntosPreguntasTerror, r.PuntosMusicaFantasia, r.PuntosMusicaTerror, u.nombre FROM ranking r JOIN usuarios u ON r.codigoRanking = u.codigoRanking');
+    $res = $mbd->query('SELECT r.PuntosImagenFantasia, r.PuntosImagenTerror, r.PuntosImagenFiccion, r.PuntosPreguntasFantasia, r.PuntosPreguntasTerror, r.PuntosPreguntasFiccion, r.PuntosMusicaFantasia, r.PuntosMusicaTerror, r.PuntosMusicaFiccion, u.nombre FROM ranking r JOIN usuarios u ON r.codigoRanking = u.codigoRanking');
 
     if ($res->errorCode() == 0) {
         $rows = $res->fetchAll(PDO::FETCH_ASSOC);
