@@ -1,4 +1,43 @@
-<div [ngClass]="{ blur: mostrarFooter }" class="background-image">
+<!--Mensaje Cookies-->
+<div *ngIf="showCookieConsent" class="cookie-consent-overlay">
+  <div class="cookie-consent">
+    <p>
+      Utilizamos cookies propias y de terceros para obtener datos estadísticos
+      de la navegación de nuestros usuarios y mejorar nuestros servicios. Si
+      acepta o continúa navegando, consideramos que acepta su uso. Puede cambiar
+      la configuración u obtener más información
+      <a routerLink="/infocookie" class="azul">
+        aquí (enlace a página de cookies).</a
+      >
+    </p>
+    <button (click)="acceptCookies()">Aceptar</button>
+    <button (click)="rejectCookies()">Rechazar</button>
+  </div>
+</div>
+<!--Fin Mensaje cookies-->
+<div [class.blurred]="showCookieConsent" class="background-image">
+  <!--Inicio Header-->
+    <header class="header">
+    <div class="logo">
+      <img
+        src="../../assets/icono/AdivinaLapeliculaLogo.png"
+        alt="ImagenlogoAdivinaLaPelicula"
+        width="200"
+        height="200"
+      />
+    </div>
+    <nav class="nav-links">
+      <a routerLinkActive="active">Inicio</a>
+      <a routerLinkActive="active"
+        >Sobre nosotros</a
+      >
+      <a routerLinkActive="active"
+        >Contactanos</a
+      >
+    </nav>
+  </header>
+  <!--Fin Header-->
+  <!--Contenido Principal-->
   <div class="container">
     <div class="row">
       <div class="col-md-6 offset-md-3 custom-div">
@@ -60,8 +99,8 @@
               class="btn btn-primary btn-block"
               id="iniciar"
               name="iniciar"
-              [value]="isSessionActive ? 'Acceder' : 'Iniciar Sesión'"            
-              />
+              [value]="isSessionActive ? 'Acceder' : 'Iniciar Sesión'"
+            />
             <input
               type="submit"
               class="btn btn-danger btn-block cerrarSesion"
@@ -79,41 +118,26 @@
   <br />
   <!-- Creamos varias rutas para navegar por los componentes-->
   <div class="text-center">
-    <a [routerLink]="tieneSesionActiva() ? '' : '/registro'" (click)="mostrarAlert()"> Aún no estoy registrado </a>| 
+    <a
+      [routerLink]="tieneSesionActiva() ? '' : '/registro'"
+      (click)="mostrarAlert()"
+    >
+      Aún no estoy registrado </a
+    >|
     <a routerLink="/dosjugadores">Modo dos jugadores</a>
   </div>
 </div>
-<!--Creamos un footer para mostrar el mensaje de las cookies y aceptarlas-->
-<footer class="footer fixed-bottom bg-white" *ngIf="mostrarFooter">
-  <div class="container bg-white">
-    <form method="POST">
-      <p>
-        Utilizamos cookies propias y de terceros para obtener datos estadísticos
-        de la navegación de nuestros usuarios y mejorar nuestros servicios. Si
-        acepta o continúa navegando, consideramos que acepta su uso. Puede
-        cambiar la configuración u obtener más información
-        <a routerLink="/infocookie" class="azul">
-          aquí (enlace a página de cookies).</a
-        >
-      </p>
-      <div class="text-center botones-container">
-        <input
-          type="submit"
-          class="btn btn-primary"
-          id="aceptar"
-          name="aceptar"
-          value="Aceptar"
-          (click)="aceptarCookies($event)"
-        />
-        <input
-          type="submit"
-          class="btn btn-danger"
-          id="rechazar"
-          name="rechazar"
-          value="Rechazar"
-          (click)="rechazarCookies()"
-        />
-      </div>
-    </form>
+<!--Fin contenido principal-->
+<!--Inicio Footer-->
+<footer class="footer">
+  <div class="container">
+    <p>&copy; 2024 Todos los derechos reservados - AdivinaLaPelicula</p>
+    <br />
+    <ul class="footer-links">
+      <li><a>Aviso Legal</a></li>
+      <li><a>Política de Privacidad</a></li>
+      <li><a>Términos de Servicio</a></li>
+    </ul>
   </div>
 </footer>
+<!--Fin Footer-->

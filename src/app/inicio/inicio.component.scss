@@ -1,11 +1,64 @@
-.blur {
-  //Especificamos que ponga borroso el componente si el footer esta visible a traves de una clase
-  filter: blur(4px);
+img {
+  max-width: 100%;
+  height: auto;
+  width: 80px;
+  margin-left: 10px;
+}
+
+.header {
+    background-color: #F0F0F0;
+    color: #333; 
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .logo {
+    font-size: 24px;
+  }
+  
+  .nav-links a {
+    color: #333;
+    text-decoration: none;
+    margin-left: 20px;
+  }
+  
+  .nav-links a:hover {
+    text-decoration: underline;
+  }
+  
+  .nav-links .active {
+    font-weight: bold;
+  }
+
+.cookie-consent-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cookie-consent {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 10000;
+}
+
+.blurred {
+  filter: blur(5px);
   pointer-events: none;
 }
 
 .background-image {
-  //Especificamos el fondo a traves del componente a traves de una clase
   background-image: url("../../assets/fondos/fondologin.jpg");
   background-size: cover;
   background-position: center;
@@ -16,20 +69,17 @@
 h1,
 label,
 a {
-  //Especificamos que las siguientes etiquetas tengan el color blanco
   color: white;
 }
 
-//Color azul para el enlace sobre la proteccion de datos
 .azul {
-  color: blue;
+  color: rgb(70, 148, 221);
 }
 
 a:hover {
   color: red;
 }
 
-//Para dar un poco de margen al contenedor
 .custom-div {
   margin-top: 50px;
 }
@@ -38,7 +88,6 @@ a:hover {
   margin-right: 10px;
 }
 
-//Estilo para que el input se ponga en gris cuando no se pueda usar al tener la sesion iniciada
 .readonly-input {
   color: #888;
   background-color: #ccc;
@@ -48,7 +97,6 @@ a:hover {
   border: 1px solid #ccc;
 }
 
-//Para el boton de cerrar sesion
 .cerrarSesion {
   background-color: rgb(196, 17, 17);
 
@@ -57,25 +105,134 @@ a:hover {
   }
 }
 
-//Response para la imagen de fondo
-@media (max-width: 1200px) {
-  .background-image {
-    background-size: 100% 100%;
-  }
+.cookie-consent {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
 }
 
-//Animacion para el footer
-@keyframes hideFooter {
-  0% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(100%);
-  }
+.cookie-consent p {
+  margin: 0 0 10px 0;
 }
 
-.hide-animation {
-  animation: hideFooter 0.5s forwards;
+.cookie-consent button {
+  background-color: #f44336;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  margin: 5px;
+  cursor: pointer;
+  border-radius: 5px;
 }
+
+.cookie-consent button:hover {
+  background-color: #e53935;
+}
+
+.cookie-consent button:nth-child(2) {
+  background-color: #4caf50;
+}
+
+.cookie-consent button:nth-child(2):hover {
+  background-color: #45a049;
+}
+
+.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 5px 0;
+    font-family: "Roboto", sans-serif;
+    font-size: 0.875rem;
+  }
+  
+  .footer p {
+    margin: 0;
+    text-align: center;
+  }
+  
+  .footer-links {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+    margin: 10px 0;
+  }
+  
+  .footer-links li {
+    display: inline;
+    margin-right: 10px;
+  }
+  
+  .footer-links li:last-child {
+    margin-right: 0;
+  }
+  
+  .footer-links li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.875rem;
+  }
+  
+  .footer-links li a:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 1200px) {
+    .background-image {
+      background-size: 100% 100%;
+    }
+  
+    .header {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .logo {
+      margin-bottom: 10px;
+    }
+  
+    .nav-links {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .nav-links a {
+      margin: 10px 0;
+    }
+  
+    .footer {
+      font-size: 0.75rem;
+    }
+  
+    .footer-links li {
+      display: block;
+      margin: 5px 0;
+    }
+  
+  }
+  
+  @media (max-width: 768px) {
+    .header {
+      padding: 10px 5px;
+    }
+  
+    .nav-links a {
+      margin: 5px 0;
+    }
+  
+    .footer {
+      padding: 10px 5px;
+    }
+  
+    .footer-links li {
+      margin-right: 5px;
+    }
+  }

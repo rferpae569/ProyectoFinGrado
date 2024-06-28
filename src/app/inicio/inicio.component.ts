@@ -1,4 +1,4 @@
-import {Component, OnInit, AfterViewInit,} from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Usuarios } from '../model/usuarios';
@@ -18,11 +18,11 @@ export class InicioComponent implements OnInit, AfterViewInit {
   isLoggedIn = false;
   entrada: boolean = false;
   fallo: boolean = false;
-  mostrarFooter: boolean = true; 
-  mostrarContrasena: boolean = false; 
+  mostrarContrasena: boolean = false;
   menuActive: boolean = false;
   sessionValue: string = '';
   isSessionActive: boolean = false;
+  showCookieConsent: boolean = true;
 
   constructor(
     private cookieService: CookieService,
@@ -97,53 +97,42 @@ export class InicioComponent implements OnInit, AfterViewInit {
   }
 
   /*Comprobamos si existe la sesion. Si existe, se escribira el nombre de usuario en el input correspondiente
-  Aparte de eso, mostrara el footer si no se han aceptado las cookies */
+  Aparte de eso, mostrara el mensaje de las cokies si no han sido aceptadas */
   ngOnInit() {
     const sessionCookieExists = this.cookieService.check('session');
     if (sessionCookieExists) {
       this.sessionValue = this.cookieService.get('session');
       this.newloginForm.patchValue({
-        Nombre: this.sessionValue
+        Nombre: this.sessionValue,
       });
       this.isSessionActive = true;
     } else {
       this.sessionValue = '';
       this.isLoggedIn = false;
     }
-    
-    this.mostrarFooter = !this.cookieService.check('Cookies');
+
+    this.checkCookieConsent();
   }
 
- //Esta funcion sirve para crear las cookies correspondientes si se aceptan y activar la animacion
-  aceptarCookies(event: Event) {
-    event.preventDefault();
-  
-    // Obtenemos la fecha actual
-    const fechaActual = new Date();
-
-    // Obtenemos la fecha de expiración
-    const fechaExpiracion = new Date();
-    fechaExpiracion.setDate(fechaActual.getDate() + 1);
-  
-    // Establecemos la cookie con la fecha de expiración
-    this.cookieService.set('Cookies', 'Aceptadas', fechaExpiracion);
-  
-    const footerElement = document.querySelector('.footer');
-    if (footerElement) {
-      footerElement.classList.add('hide-animation');
-  
-      // Esperamos a que termine la animación antes de ocultar el footer
-      setTimeout(() => {
-        this.mostrarFooter = false;
-      }, 500);
+  //Si existen las cookies, desactivara el duv con el mensaje
+  checkCookieConsent(): void {
+    const consent = this.cookieService.get('cookies');
+    if (consent === 'Aceptadas') {
+      this.showCookieConsent = false;
     }
   }
 
-  rechazarCookies() {
-    //Esta funcion sirve para rechazar las cookies, al hacerlo, mostrara un mensaje de alerta
-    alert('Debes de aceptar las cookies');
-    this.mostrarFooter = true;
-    return false;
+  //En caso de pulsar el boton de "Aceptar", las cookies se crearan
+  acceptCookies(): void {
+    const expirationDate = new Date();
+    expirationDate.setHours(expirationDate.getHours() + 24);
+    this.cookieService.set('cookies', 'Aceptadas', { expires: expirationDate });
+    this.showCookieConsent = false;
+  }
+
+  //Esta funcion mostrara un mensaje si las cookies son rechazadas
+  rejectCookies(): void {
+    alert('Debes aceptar las cookies para continuar en la página.');
   }
 
   toggleMostrarContrasena() {
@@ -169,9 +158,9 @@ export class InicioComponent implements OnInit, AfterViewInit {
   cerrarSesion() {
     this.cookieService.delete('session');
     this.newloginForm.get('Nombre')?.setValue('');
-    this.sessionValue = ''; 
+    this.sessionValue = '';
     this.isLoggedIn = false;
-    this.isSessionActive = false; 
+    this.isSessionActive = false;
   }
 
   //Esta funcion mostrara la alerta si le damos al enlace de registro con la sesion abierta.
