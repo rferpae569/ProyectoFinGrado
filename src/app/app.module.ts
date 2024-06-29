@@ -37,6 +37,7 @@ import { JuegopreguntaficciondosjComponent } from './juegopreguntaficciondosj/ju
 import { JuegomusicaficcionComponent } from './juegomusicaficcion/juegomusicaficcion.component';
 import { JuegomusicaficciondosjComponent } from './juegomusicaficciondosj/juegomusicaficciondosj.component';
 import { SobreNosotrosComponent } from './sobre-nosotros/sobre-nosotros.component';
+import { ContactanosComponent } from './contactanos/contactanos.component';
 
 //importamos los modules y los ocmponentes correspondientes
 
@@ -73,6 +74,7 @@ import { SobreNosotrosComponent } from './sobre-nosotros/sobre-nosotros.componen
     JuegomusicaficcionComponent,
     JuegomusicaficciondosjComponent,
     SobreNosotrosComponent,
+    ContactanosComponent,
   ],
   imports: [
     BrowserModule,
