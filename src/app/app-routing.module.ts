@@ -30,7 +30,7 @@ import { JuegopreguntaficciondosjComponent } from './juegopreguntaficciondosj/ju
 import { JuegomusicaficcionComponent } from './juegomusicaficcion/juegomusicaficcion.component';
 import { JuegomusicaficciondosjComponent } from './juegomusicaficciondosj/juegomusicaficciondosj.component';
 import { SobreNosotrosComponent } from './sobre-nosotros/sobre-nosotros.component';
-import { ContactanosComponent } from './contactanos/contactanos.component';
+// import { ContactanosComponent } from './contactanos/contactanos.component';
 //importamos los modulos y los componentes necesarios
 
 const routes: Routes = [
