@@ -29,7 +29,7 @@ import { JuegopreguntaficcionComponent } from './juegopreguntaficcion/juegopregu
 import { JuegopreguntaficciondosjComponent } from './juegopreguntaficciondosj/juegopreguntaficciondosj.component';
 import { JuegomusicaficcionComponent } from './juegomusicaficcion/juegomusicaficcion.component';
 import { JuegomusicaficciondosjComponent } from './juegomusicaficciondosj/juegomusicaficciondosj.component';
-import { SobreNosotrosComponent } from './sobre-nosotros/sobre-nosotros.component';
+// import { SobreNosotrosComponent } from './sobre-nosotros/sobre-nosotros.component';
 //importamos los modulos y los componentes necesarios
 
 const routes: Routes = [
