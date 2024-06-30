@@ -33,6 +33,7 @@ import { SobreNosotrosComponent } from './sobre-nosotros/sobre-nosotros.componen
 import { ContactanosComponent } from './contactanos/contactanos.component';
 import { AvisoLegalComponent } from './aviso-legal/aviso-legal.component';
 import { PoliticaPrivacidadComponent } from './politica-privacidad/politica-privacidad.component';
+import { TerminosServiciosComponent } from './terminos-servicios/terminos-servicios.component';
 //importamos los modulos y los componentes necesarios
 
 const routes: Routes = [
@@ -69,7 +70,8 @@ const routes: Routes = [
   { path: 'sobrenosotros', component:SobreNosotrosComponent},
   { path: 'contactanos', component:ContactanosComponent},
   { path: 'avisolegal', component:AvisoLegalComponent},
-  { path: 'politicaprivacidad', component:PoliticaPrivacidadComponent}
+  { path: 'politicaprivacidad', component:PoliticaPrivacidadComponent},
+  { path: 'terminosservicios', component:TerminosServiciosComponent}
   //Creamos las rutas para cada componente
 
 ];
