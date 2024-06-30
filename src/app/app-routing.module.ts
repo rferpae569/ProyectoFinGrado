@@ -69,7 +69,7 @@ const routes: Routes = [
   { path: 'sobrenosotros', component:SobreNosotrosComponent},
   { path: 'contactanos', component:ContactanosComponent},
   { path: 'avisolegal', component:AvisoLegalComponent},
-  // { path: 'politicaprivacidad', component:PoliticaPrivacidadComponent}
+  { path: 'politicaprivacidad', component:PoliticaPrivacidadComponent}
   //Creamos las rutas para cada componente
 
 ];
