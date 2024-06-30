@@ -1,6 +1,6 @@
 <div class="background-image">
-   <!--Inicio Header-->
-   <header class="header">
+  <!--Inicio Header-->
+  <header class="header">
     <div class="logo">
       <img
         src="../../assets/icono/AdivinaLapeliculaLogo.png"
@@ -10,13 +10,11 @@
       />
     </div>
     <nav class="nav-links">
-      <a routerLinkActive="active">Inicio</a>
-      <a routerLinkActive="active"
+      <a routerLink="/inicio" routerLinkActive="active">Inicio</a>
+      <a routerLink="/sobrenosotros" routerLinkActive="active"
         >Sobre nosotros</a
       >
-      <a routerLinkActive="active"
-        >Contactanos</a
-      >
+      <a routerLink="/contactanos" routerLinkActive="active">Contactanos</a>
     </nav>
   </header>
   <!--Fin Header-->
@@ -43,7 +41,8 @@
           formControlName="Nombre1"
           placeholder="Introduce el nombre del jugador 1"
           [ngClass]="{
-            'readonly-input': nombre1 && nombre1.value === sessionValue && sessionValue !== ''
+            'readonly-input':
+              nombre1 && nombre1.value === sessionValue && sessionValue !== ''
           }"
           [value]="nombre1?.value || sessionValue"
           [readonly]="sessionValue !== ''"
@@ -84,7 +83,8 @@
           formControlName="Nombre2"
           placeholder="Introduce el nombre del jugador 2"
           [ngClass]="{
-            'readonly-input': nombre2 && nombre2.value === sessionValue2 && sessionValue2 !== ''
+            'readonly-input':
+              nombre2 && nombre2.value === sessionValue2 && sessionValue2 !== ''
           }"
           [value]="nombre2?.value || sessionValue2"
           [readonly]="sessionValue2 !== ''"
@@ -116,13 +116,29 @@
       </div>
       <div class="text-center botones-container">
         <br />
-        <button type="submit" class="btn btn-primary" [innerHTML]="isSessionActive ? 'Acceder' : 'Iniciar sesión'"></button>
-        <button type="button" class="btn btn-danger cerrarSesion" *ngIf="sessionCookieExists && session2CookieExists" (click)="cerrarSesion()">Cerrar sesión</button>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [innerHTML]="isSessionActive ? 'Acceder' : 'Iniciar sesión'"
+        ></button>
+        <button
+          type="button"
+          class="btn btn-danger cerrarSesion"
+          *ngIf="sessionCookieExists && session2CookieExists"
+          (click)="cerrarSesion()"
+        >
+          Cerrar sesión
+        </button>
       </div>
     </form>
     <br />
     <div class="text-center">
-      <a [routerLink]="tieneSesionActiva() ? 'dosjugadores' : '/registro'" (click)="mostrarAlert()"> Aún no estoy registrado </a>| 
+      <a
+        [routerLink]="tieneSesionActiva() ? 'dosjugadores' : '/registro'"
+        (click)="mostrarAlert()"
+      >
+        Aún no estoy registrado </a
+      >|
       <a routerLink="/inicio">Modo un jugador</a>
     </div>
   </div>

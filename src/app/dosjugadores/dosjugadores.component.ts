@@ -1,4 +1,4 @@
-import { Component,OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Usuarios } from '../model/usuarios';
@@ -25,8 +25,8 @@ export class DosjugadoresComponent implements OnInit, AfterViewInit {
   public message: string = '';
   public clasec: string = '';
   public clases: string = 'text-info';
-  actuales$!: Observable<Usuariosdos[]>; 
-  mostrarContrasena: boolean = false; 
+  actuales$!: Observable<Usuariosdos[]>;
+  mostrarContrasena: boolean = false;
   sessionValue: string = '';
   sessionValue2: string = '';
   sessionCookieExists = false;
@@ -93,7 +93,7 @@ export class DosjugadoresComponent implements OnInit, AfterViewInit {
     if (sessionCookieExists) {
       this.sessionValue = this.cookieService.get('session');
       this.newloginForm.patchValue({
-        Nombre1: this.sessionValue
+        Nombre1: this.sessionValue,
       });
     } else {
       this.sessionValue = '';
@@ -103,7 +103,7 @@ export class DosjugadoresComponent implements OnInit, AfterViewInit {
     if (session2CookieExists) {
       this.sessionValue2 = this.cookieService.get('session2');
       this.newloginForm.patchValue({
-        Nombre2: this.sessionValue2
+        Nombre2: this.sessionValue2,
       });
     } else {
       this.sessionValue2 = '';
@@ -234,17 +234,17 @@ export class DosjugadoresComponent implements OnInit, AfterViewInit {
 
     this.sessionCookieExists = this.cookieService.check('session');
     this.session2CookieExists = this.cookieService.check('session2');
-    
+
     this.newloginForm.reset({
       Nombre1: '',
       Passwrd1: '',
       Nombre2: '',
-      Passwrd2: ''
+      Passwrd2: '',
     });
-  
+
     this.isLoggedIn = false;
     this.sessionValue = '';
     this.sessionValue2 = '';
-    this.isSessionActive=false;
+    this.isSessionActive = false;
   }
 }
