@@ -32,6 +32,7 @@ import { JuegomusicaficciondosjComponent } from './juegomusicaficciondosj/juegom
 import { SobreNosotrosComponent } from './sobre-nosotros/sobre-nosotros.component';
 import { ContactanosComponent } from './contactanos/contactanos.component';
 import { AvisoLegalComponent } from './aviso-legal/aviso-legal.component';
+import { PoliticaPrivacidadComponent } from './politica-privacidad/politica-privacidad.component';
 //importamos los modulos y los componentes necesarios
 
 const routes: Routes = [
@@ -67,7 +68,8 @@ const routes: Routes = [
   { path: 'juegomusicaficciondosj', component:JuegomusicaficciondosjComponent},
   { path: 'sobrenosotros', component:SobreNosotrosComponent},
   { path: 'contactanos', component:ContactanosComponent},
-  { path: 'avisolegal', component:AvisoLegalComponent}
+  { path: 'avisolegal', component:AvisoLegalComponent},
+  { path: 'politicaprivacidad', component:PoliticaPrivacidadComponent}
   //Creamos las rutas para cada componente
 
 ];
