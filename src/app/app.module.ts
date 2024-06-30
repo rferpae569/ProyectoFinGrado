@@ -39,7 +39,7 @@ import { JuegomusicaficciondosjComponent } from './juegomusicaficciondosj/juegom
 import { SobreNosotrosComponent } from './sobre-nosotros/sobre-nosotros.component';
 import { ContactanosComponent } from './contactanos/contactanos.component';
 import { AvisoLegalComponent } from './aviso-legal/aviso-legal.component';
-import { PoliticaPrivacidadComponent } from './politica-privacidad/politica-privacidad.component';
+// import { PoliticaPrivacidadComponent } from './politica-privacidad/politica-privacidad.component';
 //importamos los modules y los ocmponentes correspondientes
 
 @NgModule({
