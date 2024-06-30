@@ -40,7 +40,7 @@ import { SobreNosotrosComponent } from './sobre-nosotros/sobre-nosotros.componen
 import { ContactanosComponent } from './contactanos/contactanos.component';
 import { AvisoLegalComponent } from './aviso-legal/aviso-legal.component';
 import { PoliticaPrivacidadComponent } from './politica-privacidad/politica-privacidad.component';
-// import { TerminosServiciosComponent } from './terminos-servicios/terminos-servicios.component';
+import { TerminosServiciosComponent } from './terminos-servicios/terminos-servicios.component';
 //importamos los modules y los ocmponentes correspondientes
 
 @NgModule({
