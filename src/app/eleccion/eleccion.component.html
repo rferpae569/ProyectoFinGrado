@@ -1,40 +1,73 @@
 <div class="background-image">
-  <header class="header">
-    <div class="left-content">
-      <img src="../../assets/icono/AdivinaLapeliculaLogo.png" alt="ImagenlogoAdivinaLaPelicula" width="200" height="200">
-    </div>
-    <div class="center-content">
-    <ul class="horizontal-list">
-      <li><a routerLink="/cartelera">Cartelera</a></li>
-      <li><a routerLink="/clasificacion">Clasificacion</a></li>
-      <li><a routerLink="/encuesta">Encuesta</a></li>
-    </ul>
-  </div>
-  <div class="right-content">
-    <p class="dropdown-toggle" (click)="toggleDropdown()">Usuario: <span class="username">{{usuariosession}}</span>
-      <ng-container *ngIf="usuariosession2"> y {{usuariosession2}}</ng-container>
-    </p>    
-    <ul class="dropdown-menu"  [ngClass]="{'show': isDropdownOpen, 'hide': !isDropdownOpen}">
-      <li><a routerLink="/actualizar">Actualizar Datos</a></li>
-      <li><a routerLink="/borrar">Borrar Cuenta</a></li>
-      <li><a routerLink="/irAInicio" (click)="irAInicio()">Cerrar Sesion</a></li>
-    </ul>
-  </div>
-  </header>
-  <div class="container">
-    <!--Creamos los enlaces para los distintos juegos-->
+  <div class="main-wrapper">
+    <!--Inicio Header-->
+    <header class="header">
+      <div class="left-content">
+        <img
+          src="../../assets/icono/AdivinaLapeliculaLogo.png"
+          alt="ImagenlogoAdivinaLaPelicula"
+          width="200"
+          height="200"
+        />
+      </div>
+      <div class="center-content">
+        <ul class="horizontal-list">
+          <li><a routerLink="/inicio">Inicio</a></li>
+          <li><a routerLink="/cartelera">Cartelera</a></li>
+          <li><a routerLink="/clasificacion">Clasificacion</a></li>
+          <li><a routerLink="/encuesta">Encuesta</a></li>
+        </ul>
+      </div>
+      <div class="right-content">
+        <p class="dropdown-toggle" (click)="toggleDropdown()">
+          Usuario: <span class="username">{{ usuariosession }}</span>
+          <ng-container *ngIf="usuariosession2">
+            y {{ usuariosession2 }}</ng-container
+          >
+        </p>
+        <ul
+          class="dropdown-menu"
+          [ngClass]="{ show: isDropdownOpen, hide: !isDropdownOpen }"
+        >
+          <li><a routerLink="/actualizar">Actualizar Datos</a></li>
+          <li><a routerLink="/borrar">Borrar Cuenta</a></li>
+          <li>
+            <a routerLink="/irAInicio" (click)="irAInicio()">Cerrar Sesion</a>
+          </li>
+        </ul>
+      </div>
+    </header>
+    <!--Fin Header-->
+    <!--Contenido principal-->
+    <div class="container">
+      <!--Creamos los enlaces para los distintos juegos-->
       <div class="pricing-wrapper clearfix">
         <div class="pricing-table">
           <h3 class="pricing-title">Juego Imagenes</h3>
           <!-- Lista de Caracteristicas / Propiedades -->
           <ul class="table-list hidden-list">
-            <li> <a (click)="incrementarJugadasImagenFantasia()" routerLink="/juegoimagenfantasia"
-              >Adivina las películas de fantasia a través de imágenes</a
-            ></li>
-            <li> <a (click)="incrementarJugadasImagenTerror()" routerLink="/juegoimagenterror"
-              >Adivina las películas de terror a través de imágenes</a
-            ></li>
-            <li><a (click)="incrementarJugadasImagenFiccion()" routerLink="/juegoimagenficcion">Adivina las peliculas de ciencia ficcion a través de imagenes</a></li>
+            <li>
+              <a
+                (click)="incrementarJugadasImagenFantasia()"
+                routerLink="/juegoimagenfantasia"
+                >Adivina las películas de fantasia a través de imágenes</a
+              >
+            </li>
+            <li>
+              <a
+                (click)="incrementarJugadasImagenTerror()"
+                routerLink="/juegoimagenterror"
+                >Adivina las películas de terror a través de imágenes</a
+              >
+            </li>
+            <li>
+              <a
+                (click)="incrementarJugadasImagenFiccion()"
+                routerLink="/juegoimagenficcion"
+                >Adivina las peliculas de ciencia ficcion a través de
+                imagenes</a
+              >
+            </li>
           </ul>
         </div>
         <div class="pricing-table recommended">
@@ -55,7 +88,14 @@
                 >Adivina las películas de terror a través de preguntas</a
               >
             </li>
-            <li><a (click)="incrementarJugadasPreguntasFiccion()" routerLink="/juegopreguntaficcion">Adivina las peliculas de ciencia ficcion a través de preguntas</a></li>
+            <li>
+              <a
+                (click)="incrementarJugadasPreguntasFiccion()"
+                routerLink="/juegopreguntaficcion"
+                >Adivina las peliculas de ciencia ficcion a través de
+                preguntas</a
+              >
+            </li>
           </ul>
         </div>
         <div class="pricing-table">
@@ -63,18 +103,46 @@
           <!-- Lista de Caracteristicas / Propiedades -->
           <ul class="table-list">
             <li>
-              <a (click)="incrementarJugadasMusicaFantasia()" routerLink="/juegomusicafantasia"
+              <a
+                (click)="incrementarJugadasMusicaFantasia()"
+                routerLink="/juegomusicafantasia"
                 >Adivina la película de fantasia a través de su música</a
               >
             </li>
             <li>
-              <a (click)="incrementarJugadasMusicaTerror()" routerLink="/juegomusicaterror"
+              <a
+                (click)="incrementarJugadasMusicaTerror()"
+                routerLink="/juegomusicaterror"
                 >Adivina la película de terror a través de su música</a
               >
             </li>
-            <li><a (click)="incrementarJugadasMusicaFiccion()" routerLink="/juegomusicaficcion">Adivina las peliculas de ciencia ficcion a través de canciones</a></li>
+            <li>
+              <a
+                (click)="incrementarJugadasMusicaFiccion()"
+                routerLink="/juegomusicaficcion"
+                >Adivina las peliculas de ciencia ficcion a través de
+                canciones</a
+              >
+            </li>
           </ul>
         </div>
+      </div>
     </div>
+    <!--Fin contenido principal-->
+    <!--Inicio Footer-->
+    <footer class="footer">
+      <div class="container-footer">
+        <p>&copy; 2024 Todos los derechos reservados - AdivinaLaPelicula</p>
+        <br />
+        <ul class="footer-links">
+          <li><a routerLink="/avisolegal">Aviso Legal</a></li>
+          <li>
+            <a routerLink="/politicaprivacidad">Política de Privacidad</a>
+          </li>
+          <li><a routerLink="/terminosservicios">Términos de Servicio</a></li>
+        </ul>
+      </div>
+    </footer>
+    <!--Fin Footer-->
   </div>
 </div>

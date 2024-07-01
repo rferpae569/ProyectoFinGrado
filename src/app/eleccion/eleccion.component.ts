@@ -42,26 +42,32 @@ export class EleccionComponent {
         nombre: nombreuser,
       };
 
-      this.servicio.getIncrementarJugadasImagenFantasia(nuevo).subscribe((datos) => {
-        console.log('Datos enviados al servidor:', datos);
-      });
+      this.servicio
+        .getIncrementarJugadasImagenFantasia(nuevo)
+        .subscribe((datos) => {
+          console.log('Datos enviados al servidor:', datos);
+        });
 
       const nuevo2 = {
         nombre: nombreuser2,
       };
 
-      this.servicio.getIncrementarJugadasImagenFantasia(nuevo2).subscribe((datos) => {
-        console.log('Datos enviados al servidor:', datos);
-      });
+      this.servicio
+        .getIncrementarJugadasImagenFantasia(nuevo2)
+        .subscribe((datos) => {
+          console.log('Datos enviados al servidor:', datos);
+        });
 
       // Si ambos usuarios están en sesión, redirige al juego de las imagenes de fantasia para dos jugadores
       this.router.navigate(['juegoimagenfantasiadosj']);
     } else if (nombreuser) {
       //Si solo es un jugador, hara la incrementacion una vez para el usuario correspondiente y ira al juego de la imagenes de un jugador
       const nuevo = { nombre: nombreuser };
-      this.servicio.getIncrementarJugadasImagenFantasia(nuevo).subscribe((datos) => {
-        console.log('Datos enviados al servidor:', datos);
-      });
+      this.servicio
+        .getIncrementarJugadasImagenFantasia(nuevo)
+        .subscribe((datos) => {
+          console.log('Datos enviados al servidor:', datos);
+        });
     } else {
       console.log('Sesiones no encontradas');
     }
@@ -78,26 +84,32 @@ export class EleccionComponent {
         nombre: nombreuser,
       };
 
-      this.servicio.getIncrementarJugadasImagenTerror(nuevo).subscribe((datos) => {
-        console.log('Datos enviados al servidor:', datos);
-      });
+      this.servicio
+        .getIncrementarJugadasImagenTerror(nuevo)
+        .subscribe((datos) => {
+          console.log('Datos enviados al servidor:', datos);
+        });
 
       const nuevo2 = {
         nombre: nombreuser2,
       };
 
-      this.servicio.getIncrementarJugadasImagenTerror(nuevo2).subscribe((datos) => {
-        console.log('Datos enviados al servidor:', datos);
-      });
+      this.servicio
+        .getIncrementarJugadasImagenTerror(nuevo2)
+        .subscribe((datos) => {
+          console.log('Datos enviados al servidor:', datos);
+        });
 
       // Si ambos usuarios están en sesión, redirige al juego de las imagenes de terror para dos jugadores
       this.router.navigate(['juegoimagenterrordosj']);
     } else if (nombreuser) {
       //Si solo es un jugador, hara la incrementacion una vez para el usuario correspondiente y ira al juego de la imagenes de un jugador
       const nuevo = { nombre: nombreuser };
-      this.servicio.getIncrementarJugadasImagenTerror(nuevo).subscribe((datos) => {
-        console.log('Datos enviados al servidor:', datos);
-      });
+      this.servicio
+        .getIncrementarJugadasImagenTerror(nuevo)
+        .subscribe((datos) => {
+          console.log('Datos enviados al servidor:', datos);
+        });
     } else {
       console.log('Sesiones no encontradas');
     }
@@ -114,26 +126,32 @@ export class EleccionComponent {
         nombre: nombreuser,
       };
 
-      this.servicio.getIncrementarJugadasImagenFiccion(nuevo).subscribe((datos) => {
-        console.log('Datos enviados al servidor:', datos);
-      });
+      this.servicio
+        .getIncrementarJugadasImagenFiccion(nuevo)
+        .subscribe((datos) => {
+          console.log('Datos enviados al servidor:', datos);
+        });
 
       const nuevo2 = {
         nombre: nombreuser2,
       };
 
-      this.servicio.getIncrementarJugadasImagenFiccion(nuevo2).subscribe((datos) => {
-        console.log('Datos enviados al servidor:', datos);
-      });
+      this.servicio
+        .getIncrementarJugadasImagenFiccion(nuevo2)
+        .subscribe((datos) => {
+          console.log('Datos enviados al servidor:', datos);
+        });
 
       // Si ambos usuarios están en sesión, redirige al juego de las imagenes de ficcion para dos jugadores
       this.router.navigate(['juegoimagenficciondosj']);
     } else if (nombreuser) {
       //Si solo es un jugador, hara la incrementacion una vez para el usuario correspondiente y ira al juego de la imagenes de un jugador
       const nuevo = { nombre: nombreuser };
-      this.servicio.getIncrementarJugadasImagenFiccion(nuevo).subscribe((datos) => {
-        console.log('Datos enviados al servidor:', datos);
-      });
+      this.servicio
+        .getIncrementarJugadasImagenFiccion(nuevo)
+        .subscribe((datos) => {
+          console.log('Datos enviados al servidor:', datos);
+        });
     } else {
       console.log('Sesiones no encontradas');
     }
@@ -150,9 +168,11 @@ export class EleccionComponent {
         nombre: nombreuser,
       };
 
-      this.servicio.getIncrementarJugadasPreguntasFantasia(nuevo).subscribe((datos) => {
-        console.log('Datos enviados al servidor:', datos);
-      });
+      this.servicio
+        .getIncrementarJugadasPreguntasFantasia(nuevo)
+        .subscribe((datos) => {
+          console.log('Datos enviados al servidor:', datos);
+        });
 
       const nuevo2 = {
         nombre: nombreuser2,
@@ -169,9 +189,11 @@ export class EleccionComponent {
     } else if (nombreuser) {
       //Si solo es un jugador, hara la incrementacion una vez para el usuario correspondiente y ira al juego de las preguntas de un jugador
       const nuevo = { nombre: nombreuser };
-      this.servicio.getIncrementarJugadasPreguntasFantasia(nuevo).subscribe((datos) => {
-        console.log('Datos enviados al servidor:', datos);
-      });
+      this.servicio
+        .getIncrementarJugadasPreguntasFantasia(nuevo)
+        .subscribe((datos) => {
+          console.log('Datos enviados al servidor:', datos);
+        });
     } else {
       console.log('Sesiones no encontradas');
     }
@@ -188,9 +210,11 @@ export class EleccionComponent {
         nombre: nombreuser,
       };
 
-      this.servicio.getIncrementarJugadasPreguntasTerror(nuevo).subscribe((datos) => {
-        console.log('Datos enviados al servidor:', datos);
-      });
+      this.servicio
+        .getIncrementarJugadasPreguntasTerror(nuevo)
+        .subscribe((datos) => {
+          console.log('Datos enviados al servidor:', datos);
+        });
 
       const nuevo2 = {
         nombre: nombreuser2,
@@ -207,9 +231,11 @@ export class EleccionComponent {
     } else if (nombreuser) {
       //Si solo es un jugador, hara la incrementacion una vez para el usuario correspondiente y ira al juego de las preguntas de un jugador
       const nuevo = { nombre: nombreuser };
-      this.servicio.getIncrementarJugadasPreguntasTerror(nuevo).subscribe((datos) => {
-        console.log('Datos enviados al servidor:', datos);
-      });
+      this.servicio
+        .getIncrementarJugadasPreguntasTerror(nuevo)
+        .subscribe((datos) => {
+          console.log('Datos enviados al servidor:', datos);
+        });
     } else {
       console.log('Sesiones no encontradas');
     }
@@ -226,9 +252,11 @@ export class EleccionComponent {
         nombre: nombreuser,
       };
 
-      this.servicio.getIncrementarJugadasPreguntasFiccion(nuevo).subscribe((datos) => {
-        console.log('Datos enviados al servidor:', datos);
-      });
+      this.servicio
+        .getIncrementarJugadasPreguntasFiccion(nuevo)
+        .subscribe((datos) => {
+          console.log('Datos enviados al servidor:', datos);
+        });
 
       const nuevo2 = {
         nombre: nombreuser2,
@@ -245,9 +273,11 @@ export class EleccionComponent {
     } else if (nombreuser) {
       //Si solo es un jugador, hara la incrementacion una vez para el usuario correspondiente y ira al juego de las preguntas de un jugador
       const nuevo = { nombre: nombreuser };
-      this.servicio.getIncrementarJugadasPreguntasFiccion(nuevo).subscribe((datos) => {
-        console.log('Datos enviados al servidor:', datos);
-      });
+      this.servicio
+        .getIncrementarJugadasPreguntasFiccion(nuevo)
+        .subscribe((datos) => {
+          console.log('Datos enviados al servidor:', datos);
+        });
     } else {
       console.log('Sesiones no encontradas');
     }
@@ -264,26 +294,32 @@ export class EleccionComponent {
         nombre: nombreuser,
       };
 
-      this.servicio.getIncrementarJugadasMusicaFantasia(nuevo).subscribe((datos) => {
-        console.log('Datos enviados al servidor:', datos);
-      });
+      this.servicio
+        .getIncrementarJugadasMusicaFantasia(nuevo)
+        .subscribe((datos) => {
+          console.log('Datos enviados al servidor:', datos);
+        });
 
       const nuevo2 = {
         nombre: nombreuser2,
       };
 
-      this.servicio.getIncrementarJugadasMusicaFantasia(nuevo2).subscribe((datos) => {
-        console.log('Datos enviados al servidor:', datos);
-      });
+      this.servicio
+        .getIncrementarJugadasMusicaFantasia(nuevo2)
+        .subscribe((datos) => {
+          console.log('Datos enviados al servidor:', datos);
+        });
 
       // Si ambos usuarios están en sesión, redirige al juego de las canciones para dos jugadores
       this.router.navigate(['juegomusicafantasiadosj']);
     } else if (nombreuser) {
       //Si solo es un jugador, hara la incrementacion una vez para el usuario correspondiente y ira al juego de las canciones de un jugador
       const nuevo = { nombre: nombreuser };
-      this.servicio.getIncrementarJugadasMusicaFantasia(nuevo).subscribe((datos) => {
-        console.log('Datos enviados al servidor:', datos);
-      });
+      this.servicio
+        .getIncrementarJugadasMusicaFantasia(nuevo)
+        .subscribe((datos) => {
+          console.log('Datos enviados al servidor:', datos);
+        });
     } else {
       console.log('Sesiones no encontradas');
     }
@@ -300,32 +336,38 @@ export class EleccionComponent {
         nombre: nombreuser,
       };
 
-      this.servicio.getIncrementarJugadasMusicaTerror(nuevo).subscribe((datos) => {
-        console.log('Datos enviados al servidor:', datos);
-      });
+      this.servicio
+        .getIncrementarJugadasMusicaTerror(nuevo)
+        .subscribe((datos) => {
+          console.log('Datos enviados al servidor:', datos);
+        });
 
       const nuevo2 = {
         nombre: nombreuser2,
       };
 
-      this.servicio.getIncrementarJugadasMusicaTerror(nuevo2).subscribe((datos) => {
-        console.log('Datos enviados al servidor:', datos);
-      });
+      this.servicio
+        .getIncrementarJugadasMusicaTerror(nuevo2)
+        .subscribe((datos) => {
+          console.log('Datos enviados al servidor:', datos);
+        });
 
       // Si ambos usuarios están en sesión, redirige al juego de las canciones para dos jugadores
       this.router.navigate(['juegomusicaterrordosj']);
     } else if (nombreuser) {
       //Si solo es un jugador, hara la incrementacion una vez para el usuario correspondiente y ira al juego de las canciones de un jugador
       const nuevo = { nombre: nombreuser };
-      this.servicio.getIncrementarJugadasMusicaTerror(nuevo).subscribe((datos) => {
-        console.log('Datos enviados al servidor:', datos);
-      });
+      this.servicio
+        .getIncrementarJugadasMusicaTerror(nuevo)
+        .subscribe((datos) => {
+          console.log('Datos enviados al servidor:', datos);
+        });
     } else {
       console.log('Sesiones no encontradas');
     }
   }
 
-  incrementarJugadasMusicaFiccion(){
+  incrementarJugadasMusicaFiccion() {
     //Esta funcion sirve para incrementar el numero de jugadas de los usuarios que han iniciado sesion en el juego de las canciones
     //Si son dos usuarios, lo hara dos veces, una para cada uno
     const nombreuser = this.cookieService.get('session');
@@ -336,26 +378,32 @@ export class EleccionComponent {
         nombre: nombreuser,
       };
 
-      this.servicio.getIncrementarJugadasMusicaFiccion(nuevo).subscribe((datos) => {
-        console.log('Datos enviados al servidor:', datos);
-      });
+      this.servicio
+        .getIncrementarJugadasMusicaFiccion(nuevo)
+        .subscribe((datos) => {
+          console.log('Datos enviados al servidor:', datos);
+        });
 
       const nuevo2 = {
         nombre: nombreuser2,
       };
 
-      this.servicio.getIncrementarJugadasMusicaFiccion(nuevo2).subscribe((datos) => {
-        console.log('Datos enviados al servidor:', datos);
-      });
+      this.servicio
+        .getIncrementarJugadasMusicaFiccion(nuevo2)
+        .subscribe((datos) => {
+          console.log('Datos enviados al servidor:', datos);
+        });
 
       // Si ambos usuarios están en sesión, redirige al juego de las canciones para dos jugadores
       this.router.navigate(['juegomusicaficciondosj']);
     } else if (nombreuser) {
       //Si solo es un jugador, hara la incrementacion una vez para el usuario correspondiente y ira al juego de las canciones de un jugador
       const nuevo = { nombre: nombreuser };
-      this.servicio.getIncrementarJugadasMusicaFiccion(nuevo).subscribe((datos) => {
-        console.log('Datos enviados al servidor:', datos);
-      });
+      this.servicio
+        .getIncrementarJugadasMusicaFiccion(nuevo)
+        .subscribe((datos) => {
+          console.log('Datos enviados al servidor:', datos);
+        });
     } else {
       console.log('Sesiones no encontradas');
     }
@@ -375,7 +423,7 @@ export class EleccionComponent {
       'pistas',
       'preguntas',
       'session',
-      'session2'
+      'session2',
     ];
     for (const cookie of cookiesExistentes) {
       if (this.cookieService.check(cookie)) {
