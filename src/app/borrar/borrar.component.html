@@ -1,4 +1,22 @@
 <div class="background-image">
+  <!--Inicio Header-->
+  <header class="header">
+    <div class="logo">
+      <img
+        src="../../assets/icono/AdivinaLapeliculaLogo.png"
+        alt="ImagenlogoAdivinaLaPelicula"
+        width="200"
+        height="200"
+      />
+    </div>
+    <nav class="nav-links">
+      <a routerLink="/actualizar" routerLinkActive="active">Actualizar datos</a>
+      <a routerLink="/eleccion" routerLinkActive="active">Juegos</a>
+      <a routerLink="/borrar" routerLinkActive="active">Borrar cuenta</a>
+    </nav>
+  </header>
+  <!--Fin Header-->
+  <!--Contenido principal-->
   <div class="container">
     <div class="row">
       <div class="text-center">
@@ -54,15 +72,18 @@
       </div>
     </div>
   </div>
-  <div class="text-center">
-    <a
-      routerLink="/eleccion"
-      style="cursor: pointer; color: white"
-      (mouseover)="cambiarColor('red')"
-      (mouseout)="cambiarColor('white')"
-      >Juegos</a
-    >
-    |
-    <a routerLink="/actualizar">Actualizar Datos</a>
-  </div>
 </div>
+<!--Fin contenido principal-->
+<!--Inicio Footer-->
+<footer class="footer">
+  <div class="container">
+    <p>&copy; 2024 Todos los derechos reservados - AdivinaLaPelicula</p>
+    <br />
+    <ul class="footer-links">
+      <li><a routerLink="/avisolegal">Aviso Legal</a></li>
+      <li><a routerLink="/politicaprivacidad">Política de Privacidad</a></li>
+      <li><a routerLink="/terminosservicios">Términos de Servicio</a></li>
+    </ul>
+  </div>
+</footer>
+<!--Fin Footer-->

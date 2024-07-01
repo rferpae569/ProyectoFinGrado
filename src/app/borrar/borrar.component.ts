@@ -53,7 +53,7 @@ export class BorrarComponent implements OnInit {
   ngOnInit() {
     const sessionCookie = this.getCookie('session');
     if (sessionCookie) {
-      this.sessionCookie = sessionCookie; 
+      this.sessionCookie = sessionCookie;
       this.newusuarioForm.get('Nombre')?.setValue(this.sessionCookie);
     }
 
