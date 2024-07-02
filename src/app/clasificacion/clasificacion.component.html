@@ -1,75 +1,123 @@
 <div class="background-image">
-<main [@slideInOut]>
-  <div id="header">
-    <h1>{{ tablaActual === 'imagenes' ? tituloTablaImagenes : tablaActual === 'preguntas' ? tituloTablaPreguntas : tituloTablaMusica }}</h1>    
-    <img src="../../assets/icono/AdivinaLapeliculaLogo.png" alt="ImagenlogoAdivinaLaPelicula" width="100" height="100">
-  </div>
-  
-  <!-- Primera tabla -->
-  <div id="leaderboard" *ngIf="mostrarTablaI">
-    <div class="ribbon"></div>
-    <table>
-      <tr *ngFor="let usuario of usuariosImagen; let i = index">
-        <td>{{ i + 1 }}</td>          
-        <td>{{ usuario.nombre }}</td>
-        <td>{{ usuario.puntosImagenFantasia }}</td>
-        <td>{{ usuario.puntosImagenTerror }}</td>
-        <td>{{ usuario.puntosImagenFiccion }}</td>
-        <td>{{ usuario.totalImagen }}</td>
-      </tr>
-    </table>
-    <div id="buttons">
-      <button (click)="irAEleccion()" class="exit">Volver</button>
-      <button (click)="mostrarTablaPreguntas()" class="continue">R.Preguntas</button>
-      <button (click)="mostrarTablaMusica()" class="continue">R.Musica</button>
+  <!--Inicio Header-->
+  <header class="header">
+    <div class="logo">
+      <img
+        src="../../assets/icono/AdivinaLapeliculaLogo.png"
+        alt="ImagenlogoAdivinaLaPelicula"
+        width="200"
+        height="200"
+      />
     </div>
-  </div>
-  
-  <!-- Segunda tabla -->
-  <div id="leaderboard" *ngIf="mostrarTablaP">
-    <div class="ribbon"></div>
-    <table>
-      <tr *ngFor="let usuario of usuariosPreguntas; let i = index">
-        <td>{{ i + 1 }}</td>          
-        <td>{{ usuario.nombre }}</td>
-        <td>{{ usuario.PuntosPreguntasFantasia }}</td>
-        <td>{{ usuario.PuntosPreguntasTerror }}</td>
-        <td>{{ usuario.PuntosPreguntasFiccion }}</td>
-        <td>{{ usuario.totalPreguntas }}</td>
-      </tr>
-    </table>
-    <div id="buttons">
-      <button (click)="mostrarTablaPrincipal()" class="continue">R.Imagen</button>
-      <button (click)="mostrarTablaMusica()" class="continue">R.Musica</button>
-      <button (click)="irAEleccion()" class="exit">Volver</button>
+    <nav class="nav-links">
+      <a routerLink="/inicio" routerLinkActive="active">Inicio</a>
+      <a routerLink="/eleccion">Juegos</a>
+      <a routerLink="/encuesta">Encuesta</a>
+    </nav>
+  </header>
+  <!--Fin Header-->
+  <main [@slideInOut]>
+    <div id="header">
+      <h1>
+        {{
+          tablaActual === "imagenes"
+            ? tituloTablaImagenes
+            : tablaActual === "preguntas"
+            ? tituloTablaPreguntas
+            : tituloTablaMusica
+        }}
+      </h1>
+      <img
+        src="../../assets/icono/AdivinaLapeliculaLogo.png"
+        alt="ImagenlogoAdivinaLaPelicula"
+        width="100"
+        height="100"
+      />
     </div>
-  </div>
 
-   <!-- Tercera tabla -->
-   <div id="leaderboard" *ngIf="mostrarTablaM">
-    <div class="ribbon"></div>
-    <table>
-      <tr *ngFor="let usuario of usuariosMusica; let i = index">
-        <td>{{ i + 1 }}</td>          
-        <td>{{ usuario.nombre }}</td>
-        <td>{{ usuario.PuntosMusicaFantasia }}</td>
-        <td>{{ usuario.PuntosMusicaTerror }}</td>
-        <td>{{ usuario.PuntosMusicaFiccion }}</td>
-        <td>{{ usuario.totalMusica }}</td>
-      </tr>
-    </table>
-    <div id="buttons">
-      <button (click)="mostrarTablaPrincipal()" class="continue">R.Imagen</button>
-      <button (click)="mostrarTablaPreguntas()" class="continue">R.Preguntas</button>
-      <button (click)="irAEleccion()" class="exit">Volver</button>
+    <!-- Primera tabla -->
+    <div id="leaderboard" *ngIf="mostrarTablaI">
+      <div class="ribbon"></div>
+      <table>
+        <tr *ngFor="let usuario of usuariosImagen; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ usuario.nombre }}</td>
+          <td>{{ usuario.puntosImagenFantasia }}</td>
+          <td>{{ usuario.puntosImagenTerror }}</td>
+          <td>{{ usuario.puntosImagenFiccion }}</td>
+          <td>{{ usuario.totalImagen }}</td>
+        </tr>
+      </table>
+      <div id="buttons">
+        <button (click)="irAEleccion()" class="exit">Volver</button>
+        <button (click)="mostrarTablaPreguntas()" class="continue">
+          R.Preguntas
+        </button>
+        <button (click)="mostrarTablaMusica()" class="continue">
+          R.Musica
+        </button>
+      </div>
     </div>
-  </div>
-</main>
+
+    <!-- Segunda tabla -->
+    <div id="leaderboard" *ngIf="mostrarTablaP">
+      <div class="ribbon"></div>
+      <table>
+        <tr *ngFor="let usuario of usuariosPreguntas; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ usuario.nombre }}</td>
+          <td>{{ usuario.PuntosPreguntasFantasia }}</td>
+          <td>{{ usuario.PuntosPreguntasTerror }}</td>
+          <td>{{ usuario.PuntosPreguntasFiccion }}</td>
+          <td>{{ usuario.totalPreguntas }}</td>
+        </tr>
+      </table>
+      <div id="buttons">
+        <button (click)="mostrarTablaPrincipal()" class="continue">
+          R.Imagen
+        </button>
+        <button (click)="mostrarTablaMusica()" class="continue">
+          R.Musica
+        </button>
+        <button (click)="irAEleccion()" class="exit">Volver</button>
+      </div>
+    </div>
+
+    <!-- Tercera tabla -->
+    <div id="leaderboard" *ngIf="mostrarTablaM">
+      <div class="ribbon"></div>
+      <table>
+        <tr *ngFor="let usuario of usuariosMusica; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ usuario.nombre }}</td>
+          <td>{{ usuario.PuntosMusicaFantasia }}</td>
+          <td>{{ usuario.PuntosMusicaTerror }}</td>
+          <td>{{ usuario.PuntosMusicaFiccion }}</td>
+          <td>{{ usuario.totalMusica }}</td>
+        </tr>
+      </table>
+      <div id="buttons">
+        <button (click)="mostrarTablaPrincipal()" class="continue">
+          R.Imagen
+        </button>
+        <button (click)="mostrarTablaPreguntas()" class="continue">
+          R.Preguntas
+        </button>
+        <button (click)="irAEleccion()" class="exit">Volver</button>
+      </div>
+    </div>
+  </main>
 </div>
-  
-    
-  
-  
-
-  
-  
+<!--Inicio Footer-->
+<footer class="footer">
+  <div class="container-footer">
+    <p>&copy; 2024 Todos los derechos reservados - AdivinaLaPelicula</p>
+    <br />
+    <ul class="footer-links">
+      <li><a routerLink="/avisolegal">Aviso Legal</a></li>
+      <li><a routerLink="/politicaprivacidad">Política de Privacidad</a></li>
+      <li><a routerLink="/terminosservicios">Términos de Servicio</a></li>
+    </ul>
+  </div>
+</footer>
+<!--Fin Footer-->
