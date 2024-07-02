@@ -32,6 +32,13 @@
         >Sobre nosotros</a
       >
       <a routerLink="/contactanos" routerLinkActive="active">Contactanos</a>
+      <a
+        [routerLink]="tieneSesionActiva() ? '' : '/registro'"
+        (click)="mostrarAlert()"
+      >
+        Registrarse
+      </a>
+      <a routerLink="/dosjugadores">Modo dos jugadores</a>
     </nav>
   </header>
   <!--Fin Header-->
@@ -112,17 +119,6 @@
         </form>
       </div>
     </div>
-  </div>
-  <br />
-  <!-- Creamos varias rutas para navegar por los componentes-->
-  <div class="text-center">
-    <a
-      [routerLink]="tieneSesionActiva() ? '' : '/registro'"
-      (click)="mostrarAlert()"
-    >
-      Aún no estoy registrado </a
-    >|
-    <a routerLink="/dosjugadores">Modo dos jugadores</a>
   </div>
 </div>
 <!--Fin contenido principal-->
