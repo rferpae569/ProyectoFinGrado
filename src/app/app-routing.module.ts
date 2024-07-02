@@ -37,7 +37,7 @@ import { TerminosServiciosComponent } from './terminos-servicios/terminos-servic
 //importamos los modulos y los componentes necesarios
 
 const routes: Routes = [
-  { path: '', component: InicioComponent },
+  { path: '', redirectTo: '/inicio', pathMatch: 'full' },
   { path: 'inicio', component: InicioComponent },
   { path: 'registro', component: RegistroComponent },
   { path: 'actualizar', component: ActualizarComponent },
