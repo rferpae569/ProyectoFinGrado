@@ -39,7 +39,7 @@ export class FormularioencuestaComponent implements OnInit {
   ngOnInit(): void {
     const sessionCookie = this.getCookieValue('session');
     const session2Cookie = this.getCookieValue('session2');
-     this.showChangeUserButton = !!session2Cookie;
+    this.showChangeUserButton = !!session2Cookie;
     let usuarioValue = '';
     if (sessionCookie) {
       try {
@@ -105,15 +105,15 @@ export class FormularioencuestaComponent implements OnInit {
 
     const sessionCookie = this.getCookieValue('session');
     const session2Cookie = this.getCookieValue('session2');
-  
+
     if (session2Cookie) {
       // Si hay un valor para la cookie 'session2', intercambiamos los valores entre 'session' y 'session2'
       document.cookie = `session=${session2Cookie}`;
       document.cookie = `session2=${sessionCookie}`;
-  
+
       // Actualizamos el valor del input con el nuevo valor de la cookie 'session'
       this.newencuestaForm.patchValue({
-        usuario: session2Cookie
+        usuario: session2Cookie,
       });
     }
   }
