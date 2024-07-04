@@ -5,74 +5,78 @@
   padding: 0;
   box-sizing: border-box;
 }
-/* width */
+
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
-/* Track */
+
 ::-webkit-scrollbar-track {
   background: #0a0a0a;
 }
-/* Handle */
+
 ::-webkit-scrollbar-thumb {
   background: #ad3955;
 }
-/* Handle on hover */
+
 ::-webkit-scrollbar-thumb:hover {
   background: #ad3955;
 }
+
 html,
 body {
   height: 100%;
   width: 100%;
 }
+
 body {
   background: #191919;
 }
 
-.background {
-  position: fixed;
-  top: 0;
-  left: 0;
+.background-image {
+  background-image: url("../../assets/fondos/fondoClasificacion.jpg");
+  background-size: cover;
+  background-position: center;
   width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at center, #1c0025, #000000);
-  background-size: 200% 200%;
-  background-repeat: no-repeat;
 }
-.background .gradient {
-  position: absolute;
-  top: calc(50% - 2rem);
-  left: calc(50% - 8rem);
-  transform: translate3d(-50%, -50%, 0);
-  width: 30rem;
-  height: 25rem;
-  background: radial-gradient(
-    circle at center,
-    rgb(225 199 98 / 16%),
-    rgba(28, 0, 37, 0) 10rem
-  );
-  filter: blur(20px);
+
+img {
+  max-width: 300%;
+  height: auto;
+  width: 80px;
+  margin-left: 10px;
 }
-.background .gradient-2 {
-  position: absolute;
-  top: calc(50% + 5rem);
-  left: calc(50% + 8rem);
-  transform: translate3d(-50%, -50%, 0);
-  width: 12rem;
-  height: 17rem;
-  background: radial-gradient(
-    circle at center,
-    rgb(33 165 123 / 16%),
-    rgba(28, 0, 37, 0) 10rem
-  );
-  filter: blur(20px);
+
+.header {
+  background-color: #f0f0f0;
+  color: #333;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 24px;
+}
+
+.nav-links a {
+  color: #333;
+  text-decoration: none;
+  margin-left: 20px;
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+}
+
+.nav-links .active {
+  font-weight: bold;
 }
 
 .scroller {
   position: relative;
-  height: 500vh;  
+  height: 500vh;
   width: 100%;
 }
 
@@ -83,9 +87,9 @@ body {
   height: 100vh;
   position: sticky;
   display: grid;
-  place-items: center;  
+  place-items: center;
   perspective: 6400px;
-  transform-style: preserve-3d;	
+  transform-style: preserve-3d;
 }
 
 .movies {
@@ -96,13 +100,14 @@ body {
   perspective: 6400px;
   gap: 5rem;
   transition: transform 0.75s ease-out;
-  transform: translateY(0%) translateZ(-300px) rotateY(18deg) rotateX(-12deg) rotateZ(-3deg);	
+  transform: translateY(0%) translateZ(-300px) rotateY(18deg) rotateX(-12deg)
+    rotateZ(-3deg);
 }
 
 .movies {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Esto creará 5 columnas */
-  gap: 22rem; /* Espacio entre las películas */
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22rem; 
 }
 
 .movie {
@@ -112,27 +117,27 @@ body {
   position: relative;
   perspective: 6400px;
   transform-style: preserve-3d;
-  transform: rotateX(0deg) translate3d(0rem, 0rem, 0rem);	
+  transform: rotateX(0deg) translate3d(0rem, 0rem, 0rem);
   transition: transform 0.75s ease-in-out, margin 1.5s linear;
 }
 
 .movie {
-  width: 100%; /* Cada película ocupará el 100% del ancho de su columna */
+  width: 100%;
 }
 .movie.selected {
-    margin-top: 22rem;
-    margin-bottom: 10rem;
-    transform: rotateX(-90deg) translate3d(0rem,15rem,12rem);
-    transition: transform 1.5s ease-in-out, margin 0.75s linear;
-    perspective: 6400px;  
+  margin-top: 22rem;
+  margin-bottom: 10rem;
+  transform: rotateX(-90deg) translate3d(0rem, 15rem, 12rem);
+  transition: transform 1.5s ease-in-out, margin 0.75s linear;
+  perspective: 6400px;
 }
 .movie div {
   position: absolute;
   top: 0;
   left: 0;
-  /* border: 2px solid #fff; */
   background: #e1e0df;
-  box-shadow: 0 8px 16px -8px #000, inset 0px 2px 16px #FFF, inset 0px -2px 16px -4px #000;
+  box-shadow: 0 8px 16px -8px #000, inset 0px 2px 16px #fff,
+    inset 0px -2px 16px -4px #000;
 }
 .movie div:nth-child(1) {
   width: 20rem;
@@ -148,7 +153,7 @@ body {
 .movie div:nth-child(2) {
   width: 35rem;
   height: 4rem;
-  transform: rotatey(90deg) translate3d(17.5rem, 0, 2.5rem)
+  transform: rotatey(90deg) translate3d(17.5rem, 0, 2.5rem);
 }
 .movie div:nth-child(3) {
   width: 35rem;
@@ -184,6 +189,111 @@ body {
   opacity: 0;
   animation: fade-in 0.8s linear forwards;
 }
+
+.footer {
+  background-color: #333;
+  color: #fff;
+  padding: 5px 0;
+  font-family: "Roboto", sans-serif;
+  font-size: 0.875rem;
+}
+
+.footer p {
+  margin: 0;
+  text-align: center;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  text-align: center;
+  margin: 10px 0;
+}
+
+.footer-links li {
+  display: inline;
+  margin-right: 10px;
+}
+
+.footer-links li:last-child {
+  margin-right: 0;
+}
+
+.footer-links li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.875rem;
+}
+
+.footer-links li a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 1200px) {
+  .background-image {
+    background-size: 100% 100%;
+    width: 410%;
+  }
+
+  .header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .logo {
+    margin-bottom: 10px;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav-links a {
+    padding: 10px 0;
+  }
+
+  main {
+    padding: 10px;
+  }
+
+  #header {
+    text-align: center;
+  }
+
+  .footer {
+    font-size: 0.75rem;
+    width: 410%;
+  }
+
+  .footer-links li {
+    display: block;
+    margin: 5px 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 10px 5px;
+  }
+
+  .nav-links a {
+    padding: 5px 0;
+  }
+
+  main {
+    padding: 5px;
+  }
+
+  .footer {
+    padding: 10px 5px;
+  }
+
+  .footer-links li {
+    margin-right: 5px;
+  }
+}
+
 @keyframes fade-in {
   to {
     opacity: 1;
