@@ -28,10 +28,10 @@
     </div>
     <nav class="nav-links">
       <a routerLink="/inicio" routerLinkActive="active">Inicio</a>
-      <a routerLink="/sobrenosotros" routerLinkActive="active"
+      <a routerLink="/sobrenosotros"
         >Sobre nosotros</a
       >
-      <a routerLink="/contactanos" routerLinkActive="active">Contactanos</a>
+      <a routerLink="/contactanos">Contactanos</a>
       <a
         [routerLink]="tieneSesionActiva() ? '' : '/registro'"
         (click)="mostrarAlert()"
