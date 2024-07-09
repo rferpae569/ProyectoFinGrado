@@ -192,8 +192,6 @@ nav.active {
   text-decoration: underline;
 }
 
-//Response para la imagen de fondo
-/* Media Queries */
 @media (max-width: 1200px) {
   .background-image {
     background-size: 100% 100%;
@@ -245,66 +243,6 @@ nav.active {
   }
 }
 
-nav.active {
-  transform: translateX(-10%);
-  opacity: 1;
-}
-
-.menu-toggle {
-  font-size: 24px;
-  cursor: pointer;
-  transition: 0.4s;
-  position: fixed;
-  top: 170px;
-  right: 0;
-  z-index: 2;
-  background-color: transparent;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-}
-
-.footer {
-  background-color: #333;
-  color: #fff;
-  padding: 5px 0;
-  font-family: "Roboto", sans-serif;
-  font-size: 0.875rem;
-}
-
-.footer p {
-  margin: 0;
-  text-align: center;
-}
-
-.footer-links {
-  list-style: none;
-  padding: 0;
-  text-align: center;
-  margin: 10px 0;
-}
-
-.footer-links li {
-  display: inline;
-  margin-right: 10px;
-}
-
-.footer-links li:last-child {
-  margin-right: 0;
-}
-
-.footer-links li a {
-  color: #fff;
-  text-decoration: none;
-  font-size: 0.875rem;
-}
-
-.footer-links li a:hover {
-  text-decoration: underline;
-}
-
 * {
   padding: 0;
   -webkit-box-sizing: border-box;
@@ -393,13 +331,6 @@ nav.active {
 .pricing-table:hover .table-list {
   opacity: 1;
   height: auto;
-}
-
-.dropdown-menu {
-  display: none;
-  position: absolute;
-  background-color: white;
-  border: 1px solid #ccc;
 }
 
 @keyframes dropdownShowAnimation {
@@ -416,135 +347,6 @@ nav.active {
 .dropdown-menu.show {
   display: block;
   animation: dropdownShowAnimation 0.3s ease forwards;
-}
-
-* {
-  padding: 0;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
-.pricing-wrapper {
-  width: 960px;
-  margin: 0px auto 0;
-}
-
-.pricing-table {
-  margin: 0 10px;
-  text-align: center;
-  width: 300px;
-  float: left;
-  -webkit-transition: all 0.25s ease;
-  -o-transition: all 0.25s ease;
-  transition: all 0.25s ease;
-}
-
-.pricing-table:hover {
-  -webkit-transform: scale(1.06);
-  -ms-transform: scale(1.06);
-  -o-transform: scale(1.06);
-  transform: scale(1.06);
-}
-
-.pricing-title {
-  color: #fff;
-  background: #817c7b;
-  padding: 20px 0;
-  font-size: 2em;
-  text-transform: uppercase;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
-  margin-top: 30px;
-}
-
-.pricing-table.recommended .pricing-title {
-  background: #817c7b;
-}
-
-.pricing-table.recommended .pricing-action {
-  background: #817c7b;
-}
-
-.pricing-table .price {
-  background: #403e3d;
-  font-size: 3.4em;
-  font-weight: 700;
-  padding: 20px 0;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
-}
-
-.pricing-table .price sup {
-  font-size: 0.4em;
-  position: relative;
-  left: 5px;
-}
-
-.table-list {
-  background: #fff;
-  color: #403d3a;
-  list-style: none;
-  opacity: 0;
-  height: 0;
-  overflow: hidden;
-  transition: opacity 0.3s ease, height 0.3s ease;
-}
-
-.table-list li {
-  font-size: 1.4em;
-  font-weight: 700;
-  padding: 12px 8px;
-}
-
-.table-list li span {
-  font-weight: 400;
-}
-
-.table-list li:nth-child(2n) {
-  background: #f0f0f0;
-}
-
-.pricing-table:hover .table-list {
-  opacity: 1;
-  height: auto;
-}
-
-.dropdown-menu {
-  display: none;
-  position: absolute;
-  background-color: white;
-  border: 1px solid #ccc;
-}
-
-@keyframes dropdownShowAnimation {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes dropdownHideAnimation {
-  from {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  to {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-}
-
-.show {
-  display: block;
-  animation: dropdownShowAnimation 0.3s ease-in-out forwards;
-}
-
-.hide {
-  display: block;
-  animation: dropdownHideAnimation 0.3s ease-in-out forwards;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
