@@ -9,9 +9,12 @@ import { startWith, map } from 'rxjs/operators';
 @Component({
   selector: 'app-juegoimagenficcion',
   templateUrl: './juegoimagenficcion.component.html',
-  styleUrls: ['./juegoimagenficcion.component.scss']
+  styleUrls: ['./juegoimagenficcion.component.scss'],
 })
 export class JuegoimagenficcionComponent implements OnInit {
+  usuariosession: string = this.cookieService.get('session');
+  usuariosession2: string = this.cookieService.get('session2');
+  isDropdownOpen = false;
 
   datos!: Juegoimagen[];
   respuesta: string = '';
@@ -90,11 +93,13 @@ export class JuegoimagenficcionComponent implements OnInit {
     // Verificamos si existe la cookie 'peliculas', y si no existe, obtenemos los datos
     const sessionCookieExists = this.cookieService.check('peliculas');
     if (!sessionCookieExists) {
-      this.servicioService.getDatosPeliculaImagenFiccion().subscribe((datos) => {
-        this.datos = datos;
-        this.generarArrayNombresPeliculas();
-        this.seleccionarPalabraSecreta();
-      });
+      this.servicioService
+        .getDatosPeliculaImagenFiccion()
+        .subscribe((datos) => {
+          this.datos = datos;
+          this.generarArrayNombresPeliculas();
+          this.seleccionarPalabraSecreta();
+        });
     } else {
       //Si no existe, recuperamos los datos guardados en las cookies especificadas
       const nombresPeliculasCookie = this.cookieService.get('peliculas');
@@ -108,8 +113,8 @@ export class JuegoimagenficcionComponent implements OnInit {
     }
   }
 
-   //Generamos un numero aleatorio
-   generarNumeroAleatorio(max: number) {
+  //Generamos un numero aleatorio
+  generarNumeroAleatorio(max: number) {
     return Math.floor(Math.random() * max);
   }
 
@@ -128,9 +133,11 @@ export class JuegoimagenficcionComponent implements OnInit {
       };
 
       //Enviamos los datos al servidor
-      this.servicioService.postDatoRankingImagenFiccion(nuevo).subscribe((datos) => {
-        console.log('Datos enviados al servidor:', datos);
-      });
+      this.servicioService
+        .postDatoRankingImagenFiccion(nuevo)
+        .subscribe((datos) => {
+          console.log('Datos enviados al servidor:', datos);
+        });
 
       this.router.navigate(['/eleccion2']); //Nos vamos a "eleccion2"
     }
@@ -275,9 +282,11 @@ export class JuegoimagenficcionComponent implements OnInit {
         };
 
         //Mandamos los datos al servidor
-        this.servicioService.postDatoRankingImagenFiccion(nuevo).subscribe((datos) => {
-          console.log('Datos enviados al servidor:', datos);
-        });
+        this.servicioService
+          .postDatoRankingImagenFiccion(nuevo)
+          .subscribe((datos) => {
+            console.log('Datos enviados al servidor:', datos);
+          });
 
         this.router.navigate(['/eleccion2']); //Nos vamos a eleccion2
       }
@@ -346,5 +355,33 @@ export class JuegoimagenficcionComponent implements OnInit {
   irAEleccion2() {
     this.servicioService.juegoTerminadoAntesDeTiempo = true;
     this.router.navigate(['/eleccion2']);
+  }
+
+  irAInicio() {
+    //Esta funcion nos llevara al inicio, y borrara las cookies especificadas.
+    const cookiesExistentes = [
+      'numero',
+      'palabra',
+      'puntos',
+      'puntos2',
+      'listapeliculas',
+      'intentos',
+      'intentos2',
+      'peliculas',
+      'pistas',
+      'preguntas',
+      'session',
+      'session2',
+    ];
+    for (const cookie of cookiesExistentes) {
+      if (this.cookieService.check(cookie)) {
+        this.cookieService.delete(cookie);
+      }
+    }
+    this.router.navigate(['']);
+  }
+
+  toggleDropdown() {
+    this.isDropdownOpen = !this.isDropdownOpen;
   }
 }
