@@ -5,7 +5,13 @@ import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import { Juegopreguntapista } from '../model/juegopreguntapista';
-import {trigger, state, style, animate, transition} from '@angular/animations';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+} from '@angular/animations';
 
 @Component({
   selector: 'app-juegopreguntaficcion',
@@ -21,6 +27,9 @@ import {trigger, state, style, animate, transition} from '@angular/animations';
   ],
 })
 export class JuegopreguntaficcionComponent implements OnInit {
+  usuariosession: string = this.cookieService.get('session');
+  usuariosession2: string = this.cookieService.get('session2');
+  isDropdownOpen = false;
 
   datos!: Juegopregunta[];
   Respuesta: string = '';
@@ -74,15 +83,17 @@ export class JuegopreguntaficcionComponent implements OnInit {
     const puntoscookie = this.cookieService.get('puntos');
     this.puntos = parseInt(puntoscookie, 10) || 0;
 
-    this.servicioService.getDatosPeliculaPistaPreguntaFiccion().subscribe((datos) => {
-      this.pistaPregunta = datos;
-      this.cookieService.set(
-        'pistas',
-        JSON.stringify(this.pistaPregunta.slice(0, 20))
-      ); //Esto es para las pistas
+    this.servicioService
+      .getDatosPeliculaPistaPreguntaFiccion()
+      .subscribe((datos) => {
+        this.pistaPregunta = datos;
+        this.cookieService.set(
+          'pistas',
+          JSON.stringify(this.pistaPregunta.slice(0, 20))
+        ); //Esto es para las pistas
 
-      this.seleccionarPalabraSecreta();
-    });
+        this.seleccionarPalabraSecreta();
+      });
   }
 
   constructor(
@@ -99,11 +110,13 @@ export class JuegopreguntaficcionComponent implements OnInit {
     // Verificamos si existe la cookie 'preguntas', y si no existe, obtenemos los datos
     const sessionCookieExists = this.cookieService.check('preguntas');
     if (!sessionCookieExists) {
-      this.servicioService.getDatosPeliculaPreguntaFiccion().subscribe((datos) => {
-        this.datos = datos;
-        this.generarArrayPreguntasPeliculas();
-        this.seleccionarPalabraSecreta();
-      });
+      this.servicioService
+        .getDatosPeliculaPreguntaFiccion()
+        .subscribe((datos) => {
+          this.datos = datos;
+          this.generarArrayPreguntasPeliculas();
+          this.seleccionarPalabraSecreta();
+        });
     } else {
       //Si no existe, recuperamos los datos guardados en las cookies especificadas
       const preguntasPeliculasCookie = this.cookieService.get('preguntas');
@@ -139,9 +152,11 @@ export class JuegopreguntaficcionComponent implements OnInit {
       };
 
       //Enviamos los datos al servidor
-      this.servicioService.postDatoRankingPreguntaFiccion(nuevo).subscribe((datos) => {
-        console.log('Datos enviados al servidor:', datos);
-      });
+      this.servicioService
+        .postDatoRankingPreguntaFiccion(nuevo)
+        .subscribe((datos) => {
+          console.log('Datos enviados al servidor:', datos);
+        });
 
       this.router.navigate(['/eleccion2']); //nos vamos a "eleccion2"
     }
@@ -374,5 +389,33 @@ export class JuegopreguntaficcionComponent implements OnInit {
   togglePistaAnimation() {
     this.mostrarPista = !this.mostrarPista;
     this.estadoAnimacion = this.mostrarPista ? 'down' : 'up';
+  }
+
+  irAInicio() {
+    //Esta funcion nos llevara al inicio, y borrara las cookies especificadas.
+    const cookiesExistentes = [
+      'numero',
+      'palabra',
+      'puntos',
+      'puntos2',
+      'listapeliculas',
+      'intentos',
+      'intentos2',
+      'peliculas',
+      'pistas',
+      'preguntas',
+      'session',
+      'session2',
+    ];
+    for (const cookie of cookiesExistentes) {
+      if (this.cookieService.check(cookie)) {
+        this.cookieService.delete(cookie);
+      }
+    }
+    this.router.navigate(['']);
+  }
+
+  toggleDropdown() {
+    this.isDropdownOpen = !this.isDropdownOpen;
   }
 }
