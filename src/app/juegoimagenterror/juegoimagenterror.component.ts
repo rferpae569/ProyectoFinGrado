@@ -9,9 +9,12 @@ import { startWith, map } from 'rxjs/operators';
 @Component({
   selector: 'app-juegoimagenterror',
   templateUrl: './juegoimagenterror.component.html',
-  styleUrls: ['./juegoimagenterror.component.scss']
+  styleUrls: ['./juegoimagenterror.component.scss'],
 })
 export class JuegoimagenterrorComponent implements OnInit {
+  usuariosession: string = this.cookieService.get('session');
+  usuariosession2: string = this.cookieService.get('session2');
+  isDropdownOpen = false;
 
   datos!: Juegoimagen[];
   respuesta: string = '';
@@ -108,8 +111,8 @@ export class JuegoimagenterrorComponent implements OnInit {
     }
   }
 
-   //Generamos un numero aleatorio
-   generarNumeroAleatorio(max: number) {
+  //Generamos un numero aleatorio
+  generarNumeroAleatorio(max: number) {
     return Math.floor(Math.random() * max);
   }
 
@@ -128,9 +131,11 @@ export class JuegoimagenterrorComponent implements OnInit {
       };
 
       //Enviamos los datos al servidor
-      this.servicioService.postDatoRankingImagenTerror(nuevo).subscribe((datos) => {
-        console.log('Datos enviados al servidor:', datos);
-      });
+      this.servicioService
+        .postDatoRankingImagenTerror(nuevo)
+        .subscribe((datos) => {
+          console.log('Datos enviados al servidor:', datos);
+        });
 
       this.router.navigate(['/eleccion2']); //Nos vamos a "eleccion2"
     }
@@ -275,9 +280,11 @@ export class JuegoimagenterrorComponent implements OnInit {
         };
 
         //Mandamos los datos al servidor
-        this.servicioService.postDatoRankingImagenTerror(nuevo).subscribe((datos) => {
-          console.log('Datos enviados al servidor:', datos);
-        });
+        this.servicioService
+          .postDatoRankingImagenTerror(nuevo)
+          .subscribe((datos) => {
+            console.log('Datos enviados al servidor:', datos);
+          });
 
         this.router.navigate(['/eleccion2']); //Nos vamos a eleccion2
       }
@@ -346,5 +353,33 @@ export class JuegoimagenterrorComponent implements OnInit {
   irAEleccion2() {
     this.servicioService.juegoTerminadoAntesDeTiempo = true;
     this.router.navigate(['/eleccion2']);
+  }
+
+  irAInicio() {
+    //Esta funcion nos llevara al inicio, y borrara las cookies especificadas.
+    const cookiesExistentes = [
+      'numero',
+      'palabra',
+      'puntos',
+      'puntos2',
+      'listapeliculas',
+      'intentos',
+      'intentos2',
+      'peliculas',
+      'pistas',
+      'preguntas',
+      'session',
+      'session2',
+    ];
+    for (const cookie of cookiesExistentes) {
+      if (this.cookieService.check(cookie)) {
+        this.cookieService.delete(cookie);
+      }
+    }
+    this.router.navigate(['']);
+  }
+
+  toggleDropdown() {
+    this.isDropdownOpen = !this.isDropdownOpen;
   }
 }
