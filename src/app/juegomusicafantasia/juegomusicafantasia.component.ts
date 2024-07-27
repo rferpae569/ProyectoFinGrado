@@ -6,7 +6,13 @@ import { FormControl } from '@angular/forms';
 import { startWith, map } from 'rxjs/operators';
 import { Juegomusica } from '../model/juegomusica';
 import { Juegomusicapista } from '../model/juegomusicapista';
-import {trigger, state, style, animate, transition} from '@angular/animations';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+} from '@angular/animations';
 //Importamos los modulos
 
 @Component({
@@ -23,6 +29,10 @@ import {trigger, state, style, animate, transition} from '@angular/animations';
   ],
 })
 export class JuegomusicafantasiaComponent implements OnInit {
+  usuariosession: string = this.cookieService.get('session');
+  usuariosession2: string = this.cookieService.get('session2');
+  isDropdownOpen = false;
+
   datos!: Juegomusica[];
   respuesta: string = '';
   intentos: number = 0;
@@ -480,5 +490,33 @@ export class JuegomusicafantasiaComponent implements OnInit {
   togglePistaAnimation() {
     this.mostrarPista = !this.mostrarPista;
     this.estadoAnimacion = this.mostrarPista ? 'down' : 'up';
+  }
+
+  irAInicio() {
+    //Esta funcion nos llevara al inicio, y borrara las cookies especificadas.
+    const cookiesExistentes = [
+      'numero',
+      'palabra',
+      'puntos',
+      'puntos2',
+      'listapeliculas',
+      'intentos',
+      'intentos2',
+      'peliculas',
+      'pistas',
+      'preguntas',
+      'session',
+      'session2',
+    ];
+    for (const cookie of cookiesExistentes) {
+      if (this.cookieService.check(cookie)) {
+        this.cookieService.delete(cookie);
+      }
+    }
+    this.router.navigate(['']);
+  }
+
+  toggleDropdown() {
+    this.isDropdownOpen = !this.isDropdownOpen;
   }
 }
