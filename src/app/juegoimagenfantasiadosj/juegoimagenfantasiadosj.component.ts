@@ -9,9 +9,12 @@ import { startWith, map } from 'rxjs/operators';
 @Component({
   selector: 'app-juegoimagenfantasiadosj',
   templateUrl: './juegoimagenfantasiadosj.component.html',
-  styleUrls: ['./juegoimagenfantasiadosj.component.scss']
+  styleUrls: ['./juegoimagenfantasiadosj.component.scss'],
 })
 export class JuegoimagenfantasiadosjComponent implements OnInit {
+  usuariosession: string = this.cookieService.get('session');
+  usuariosession2: string = this.cookieService.get('session2');
+  isDropdownOpen = false;
 
   datos!: Juegoimagen[];
   respuesta: string = '';
@@ -103,7 +106,8 @@ export class JuegoimagenfantasiadosjComponent implements OnInit {
 
     // Asignamos la sesión actual basada en el turno actual
     this.session = this.turnoActual === 1 ? this.getCookieValue('session') : '';
-    this.session2 = this.turnoActual === 2 ? this.getCookieValue('session2') : '';
+    this.session2 =
+      this.turnoActual === 2 ? this.getCookieValue('session2') : '';
 
     // Alternamos el turno para el siguiente ciclo
     this.alternarTurno();
@@ -123,11 +127,13 @@ export class JuegoimagenfantasiadosjComponent implements OnInit {
     // Verificamos si existe la cookie 'peliculas', y si no existe, obtenemos los datos
     const sessionCookieExists = this.cookieService.check('peliculas');
     if (!sessionCookieExists) {
-      this.servicioService.getDatosPeliculaImagenfantasia().subscribe((datos) => {
-        this.datos = datos;
-        this.generarArrayNombresPeliculas();
-        this.seleccionarPalabraSecreta();
-      });
+      this.servicioService
+        .getDatosPeliculaImagenfantasia()
+        .subscribe((datos) => {
+          this.datos = datos;
+          this.generarArrayNombresPeliculas();
+          this.seleccionarPalabraSecreta();
+        });
     } else {
       //Si no existe, recuperamos los datos guardados en las cookies especificadas
       const nombresPeliculasCookie = this.cookieService.get('peliculas');
@@ -189,14 +195,18 @@ export class JuegoimagenfantasiadosjComponent implements OnInit {
       };
 
       //Enviamos los datos del jugador 1 al servidor
-      this.servicioService.postDatoRankingImagenFantasia(nuevo).subscribe((datos) => {
-        console.log('Datos enviados al servidor:', datos);
-      });
+      this.servicioService
+        .postDatoRankingImagenFantasia(nuevo)
+        .subscribe((datos) => {
+          console.log('Datos enviados al servidor:', datos);
+        });
 
       //Enviamos los datos del jugador 2 al servidor
-      this.servicioService.postDatoRankingImagenFantasia(nuevo2).subscribe((datos) => {
-        console.log('Datos enviados al servidor:', datos);
-      });
+      this.servicioService
+        .postDatoRankingImagenFantasia(nuevo2)
+        .subscribe((datos) => {
+          console.log('Datos enviados al servidor:', datos);
+        });
 
       this.router.navigate(['/eleccion2']); //Nos vamos a "eleccions2dosj"
     }
@@ -375,9 +385,11 @@ export class JuegoimagenfantasiadosjComponent implements OnInit {
         };
 
         //Mandamos los datos del jugador 1 al servidor
-        this.servicioService.postDatoRankingImagenFantasia(nuevo).subscribe((datos) => {
-          console.log('Datos enviados al servidor:', datos);
-        });
+        this.servicioService
+          .postDatoRankingImagenFantasia(nuevo)
+          .subscribe((datos) => {
+            console.log('Datos enviados al servidor:', datos);
+          });
 
         //Mandamos los datos del jugador 2 al servidor
         this.servicioService
@@ -410,9 +422,11 @@ export class JuegoimagenfantasiadosjComponent implements OnInit {
           });
 
         //Mandamos los datos del jugador 1 al servidor
-        this.servicioService.postDatoRankingImagenFantasia(nuevo).subscribe((datos) => {
-          console.log('Datos enviados al servidor:', datos);
-        });
+        this.servicioService
+          .postDatoRankingImagenFantasia(nuevo)
+          .subscribe((datos) => {
+            console.log('Datos enviados al servidor:', datos);
+          });
 
         this.router.navigate(['/eleccion2']); //Nos vamos a "eleccion2"
       }
@@ -482,5 +496,33 @@ export class JuegoimagenfantasiadosjComponent implements OnInit {
   irAEleccion2() {
     this.servicioService.juegoTerminadoAntesDeTiempo = true;
     this.router.navigate(['eleccion2']);
+  }
+
+  irAInicio() {
+    //Esta funcion nos llevara al inicio, y borrara las cookies especificadas.
+    const cookiesExistentes = [
+      'numero',
+      'palabra',
+      'puntos',
+      'puntos2',
+      'listapeliculas',
+      'intentos',
+      'intentos2',
+      'peliculas',
+      'pistas',
+      'preguntas',
+      'session',
+      'session2',
+    ];
+    for (const cookie of cookiesExistentes) {
+      if (this.cookieService.check(cookie)) {
+        this.cookieService.delete(cookie);
+      }
+    }
+    this.router.navigate(['']);
+  }
+
+  toggleDropdown() {
+    this.isDropdownOpen = !this.isDropdownOpen;
   }
 }
