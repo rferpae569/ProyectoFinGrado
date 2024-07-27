@@ -1,8 +1,17 @@
 <div class="background-image">
-    <div class="container">
-      <h1 class="text-center mt-5">Usuario: {{ session }}</h1>
-      <h1 class="text-center mt-5">Intentos:</h1>
-      <div class="image-container">
+  <!--Inicio Header-->
+  <header class="header">
+    <div class="left-content">
+      <img
+        src="../../assets/icono/AdivinaLapeliculaLogo.png"
+        alt="ImagenlogoAdivinaLaPelicula"
+        width="200"
+        height="200"
+      />
+    </div>
+    <div class="center-content">
+      <p class="text-center">
+        Intentos:
         <ng-container *ngFor="let _ of [].constructor(intentos); let i = index">
           <img
             [src]="'../../assets/icono/claquetaicon.png'"
@@ -10,113 +19,152 @@
             alt="Intento {{ i + 1 }}"
           />
         </ng-container>
-      </div>
-      <h1 class="text-center mt-5">Puntos: {{ puntos }}</h1>
-      <div
-        class="row"
-        [ngClass]="{
-          'animate-left': showAnimation && !showAnimation,
-          'animate-right': showAnimation,
-          'animate-enter-left': !showAnimation
-        }"
+      </p>
+      <p class="text-center">Puntos: {{ puntos }}</p>
+    </div>
+    <div class="right-content">
+      <p class="dropdown-toggle" (click)="toggleDropdown()">
+        Usuario: <span class="username">{{ usuariosession }}</span>
+        <ng-container *ngIf="usuariosession2">
+          y {{ usuariosession2 }}</ng-container
+        >
+      </p>
+      <ul
+        class="dropdown-menu"
+        [ngClass]="{ show: isDropdownOpen, hide: !isDropdownOpen }"
       >
-        <h1 class="text-center mt-5">¿A qué película pertenece esta cancion?</h1>
-        <div class="col-md-6 mx-auto">
-          <audio controls>
-            <source
-              [src]="
-                '../../assets/musica/' +
-                nombresPeliculas[numeroAleatorio].musica[0]
-              "
-              type="audio/mp3"
-            />
-            Tu navegador no soporta el elemento de audio.
-          </audio>
-  
-          <div
-            class="alert-info"
-            role="alert"
-            [@slideDownUp]="estadoAnimacion"
-            [style.height]="mostrarPista ? 'auto' : '0'"
-          >
-            <h1 class="text-center">Pista Musical:</h1>
-            <table class="table-style">
-              <tr>
-                <th>Nombre</th>
-                <th>Compositor</th>
-                <th>Clave</th>
-              </tr>
-              <tr>
-                <td>{{ pistas }}</td>
-                <td>{{ pistas2 }}</td>
-                <td>{{ pistas3 }}</td>
-              </tr>
-            </table>
-          </div>
-          <br />
-  
-          <button
-            class="btn btn-primary mx-auto d-block"
-            (click)="togglePistaAnimation()"
-          >
-            Pista
-          </button>
-          <!--Añadimos el boton para mostrar la pista al hacer click en el con javascript-->
-  
-          <form autocomplete="off" class="mt-4" ngForm>
-            <!--Creamos un formulario para que el usuario pueda responder-->
-            <div class="form-group colorajax">
-              <label for="respuesta">Introduce la respuesta</label>
-              <input
-                id="respuesta"
-                type="text"
-                class="form-control"
-                placeholder="Respuesta"
-                name="respuesta"
-                [formControl]="filtroTituloControl"
-              />
-              <label for="peliculaSelect">Titulos coincidentes</label>
-              <select
-                id="peliculaSelect"
-                class="form-control"
-                name="peliculaSelect"
-                [disabled]="!titulosCoincidentes.length"
-                (change)="seleccionarTitulo($event)"
-                size="5"
-              >
-                <option value="" disabled>
-                  Selecciona la pelicula automáticamente
-                </option>
-                <option
-                  *ngFor="let titulo of titulosCoincidentes"
-                  [value]="titulo"
-                >
-                  {{ titulo }}
-                </option>
-              </select>
-            </div>
-            <div class="text-center">
-              <br />
-              <button
-                type="submit"
-                class="btn btn-primary"
-                (click)="enviarRespuesta()"
-              >
-                Comprobar
-              </button>
-              <button
-                class="btn btn-secondary"
-                type="button"
-                (click)="borrarTexto()"
-              >
-                Borrar Respuesta
-              </button>
-              <button class="btn btn-dark" (click)="irAEleccion2()">
-                Terminar juego
-              </button>
-            </div>
-          </form>
+        <li><a routerLink="/actualizar">Actualizar Datos</a></li>
+        <li><a routerLink="/borrar">Borrar Cuenta</a></li>
+        <li>
+          <a routerLink="/irAInicio" (click)="irAInicio()">Cerrar Sesion</a>
+        </li>
+      </ul>
+    </div>
+  </header>
+  <!--Fin Header-->
+  <!--Contenido principal-->
+  <div class="container">
+    <div
+      class="row"
+      [ngClass]="{
+        'animate-left': showAnimation && !showAnimation,
+        'animate-right': showAnimation,
+        'animate-enter-left': !showAnimation
+      }"
+    >
+      <h1 class="text-center mt-5">¿A qué película pertenece esta cancion?</h1>
+      <div class="col-md-6 mx-auto">
+        <audio controls>
+          <source
+            [src]="
+              '../../assets/musica/' +
+              nombresPeliculas[numeroAleatorio].musica[0]
+            "
+            type="audio/mp3"
+          />
+          Tu navegador no soporta el elemento de audio.
+        </audio>
+
+        <div
+          class="alert-info"
+          role="alert"
+          [@slideDownUp]="estadoAnimacion"
+          [style.height]="mostrarPista ? 'auto' : '0'"
+        >
+          <h1 class="text-center">Pista Musical:</h1>
+          <table class="table-style">
+            <tr>
+              <th>Nombre</th>
+              <th>Compositor</th>
+              <th>Clave</th>
+            </tr>
+            <tr>
+              <td>{{ pistas }}</td>
+              <td>{{ pistas2 }}</td>
+              <td>{{ pistas3 }}</td>
+            </tr>
+          </table>
         </div>
+        <br />
+
+        <button
+          class="btn btn-primary mx-auto d-block"
+          (click)="togglePistaAnimation()"
+        >
+          Pista
+        </button>
+        <!--Añadimos el boton para mostrar la pista al hacer click en el con javascript-->
+
+        <form autocomplete="off" class="mt-4" ngForm>
+          <!--Creamos un formulario para que el usuario pueda responder-->
+          <div class="form-group colorajax">
+            <label for="respuesta">Introduce la respuesta</label>
+            <input
+              id="respuesta"
+              type="text"
+              class="form-control"
+              placeholder="Respuesta"
+              name="respuesta"
+              [formControl]="filtroTituloControl"
+            />
+            <label for="peliculaSelect">Titulos coincidentes</label>
+            <select
+              id="peliculaSelect"
+              class="form-control"
+              name="peliculaSelect"
+              [disabled]="!titulosCoincidentes.length"
+              (change)="seleccionarTitulo($event)"
+              size="5"
+            >
+              <option value="" disabled>
+                Selecciona la pelicula automáticamente
+              </option>
+              <option
+                *ngFor="let titulo of titulosCoincidentes"
+                [value]="titulo"
+              >
+                {{ titulo }}
+              </option>
+            </select>
+          </div>
+          <div class="text-center">
+            <br />
+            <button
+              type="submit"
+              class="btn btn-primary"
+              (click)="enviarRespuesta()"
+            >
+              Comprobar
+            </button>
+            <button
+              class="btn btn-secondary"
+              type="button"
+              (click)="borrarTexto()"
+            >
+              Borrar Respuesta
+            </button>
+            <button class="btn btn-dark" (click)="irAEleccion2()">
+              Terminar juego
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
+  <!--Fin contenido principal-->
+  <!--Inicio Footer-->
+  <footer class="footer">
+    <div class="container-footer">
+      <p>&copy; 2024 Todos los derechos reservados - AdivinaLaPelicula</p>
+      <br />
+      <ul class="footer-links">
+        <li><a routerLink="/avisolegal">Aviso Legal</a></li>
+        <li>
+          <a routerLink="/politicaprivacidad">Política de Privacidad</a>
+        </li>
+        <li><a routerLink="/terminosservicios">Términos de Servicio</a></li>
+      </ul>
+    </div>
+  </footer>
+  <!--Fin Footer-->
+</div>
