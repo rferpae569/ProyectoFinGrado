@@ -5,7 +5,13 @@ import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import { Juegopreguntapista } from '../model/juegopreguntapista';
-import {trigger,state,style,animate,transition,} from '@angular/animations';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+} from '@angular/animations';
 //Importamos los modulos
 
 @Component({
@@ -22,6 +28,9 @@ import {trigger,state,style,animate,transition,} from '@angular/animations';
   ],
 })
 export class JuegopreguntaficciondosjComponent implements OnInit {
+  usuariosession: string = this.cookieService.get('session');
+  usuariosession2: string = this.cookieService.get('session2');
+  isDropdownOpen = false;
 
   datos!: Juegopregunta[];
   Respuesta: string = '';
@@ -88,15 +97,17 @@ export class JuegopreguntaficciondosjComponent implements OnInit {
     const puntoscookie2 = this.cookieService.get('puntos2');
     this.puntos2 = parseInt(puntoscookie2, 10) || 0;
 
-    this.servicioService.getDatosPeliculaPistaPreguntaFiccion().subscribe((datos) => {
-      this.pistaPregunta = datos;
-      this.cookieService.set(
-        'pistas',
-        JSON.stringify(this.pistaPregunta.slice(0, 20))
-      ); //Esto para pistas
+    this.servicioService
+      .getDatosPeliculaPistaPreguntaFiccion()
+      .subscribe((datos) => {
+        this.pistaPregunta = datos;
+        this.cookieService.set(
+          'pistas',
+          JSON.stringify(this.pistaPregunta.slice(0, 20))
+        ); //Esto para pistas
 
-      this.seleccionarPalabraSecreta();
-    });
+        this.seleccionarPalabraSecreta();
+      });
 
     const turnoGuardado = localStorage.getItem('turno');
 
@@ -112,7 +123,8 @@ export class JuegopreguntaficciondosjComponent implements OnInit {
 
     // Asignamos la sesión actual basada en el turno actual
     this.session = this.turnoActual === 1 ? this.getCookieValue('session') : '';
-    this.session2 = this.turnoActual === 2 ? this.getCookieValue('session2') : '';
+    this.session2 =
+      this.turnoActual === 2 ? this.getCookieValue('session2') : '';
 
     // Alternamos el turno para el siguiente ciclo
     this.alternarTurno();
@@ -132,11 +144,13 @@ export class JuegopreguntaficciondosjComponent implements OnInit {
     // Verificamos si existe la cookie 'preguntas', y si no existe, obtenemos los datos
     const sessionCookieExists = this.cookieService.check('preguntas');
     if (!sessionCookieExists) {
-      this.servicioService.getDatosPeliculaPreguntaFiccion().subscribe((datos) => {
-        this.datos = datos;
-        this.generarArrayPreguntasPeliculas();
-        this.seleccionarPalabraSecreta();
-      });
+      this.servicioService
+        .getDatosPeliculaPreguntaFiccion()
+        .subscribe((datos) => {
+          this.datos = datos;
+          this.generarArrayPreguntasPeliculas();
+          this.seleccionarPalabraSecreta();
+        });
     } else {
       //Si no existe, recuperamos los datos guardados en las cookies especificadas
       const preguntasPeliculasCookie = this.cookieService.get('preguntas');
@@ -200,9 +214,11 @@ export class JuegopreguntaficciondosjComponent implements OnInit {
       };
 
       //Enviamos los datos del jugador 1 al servidor
-      this.servicioService.postDatoRankingPreguntaFiccion(nuevo).subscribe((datos) => {
-        console.log('Datos enviados al servidor:', datos);
-      });
+      this.servicioService
+        .postDatoRankingPreguntaFiccion(nuevo)
+        .subscribe((datos) => {
+          console.log('Datos enviados al servidor:', datos);
+        });
 
       //Enviamos los datos del jugador 2 al servidor
       this.servicioService
@@ -252,8 +268,8 @@ export class JuegopreguntaficciondosjComponent implements OnInit {
   }
 
   enviarRespuesta() {
-     //Activar animacion
-     this.showAnimation = true;
+    //Activar animacion
+    this.showAnimation = true;
 
     // Obtenemos los nombres de las películas desde la cookie 'preguntas'
     const preguntaCookie = this.cookieService.get('preguntas');
@@ -513,5 +529,33 @@ export class JuegopreguntaficciondosjComponent implements OnInit {
   togglePistaAnimation() {
     this.mostrarPista = !this.mostrarPista;
     this.estadoAnimacion = this.mostrarPista ? 'down' : 'up';
+  }
+
+  irAInicio() {
+    //Esta funcion nos llevara al inicio, y borrara las cookies especificadas.
+    const cookiesExistentes = [
+      'numero',
+      'palabra',
+      'puntos',
+      'puntos2',
+      'listapeliculas',
+      'intentos',
+      'intentos2',
+      'peliculas',
+      'pistas',
+      'preguntas',
+      'session',
+      'session2',
+    ];
+    for (const cookie of cookiesExistentes) {
+      if (this.cookieService.check(cookie)) {
+        this.cookieService.delete(cookie);
+      }
+    }
+    this.router.navigate(['']);
+  }
+
+  toggleDropdown() {
+    this.isDropdownOpen = !this.isDropdownOpen;
   }
 }
