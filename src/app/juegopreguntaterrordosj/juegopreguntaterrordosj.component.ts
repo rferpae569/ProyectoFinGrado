@@ -20,7 +20,7 @@ import {
   styleUrls: ['./juegopreguntaterrordosj.component.scss'],
   animations: [
     trigger('slideDownUp', [
-      state('down', style({ opacity: 2, height: '*' })),
+      state('down', style({ opacity: 1, height: '*' })),
       state('up', style({ opacity: 0, height: '50px' })),
       transition('up => down', animate('300ms ease-in')),
       transition('down => up', animate('300ms ease-out')),
