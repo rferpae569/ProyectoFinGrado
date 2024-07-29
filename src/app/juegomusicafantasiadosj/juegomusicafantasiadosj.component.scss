@@ -1,148 +1,384 @@
 .background-image {
-    //definimos la imagen de fondo
-    background-image: url("../../assets/fondos/fondojuegos.jpg");
-    background-size: 100% 100%;
-    background-attachment: scroll;
-    overflow: auto;
-    height: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 150vh;
+  background-image: url("../../assets/fondos/fondojuegos.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+h1,
+label {
+  color: white;
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 50px;
+}
+
+.altoimagen {
+  height: 300px;
+  width: 600px;
+}
+
+.img-intento,
+.img-intento2 {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+  padding: 5px;
+}
+
+audio {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 400px;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.table-style {
+  background-color: #f2f2f2;
+  border: 1px solid #ddd;
+  color: #333;
+  text-align: left;
+  margin: 0 auto;
+  width: 80%;
+  max-width: 800px;
+  border-spacing: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.table-style th {
+  background-color: #3498db;
+  color: white;
+}
+
+.table-style th,
+.table-style td {
+  padding: 15px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+.table-style tr:hover {
+  background-color: #e0e0e0;
+  transition: background-color 0.3s;
+}
+
+.alert-info {
+  display: block;
+  overflow: hidden;
+}
+
+button {
+  margin-right: 15px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  width: 80px;
+  margin-left: 10px;
+}
+
+.header {
+  background-color: #f0f0f0;
+  color: #333;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 24px;
+}
+
+.nav-links a {
+  color: #333;
+  text-decoration: none;
+  margin-left: 20px;
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+}
+
+.nav-links .active {
+  font-weight: bold;
+}
+
+a {
+  color: black;
+}
+
+a:hover {
+  color: red;
+}
+
+.left-content {
+  flex: 1;
+  text-align: left;
+}
+
+.center-content {
+  flex: 2;
+}
+
+.right-content {
+  flex: 1;
+  text-align: right;
+}
+
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  list-style: none;
+  padding: 10px 0;
+  margin: 0;
+  display: none;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #f0f0f0;
+  min-width: 150px;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  top: 13.4%;
+}
+
+.dropdown-menu.show {
+  background-color: #f0f0f0;
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes dropdownShowAnimation {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
   }
-  
-  h1,
-  label,
-  li {
-    //especificamos el color blanco para las siguientes etiquetas
-    color: white;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  .container {
-    //Posicionamos el div a traves de una clase
-    position: relative;
-    z-index: 1;
-    margin-top: 0;
+}
+
+@keyframes dropdownHideAnimation {
+  from {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  /* Estilo moderno para el elemento audio */
-  audio {
-    display: block;
-    margin: 0 auto;
-    width: 100%;
-    max-width: 400px;
-    color: #fff;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
   }
-  
-  /* Creamos un estilo para las tablas*/
-  .table-style {
-    background-color: #f2f2f2;
-    border: 1px solid #ddd;
-    color: #333;
-    text-align: left;
-    margin: 0 auto;
-    width: 80%;
-    max-width: 800px;
-    border-spacing: 0;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.hide {
+  display: block;
+  animation: dropdownHideAnimation 0.3s ease-in-out forwards;
+}
+
+.dropdown-menu.show {
+  display: block;
+  animation: dropdownShowAnimation 0.3s ease forwards;
+}
+
+.center-content {
+  text-align: center;
+}
+
+.puntos-container,
+.intentos-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.puntos-container p,
+.intentos-container p {
+  margin: 0;
+}
+
+.footer {
+  background-color: #333;
+  color: #fff;
+  padding: 5px 0;
+  font-family: "Roboto", sans-serif;
+  font-size: 0.875rem;
+  margin-top: auto;
+}
+
+.footer p {
+  margin: 0;
+  text-align: center;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  text-align: center;
+  margin: 10px 0;
+}
+
+.footer-links li {
+  display: inline;
+  margin-right: 10px;
+}
+
+.footer-links li:last-child {
+  margin-right: 0;
+}
+
+.footer-links li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.875rem;
+}
+
+.footer-links li a:hover {
+  text-decoration: underline;
+}
+
+.animate-left {
+  transition: transform 0.3s ease-in-out;
+  transform: translateX(0);
+}
+
+.animate-right {
+  transition: transform 0.2s ease-in-out;
+  transform: translateX(200%);
+}
+
+.animate-enter-left {
+  animation: entradaDesdeIzquierda 0.5s ease-in-out;
+}
+
+@keyframes entradaDesdeIzquierda {
+  from {
+    transform: translateX(-180%);
   }
-  
-  /*Especificamos un estilo para los th y los td*/
-  .table-style th {
-    background-color: #3498db;
-    color: white;
-  }
-  
-  .table-style th,
-  .table-style td {
-    padding: 15px;
-    text-align: center;
-    border: 1px solid #ddd;
-  }
-  
-  /* Cambio de color al pasar el ratón sobre las filas */
-  .table-style tr:hover {
-    background-color: #e0e0e0;
-    transition: background-color 0.3s;
-  }
-  
-  .user-section {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-  }
-  
-  .text-left {
-    //El texto del div con esta clase se pondra a la izquierda
-    text-align: left;
-  }
-  
-  .text-right {
-    //El texto del div con esta clase se pondra a la derecha
-    text-align: right;
-  }
-  
-  /* Estilos para el contenedor de imágenes */
-  .image-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  /* Estilos para la imagen del icono utilizada para los intentos*/
-  .img-intento,
-  .img-intento2 {
-    width: 30px;
-    height: 30px;
-    filter: invert(100%);
-    margin-right: 10px;
-    padding: 5px;
-  }
-  
-  button {
-    margin-right: 15px;
-  }
-  
-  .alert-info {
-    display: block;
-    overflow: hidden;
-  }
-  
-  //Response para la imagen de fondo
-  @media (max-width: 1200px) {
-    .background-image {
-      background-size: 100% 100%;
-    }
-  }
-  
-  /*Para que haya un poco de margen entre los dos botones con el metodo responsive*/
-  @media (max-width: 767px) {
-    .text-center button:last-child {
-      margin-top: 5px;
-    }
-  }
-  
-  //Estilos para las animaciones
-  .animate-left {
-    transition: transform 0.3s ease-in-out;
+  to {
     transform: translateX(0);
   }
-  
-  .animate-right {
-    transition: transform 0.2s ease-in-out;
-    transform: translateX(200%);
+}
+
+@media (max-width: 1200px) {
+  .background-image {
+    background-size: 100% 100%;
   }
-  
-  .animate-enter-left {
-    animation: entradaDesdeIzquierda 0.5s ease-in-out;
+
+  .header {
+    flex-direction: column;
+    text-align: center;
   }
-  
-  @keyframes entradaDesdeIzquierda {
-    from {
-      transform: translateX(-200%);
-    }
-    to {
-      transform: translateX(0);
-    }
+
+  .right-content {
+    order: -1;
+    text-align: center;
+    padding-top: 10px;
   }
+
+  .dropdown-toggle {
+    cursor: pointer;
+  }
+
+  .dropdown-menu {
+    position: static;
+    display: none;
+    max-height: none;
+    opacity: 1;
+    padding: 10px 0;
+    background-color: white;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  .dropdown-menu.show {
+    display: block;
+    margin-top: 5px;
+    border-top: 1px solid #ccc;
+  }
+
+  .logo {
+    margin-bottom: 10px;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav-links a {
+    padding: 10px 0;
+  }
+
+  .footer {
+    font-size: 0.75rem;
+  }
+
+  .footer-links li {
+    display: block;
+    margin: 5px 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .background-image {
+    background-size: 100% 100%;
+  }
+
+  .header {
+    padding: 10px 5px;
+  }
+
+  .right-content {
+    order: -1;
+    text-align: center;
+    padding-top: 10px;
+  }
+
+  .dropdown-toggle {
+    cursor: pointer;
+  }
+
+  .dropdown-menu {
+    position: static;
+    display: none;
+    max-height: none;
+    opacity: 1;
+    padding: 10px 0;
+    background-color: white;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  .dropdown-menu.show {
+    display: block;
+    margin-top: 5px;
+    border-top: 1px solid #ccc;
+  }
+
+  .nav-links a {
+    padding: 5px 0;
+  }
+
+  .footer {
+    padding: 10px 5px;
+  }
+
+  .footer-links li {
+    margin-right: 5px;
+  }
+}
