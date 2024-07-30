@@ -2,7 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { ServicioService } from '../servicio.service';
-import {trigger, state, style, animate, transition} from '@angular/animations';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+} from '@angular/animations';
 //Importamos los modulos y declaramos la variable para el grafico
 
 @Component({
@@ -31,6 +37,10 @@ import {trigger, state, style, animate, transition} from '@angular/animations';
   ],
 })
 export class Eleccion2Component implements OnInit {
+  usuariosession: string = this.cookieService.get('session');
+  usuariosession2: string = this.cookieService.get('session2');
+  isDropdownOpen = false;
+
   // datos!: Ranking[];
   // datos2!: Numjugadas[];
   usuarioConMasPuntos: string = '';
@@ -53,7 +63,6 @@ export class Eleccion2Component implements OnInit {
   }
 
   ngOnInit() {
-
     const sessionCookie = this.cookieService.get('session');
     const session2Cookie = this.cookieService.get('session2');
 
@@ -122,6 +131,10 @@ export class Eleccion2Component implements OnInit {
       }
     }
     this.router.navigate(['']);
+  }
+
+  toggleDropdown() {
+    this.isDropdownOpen = !this.isDropdownOpen;
   }
 
   get juegoTerminadoAntesDeTiempo(): boolean {

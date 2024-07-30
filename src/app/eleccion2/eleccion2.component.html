@@ -1,48 +1,105 @@
-<div>
-  <div class="container">
-    <h1
-      class="text-center my-4"
-      *ngIf="!juegoTerminadoAntesDeTiempo && (session || session2)"
-    >
-      El juego ha terminado
-    </h1>
-    <h1
-      class="text-center my-4"
-      *ngIf="!hayEmpate && !juegoTerminadoAntesDeTiempo && session && session2"
-    >
-      El ganador es: {{ usuarioConMasPuntos }}
-    </h1>
-    <h1 class="text-center my-4" *ngIf="juegoTerminadoAntesDeTiempo">
-      El juego ha acabado antes de tiempo
-    </h1>
-    <h1
-      class="text-center my-4"
-      *ngIf="hayEmpate && !juegoTerminadoAntesDeTiempo"
-    >
-      Empate
-    </h1>
-    <h1 class="text-center my-4">¿Desea jugar otra vez o a otro juego?</h1>
-    <div class="d-flex justify-content-center">
-      <form method="post" class="d-flex flex-column">
-        <!--Creamos el formulario para saber si queremos volver a jugar o no-->
-        <input
-          type="submit"
-          class="btn btn-primary mb-2"
-          id="SI"
-          name="SI"
-          value="SI"
-          (click)="irAEleccion()"
-        />
-        <input
-          type="submit"
-          class="btn btn-secondary"
-          id="NO"
-          name="NO"
-          value="NO"
-          (click)="irAInicio()"
-        />
-      </form>
+<div class="page-container">
+  <!--Inicio Header-->
+  <header class="header">
+    <div class="left-content">
+      <img
+        src="../../assets/icono/AdivinaLapeliculaLogo.png"
+        alt="ImagenlogoAdivinaLaPelicula"
+        width="200"
+        height="200"
+      />
     </div>
-    <br />
+    <div class="center-content">
+      <ul class="horizontal-list">
+        <li><a routerLink="/inicio">Inicio</a></li>
+        <li><a routerLink="/cartelera">Cartelera</a></li>
+        <li><a routerLink="/clasificacion">Clasificacion</a></li>
+        <li><a routerLink="/encuesta">Encuesta</a></li>
+      </ul>
+    </div>
+    <div class="right-content">
+      <p class="dropdown-toggle" (click)="toggleDropdown()">
+        Usuario: <span class="username">{{ usuariosession }}</span>
+        <ng-container *ngIf="usuariosession2">
+          y {{ usuariosession2 }}</ng-container
+        >
+      </p>
+      <ul
+        class="dropdown-menu"
+        [ngClass]="{ show: isDropdownOpen, hide: !isDropdownOpen }"
+      >
+        <li><a routerLink="/actualizar">Actualizar Datos</a></li>
+        <li><a routerLink="/borrar">Borrar Cuenta</a></li>
+        <li>
+          <a routerLink="/irAInicio" (click)="irAInicio()">Cerrar Sesion</a>
+        </li>
+      </ul>
+    </div>
+  </header>
+  <!--Fin Header-->
+  <!--Contenido principal-->
+  <div class="main-content">
+    <div class="container">
+      <h1
+        class="text-center my-4"
+        *ngIf="!juegoTerminadoAntesDeTiempo && (session || session2)"
+      >
+        El juego ha terminado
+      </h1>
+      <h1
+        class="text-center my-4"
+        *ngIf="
+          !hayEmpate && !juegoTerminadoAntesDeTiempo && session && session2
+        "
+      >
+        El ganador es: {{ usuarioConMasPuntos }}
+      </h1>
+      <h1 class="text-center my-4" *ngIf="juegoTerminadoAntesDeTiempo">
+        El juego ha acabado antes de tiempo
+      </h1>
+      <h1
+        class="text-center my-4"
+        *ngIf="hayEmpate && !juegoTerminadoAntesDeTiempo"
+      >
+        Empate
+      </h1>
+      <h1 class="text-center my-4">¿Desea jugar otra vez o a otro juego?</h1>
+      <div class="d-flex justify-content-center">
+        <form method="post" class="d-flex flex-column">
+          <!--Creamos el formulario para saber si queremos volver a jugar o no-->
+          <input
+            type="submit"
+            class="btn btn-primary mb-2"
+            id="SI"
+            name="SI"
+            value="SI"
+            (click)="irAEleccion()"
+          />
+          <input
+            type="submit"
+            class="btn btn-secondary"
+            id="NO"
+            name="NO"
+            value="NO"
+            (click)="irAInicio()"
+          />
+        </form>
+      </div>
+      <br />
+    </div>
   </div>
+  <!--Fin contenido principal-->
+  <!--Inicio Footer-->
+  <footer class="footer">
+    <div class="container-footer">
+      <p>&copy; 2024 Todos los derechos reservados - AdivinaLaPelicula</p>
+      <br />
+      <ul class="footer-links">
+        <li><a routerLink="/avisolegal">Aviso Legal</a></li>
+        <li><a routerLink="/politicaprivacidad">Política de Privacidad</a></li>
+        <li><a routerLink="/terminosservicios">Términos de Servicio</a></li>
+      </ul>
+    </div>
+  </footer>
+  <!--Fin Footer-->
 </div>
