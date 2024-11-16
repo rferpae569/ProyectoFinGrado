@@ -37,23 +37,3 @@ En los juegos de cada seccion, el usuario tendra tres intentos, si los gasta y p
 Aparte de eso, se ha implementado tambien el modo dos jugadores, donde el usuario podra jugar a los mismos juegos con otra persona una vez inicien sesion los dos juntos. Se puede acceder a ese modo dandole al enlace de "Modo dos jugadores" ubicado en el componente "Inicio".
 
 **Este proyecto ha sido realizado por Rubén Fernández**
-
-## Estructura de código
-
-Ejecuta `ng generate component component-name` para generar un nuevo componente. También puedes utilizar `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Construcción
-
-Ejecuta  `ng build` para compilar el proyecto. Los artefactos de construcción se almacenarán en el directorio  `dist/`.
-
-## Ejecución de pruebas unitarias
-
-Ejecuta  `ng test`  para ejecutar pruebas unitarias utilizando [Karma](https://karma-runner.github.io).
-
-## Ejecución de pruebas end-to-end
-
-Ejecuta  `ng e2e` para ejecutar pruebas end-to-end utilizando una plataforma de tu elección. Para utilizar este comando, primero debes agregar un paquete que implemente capacidades de pruebas end-to-end.
-
-## Ayuda adicional
-
-Para obtener más ayuda sobre Angular CLI, utiliza `ng help` o consulta la página de [Angular CLI Overview and Command Reference](https://angular.io/cli).
